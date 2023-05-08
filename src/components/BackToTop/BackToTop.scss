@@ -26,6 +26,14 @@
     line-height: 15px;
     color: $secondary-color;
     text-decoration: none;
+
+    &:hover {
+      color: $white-color;
+    }
+
+    &:hover .backToTop__button--img {
+      background-color: $icons-color;
+    }
   }
 
   &--img {
@@ -37,5 +45,5 @@
     background-repeat: no-repeat;
     background-position: center;
     background-color: $surface2-color;
-  }
+  }  
 }
