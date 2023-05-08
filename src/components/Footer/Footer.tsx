@@ -3,6 +3,7 @@ import niceGadgetsSvg from '../../icons/niceGadgets.svg';
 import okHand from '../../icons/okHand.png';
 
 import React from 'react';
+import { BackToTop } from '../BackToTop/BackToTop';
 
 export const Footer: React.FC = () => {
   return (
@@ -37,12 +38,7 @@ export const Footer: React.FC = () => {
         </li>
       </ul>
 
-      <div className="footer__back">
-        <a href="#" className="footer__back--link">
-          Back to top
-          <div className='footer__back--img'></div>
-        </a>
-      </div>
+      <BackToTop />
     </footer>
   );
 };
