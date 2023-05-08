@@ -1,0 +1,127 @@
+@import '../../styles//variables.scss';
+
+.contaionerBurger {
+  background-color: $black-color;
+  height: 100vh;
+  padding: 0;
+  margin: 0 auto;
+
+  &_header {
+    box-sizing: border-box;
+    display: flex;
+    height: 48px;
+    justify-content: space-between;
+    border-bottom: 1px $elements-color solid;
+    margin-bottom: 24px;
+  }
+
+  &_menu {
+    margin: 0 auto;
+
+    & .list {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      display: flex;
+      color: $secondary-color;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-family: 'Montserrat';
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 11px;
+      letter-spacing: 0.04em;
+
+      &-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 32px;
+        transition: 0.3s;
+        width: max-content;
+
+        &::after {
+          content: ' ';
+          margin-top: 5px;
+          width: 100%;
+          height: 2px;
+          transition: 0.3s;
+          background: transparent;
+        }
+
+        &:hover {
+          color: $white-color;
+          cursor: pointer;
+
+          &::after {
+            background-color: $white-color;
+          }
+        }
+      }
+    }
+  }
+
+  .IconUrl {
+    display: flex;
+  }
+
+  & .logo {
+    box-sizing: border-box;
+    padding: 12px 0px 13px 16px;
+  }
+
+  & .closeButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    border: 0;
+    border-left: 1px $elements-color solid;
+    background-color: transparent;
+
+    &.closeButton {
+      .crossIcon {
+        transition: 0.3s;
+
+        &:hover {
+          transform: scale(1.2);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  & .footer {
+    bottom: 0;
+    height: max-content;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .btn {
+    width: 50%;
+    height: 64px;
+    background-color: transparent;
+    border: 0;
+    border-top: 1px $elements-color solid;
+    border-bottom: 2px transparent solid;
+    transition: 0.3s;
+
+    &:hover {
+      border-bottom: 2px $white-color solid;
+    }
+
+    &.likeButton {
+      background-color: transparent;
+      border-right: 1px $elements-color solid;
+    }
+
+    &.cardButton {
+      background-color: transparent;
+    }
+  }
+}
