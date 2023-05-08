@@ -1,0 +1,25 @@
+.btn__add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #905BFF;
+  font-weight: 700;
+  font-size: 14px;
+  text-align: center;
+  color: #F1F2F9;
+  text-decoration: none;
+
+  border: none;
+  cursor: pointer;
+
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: #A378FF;
+  }
+
+  &--clicked {
+    background: #323542;
+  }
+}

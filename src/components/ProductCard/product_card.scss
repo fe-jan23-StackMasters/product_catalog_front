@@ -1,0 +1,71 @@
+.card {
+  color: #F1F2F9;
+  background: #161827;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 272px;
+  height: 506px;
+  padding: 32px;
+  text-align: start;
+  font-family: 'Montserrat', sans-serif;
+
+  &__image {
+    align-self: center;
+    margin-bottom: 24px;
+  }
+  
+  &__title {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 8px;
+    line-height: 21px;
+  }
+  
+  &__prices {
+    display: flex;
+    margin-bottom: 16px;
+  }
+  
+  &__price {
+    font-weight: 600;
+    font-size: 22px;
+    text-decoration-line: line-through;
+    color: #75767F;
+
+    &--sale {
+      margin-right: 8px;
+      font-weight: 800;
+      font-size: 22px;
+      color: #F1F2F9;
+    }
+  }
+  
+  &__characteristics {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 16px;
+    padding-top: 16px;
+
+    border-top: 1px solid #3B3E4A;
+
+    &-titles {
+      font-weight: 700;
+      font-size: 12px;
+      color: #75767F;
+    }
+    
+    &-values {
+      font-weight: 600;
+      font-size: 12px;
+      color: #F1F2F9;
+      text-align: right;
+    }
+  }
+  
+  &__buttons {
+    display: flex;
+    gap: 8px;
+  }
+}

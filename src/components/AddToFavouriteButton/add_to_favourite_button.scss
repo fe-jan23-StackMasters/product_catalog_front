@@ -1,0 +1,22 @@
+.btn__fav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+
+  background: #323542;
+  border: none;
+  cursor: pointer;
+
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: #4A4D58;
+  }
+  
+  &--selected {
+    border: 1px solid #3B3E4A;
+  }
+}
