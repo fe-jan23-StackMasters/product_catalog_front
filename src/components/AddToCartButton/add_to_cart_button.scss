@@ -1,0 +1,27 @@
+@import '../../styles/variables.scss';
+
+.btn__add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: $accent-color;
+  font-weight: 700;
+  font-size: 14px;
+  text-align: center;
+  color: $white-color;
+  text-decoration: none;
+
+  border: none;
+  cursor: pointer;
+
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: $hover-color;
+  }
+
+  &--clicked {
+    background: $surface2-color;
+  }
+}
