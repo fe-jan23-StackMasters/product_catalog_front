@@ -107,7 +107,7 @@ export const Header = () => {
               </a>
 
               <a
-                href='/shopingBag'
+                href='/basket'
                 className="header__menu-opener"
               >
                 <img
