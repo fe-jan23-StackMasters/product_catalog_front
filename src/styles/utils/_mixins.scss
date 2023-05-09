@@ -15,6 +15,11 @@
   height: $size;
 }
 
+@mixin squareForPosition($size) {
+  right: $size;
+  top: $size;
+}
+
 @mixin top-actions {
   display: flex;
   justify-content: space-between;
