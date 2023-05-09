@@ -1,6 +1,8 @@
+@import '../../styles/variables.scss';
+
 .card {
-  color: #F1F2F9;
-  background: #161827;
+  color: $white-color;
+  background: $surface1-color;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -31,13 +33,13 @@
     font-weight: 600;
     font-size: 22px;
     text-decoration-line: line-through;
-    color: #75767F;
+    color: $secondary-color;
 
     &--sale {
       margin-right: 8px;
       font-weight: 800;
       font-size: 22px;
-      color: #F1F2F9;
+      color: $white-color;
     }
   }
   
@@ -48,18 +50,18 @@
     margin-bottom: 16px;
     padding-top: 16px;
 
-    border-top: 1px solid #3B3E4A;
+    border-top: 1px solid $elements-color;
 
     &-titles {
       font-weight: 700;
       font-size: 12px;
-      color: #75767F;
+      color: $secondary-color;
     }
     
     &-values {
       font-weight: 600;
       font-size: 12px;
-      color: #F1F2F9;
+      color: $white-color;
       text-align: right;
     }
   }

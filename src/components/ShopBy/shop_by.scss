@@ -1,0 +1,92 @@
+@import '../../styles/variables.scss';
+@import '../../styles/utils/mixins';
+
+.shopBy {
+  font-family: "Mont", sans-serif;
+  text-align: start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    margin-bottom: 24px;
+    font-size: 32px;
+    line-height: 41px;
+    font-weight: bold;
+    letter-spacing: -0.01em;
+    color: $white-color
+  }
+
+  &__categories {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    @include onTablet {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+    }
+
+    @include onDesktop {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+    }
+  }
+
+  &__category {
+    display: flex;
+    flex-direction: column;
+
+    &-img {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 90%;
+    }
+  }
+
+  &__link {
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    display: block;
+    color: $white-color;
+    text-decoration: none;
+  }
+
+  &__category-count {
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: normal;
+    color: $secondary-color;
+  }
+
+  &__container {
+    position: relative;
+    width: 288px;
+    height: 288px;
+    background-color: $bg-purple;
+    margin-bottom: 24px;
+
+    @include onTablet {
+      width: 187px;
+      height: 187px;  
+    }
+
+    @include onDesktop {
+      width: 368px;
+      height: 368px;
+    }
+
+    &--grey {
+      background-color: $bg-grey;
+    }
+
+    &--red {
+      background-color: $bg-red
+    }
+  }
+}

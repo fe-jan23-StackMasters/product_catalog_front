@@ -1,9 +1,11 @@
+@import '../../styles/variables.scss';
+
 .btn__add {
   display: flex;
   justify-content: center;
   align-items: center;
 
-  background: #905BFF;
+  background: $accent-color;
   font-weight: 700;
   font-size: 14px;
   text-align: center;
@@ -16,10 +18,10 @@
   transition: background 0.3s ease;
 
   &:hover {
-    background: #A378FF;
+    background: $hover-color;
   }
 
   &--clicked {
-    background: #323542;
+    background: $surface2-color;
   }
 }
