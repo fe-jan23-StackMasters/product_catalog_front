@@ -1,34 +1,20 @@
-import React, { useEffect, useState, FC } from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import classNames from 'classnames';
-// import newPhone from '../../images/header/headerPhonePic14Pro.png';
+import React, { FC, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import logoItem from '../../icons/niceGadgets.svg';
 import logoItemOk from '../../icons/Ok.svg';
 import menuOpener from '../../icons/Menu.svg';
 import favoritesRed from '../../icons/faqvoritesFilled.svg';
 import favorites from '../../icons/favourites.svg';
 import shoppingBag from '../../icons/shoppingBag.svg';
+import { PageNavLink } from '../PageNavLink';
 
 const navList = ['home', 'phones', 'tablets', 'accessories'];
 
 export type Props = {
-  to: string;
-  text: string;
+  toggleMenu: () => void;
 };
 
-export const PageNavLink: FC<Props> = ({ to, text }) => (
-  <NavLink
-    to={to}
-    className={({ isActive }) => classNames(
-      'nav__link',
-      { 'nav__link--is-active': isActive },
-    )}
-  >
-    {text}
-  </NavLink>
-);
-
-export const Header = () => {
+export const Header: FC<Props> = ({ toggleMenu }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [hasFavorites, setHasFavorites] = useState(false);
   const [expectToBuy, setExpectToBuy] = useState(0);
@@ -89,7 +75,7 @@ export const Header = () => {
           {!isMobile ? (
             <div className="header__buying-section">
 
-              <a href='/favorites' className="header__menu-opener">
+              <a href='/favorites' className="header__case">
               {hasFavorites ? (
                 <>
                 <div className="header__count-position">
@@ -111,7 +97,7 @@ export const Header = () => {
 
               <a
                 href='/shopingBag'
-                className="header__menu-opener"
+                className="header__case"
               >
                 <div className="header__count-position">
 
@@ -127,13 +113,16 @@ export const Header = () => {
               </a>
             </div>
           ) : (
-            <a href='/' className="header__menu-opener">
+            <button
+              className="header__menu-button header__case"
+              onClick={toggleMenu}
+            >
               <img
                 className="header__menu-opener_image"
                 src={menuOpener}
                 alt="menu"
                 />
-            </a>
+            </button>
           )}
       </div>
     </header>

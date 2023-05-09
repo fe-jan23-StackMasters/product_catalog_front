@@ -15,7 +15,14 @@
     @include top-actions;
   }
 
-  &__menu-opener {
+  &__menu-button {
+    background-color: $black-color;
+    border: none;
+
+    cursor: pointer;
+  }
+
+  &__case {
     border-left: solid 1px $elements-color;
     flex-shrink: 0;
     padding: 17px;

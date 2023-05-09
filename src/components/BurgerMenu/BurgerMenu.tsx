@@ -5,7 +5,11 @@ import cross from '../../icons/Close.svg';
 import like from '../../icons/favourites.svg';
 import cardIcon from '../../icons/shoppingBag.svg';
 
-export const BurgerMenu: React.FC = () => {
+export type Props = {
+  toggleMenu: () => void;
+};
+
+export const BurgerMenu: React.FC<Props> = ({ toggleMenu }) => {
   const menuList: string[] = ['HOME', 'PHONES', 'TABLETS', 'ACCESSORIES'];
 
   return (
@@ -18,9 +22,7 @@ export const BurgerMenu: React.FC = () => {
         </div>
         <button
           className="menu__header-contaioner closeButton"
-          onClick={() => {
-            return null;
-          }}
+          onClick={toggleMenu}
         >
           <img src={cross} className="crossIcon" />
         </button>

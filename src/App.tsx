@@ -10,11 +10,23 @@ import { FavouritesPage } from './components/FavouritesPage';
 import { CartPage } from './components/CartPage';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { BurgerMenu } from './components/BurgerMenu';
+import { useState } from 'react';
 
 export const App = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
-      <Header />
+      {!isOpen ? (
+        <Header toggleMenu={toggleMenu}/>
+      ) : (
+        <BurgerMenu toggleMenu={toggleMenu}/>
+      )}
 
       <main className='container'>
         <Routes>
