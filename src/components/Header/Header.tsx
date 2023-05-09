@@ -75,7 +75,7 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
           {!isMobile ? (
             <div className="header__buying-section">
 
-              <a href='/favorites' className="header__case">
+              <a href='/favourites' className="header__case">
               {hasFavorites ? (
                 <>
                 <div className="header__count-position">
@@ -96,7 +96,7 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
               </a>
 
               <a
-                href='/shopingBag'
+                href='/cart'
                 className="header__case"
               >
                 <div className="header__count-position">
