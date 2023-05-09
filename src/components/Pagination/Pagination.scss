@@ -1,0 +1,62 @@
+@import '../../styles/variables.scss';
+@import '../../styles/utils/mixins';
+
+html {
+  background-color: #0F1121;
+}
+
+.pagination {
+  font-family: 'Montserrat';
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    column-gap: 16px;
+    row-gap: 40px;
+
+    @include onTablet {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include onDesktop {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  &__page {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+    background-color: $surface1-color;
+    // color: white;
+
+    &--selected {
+      background-color: $accent-color;
+    }
+  }
+
+  &__link {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+
+    color: $white-color;
+    text-decoration: none;
+  }
+}

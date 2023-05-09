@@ -1,0 +1,9 @@
+@import '../../styles/variables.scss';
+@import '../../styles/utils/mixins';
+
+.card {
+  height: 440px;
+  width: 288px;
+  background-color: #161827;
+  color: white;
+}
