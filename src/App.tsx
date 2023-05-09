@@ -26,6 +26,5 @@ export const App = () => {
         <Route path="/cart" element={<CartPage />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-    </div>
   );
 };
