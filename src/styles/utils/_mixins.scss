@@ -16,8 +16,8 @@
 }
 
 @mixin squareForPosition($size) {
-  right: $size;
-  top: $size;
+  left: $size;
+  bottom: $size;
 }
 
 @mixin top-actions {

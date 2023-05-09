@@ -96,9 +96,17 @@ export const Header = () => {
 
               <a href='/favorites' className="header__menu-opener">
               {hasFavorites ? (
-                <img src={favoritesRed}
-                  className="header__menu-opener_image" alt="menu"
-                />
+                <>
+                <div className="header__count-position">
+
+                  <img src={favoritesRed}
+                    className="header__menu-opener_image" alt="menu"
+                    />
+                    <span className='header__shoping-bag-count'>
+                      13
+                    </span>
+                </div>
+                </>
               ) : (
                 <img src={favorites}
                 className="header__menu-opener_image" alt="menu"
@@ -110,14 +118,17 @@ export const Header = () => {
                 href='/shopingBag'
                 className="header__menu-opener"
               >
+                <div className="header__count-position">
+
                 <img
                   className="header__menu-opener_image"
                   src={shoppingBag}
                   alt="menu"
-                />
+                  />
                 <span className='header__shoping-bag-count'>
                   {expectToBuy}
                 </span>
+                </div>
               </a>
             </div>
           ) : (

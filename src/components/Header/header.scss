@@ -27,13 +27,7 @@
 
   &__menu-opener_image {
     display: block;
-    width: 14px;
-    height: 9px;
-
-
-    @include onTablet {
-      height: 14px;
-    }
+    @include square(14px);
 
     @include onDesktop {
       display: flex;
@@ -44,6 +38,11 @@
     }
 
   }
+
+  &__count-position {
+    position: relative;
+  }
+
 
   &__shoping-bag-count {
     display: flex;
@@ -65,10 +64,6 @@
 
     position: absolute;
     @include squareForPosition(10px);
-
-    @include onDesktop {
-      @include squareForPosition(18px);
-    }
   }
 }
 
