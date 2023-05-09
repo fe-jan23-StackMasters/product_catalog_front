@@ -52,85 +52,83 @@ export const Header = () => {
 
   return (
     <header className="header" >
-      <div className='container'>
-        <div className="header__content">
-          <div className="header__right-side">
-            {isMobile && (
-              <a href="/" className="logo">
-                <img
-                  className="logo__image"
-                  src={logoItem} alt="Logo icon"
-                />
-                <img className="logo__ok" src={logoItemOk} alt="ok" />
-              </a>
-            )}
+      <div className="header__content">
+        <div className="header__right-side">
+          {isMobile && (
+            <a href="/" className="logo">
+              <img
+                className="logo__image"
+                src={logoItem} alt="Logo icon"
+              />
+              <img className="logo__ok" src={logoItemOk} alt="ok" />
+            </a>
+          )}
 
-            {!isMobile && (
-              <nav className="header__nav nav">
-                <ul className="nav__panel">
-                  <li className='nav__item'>
-                    <a href="/" className="logo">
-                      <img
-                        className="logo__image"
-                        src={logoItem} alt="Logo icon"
-                      />
-                      <img className="logo__ok" src={logoItemOk} alt="ok" />
+          {!isMobile && (
+            <nav className="header__nav nav">
+              <ul className="nav__panel">
+                <li className='nav__item'>
+                  <a href="/" className="logo">
+                    <img
+                      className="logo__image"
+                      src={logoItem} alt="Logo icon"
+                    />
+                    <img className="logo__ok" src={logoItemOk} alt="ok" />
+                  </a>
+                </li>
+                {navList.map(item => (
+                  <li key={item} className="nav__item">
+                    <a href={`/${item}`} className={classNames(
+                      'nav__link',
+                      { 'nav__link--is-active': true },
+                    )}>
+                      {item}
                     </a>
                   </li>
-                  {navList.map(item => (
-                    <li key={item} className="nav__item">
-                      <a href={`/${item}`} className={classNames(
-                        'nav__link',
-                        { 'nav__link--is-active': true },
-                      )}>
-                        {item}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            )}
-          </div>
+                ))}
+              </ul>
+            </nav>
+          )}
+        </div>
 
-            {!isMobile ? (
-              <div className="header__buying-section">
+          {!isMobile ? (
+            <div className="header__buying-section">
 
-                <a href='/favorites' className="header__menu-opener">
-                {hasFavorites ? (
-                  <img src={favoritesRed}
-                    className="header__menu-opener_image" alt="menu"
-                  />
-                ) : (
-                  <img src={favorites}
+              <a href='/favorites' className="header__menu-opener">
+              {hasFavorites ? (
+                <img src={favoritesRed}
                   className="header__menu-opener_image" alt="menu"
-                  />
-                )}
-                </a>
+                />
+              ) : (
+                <img src={favorites}
+                className="header__menu-opener_image" alt="menu"
+                />
+              )}
+              </a>
 
-                <a
-                  href='/shopingBag'
-                  className="header__menu-opener"
-                >
-                  <img
-                    className="header__menu-opener_image"
-                    src={shoppingBag}
-                    alt="menu"
-                  />
-                  <span className='header__shoping-bag-count'>
-                    {expectToBuy}
-                  </span>
-                </a>
-              </div>
-            ) : (
-              <a href='/' className="header__menu-opener">
+              <a
+                href='/shopingBag'
+                className="header__menu-opener"
+              >
                 <img
                   className="header__menu-opener_image"
-                  src={menuOpener}
+                  src={shoppingBag}
                   alt="menu"
-                  />
+                />
+                <span className='header__shoping-bag-count'>
+                  {expectToBuy}
+                </span>
               </a>
-            )}
-        </div>
+            </div>
+          ) : (
+            <a href='/' className="header__menu-opener">
+              <img
+                className="header__menu-opener_image"
+                src={menuOpener}
+                alt="menu"
+                />
+            </a>
+          )}
       </div>
     </header>
   );
