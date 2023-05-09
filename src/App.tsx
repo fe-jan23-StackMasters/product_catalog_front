@@ -11,9 +11,14 @@ function App() {
 
       <Routes>
         <Route path="*" element={<PageNotFound />} />
-        {/* <Route path="/home" element={<HomePage />} /> */}
-        {/* <Route path="/phones" element={<PhonesPage />} /> */}
-        {/* <Route path="/:itemCard" element={<ItemCardPage />} /> */}
+          {/* <Route path="/" element={<HomePage />} />
+          <Route path="/home" element={<Navigate to="/" replace />} /> */}
+
+        {/* <Route path="phones" element={ <Outlet /> }>
+          <Route index element={ <PhonesPage /> } />
+          <Route path=":itemCard" element={ <PhonesPage /> } />
+        </Route> */}
+
         {/* <Route path="/tablets" element={<TabletsPage />} /> */}
         {/* <Route path="/accessories" element={<AccessoriesPage />} /> */}
         {/* <Route path="/favourites" element={<FavouritesPage />} /> */}
