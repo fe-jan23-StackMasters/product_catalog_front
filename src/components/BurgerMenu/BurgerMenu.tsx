@@ -9,15 +9,15 @@ export const BurgerMenu: React.FC = () => {
   const menuList: string[] = ['HOME', 'PHONES', 'TABLETS', 'ACCESSORIES'];
 
   return (
-    <div className="contaionerBurger">
-      <div className="contaionerBurger_header">
-        <div className="contaionerBurger_header logo">
-          <a href="/Home" className="IconUrl">
-            <img src={logo} className="IconUrl-logoIcon" />
+    <div className="menu">
+      <div className="menu__header">
+        <div className="menu__header-contaioner logo">
+          <a href="/Home" className="menu__icon">
+            <img src={logo} className="menu__icon-logoIcon" />
           </a>
         </div>
         <button
-          className="contaionerBurger_header closeButton"
+          className="menu__header-contaioner closeButton"
           onClick={() => {
             return null;
           }}
@@ -25,16 +25,16 @@ export const BurgerMenu: React.FC = () => {
           <img src={cross} className="crossIcon" />
         </button>
       </div>
-      <div className="contaionerBurger_menu">
-        <ul className="contaionerBurger_menu list">
+      <div className="menu__content">
+        <ul className="menu__content-list">
           {menuList.map((item) => (
-            <li className="list-item" key={item}>
+            <li className="menu__content-list item" key={item}>
               {item}
             </li>
           ))}
         </ul>
       </div>
-      <div className="contaionerBurger footer">
+      <div className="menu__content footer">
         <button className="btn likeButton">
           <img src={like} />
         </button>

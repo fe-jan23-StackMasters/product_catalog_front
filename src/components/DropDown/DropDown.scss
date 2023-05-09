@@ -1,0 +1,94 @@
+@import '../../styles/variables.scss';
+
+.dropdown {
+  max-width: 176px;
+  z-index: 11;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  background-color: $surface2-color;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+  color: $white-color;
+  font-style: normal;
+  padding: 0px 12px;
+  border: 1px solid transparent;
+
+  &_arrowDrop {
+    box-sizing: border-box;
+    height: 10px;
+    width: 8px;
+    fill: $secondary-color;
+    transform: rotate(270deg);
+    transition: 0.5s;
+  }
+
+  &:hover {
+    border: 1px solid $icons-color;
+    background-color: $surface2-color;
+    cursor: pointer;
+
+    .dropdown_arrowDrop {
+      fill: $icons-color;
+    }
+  }
+}
+
+.dropdown_content {
+  max-width: 176px;
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: 1s;
+  box-sizing: border-box;
+  z-index: 10;
+  pointer-events: none;
+  margin-top: 4px;
+  border: 1px $elements-color solid;
+  box-shadow: 0px 2px 15px 0px #0000000d;
+
+  &-item {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    color: $secondary-color;
+    width: 100%;
+    height: 40px;
+    text-align: left;
+    background-color: $black-color;
+
+    &:hover {
+      background-color: $surface2-color;
+      color: $white-color;
+      cursor: pointer;
+    }
+
+    &-option {
+      height: fit-content;
+      box-sizing: border-box;
+      display: flex;
+      padding-left: 12px;
+      width: 100%;
+      align-items: center;
+      height: 40px;
+      text-align: left;
+    }
+    
+  }
+}
+
+.active_arrow {
+  transform: rotate(90deg);
+}
+
+.active-drop {
+  display: block;
+  opacity: 1;
+  transition: 0.5s;
+  pointer-events: all;
+  transform: translateY(0%);
+}
