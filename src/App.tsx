@@ -1,5 +1,6 @@
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import './App.scss';
+
 import { PageNotFound } from './components/PageNotFound';
 import { HomePage } from './components/HomePage';
 import { PhonesPage } from './components/PhonesPage';
@@ -10,6 +11,7 @@ import { CartPage } from './components/CartPage';
 
 export const App = () => {
   return (
+
     <div>
       <Routes>
         <Route path="/" element={<HomePage />} />

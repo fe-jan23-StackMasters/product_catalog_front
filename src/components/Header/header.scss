@@ -1,0 +1,166 @@
+.header {
+  background-color: $black-color;
+  border-bottom: solid 1px $elements-color;
+  margin-bottom: 24px;
+
+  &__content {
+    @include top-actions;
+  }
+
+  &__buying-section {
+    display: flex;
+  }
+
+  &__nav {
+    @include top-actions;
+  }
+
+  &__menu-opener {
+    border-left: solid 1px $elements-color;
+    flex-shrink: 0;
+    padding: 17px;
+
+    @include onDesktop {
+      padding: 25px;
+    }
+  }
+
+  &__menu-opener_image {
+    display: block;
+    width: 14px;
+    height: 9px;
+
+
+    @include onTablet {
+      height: 14px;
+    }
+
+    @include onDesktop {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-items: center;
+      @include square(16px);
+    }
+
+  }
+
+  &__shoping-bag-count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    text-decoration: none;
+    font-family: 'Mont';
+    font-size: 9px;
+    line-height: 11px;
+    color: $white-color;
+    
+    @include square(14px);
+    padding: 3px;
+
+    background-color: $red-color;
+    border: $black-color 1px solid;
+    border-radius: 50%;
+
+    position: absolute;
+    @include squareForPosition(10px);
+
+    @include onDesktop {
+      @include squareForPosition(18px);
+    }
+  }
+}
+
+.logo {
+  position: relative;
+
+  &__image {
+    position: relative;
+    width: 64;
+    padding: 14px 16px;
+
+    @include onTablet {
+      padding: 0;
+    }
+
+    @include onDesktop {
+      width: 80px;
+    }
+  }
+
+  &__ok {
+    position: absolute;
+    width: 9px;
+    height: 12px;
+    top: -19px;
+    right: 40px;
+
+    @include onTablet {
+      top: -5px;
+      right: 24px;
+    }
+
+    @include onDesktop {
+      width: 11px;
+      top: -9px;
+      right: 30px;
+    }
+  }
+}
+
+.nav {
+  &__panel {
+    display: flex;
+    justify-content: center;
+    margin-right: 32px;
+    list-style: none;
+    padding: 0 17px;
+    margin: 0;
+  }
+
+  &__item {
+    margin-right: 32px;
+    
+    &:not(:first-child) {
+      @include onDesktop {
+        margin-right: 64px;
+      }
+    }
+  }
+
+  &__link {
+    position: relative;
+    font-family: 'Mont', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 11px;
+    text-decoration: none;
+    color: $secondary-color;
+    text-transform: uppercase;
+    padding: 17px 0;
+
+    @include onDesktop {
+      padding: 28px 0;
+    }
+
+    &:hover {
+      color: $white-color;
+    }
+
+    &--is-active {
+      color: $white-color;
+    }
+    
+    &--is-active::after {
+      bottom: 0;
+      width: 100%;
+      position: absolute;
+      content: "";
+      background-color: $white-color;
+      height: 4px;
+      display: block;
+    }
+  }
+}
