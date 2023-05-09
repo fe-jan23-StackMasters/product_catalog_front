@@ -22,6 +22,5 @@ export const BasketCard = () => (
       </div>
       <div className="basket__card-price">$888</div>
     </div>
-
   </div>
 );

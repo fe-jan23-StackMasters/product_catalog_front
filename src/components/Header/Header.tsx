@@ -51,15 +51,12 @@ export const Header = () => {
   }, []);
 
   return (
-    <header className="header" >
+    <header className="header">
       <div className="header__content">
         <div className="header__right-side">
           {isMobile && (
             <a href="/" className="logo">
-              <img
-                className="logo__image"
-                src={logoItem} alt="Logo icon"
-              />
+              <img className="logo__image" src={logoItem} alt="Logo icon" />
               <img className="logo__ok" src={logoItemOk} alt="ok" />
             </a>
           )}
@@ -67,21 +64,24 @@ export const Header = () => {
           {!isMobile && (
             <nav className="header__nav nav">
               <ul className="nav__panel">
-                <li className='nav__item'>
+                <li className="nav__item">
                   <a href="/" className="logo">
                     <img
                       className="logo__image"
-                      src={logoItem} alt="Logo icon"
+                      src={logoItem}
+                      alt="Logo icon"
                     />
                     <img className="logo__ok" src={logoItemOk} alt="ok" />
                   </a>
                 </li>
-                {navList.map(item => (
+                {navList.map((item) => (
                   <li key={item} className="nav__item">
-                    <a href={`/${item}`} className={classNames(
-                      'nav__link',
-                      { 'nav__link--is-active': true },
-                    )}>
+                    <a
+                      href={`/${item}`}
+                      className={classNames('nav__link', {
+                        'nav__link--is-active': true,
+                      })}
+                    >
                       {item}
                     </a>
                   </li>
@@ -91,44 +91,42 @@ export const Header = () => {
           )}
         </div>
 
-          {!isMobile ? (
-            <div className="header__buying-section">
-
-              <a href='/favorites' className="header__menu-opener">
+        {!isMobile ? (
+          <div className="header__buying-section">
+            <a href="/favorites" className="header__menu-opener">
               {hasFavorites ? (
-                <img src={favoritesRed}
-                  className="header__menu-opener_image" alt="menu"
-                />
-              ) : (
-                <img src={favorites}
-                className="header__menu-opener_image" alt="menu"
-                />
-              )}
-              </a>
-
-              <a
-                href='/basket'
-                className="header__menu-opener"
-              >
                 <img
+                  src={favoritesRed}
                   className="header__menu-opener_image"
-                  src={shoppingBag}
                   alt="menu"
                 />
-                <span className='header__shoping-bag-count'>
-                  {expectToBuy}
-                </span>
-              </a>
-            </div>
-          ) : (
-            <a href='/' className="header__menu-opener">
+              ) : (
+                <img
+                  src={favorites}
+                  className="header__menu-opener_image"
+                  alt="menu"
+                />
+              )}
+            </a>
+
+            <a href="/basket" className="header__menu-opener">
               <img
                 className="header__menu-opener_image"
-                src={menuOpener}
+                src={shoppingBag}
                 alt="menu"
-                />
+              />
+              <span className="header__shoping-bag-count">{expectToBuy}</span>
             </a>
-          )}
+          </div>
+        ) : (
+          <a href="/" className="header__menu-opener">
+            <img
+              className="header__menu-opener_image"
+              src={menuOpener}
+              alt="menu"
+            />
+          </a>
+        )}
       </div>
     </header>
   );

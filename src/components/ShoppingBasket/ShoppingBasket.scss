@@ -1,7 +1,6 @@
 @import '../../styles/variables.scss';
 @import '../../styles/utils/mixins';
 
-
 .btn__add {
   display: flex;
   justify-content: center;
@@ -45,7 +44,6 @@
     justify-content: space-between;
   }
 
-
   &__total {
     display: flex;
     flex-direction: column;
@@ -88,7 +86,6 @@
         margin-bottom: 24px;
         padding-bottom: 24px;
       }
-
     }
   }
 }

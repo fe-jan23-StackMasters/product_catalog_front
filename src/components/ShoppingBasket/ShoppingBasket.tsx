@@ -17,9 +17,9 @@ export const ShoppingBasket = () => {
       <div className="basket__total">
         <span className="basket__total-price">$2657</span>
         <span className="basket__total-description">Total for 3 items</span>
-          <Button width="100%" height="48px" type="btn__add">
-            Checkout
-          </ Button>
+        <Button width="100%" height="48px" type="btn__add">
+          Checkout
+        </Button>
       </div>
     </div>
   );
