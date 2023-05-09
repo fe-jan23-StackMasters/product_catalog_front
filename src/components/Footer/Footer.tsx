@@ -28,7 +28,9 @@ export const Footer: React.FC = () => {
             className="footer__link"
             target="_blank"
             rel="noreferrer"
-          >GITHUB</a>
+          >
+            GITHUB
+          </a>
         </li>
         <li className="footer__item">
           <a href="" className="footer__link">CONTACTS</a>
