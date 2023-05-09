@@ -19,10 +19,12 @@ export const App = () => {
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+    document.body.classList.toggle('no-scroll');
   };
 
   return (
     <>
+    <body>
       {!isOpen ? (
         <Header toggleMenu={toggleMenu}/>
       ) : (
@@ -48,6 +50,7 @@ export const App = () => {
       </main>
 
       <Footer />
+    </body>
     </>
   );
 };
