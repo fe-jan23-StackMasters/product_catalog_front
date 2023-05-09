@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-// import { NavLink } from 'react-router-dom';
+import React, { useEffect, useState, FC } from 'react';
+import { NavLink, Link } from 'react-router-dom';
 import classNames from 'classnames';
 // import newPhone from '../../images/header/headerPhonePic14Pro.png';
 import logoItem from '../../icons/niceGadgets.svg';
@@ -11,22 +11,22 @@ import shoppingBag from '../../icons/shoppingBag.svg';
 
 const navList = ['home', 'phones', 'tablets', 'accessories'];
 
-// export type Props = {
-//   to: string;
-//   text: string;
-// };
+export type Props = {
+  to: string;
+  text: string;
+};
 
-// export const PageNavLink: FC<Props> = ({ to, text }) => (
-//   <NavLink
-//     to={to}
-//     className={({ isActive }) => classNames(
-//       'nav__link',
-//       { 'nav__link--is-active': isActive },
-//     )}
-//   >
-//     {text}
-//   </NavLink>
-// );
+export const PageNavLink: FC<Props> = ({ to, text }) => (
+  <NavLink
+    to={to}
+    className={({ isActive }) => classNames(
+      'nav__link',
+      { 'nav__link--is-active': isActive },
+    )}
+  >
+    {text}
+  </NavLink>
+);
 
 export const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -55,35 +55,30 @@ export const Header = () => {
       <div className="header__content">
         <div className="header__right-side">
           {isMobile && (
-            <a href="/" className="logo">
+            <Link to="/" className="logo">
               <img
                 className="logo__image"
                 src={logoItem} alt="Logo icon"
               />
               <img className="logo__ok" src={logoItemOk} alt="ok" />
-            </a>
+            </Link>
           )}
 
           {!isMobile && (
             <nav className="header__nav nav">
               <ul className="nav__panel">
                 <li className='nav__item'>
-                  <a href="/" className="logo">
+                  <Link to="/" className="logo">
                     <img
                       className="logo__image"
                       src={logoItem} alt="Logo icon"
                     />
                     <img className="logo__ok" src={logoItemOk} alt="ok" />
-                  </a>
+                  </Link>
                 </li>
                 {navList.map(item => (
                   <li key={item} className="nav__item">
-                    <a href={`/${item}`} className={classNames(
-                      'nav__link',
-                      { 'nav__link--is-active': true },
-                    )}>
-                      {item}
-                    </a>
+                    <PageNavLink to={`/${item}`} text={item} />
                   </li>
                 ))}
               </ul>

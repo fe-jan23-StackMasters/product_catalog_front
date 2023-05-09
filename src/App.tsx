@@ -1,4 +1,4 @@
-import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
+import React, { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import './App.scss';
 
 import { PageNotFound } from './components/PageNotFound';
