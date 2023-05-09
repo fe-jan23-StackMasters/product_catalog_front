@@ -1,5 +1,95 @@
+@import './variables';
+@import './utils/mixins';
+
+@font-face {
+  font-family: 'Mont';
+  src: url(../fonts/Mont-Bold.otf);
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'Mont';
+  src: url(../fonts/Mont-Regular.otf);
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Mont';
+  src: url(../fonts/Mont-SemiBold.otf);
+  font-weight: 700;
+}
+
 * {
   box-sizing: border-box;
+}
+
+html {
+  font-family: 'Mont', sans-serif;
+}
+
+h1 {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 41px;
+
+  letter-spacing: -0.01em;
+
+  color: $white-color;
+
+  @include onTablet {
+    font-size: 48px;
+    line-height: 56px;
+  }
+}
+
+h2 {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 140%;
+
+  color: $white-color;
+
+  @include onTablet {
+    font-size: 32px;
+    line-height: 41px;
+    letter-spacing: -0.01em;
+  }
+}
+
+h3 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26px;
+
+  color: $white-color;
+
+  @include onTablet {
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 140%;
+  }
+}
+
+h4 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+
+  color: $white-color;
+
+  @include onTablet {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 26px;
+  }
+}
+
+body,
+p,
+h1 {
   margin: 0;
-  padding: 0;
 }
