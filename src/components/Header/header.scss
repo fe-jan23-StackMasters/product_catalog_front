@@ -7,8 +7,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
 
-    box-sizing: border-box;
+  &__buying-section {
+    display: flex;
   }
 
   &__nav {
@@ -19,13 +21,15 @@
 
   &__menu-opener {
     border-left: solid 1px #3B3E4A;
+    flex-shrink: 0;
+    padding: 17px;
   }
 
   &__menu-opener_image {
+    display: block;
     width: 14px;
     height: 9px;
 
-    padding: 17px;
 
     @media (min-width: 640px) {
       height: 14px;
@@ -35,6 +39,26 @@
       margin-right: 32px;
     }
 
+  }
+
+  &__shoping-bag-count {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    text-decoration: none;
+    align-items: center;
+    font-family: 'Mont';
+    font-size: 9px;
+    line-height: 12px;
+    color: white;
+    width: 14px;
+    height: 14px;
+    padding: 3px;
+    background-color: #EB5757;
+    border: #0F1121 1px solid;
+    border-radius: 50%;
+    right: 10px;
+    top: 10px;
   }
 
   // &__title {
@@ -68,19 +92,28 @@
 
 .logo {
   position: relative;
+
   &__image {
     position: relative;
     width: 64;
-    height: 21px;
     padding: 14px 16px;
+
+    @media (min-width: 640px) {
+      padding: 0;
+    }
   }
 
   &__ok {
     position: absolute;
     width: 9px;
     height: 12px;
-    top: 12px;
-    right: 39px;
+    top: -19px;
+    right: 40px;
+
+    @media (min-width: 640px) {
+      top: -5px;
+      right: 24px;
+    }
   }
 }
 
@@ -104,17 +137,19 @@
     justify-content: center;
     gap: 32px;
     list-style: none;
-    padding: 0 20px;
+    padding: 0 17px;
     margin: 0;
   }
 
   &__link {
+    position: relative;
     font-size: 12px;
     line-height: 11px;
     text-decoration: none;
     color: #75767F;
     font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
+    padding: 17px 0;
 
     &:hover {
       color: white;
