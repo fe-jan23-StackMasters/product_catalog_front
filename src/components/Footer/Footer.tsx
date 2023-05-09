@@ -1,4 +1,5 @@
 import './Footer.scss';
+import '../../App.scss';
 import niceGadgetsSvg from '../../icons/niceGadgets.svg';
 import okHand from '../../icons/okHand.png';
 
