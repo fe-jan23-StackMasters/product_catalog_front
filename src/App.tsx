@@ -1,31 +1,31 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import { PageNotFound } from './components/PageNotFound';
+import { HomePage } from './components/HomePage';
+import { PhonesPage } from './components/PhonesPage';
+import { TabletsPage } from './components/TabletsPage';
+import { AccessoriesPage } from './components/AccessoriesPage';
+import { FavouritesPage } from './components/FavouritesPage';
+import { CartPage } from './components/CartPage';
 
-function App() {
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>Our project will be here as soon as possible</p>
-      </header>
-
+    <div>
       <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<Navigate to="/" replace />} />
+
+        <Route path="/phones" element={<Outlet />}>
+          <Route index element={<PhonesPage />} />
+          <Route path=":itemCard" element={<PhonesPage />} />
+        </Route>
+
+        <Route path="/tablets" element={<TabletsPage />} />
+        <Route path="/accessories" element={<AccessoriesPage />} />
+        <Route path="/favourites" element={<FavouritesPage />} />
+        <Route path="/cart" element={<CartPage />} />
         <Route path="*" element={<PageNotFound />} />
-          {/* <Route path="/" element={<HomePage />} />
-          <Route path="/home" element={<Navigate to="/" replace />} /> */}
-
-        {/* <Route path="phones" element={ <Outlet /> }>
-          <Route index element={ <PhonesPage /> } />
-          <Route path=":itemCard" element={ <PhonesPage /> } />
-        </Route> */}
-
-        {/* <Route path="/tablets" element={<TabletsPage />} /> */}
-        {/* <Route path="/accessories" element={<AccessoriesPage />} /> */}
-        {/* <Route path="/favourites" element={<FavouritesPage />} /> */}
-        {/* <Route path="/cart" element={<CartPage />} /> */}
       </Routes>
     </div>
   );
-}
-
-export default App;
+};
