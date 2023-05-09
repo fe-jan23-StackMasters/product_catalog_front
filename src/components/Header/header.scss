@@ -1,25 +1,20 @@
 .header {
-  box-sizing: border-box;
-
-  height: 100vh;
   background-color: #0F1121;
+  border-bottom: solid 1px #3B3E4A;
+  margin-bottom: 24px;
 
   &__content {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 
     box-sizing: border-box;
-    height: 100vh;
   }
 
   &__nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 48px;
-    border-bottom: solid 1px #3B3E4A;
-    margin-bottom: 24px;
   }
 
   &__menu-opener {
@@ -30,37 +25,45 @@
     width: 14px;
     height: 9px;
 
-    margin: 17px;
+    padding: 17px;
+
+    @media (min-width: 640px) {
+      height: 14px;
+    }
+
+    @media (min-width: 1200px) {
+      margin-right: 32px;
+    }
+
   }
 
-  &__title {
-    font-family: 'Montserrat', sans-serif;
-    width: 288px;
-    margin: 0 auto;
+  // &__title {
+  //   font-family: 'Montserrat', sans-serif;
+  //   width: 288px;
+  //   margin: 0 auto;
 
-    font-size: 32px;
-    line-height: 41px;
-    letter-spacing: -0.01em;
-    text-align: left;
+  //   font-size: 32px;
+  //   line-height: 41px;
+  //   letter-spacing: -0.01em;
+  //   text-align: left;
 
-    color: #F1F2F9;
+  //   color: #F1F2F9;
 
-    margin-bottom: 24px;
-  }
+  //   margin-bottom: 24px;
+  // }
 
-  &__novelty {
-    width: 400px;
-    // height: 320px;
-    margin-bottom: 18px;
-  }
+  // &__novelty {
+  //   width: 400px;
+  //   margin-bottom: 18px;
+  // }
 
-  &__scroller {
-    display: flex;
-    justify-content: center;
-    gap: 14px;
-    margin: 0 auto;
-    width: 70px;
-  }
+  // &__scroller {
+  //   display: flex;
+  //   justify-content: center;
+  //   gap: 14px;
+  //   margin: 0 auto;
+  //   width: 70px;
+  // }
 }
 
 .logo {
@@ -81,9 +84,54 @@
   }
 }
 
-.container {
-  margin: 0 auto;
-  max-width: 400px;
-  padding: 0 20px;
-}
+// .container {
+//   margin: 0 auto;
+//   max-width: 639px;
+//   padding: 0 16px;
 
+//   @media (min-width: 640px) {
+//     padding: 0 24px;
+//   }
+
+//   @media (min-width: 1200px) {
+//     padding: 0 32px;
+//   }
+// }
+
+.nav {
+  &__panel {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    list-style: none;
+    padding: 0 20px;
+    margin: 0;
+  }
+
+  &__link {
+    font-size: 12px;
+    line-height: 11px;
+    text-decoration: none;
+    color: #75767F;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+
+    &:hover {
+      color: white;
+    }
+
+    &--is-active {
+      color: white;
+    }
+    
+    &--is-active::after {
+      bottom: 0;
+      width: 100%;
+      position: absolute;
+      content: "";
+      background-color: white;
+      height: 4px;
+      display: block;
+    }
+  }
+}
