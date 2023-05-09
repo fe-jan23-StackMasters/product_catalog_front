@@ -37,5 +37,7 @@
   }
 }
 
-@import "./components/Header/header.scss";
+@import "./styles/variables.scss";
 @import "./styles/normalize.scss";
+@import "./styles/utils/mixins";
+@import "./components/Header/header.scss";

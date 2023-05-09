@@ -1,12 +1,10 @@
 .header {
-  background-color: #0F1121;
-  border-bottom: solid 1px #3B3E4A;
+  background-color: $black-color;
+  border-bottom: solid 1px $elements-color;
   margin-bottom: 24px;
 
   &__content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include top-actions;
   }
 
   &__buying-section {
@@ -14,13 +12,11 @@
   }
 
   &__nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include top-actions;
   }
 
   &__menu-opener {
-    border-left: solid 1px #3B3E4A;
+    border-left: solid 1px $elements-color;
     flex-shrink: 0;
     padding: 17px;
   }
@@ -31,11 +27,11 @@
     height: 9px;
 
 
-    @media (min-width: 640px) {
+    @include onTablet {
       height: 14px;
     }
 
-    @media (min-width: 1200px) {
+    @include onDesktop {
       margin-right: 32px;
     }
 
@@ -44,19 +40,22 @@
   &__shoping-bag-count {
     display: flex;
     justify-content: center;
-    position: absolute;
-    text-decoration: none;
     align-items: center;
+    
+    text-decoration: none;
     font-family: 'Mont';
     font-size: 9px;
     line-height: 12px;
-    color: white;
-    width: 14px;
-    height: 14px;
+    color: $white-color;
+    
+    @include square(14px);
     padding: 3px;
-    background-color: #EB5757;
-    border: #0F1121 1px solid;
+    
+    background-color: $red-color;
+    border: $black-color 1px solid;
     border-radius: 50%;
+
+    position: absolute;
     right: 10px;
     top: 10px;
   }
@@ -70,7 +69,7 @@
     width: 64;
     padding: 14px 16px;
 
-    @media (min-width: 640px) {
+    @include onTablet {
       padding: 0;
     }
   }
@@ -82,7 +81,7 @@
     top: -19px;
     right: 40px;
 
-    @media (min-width: 640px) {
+    @include onTablet {
       top: -5px;
       right: 24px;
     }
@@ -102,19 +101,21 @@
   &__link {
     position: relative;
     font-size: 12px;
+    font-family: 'Mont', sans-serif;
+    font-style: normal;
+    font-weight: 800;
     line-height: 11px;
     text-decoration: none;
-    color: #75767F;
-    font-family: 'Montserrat', sans-serif;
+    color: $secondary-color;
     text-transform: uppercase;
     padding: 17px 0;
 
     &:hover {
-      color: white;
+      color: $white-color;
     }
 
     &--is-active {
-      color: white;
+      color: $white-color;
     }
     
     &--is-active::after {
@@ -122,7 +123,7 @@
       width: 100%;
       position: absolute;
       content: "";
-      background-color: white;
+      background-color: $white-color;
       height: 4px;
       display: block;
     }
