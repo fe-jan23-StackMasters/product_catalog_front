@@ -7,14 +7,26 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:react/jsx-runtime",
     "@mate-academy/eslint-config"
   ],
   "overrides": [],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "plugins": ["react", "@typescript-eslint"],
-  "rules": {}
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "eol-last": ["error", "always"]
+  },
+  "settings": {
+    "react": {
+      "version": "^18.2.0"
+    }
+  }
 }
