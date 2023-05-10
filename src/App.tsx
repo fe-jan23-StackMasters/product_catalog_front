@@ -10,14 +10,19 @@ import { FavouritesPage } from './components/FavouritesPage';
 import { CartPage } from './components/CartPage';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { Pagination } from './components/Pagination/Pagination';
 
 export const App = () => {
   return (
     <>
       <Header />
-
       <main className='container'>
         <Routes>
+
+          <Route path='/catalog' element={<Pagination />} >
+              <Route path=":page" element={<Pagination />} />
+          </Route>
+
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<Navigate to="/" replace />} />
 
