@@ -25,4 +25,4 @@ export const Button: React.FC<Props> = ({
       {children}
     </button>
   );
-};
+}

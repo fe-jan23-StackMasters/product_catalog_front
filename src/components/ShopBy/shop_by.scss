@@ -2,7 +2,7 @@
 @import '../../styles/utils/mixins';
 
 .shopBy {
-  font-family: "Mont", sans-serif;
+  font-family: 'Mont', sans-serif;
   text-align: start;
   display: flex;
   justify-content: center;
@@ -18,7 +18,7 @@
     line-height: 41px;
     font-weight: bold;
     letter-spacing: -0.01em;
-    color: $white-color
+    color: $white-color;
   }
 
   &__categories {
@@ -84,7 +84,7 @@
     }
 
     &--red {
-      background-color: $bg-red
+      background-color: $bg-red;
     }
   }
 }

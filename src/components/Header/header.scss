@@ -1,7 +1,18 @@
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
   background-color: $black-color;
   border-bottom: solid 1px $elements-color;
   margin-bottom: 24px;
+
+  @include onTablet {
+    margin-bottom: 32px;
+  }
+
+  @include onDesktop {
+    margin-bottom: 56px;
+  }
 
   &__content {
     @include top-actions;
@@ -15,7 +26,14 @@
     @include top-actions;
   }
 
-  &__menu-opener {
+  &__menu-button {
+    background-color: $black-color;
+    border: none;
+
+    cursor: pointer;
+  }
+
+  &__case {
     border-left: solid 1px $elements-color;
     flex-shrink: 0;
     padding: 17px;
@@ -27,13 +45,7 @@
 
   &__menu-opener_image {
     display: block;
-    width: 14px;
-    height: 9px;
-
-
-    @include onTablet {
-      height: 14px;
-    }
+    @include square(14px);
 
     @include onDesktop {
       display: flex;
@@ -42,20 +54,24 @@
       align-items: center;
       @include square(16px);
     }
-
   }
+
+  &__count-position {
+    position: relative;
+  }
+
 
   &__shoping-bag-count {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     text-decoration: none;
     font-family: 'Mont';
     font-size: 9px;
     line-height: 11px;
     color: $white-color;
-    
+
     @include square(14px);
     padding: 3px;
 
@@ -64,28 +80,25 @@
     border-radius: 50%;
 
     position: absolute;
-    @include squareForPosition(10px);
-
-    @include onDesktop {
-      @include squareForPosition(18px);
-    }
+    @include squareForPosition(7.5px);
   }
 }
 
 .logo {
   position: relative;
+  margin-left: 16px;
+
+  @include onTablet {
+    margin-left: 0;
+  }
 
   &__image {
     position: relative;
-    width: 64;
-    padding: 14px 16px;
-
-    @include onTablet {
-      padding: 0;
-    }
+    width: 64px;
 
     @include onDesktop {
       width: 80px;
+      margin-left: 24px;
     }
   }
 
@@ -93,18 +106,14 @@
     position: absolute;
     width: 9px;
     height: 12px;
-    top: -19px;
-    right: 40px;
-
-    @include onTablet {
-      top: -5px;
-      right: 24px;
-    }
+    top: -8px;
+    right: 23px;
 
     @include onDesktop {
       width: 11px;
-      top: -9px;
-      right: 30px;
+      height: 15px;
+      top: -13px;
+      right: 29px;
     }
   }
 }
@@ -121,7 +130,7 @@
 
   &__item {
     margin-right: 32px;
-    
+
     &:not(:first-child) {
       @include onDesktop {
         margin-right: 64px;
@@ -139,10 +148,10 @@
     text-decoration: none;
     color: $secondary-color;
     text-transform: uppercase;
-    padding: 17px 0;
+    padding: 17.5px 0;
 
     @include onDesktop {
-      padding: 28px 0;
+      padding: 30px 0;
     }
 
     &:hover {
@@ -152,12 +161,12 @@
     &--is-active {
       color: $white-color;
     }
-    
+
     &--is-active::after {
       bottom: 0;
       width: 100%;
       position: absolute;
-      content: "";
+      content: '';
       background-color: $white-color;
       height: 4px;
       display: block;

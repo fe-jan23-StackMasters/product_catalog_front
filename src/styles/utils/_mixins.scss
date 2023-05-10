@@ -16,8 +16,8 @@
 }
 
 @mixin squareForPosition($size) {
-  right: $size;
-  top: $size;
+  left: $size;
+  bottom: $size;
 }
 
 @mixin top-actions {
@@ -25,3 +25,4 @@
   justify-content: space-between;
   align-items: center;
 }
+

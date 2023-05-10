@@ -52,17 +52,11 @@ export const ProductCard: React.FC<Props> = ({
 
       <div className="card__characteristics">
         <div className="card__characteristics-titles">
-          <p className="characteristic__title">
-            Screen
-          </p>
+          <p className="characteristic__title">Screen</p>
 
-          <p className="characteristic__title">
-            Capacity
-          </p>
+          <p className="characteristic__title">Capacity</p>
 
-          <p className="characteristic__title">
-            RAM
-          </p>
+          <p className="characteristic__title">RAM</p>
         </div>
 
         <div className="card__characteristics-values">

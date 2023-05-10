@@ -1,0 +1,58 @@
+.tablets{
+  &__links {
+    display: flex;
+    margin-bottom: 24px;
+
+    @include onTablet {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__link {
+    display: flex;
+    position: relative;
+    font-family: 'Mont', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    text-decoration: none;
+    color: $secondary-color;
+    text-align: center;
+    align-items: center;
+
+    &:hover {
+      color: white;
+    }
+  }
+
+  &__arrow {
+    margin-right: 14px;
+    @include square(14px);
+  }
+
+  &__title {
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 41px;
+    color: white;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+
+  &__models {
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    color: #75767F;
+    margin-bottom: 32px;
+
+    @include onTablet {
+      margin-bottom: 40px;
+    }
+  }
+}

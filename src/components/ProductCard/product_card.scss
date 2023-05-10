@@ -16,19 +16,19 @@
     align-self: center;
     margin-bottom: 24px;
   }
-  
+
   &__title {
     font-weight: 600;
     font-size: 14px;
     margin-bottom: 8px;
     line-height: 21px;
   }
-  
+
   &__prices {
     display: flex;
     margin-bottom: 16px;
   }
-  
+
   &__price {
     font-weight: 600;
     font-size: 22px;
@@ -42,7 +42,7 @@
       color: $white-color;
     }
   }
-  
+
   &__characteristics {
     display: flex;
     justify-content: space-between;
@@ -57,7 +57,7 @@
       font-size: 12px;
       color: $secondary-color;
     }
-    
+
     &-values {
       font-weight: 600;
       font-size: 12px;
@@ -65,7 +65,7 @@
       text-align: right;
     }
   }
-  
+
   &__buttons {
     display: flex;
     gap: 8px;

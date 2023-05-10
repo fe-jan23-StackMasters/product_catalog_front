@@ -17,9 +17,11 @@
   &:hover {
     background: $icons-color;
   }
-  
   &--added {
     background: $surface1-color;
+  }
+
+  &--selected {
     border: 1px solid $elements-color;
   }
-}
+
