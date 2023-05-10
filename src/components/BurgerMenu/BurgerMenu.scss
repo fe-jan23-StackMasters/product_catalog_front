@@ -9,11 +9,11 @@
   z-index: 300;
   background-color: $black-color;
   height: 100vh;
-  
+
   padding: 0;
   margin: 0 auto;
 
-  &__header{
+  &__header {
     box-sizing: border-box;
     display: flex;
     height: 48px;
@@ -22,7 +22,7 @@
     margin-bottom: 24px;
   }
 
-  &__content{
+  &__content {
     margin: 0 auto;
 
     &-list {

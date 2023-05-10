@@ -7,7 +7,7 @@ export const BackToTop: React.FC = () => {
     <div className="backToTop__button">
       <a href="#" className="backToTop__button--link">
         Back to top
-        <div className='backToTop__button--img'></div>
+        <div className="backToTop__button--img"></div>
       </a>
     </div>
   );

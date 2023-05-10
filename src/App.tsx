@@ -7,12 +7,13 @@ import { PhonesPage } from './components/PhonesPage';
 import { TabletsPage } from './components/TabletsPage';
 import { AccessoriesPage } from './components/AccessoriesPage';
 import { FavouritesPage } from './components/FavouritesPage';
-import { CartPage } from './components/CartPage';
+import { ShoppingBasket } from './components/ShoppingBasket';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { BurgerMenu } from './components/BurgerMenu';
 import { useState } from 'react';
 // import classNames from 'classnames';
+import { HomeSlider } from './components/Slider/Slider';
 
 export const App = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,8 +32,10 @@ export const App = () => {
         <BurgerMenu toggleMenu={toggleMenu}/>
       )}
 
-      <main className='container'>
+      <main className="container">
         <Routes>
+        <Route path="/" element={
+          <HomeSlider NameSlider = {'Brand new models'} />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<Navigate to="/" replace />} />
 
@@ -43,8 +46,8 @@ export const App = () => {
 
           <Route path="/tablets" element={<TabletsPage />} />
           <Route path="/accessories" element={<AccessoriesPage />} />
-          <Route path="/favourites" element={<FavouritesPage />} />
-          <Route path="/cart" element={<CartPage />} />
+          <Route path="/favorites" element={<FavouritesPage />} />
+          <Route path="/basket" element={<ShoppingBasket />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </main>
