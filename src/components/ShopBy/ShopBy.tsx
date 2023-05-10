@@ -4,8 +4,10 @@ import './shop_by.scss';
 export const ShopBy: React.FC = () => {
   return (
     <section className="page__section shopBy">
-      <div className="container">
-        <h2 className="shopBy__title">Shop by category</h2>
+      <div className="box">
+        <h2 className="shopBy__title">
+          Shop by category
+        </h2>
 
         <div className="shopBy__categories">
           <div className="shopBy__category">
