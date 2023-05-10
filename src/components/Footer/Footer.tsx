@@ -41,7 +41,6 @@ export const Footer: React.FC = () => {
             </a>
           </li>
         </ul>
-
         <BackToTop />
       </div>
     </footer>
