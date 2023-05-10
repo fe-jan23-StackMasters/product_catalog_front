@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { ProductCard } from '../ProductCard';
-import { Phone } from '../../types/Phone';
+import { PhoneCard } from '../../types/PhoneCard';
 import './card_list.scss';
 
 interface Props {
-  products: Phone[],
+  products: PhoneCard[],
 }
 
 function useLocalStorage(key: string, initialValue: string[]) {

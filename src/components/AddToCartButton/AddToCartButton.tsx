@@ -29,8 +29,6 @@ export const AddToCart: React.FC<Props> = ({
       handler={onCardAdd}
     >
       {isAddedToCart ? 'Added' : 'Add to cart'}
-    <Button width="100%" height={`${height}`} type="btn__add">
-      {isAddedToCart ? 'Added' : 'Add to cart'}
     </Button>
   );
 };

@@ -1,4 +1,4 @@
-export interface Phone {
+export interface PhoneCard {
   id: string;
   category: string;
   phoneId: string;
