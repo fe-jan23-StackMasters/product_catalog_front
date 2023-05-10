@@ -2,6 +2,8 @@
 @import "./styles/variables.scss";
 @import "./styles/utils/mixins";
 @import "./components/Header/header.scss";
+@import "./components/TabletsPage/tablets.scss";
+@import "./styles/blocks/grid.scss";
 
 .container {
   max-width: 1200px;
