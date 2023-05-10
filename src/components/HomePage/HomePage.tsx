@@ -1,4 +1,3 @@
-import React from 'react';
 import { ShopBy } from '../ShopBy';
 
 export const HomePage = () => {
