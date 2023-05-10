@@ -46,7 +46,6 @@
       align-items: center;
       @include square(16px);
     }
-
   }
 
   &__count-position {
@@ -58,13 +57,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     text-decoration: none;
     font-family: 'Mont';
     font-size: 9px;
     line-height: 11px;
     color: $white-color;
-    
+
     @include square(14px);
     padding: 3px;
 
@@ -123,7 +122,7 @@
 
   &__item {
     margin-right: 32px;
-    
+
     &:not(:first-child) {
       @include onDesktop {
         margin-right: 64px;
@@ -154,12 +153,12 @@
     &--is-active {
       color: $white-color;
     }
-    
+
     &--is-active::after {
       bottom: 0;
       width: 100%;
       position: absolute;
-      content: "";
+      content: '';
       background-color: $white-color;
       height: 4px;
       display: block;

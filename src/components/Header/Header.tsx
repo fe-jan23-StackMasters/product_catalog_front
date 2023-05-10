@@ -1,8 +1,8 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logoItem from '../../icons/niceGadgets.svg';
 import logoItemOk from '../../icons/Ok.svg';
-import menuOpener from '../../icons/Menu.svg';
+// import menuOpener from '../../icons/Menu.svg';
 import favoritesRed from '../../icons/faqvoritesFilled.svg';
 import favorites from '../../icons/favourites.svg';
 import shoppingBag from '../../icons/shoppingBag.svg';
@@ -37,7 +37,7 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
   }, []);
 
   return (
-    <header className="header" >
+    <header className="header">
       <div className="header__content">
         <div className="header__right-side">
           {isMobile && (
@@ -57,12 +57,13 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
                   <Link to="/" className="logo">
                     <img
                       className="logo__image"
-                      src={logoItem} alt="Logo icon"
+                      src={logoItem}
+                      alt="Logo icon"
                     />
                     <img className="logo__ok" src={logoItemOk} alt="ok" />
                   </Link>
                 </li>
-                {navList.map(item => (
+                {navList.map((item) => (
                   <li key={item} className="nav__item">
                     <PageNavLink to={`/${item}`} text={item} />
                   </li>
@@ -102,8 +103,8 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
                 <div className="header__count-position">
 
                 <img
+                  src={favoritesRed}
                   className="header__menu-opener_image"
-                  src={shoppingBag}
                   alt="menu"
                   />
                 <span className='header__shoping-bag-count'>
@@ -119,7 +120,7 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
             >
               <img
                 className="header__menu-opener_image"
-                src={menuOpener}
+                src={shoppingBag}
                 alt="menu"
                 />
             </button>
