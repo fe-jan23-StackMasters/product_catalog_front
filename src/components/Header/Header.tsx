@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logoItem from '../../icons/niceGadgets.svg';
 import logoItemOk from '../../icons/Ok.svg';
-// import menuOpener from '../../icons/Menu.svg';
+import menuOpener from '../../icons/Menu.svg';
 import favoritesRed from '../../icons/faqvoritesFilled.svg';
 import favorites from '../../icons/favourites.svg';
 import shoppingBag from '../../icons/shoppingBag.svg';
@@ -103,7 +103,7 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
                 <div className="header__count-position">
 
                 <img
-                  src={favoritesRed}
+                  src={shoppingBag}
                   className="header__menu-opener_image"
                   alt="menu"
                   />
@@ -120,7 +120,7 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
             >
               <img
                 className="header__menu-opener_image"
-                src={shoppingBag}
+                src={menuOpener}
                 alt="menu"
                 />
             </button>
