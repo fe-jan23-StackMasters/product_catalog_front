@@ -10,12 +10,27 @@ import { FavouritesPage } from './components/FavouritesPage';
 import { ShoppingBasket } from './components/ShoppingBasket';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { BurgerMenu } from './components/BurgerMenu';
+import { useState } from 'react';
+// import classNames from 'classnames';
 import { HomeSlider } from './components/Slider/Slider';
 
 export const App = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+    document.body.classList.toggle('no-scroll');
+  };
+
   return (
     <>
-      <Header />
+    <body>
+      {!isOpen ? (
+        <Header toggleMenu={toggleMenu}/>
+      ) : (
+        <BurgerMenu toggleMenu={toggleMenu}/>
+      )}
 
       <main className="container">
         <Routes>
@@ -38,6 +53,7 @@ export const App = () => {
       </main>
 
       <Footer />
+    </body>
     </>
   );
 };
