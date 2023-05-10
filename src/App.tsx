@@ -10,6 +10,7 @@ import { FavouritesPage } from './components/FavouritesPage';
 import { ShoppingBasket } from './components/ShoppingBasket';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { HomeSlider } from './components/Slider/Slider';
 
 export const App = () => {
   return (
@@ -18,6 +19,8 @@ export const App = () => {
 
       <main className="container">
         <Routes>
+        <Route path="/" element={
+          <HomeSlider NameSlider = {'Brand new models'} />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<Navigate to="/" replace />} />
 
