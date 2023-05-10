@@ -8,6 +8,10 @@
   justify-content: center;
   align-items: center;
 
+  @include onDesktop {
+    width: fit-content;
+  }
+
   &__title {
     margin-bottom: 24px;
     font-size: 32px;
@@ -66,8 +70,8 @@
     margin-bottom: 24px;
 
     @include onTablet {
-      width: 187px;
-      height: 187px;  
+      width: 220px;
+      height: 220px;  
     }
 
     @include onDesktop {

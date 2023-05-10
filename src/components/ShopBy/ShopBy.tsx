@@ -4,7 +4,7 @@ import './shop_by.scss';
 export const ShopBy: React.FC = () => {
   return (
     <section className="page__section shopBy">
-      <div className="container">
+      <div className="box">
         <h2 className="shopBy__title">
           Shop by category
         </h2>

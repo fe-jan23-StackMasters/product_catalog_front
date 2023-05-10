@@ -1,25 +1,53 @@
+import React from 'react';
 import { AddToCart } from '../AddToCartButton/AddToCartButton';
 import { AddToFavourites } from '../AddToFavouriteButton/AddToFavourite';
 import './product_card.scss';
+import { Phone } from '../../types/Phone';
 
-export const ProductCard = () => {
+interface Props {
+  product: Phone,
+  onCardAdd: () => void,
+  onFavouriteAdd: () => void,
+  cardIds: string[],
+  favIds: string[],
+}
+
+export const ProductCard: React.FC<Props> = ({
+  product,
+  onCardAdd,
+  onFavouriteAdd,
+  cardIds,
+  favIds,
+}) => {
+  const {
+    // eslint-disable-next-line no-shadow
+    name,
+    fullPrice,
+    price,
+    // eslint-disable-next-line no-shadow
+    screen,
+    capacity,
+    ram,
+    id,
+  } = product;
+
   return (
     <div className="card">
       <img
         // eslint-disable-next-line max-len
-        src="https://cdn.discordapp.com/attachments/982936497068072991/1105085514358468648/image_2-removebg-preview.png"
+        src="https://media.discordapp.net/attachments/982936497068072991/1105085514358468648/image_2-removebg-preview.png"
         alt="Phone"
         className="card__image"
       />
 
       <h1 className="card__title">
-      Apple iPhone Xs 64GB Silver (iMT9G2FS/A)
+        {name}
       </h1>
 
       <div className="card__prices">
-        <p className="card__price--sale">$799</p>
+        <p className="card__price--sale">${price}</p>
 
-        <p className="card__price">$899</p>
+        <p className="card__price">${fullPrice}</p>
       </div>
 
       <div className="card__characteristics">
@@ -39,23 +67,33 @@ export const ProductCard = () => {
 
         <div className="card__characteristics-values">
           <p className="characteristic__value">
-            5.8” OLED
+            {screen}
           </p>
 
           <p className="characteristic__value">
-            64 GB
+            {capacity}
           </p>
 
           <p className="characteristic__value">
-            4 GB
+            {ram}
           </p>
         </div>
       </div>
 
       <div className="card__buttons">
-        <AddToCart height="40px"/>
+        <AddToCart
+          height="40px"
+          onCardAdd={onCardAdd}
+          id={id}
+          cardIds={cardIds}
+        />
 
-        <AddToFavourites size="40px"/>
+        <AddToFavourites
+          size="40px"
+          onFavouriteAdd={onFavouriteAdd}
+          favIds={favIds}
+          id={id}
+        />
       </div>
     </div>
   );
