@@ -3,18 +3,25 @@
 
 .footer {
   font-family: 'Montserrat', sans-serif;
-  display: flex;
-  flex-direction: column;
   background-color: $black-color;
   border-top: 1px solid $elements-color;
 
-  @include onTablet {
-    flex-direction: row;
-    justify-content: space-between;
+  &__container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: auto;
+
+    @include onTablet {
+      flex-direction: row;
+      justify-content: space-between;
+    }
   }
 
   &__logo {
+    // display: flex;
     position: relative;
+
     margin: 32px 16px;
 
     @include onTablet {
