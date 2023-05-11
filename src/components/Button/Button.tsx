@@ -1,11 +1,11 @@
 import React from 'react';
 
 interface Props {
-  width: string,
-  height: string,
-  type: string,
-  children: React.ReactNode,
-  handler?: () => void,
+  width: string;
+  height: string;
+  type: string;
+  children: React.ReactNode;
+  handler?: () => void;
 }
 
 export const Button: React.FC<Props> = ({

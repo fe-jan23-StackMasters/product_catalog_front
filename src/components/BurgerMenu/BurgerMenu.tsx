@@ -31,12 +31,13 @@ export const BurgerMenu: React.FC<Props> = ({ toggleMenu }) => {
       <div className="menu__content">
         <ul className="menu__content-list">
           {menuList.map((item) => (
-            <li
-              className="menu__content-list item"
-              key={item}
-            >
+            <li className="menu__content-list item" key={item}>
               {/* {item} */}
-              <PageNavLinkBurger to={`/${item}`} text={item} toggleMenu={toggleMenu} />
+              <PageNavLinkBurger
+                to={`/${item}`}
+                text={item}
+                toggleMenu={toggleMenu}
+              />
             </li>
           ))}
         </ul>

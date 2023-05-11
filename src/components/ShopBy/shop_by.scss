@@ -1,9 +1,6 @@
 @import '../../styles/variables.scss';
 @import '../../styles/utils/mixins.scss';
 
-$columns--tablet: 12;
-$columns--desktop: 24;
-
 .grid {
   display: grid;
   column-gap: 16px;
