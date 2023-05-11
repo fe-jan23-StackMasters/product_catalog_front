@@ -12,9 +12,7 @@ export const ProductCard = () => {
         className="card__image"
       />
 
-      <h1 className="card__title">
-      Apple iPhone Xs 64GB Silver (iMT9G2FS/A)
-      </h1>
+      <h1 className="card__title">Apple iPhone Xs 64GB Silver (iMT9G2FS/A)</h1>
 
       <div className="card__prices">
         <p className="card__price--sale">$799</p>
@@ -24,38 +22,26 @@ export const ProductCard = () => {
 
       <div className="card__characteristics">
         <div className="card__characteristics-titles">
-          <p className="characteristic__title">
-            Screen
-          </p>
+          <p className="characteristic__title">Screen</p>
 
-          <p className="characteristic__title">
-            Capacity
-          </p>
+          <p className="characteristic__title">Capacity</p>
 
-          <p className="characteristic__title">
-            RAM
-          </p>
+          <p className="characteristic__title">RAM</p>
         </div>
 
         <div className="card__characteristics-values">
-          <p className="characteristic__value">
-            5.8” OLED
-          </p>
+          <p className="characteristic__value">5.8” OLED</p>
 
-          <p className="characteristic__value">
-            64 GB
-          </p>
+          <p className="characteristic__value">64 GB</p>
 
-          <p className="characteristic__value">
-            4 GB
-          </p>
+          <p className="characteristic__value">4 GB</p>
         </div>
       </div>
 
       <div className="card__buttons">
-        <AddToCart height="40px"/>
+        <AddToCart height="40px" />
 
-        <AddToFavourites size="40px"/>
+        <AddToFavourites size="40px" />
       </div>
     </div>
   );

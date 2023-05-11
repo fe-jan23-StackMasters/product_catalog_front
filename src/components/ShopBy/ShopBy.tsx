@@ -5,16 +5,11 @@ export const ShopBy: React.FC = () => {
   return (
     <section className="page__section shopBy">
       <div className="container">
-        <h2 className="shopBy__title">
-          Shop by category
-        </h2>
+        <h2 className="shopBy__title">Shop by category</h2>
 
         <div className="shopBy__categories">
           <div className="shopBy__category">
-            <a
-              href="/phones"
-              className="shopBy__link"
-            >
+            <a href="/phones" className="shopBy__link">
               <div className="shopBy__container">
                 <img
                   // eslint-disable-next-line max-len
@@ -26,16 +21,11 @@ export const ShopBy: React.FC = () => {
               Mobile phones
             </a>
 
-            <span className="shopBy__category-count">
-              95 models
-            </span>
+            <span className="shopBy__category-count">95 models</span>
           </div>
 
           <div className="shopBy__category">
-            <a
-              href="/tablets"
-              className="shopBy__link"
-            >
+            <a href="/tablets" className="shopBy__link">
               <div className="shopBy__container shopBy__container--grey">
                 <img
                   // eslint-disable-next-line max-len
@@ -47,16 +37,11 @@ export const ShopBy: React.FC = () => {
               Tablets
             </a>
 
-            <span className="shopBy__category-count">
-              24 models
-            </span>
+            <span className="shopBy__category-count">24 models</span>
           </div>
 
           <div className="shopBy__category">
-            <a
-              href="/accessories"
-              className="shopBy__link"
-            >
+            <a href="/accessories" className="shopBy__link">
               <div className="shopBy__container shopBy__container--red">
                 <img
                   // eslint-disable-next-line max-len
@@ -68,9 +53,7 @@ export const ShopBy: React.FC = () => {
               Accessories
             </a>
 
-            <span className="shopBy__category-count">
-              100 models
-            </span>
+            <span className="shopBy__category-count">100 models</span>
           </div>
         </div>
       </div>
