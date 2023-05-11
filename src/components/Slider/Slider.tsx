@@ -43,7 +43,7 @@ export const HomeSlider: React.FC<Props> = ({
     </div>
   );
   const settingsSlider = {
-    infinite: false,
+    infinite: true,
     speed: 300,
     variableWidth: true,
     slidesToShow: 4,
@@ -100,6 +100,7 @@ export const HomeSlider: React.FC<Props> = ({
       <h2 className="slider__name">
         {isError ? 'Something went wrong...' : title}
       </h2>
+
       {isLoading ? (
         <div className='slider__loader'>
           <Loader />

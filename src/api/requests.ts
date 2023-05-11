@@ -52,7 +52,7 @@ export const getHot = (limit?: number): Promise<PhoneCard[]> => {
   return get<PhoneCard[]>(`${BASE_URL}/products/discount${limit ? `?limit=${limit}` : ''}`);
 };
 
-export const getDetailedInfo = (id: string) => {
+export const getDetailedInfo = (id: string) => { // apple-iphone-....
   return get(`${BASE_URL}/products/${id}`);
 };
 

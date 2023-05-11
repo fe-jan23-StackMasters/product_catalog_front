@@ -8,6 +8,7 @@ import { ShopBy } from '../ShopBy';
 import { HomeSlider } from '../Slider/Slider';
 import { useQuery } from '@tanstack/react-query';
 import { getHot, getNew } from '../../api/requests';
+import { Container } from '../Container';
 
 export const HomePage = () => {
   const [newProducts, setNewProducts] = useState<PhoneCard[]>();
@@ -15,10 +16,7 @@ export const HomePage = () => {
   const [cardIds, onCardToggle] = useCardsIds('cart', []);
   const [favIds, onFavToggle] = useCardsIds('favourite', []);
 
-  const {
-    isError: isHotError,
-    isLoading: isHotLoading,
-  } = useQuery({
+  const { isError: isHotError, isLoading: isHotLoading } = useQuery({
     queryKey: ['hotProducts'],
     queryFn: () => getHot(),
     onSuccess(data) {
@@ -38,7 +36,7 @@ export const HomePage = () => {
   });
 
   return (
-    <>
+    <Container>
       <h1>Welcome to Nice Gadgets store!</h1>
       <BigSlider />
 
@@ -65,6 +63,6 @@ export const HomePage = () => {
         isLoading={isHotLoading}
         isError={isHotError}
       />
-    </>
+    </Container>
   );
 };

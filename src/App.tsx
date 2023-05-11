@@ -31,7 +31,7 @@ export const App = () => {
           <BurgerMenu toggleMenu={toggleMenu} />
         )}
 
-        <main className="container">
+        <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/home" element={<Navigate to="/" replace />} />

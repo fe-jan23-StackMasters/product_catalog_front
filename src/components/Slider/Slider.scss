@@ -1,9 +1,6 @@
 @import '../../styles/utils/mixins';
 
 .slider {
-  display: flex;
-  height: 670px;
-  align-items: center;
   position: relative;
 
   @include onTablet {
@@ -11,23 +8,18 @@
   }
 
   &__name {
-    position: absolute;
-    left: 0;
-    top: 0;
     max-width: 70%;
     display: block;
-  }
-
-  &__item {
-    margin-right: 30px;
+    margin-bottom: 24px;
   }
 
   &__loader {
+    display: flex;
+    justify-content: center;
     margin: 0 auto;
   }
 
   &__container {
-    box-sizing: border-box;
     width: 100%;
 
     .slick-slider {
@@ -36,13 +28,13 @@
     }
   
     .slick-list {
-      padding: 0;
+      // padding: 0;
     }
   
     .slick-prev {
       order: 3;
       position: relative;
-      top: -66px;
+      top: -39px;
       left: calc(100% - 80px);
       display: flex;
       display: block;
@@ -102,13 +94,12 @@
   
     .slick-next {
       right: 0px;
-      top: -66px;
+      top: -39px;
     }
   
     .slick-track {
-      opacity: 1;
-      transform: translate3d(-506px, 0px, 0px);
-      width: 1000000px !important;
+      display: flex;
+      gap: 16px;
     }
   } 
 }
