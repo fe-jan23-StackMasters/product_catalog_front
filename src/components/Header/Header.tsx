@@ -42,10 +42,7 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
         <div className="header__right-side">
           {isMobile && (
             <Link to="/" className="logo">
-              <img
-                className="logo__image"
-                src={logoItem} alt="Logo icon"
-              />
+              <img className="logo__image" src={logoItem} alt="Logo icon" />
               <img className="logo__ok" src={logoItemOk} alt="ok" />
             </Link>
           )}
@@ -53,7 +50,7 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
           {!isMobile && (
             <nav className="header__nav nav">
               <ul className="nav__panel">
-                <li className='nav__item'>
+                <li className="nav__item">
                   <Link to="/" className="logo">
                     <img
                       className="logo__image"
@@ -73,58 +70,52 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
           )}
         </div>
 
-          {!isMobile ? (
-            <div className="header__buying-section">
-
-              <a href='/favourites' className="header__case">
+        {!isMobile ? (
+          <div className="header__buying-section">
+            <a href="/favourites" className="header__case">
               {hasFavorites ? (
                 <>
-                <div className="header__count-position">
-
-                  <img src={favoritesRed}
-                    className="header__menu-opener_image" alt="menu"
+                  <div className="header__count-position">
+                    <img
+                      src={favoritesRed}
+                      className="header__menu-opener_image"
+                      alt="menu"
                     />
-                    <span className='header__shoping-bag-count'>
-                      13
-                    </span>
-                </div>
+                    <span className="header__shoping-bag-count">13</span>
+                  </div>
                 </>
               ) : (
-                <img src={favorites}
-                className="header__menu-opener_image" alt="menu"
+                <img
+                  src={favorites}
+                  className="header__menu-opener_image"
+                  alt="menu"
                 />
               )}
-              </a>
+            </a>
 
-              <a
-                href='/cart'
-                className="header__case"
-              >
-                <div className="header__count-position">
-
+            <a href="/cart" className="header__case">
+              <div className="header__count-position">
                 <img
                   src={favoritesRed}
                   className="header__menu-opener_image"
                   alt="menu"
-                  />
-                <span className='header__shoping-bag-count'>
-                  {expectToBuy}
-                </span>
-                </div>
-              </a>
-            </div>
-          ) : (
-            <button
-              className="header__menu-button header__case"
-              onClick={toggleMenu}
-            >
-              <img
-                className="header__menu-opener_image"
-                src={shoppingBag}
-                alt="menu"
                 />
-            </button>
-          )}
+                <span className="header__shoping-bag-count">{expectToBuy}</span>
+              </div>
+            </a>
+          </div>
+        ) : (
+          <button
+            className="header__menu-button header__case"
+            onClick={toggleMenu}
+          >
+            <img
+              className="header__menu-opener_image"
+              src={shoppingBag}
+              alt="menu"
+            />
+          </button>
+        )}
       </div>
     </header>
   );

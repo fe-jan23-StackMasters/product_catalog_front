@@ -24,33 +24,33 @@ export const App = () => {
 
   return (
     <>
-    <body>
-      {!isOpen ? (
-        <Header toggleMenu={toggleMenu}/>
-      ) : (
-        <BurgerMenu toggleMenu={toggleMenu}/>
-      )}
+      <body>
+        {!isOpen ? (
+          <Header toggleMenu={toggleMenu} />
+        ) : (
+          <BurgerMenu toggleMenu={toggleMenu} />
+        )}
 
-      <main className="container">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/home" element={<Navigate to="/" replace />} />
+        <main className="container">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<Navigate to="/" replace />} />
 
-          <Route path="/phones" element={<Outlet />}>
-            <Route index element={<PhonesPage />} />
-            <Route path=":itemCard" element={<PhonesPage />} />
-          </Route>
+            <Route path="/phones" element={<Outlet />}>
+              <Route index element={<PhonesPage />} />
+              <Route path=":itemCard" element={<PhonesPage />} />
+            </Route>
 
-          <Route path="/tablets" element={<TabletsPage />} />
-          <Route path="/accessories" element={<AccessoriesPage />} />
-          <Route path="/favorites" element={<FavouritesPage />} />
-          <Route path="/basket" element={<ShoppingBasket />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </main>
+            <Route path="/tablets" element={<TabletsPage />} />
+            <Route path="/accessories" element={<AccessoriesPage />} />
+            <Route path="/favorites" element={<FavouritesPage />} />
+            <Route path="/basket" element={<ShoppingBasket />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </main>
 
-      <Footer />
-    </body>
+        <Footer />
+      </body>
     </>
   );
 };
