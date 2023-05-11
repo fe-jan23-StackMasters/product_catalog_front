@@ -16,6 +16,7 @@ export const AddToCart: React.FC<Props> = ({
   id,
   cardIds,
 }) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const isAddedToCart = cardIds.some((el: any) => el.id === id);
 
   return (

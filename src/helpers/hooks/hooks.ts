@@ -24,6 +24,7 @@ export function useLocalStorage(key: string, initialValue: StoragePhone[]) {
 export function useCardsIds(key: string, initialValue: StoragePhone[]) {
   const [cardsIds, setCardsIds] = useLocalStorage(key, initialValue);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onCardToggle = (basket: any) => {
     setCardsIds((prevState: StoragePhone[]) => {
       if (prevState.find((device) => device.id === basket.id)) {
