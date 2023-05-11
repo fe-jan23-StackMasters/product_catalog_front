@@ -2,10 +2,10 @@ import React from 'react';
 import { AddToCart } from '../AddToCartButton/AddToCartButton';
 import { AddToFavourites } from '../AddToFavouriteButton/AddToFavourite';
 import './product_card.scss';
-import { Phone } from '../../types/Phone';
+import { PhoneCard } from '../../types/PhoneCard';
 
 interface Props {
-  product: Phone,
+  product: PhoneCard,
   onCardAdd: () => void,
   onFavouriteAdd: () => void,
   cardIds: string[],

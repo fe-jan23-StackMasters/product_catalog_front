@@ -12,22 +12,44 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { BurgerMenu } from './components/BurgerMenu';
 import { useState } from 'react';
-// import classNames from 'classnames';
 import { HomeSlider } from './components/Slider/Slider';
+import { PhoneCard } from './types/PhoneCard';
 
 export const App = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [favorites, setFavorites] = useState<PhoneCard[]>([]);
+  const [cart, setCart] = useState<PhoneCard[]>([]);
+
+  // const handleAddToFavorites = (item: PhoneCard) => {
+  //   const newFavorites = [...favorites, item];
+
+  //   setFavorites(newFavorites);
+  //   localStorage.setItem('favorites', JSON.stringify(newFavorites));
+  // };
+
+  // const handleAddToCart = (item: PhoneCard) => {
+  //   const newCart = [...cart, item];
+
+  //   setCart(newCart);
+  //   localStorage.setItem('cart', JSON.stringify(newCart));
+  // };
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
     document.body.classList.toggle('no-scroll');
+    setFavorites([]);
+    setCart([]);
   };
 
   return (
     <>
     <body>
       {!isOpen ? (
-        <Header toggleMenu={toggleMenu}/>
+        <Header
+        toggleMenu={toggleMenu}
+        favorites={favorites}
+        cart={cart}
+        />
       ) : (
         <BurgerMenu toggleMenu={toggleMenu}/>
       )}

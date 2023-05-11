@@ -4,28 +4,31 @@ import logoItem from '../../icons/niceGadgets.svg';
 import logoItemOk from '../../icons/Ok.svg';
 import menuOpener from '../../icons/Menu.svg';
 import favoritesRed from '../../icons/faqvoritesFilled.svg';
-import favorites from '../../icons/favourites.svg';
+import favoritesHart from '../../icons/favourites.svg';
 import shoppingBag from '../../icons/shoppingBag.svg';
 import { PageNavLink } from '../PageNavLink';
+import { PhoneCard } from '../../types/PhoneCard';
 
 const navList = ['home', 'phones', 'tablets', 'accessories'];
 
 export type Props = {
   toggleMenu: () => void;
+  favorites: PhoneCard[];
+  cart: PhoneCard[];
 };
 
-export const Header: FC<Props> = ({ toggleMenu }) => {
+export const Header: FC<Props> = ({
+  toggleMenu,
+  favorites,
+  cart,
+}) => {
   const [isMobile, setIsMobile] = useState(false);
-  const [hasFavorites, setHasFavorites] = useState(false);
-  const [expectToBuy, setExpectToBuy] = useState(0);
 
   useEffect(() => {
     const handleResize = () => {
       const windowWidth = window.innerWidth;
 
       setIsMobile(windowWidth < 640);
-      setHasFavorites(true);
-      setExpectToBuy((prev) => prev + 1);
     };
 
     handleResize();
@@ -77,7 +80,7 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
             <div className="header__buying-section">
 
               <a href='/favourites' className="header__case">
-              {hasFavorites ? (
+              {(favorites.length > 0) ? (
                 <>
                 <div className="header__count-position">
 
@@ -85,12 +88,12 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
                     className="header__menu-opener_image" alt="menu"
                     />
                     <span className='header__shoping-bag-count'>
-                      13
+                      {favorites.length}
                     </span>
                 </div>
                 </>
               ) : (
-                <img src={favorites}
+                <img src={favoritesHart}
                 className="header__menu-opener_image" alt="menu"
                 />
               )}
@@ -108,7 +111,7 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
                   alt="menu"
                   />
                 <span className='header__shoping-bag-count'>
-                  {expectToBuy}
+                  {cart.length}
                 </span>
                 </div>
               </a>

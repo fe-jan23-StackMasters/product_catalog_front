@@ -4,7 +4,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import './Slider.scss';
 import ArrowRight from '../../icons/arrowRight.svg';
 import ArrowLeft from '../../icons/arrowLeft.svg';
-import { ProductCard } from '../ProductCard';
+// import { ProductCard } from '../ProductCard';
 import React from 'react';
 
 type Props = {
@@ -58,7 +58,7 @@ export const HomeSlider: React.FC<Props> = ({ NameSlider }) => {
       <h1 className='name__slider'>{NameSlider}</h1>
       <div className='slider'>
         <Slider {...settings}>
-          <div className='item'>
+          {/* <div className='item'>
             <ProductCard />
           </div>
           <div className='item'>
@@ -75,7 +75,7 @@ export const HomeSlider: React.FC<Props> = ({ NameSlider }) => {
           </div>
           <div className='item'>
             <ProductCard />
-          </div>
+          </div> */}
         </Slider>
       </div>
     </div >
