@@ -9,7 +9,7 @@ type Props = {
   phone: StoragePhone;
   handleRemovePhone: (phoneId: string) => void;
   handleAddOrRemoveQuantity: (phoneId: string, action: ActionBasket) => void;
-}
+};
 
 export const BasketCard: React.FC<Props> = ({
   phone,
@@ -24,14 +24,13 @@ export const BasketCard: React.FC<Props> = ({
     <div className="basket__card">
       <div className="basket__card-top">
         <img
-          src={deleteIcon} alt="delete"
+          src={deleteIcon}
+          alt="delete"
           className="basket__card-delete"
           onClick={() => handleRemovePhone(id)}
         />
         <img src={iphoneIcon} alt="iphone" className="basket__card-image" />
-        <span className="basket__card-title">
-          {phone.product.name}
-        </span>
+        <span className="basket__card-title">{phone.product.name}</span>
       </div>
 
       <div className="basket__card-bottom">
@@ -42,9 +41,7 @@ export const BasketCard: React.FC<Props> = ({
             onClick={() => handleAddOrRemoveQuantity(id, 'delete')}
             disabled={isDisableMin}
           />
-          <span className="basket__card-count">
-            {phone.quantity}
-          </span>
+          <span className="basket__card-count">{phone.quantity}</span>
           <button
             type="button"
             className="basket__card-plus"

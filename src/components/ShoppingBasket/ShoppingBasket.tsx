@@ -10,7 +10,7 @@ export const ShoppingBasket = () => {
   const phonesFromStorage = JSON.parse(localStorage.getItem('cart') || '');
 
   const handleRemovePhone = (phoneId: string) => {
-    const filteredPhones = phones.filter(phone => phone.id !== phoneId);
+    const filteredPhones = phones.filter((phone) => phone.id !== phoneId);
 
     localStorage.setItem('cart', JSON.stringify(filteredPhones));
 
@@ -18,7 +18,7 @@ export const ShoppingBasket = () => {
   };
 
   const handleAddOrRemoveQuantity = (phoneId: string, action: ActionBasket) => {
-    const updatedPhones = phones.map(phone => {
+    const updatedPhones = phones.map((phone) => {
       if (phone.id === phoneId) {
         if (action === 'add') {
           phone.quantity = String(+phone.quantity + 1);
@@ -50,7 +50,7 @@ export const ShoppingBasket = () => {
   return (
     <div className="basket">
       <div className="basket__cards">
-        {phones.map(phone => (
+        {phones.map((phone) => (
           <BasketCard
             key={phone.id}
             phone={phone}
@@ -61,19 +61,13 @@ export const ShoppingBasket = () => {
       </div>
 
       <div className="basket__total">
-        <span className="basket__total-price">
-          {`$${totalPrice}`}
-        </span>
+        <span className="basket__total-price">{`$${totalPrice}`}</span>
 
         <span className="basket__total-description">
           {`Total for ${totalItems} items`}
         </span>
 
-        <Button
-          width="100%"
-          height="48px"
-          type="btn__add"
-        >
+        <Button width="100%" height="48px" type="btn__add">
           Checkout
         </Button>
       </div>

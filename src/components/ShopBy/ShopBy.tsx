@@ -3,12 +3,9 @@ import React from 'react';
 import './shop_by.scss';
 import { CategoryCard } from '../CategoryCard/CategoryCard';
 
-const PhonesImg
-  = 'https://github.com/fe-oct22-senior-html-developers/product_catalog/blob/main/src/static/categories/category__phones.jpg?raw=true';
-const TabletsImg
-  = 'https://github.com/fe-oct22-senior-html-developers/product_catalog/blob/main/src/static/categories/category__accessories.jpg?raw=true';
-const AccessoriesImg
-  = 'https://github.com/fe-oct22-senior-html-developers/product_catalog/blob/main/src/static/categories/category__tablets.jpg?raw=true';
+const PhonesImg = 'https://github.com/fe-oct22-senior-html-developers/product_catalog/blob/main/src/static/categories/category__phones.jpg?raw=true';
+const TabletsImg = 'https://github.com/fe-oct22-senior-html-developers/product_catalog/blob/main/src/static/categories/category__accessories.jpg?raw=true';
+const AccessoriesImg = 'https://github.com/fe-oct22-senior-html-developers/product_catalog/blob/main/src/static/categories/category__tablets.jpg?raw=true';
 
 export const ShopBy: React.FC = () => {
   return (
