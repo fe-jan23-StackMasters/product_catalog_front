@@ -43,8 +43,8 @@ export const App = () => {
 
             <Route path="/tablets" element={<TabletsPage />} />
             <Route path="/accessories" element={<AccessoriesPage />} />
-            <Route path="/favorites" element={<FavouritesPage />} />
-            <Route path="/basket" element={<ShoppingBasket />} />
+            <Route path="/favourites" element={<FavouritesPage />} />
+            <Route path="/cart" element={<ShoppingBasket />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </main>
