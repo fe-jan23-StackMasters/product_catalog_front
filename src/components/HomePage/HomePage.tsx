@@ -1,5 +1,9 @@
-import { CardList } from '../CardList/CardList';
+// import { CardList } from '../CardList/CardList';
+
+import { useCardsIds } from '../../helpers/hooks/hooks';
+import { BigSlider } from '../BigSlider/BigSlider';
 import { ShopBy } from '../ShopBy';
+import { HomeSlider } from '../Slider/Slider';
 
 const products = [
   {
@@ -62,15 +66,71 @@ const products = [
     year: 2019,
     image: 'img/phones/apple-iphone-11/black/00.jpg',
   },
+  {
+    id: '5',
+    category: 'phones',
+    phoneId: 'apple-iphone-11-64gb-black',
+    itemId: 'apple-iphone-11-64gb-black',
+    name: 'Apple iPhone 11 64GB Black',
+    fullPrice: 932,
+    price: 880,
+    screen: '6.1 IPS',
+    capacity: '64GB',
+    color: 'black',
+    ram: '4GB',
+    year: 2019,
+    image: 'img/phones/apple-iphone-11/black/00.jpg',
+  },
+  {
+    id: '6',
+    category: 'phones',
+    phoneId: 'apple-iphone-11-64gb-black',
+    itemId: 'apple-iphone-11-64gb-black',
+    name: 'Apple iPhone 11 64GB Black',
+    fullPrice: 932,
+    price: 880,
+    screen: '6.1 IPS',
+    capacity: '64GB',
+    color: 'black',
+    ram: '4GB',
+    year: 2019,
+    image: 'img/phones/apple-iphone-11/black/00.jpg',
+  },
+  {
+    id: '7',
+    category: 'phones',
+    phoneId: 'apple-iphone-11-64gb-black',
+    itemId: 'apple-iphone-11-64gb-black',
+    name: 'Apple iPhone 11 64GB Black',
+    fullPrice: 932,
+    price: 880,
+    screen: '6.1 IPS',
+    capacity: '64GB',
+    color: 'black',
+    ram: '4GB',
+    year: 2019,
+    image: 'img/phones/apple-iphone-11/black/00.jpg',
+  },
 ];
 
 export const HomePage = () => {
+  const [cardIds, onCardToggle] = useCardsIds('cart', []);
+  const [favIds, onFavToggle] = useCardsIds('favourite', []);
+
   return (
     <>
       <h1>Welcome to Nice Gadgets store!</h1>
-
+      <BigSlider />
       <ShopBy />
-      <CardList products={products} />
+      {/* <CardList products={products} /> */}
+      <HomeSlider
+        NameSlider={'Brand new models'}
+        favIds={favIds}
+        cardIds={cardIds}
+        onCardAdd={onCardToggle}
+        onFavouriteAdd={onFavToggle}
+        products={products}
+      />
     </>
   );
 };

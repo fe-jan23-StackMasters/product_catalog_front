@@ -18,6 +18,7 @@ export const AddToFavourites: React.FC<Props> = ({
   favIds,
   id,
 }) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const isFavorite = favIds.some((el: any) => el.id === id);
 
   const imagePath = useMemo(
