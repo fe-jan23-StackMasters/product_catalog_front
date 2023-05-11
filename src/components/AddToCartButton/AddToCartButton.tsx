@@ -4,10 +4,10 @@ import classNames from 'classnames';
 import './add_to_cart_button.scss';
 
 interface Props {
-  height: string,
-  onCardAdd: () => void,
-  id: string,
-  cardIds: string[],
+  height: string;
+  onCardAdd: () => void;
+  id: string;
+  cardIds: string[];
 }
 
 export const AddToCart: React.FC<Props> = ({
@@ -16,16 +16,14 @@ export const AddToCart: React.FC<Props> = ({
   id,
   cardIds,
 }) => {
-  const isAddedToCart = cardIds.some((el: string) => el === id);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const isAddedToCart = cardIds.some((el: any) => el.id === id);
 
   return (
     <Button
       width="77%"
       height={`${height}`}
-      type={classNames(
-        'btn__add',
-        { 'btn__add--added': isAddedToCart },
-      )}
+      type={classNames('btn__add', { 'btn__add--added': isAddedToCart })}
       handler={onCardAdd}
     >
       {isAddedToCart ? 'Added' : 'Add to cart'}

@@ -5,11 +5,11 @@ import './product_card.scss';
 import { PhoneCard } from '../../types/PhoneCard';
 
 interface Props {
-  product: PhoneCard,
-  onCardAdd: () => void,
-  onFavouriteAdd: () => void,
-  cardIds: string[],
-  favIds: string[],
+  product: PhoneCard;
+  onCardAdd: () => void;
+  onFavouriteAdd: () => void;
+  cardIds: string[];
+  favIds: string[];
 }
 
 export const ProductCard: React.FC<Props> = ({
@@ -20,11 +20,9 @@ export const ProductCard: React.FC<Props> = ({
   favIds,
 }) => {
   const {
-    // eslint-disable-next-line no-shadow
     name,
     fullPrice,
     price,
-    // eslint-disable-next-line no-shadow
     screen,
     capacity,
     ram,
@@ -40,9 +38,7 @@ export const ProductCard: React.FC<Props> = ({
         className="card__image"
       />
 
-      <h1 className="card__title">
-        {name}
-      </h1>
+      <h1 className="card__title">{name}</h1>
 
       <div className="card__prices">
         <p className="card__price--sale">${price}</p>
@@ -60,17 +56,11 @@ export const ProductCard: React.FC<Props> = ({
         </div>
 
         <div className="card__characteristics-values">
-          <p className="characteristic__value">
-            {screen}
-          </p>
+          <p className="characteristic__value">{screen}</p>
 
-          <p className="characteristic__value">
-            {capacity}
-          </p>
+          <p className="characteristic__value">{capacity}</p>
 
-          <p className="characteristic__value">
-            {ram}
-          </p>
+          <p className="characteristic__value">{ram}</p>
         </div>
       </div>
 

@@ -11,12 +11,11 @@ export type Props = {
 export const PageNavLinkBurger: FC<Props> = ({ to, text, toggleMenu }) => (
   <NavLink
     onClick={toggleMenu}
-      to={to}
-      className={({ isActive }) => classNames(
-        'nav__link',
-        { 'nav__link--is-active': isActive },
-      )}
-    >
-      {text}
+    to={to}
+    className={({ isActive }) =>
+      classNames('nav__link', { 'nav__link--is-active': isActive })
+    }
+  >
+    {text}
   </NavLink>
 );

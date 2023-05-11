@@ -1,4 +1,4 @@
-.tablets{
+.tablets {
   &__links {
     display: flex;
     margin-bottom: 24px;
@@ -48,7 +48,7 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 21px;
-    color: #75767F;
+    color: #75767f;
     margin-bottom: 32px;
 
     @include onTablet {
