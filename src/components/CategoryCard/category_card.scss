@@ -1,0 +1,39 @@
+@import '../../styles/variables.scss';
+@import '../../styles/utils/mixins';
+
+.category-card {
+  @include onDesktop {
+    &:hover &__image {
+      transform: scale(1.05);
+    }
+  }
+
+  &__image {
+    width: 100%;
+    margin-bottom: 24px;
+
+    transition: transform 0.5s;
+  }
+
+  &__link {
+    text-decoration: none;
+  }
+
+  &__title {
+    margin-bottom: 4px;
+
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 25px;
+
+    color: $white-color;
+  }
+
+  &__models-amount {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+
+    color: $secondary-color;
+  }
+}

@@ -11,6 +11,12 @@
   padding: 32px;
   text-align: start;
   font-family: 'Montserrat', sans-serif;
+  border: 1px solid $surface1-color;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 0 10px 1px $accent-color;
+  }
 
   &__image {
     align-self: center;
@@ -22,6 +28,8 @@
     font-size: 14px;
     margin-bottom: 8px;
     line-height: 21px;
+    height: 50px;
+    overflow: hidden;
   }
 
   &__prices {

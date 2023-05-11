@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '../Button/Button';
-import './add_to_cart_button.scss';
 import classNames from 'classnames';
+import './add_to_cart_button.scss';
 
 interface Props {
   height: string,
