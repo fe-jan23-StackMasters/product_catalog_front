@@ -4,6 +4,9 @@ import { Button } from '../Button';
 import './ShoppingBasket.scss';
 import { StoragePhone } from '../../types/StoragePhone';
 import { ActionBasket } from '../../types/ActionBasket';
+import { Container } from '../Container';
+import { NavLink } from 'react-router-dom';
+import { LinkLine } from '../LinkLine';
 
 export const ShoppingBasket = () => {
   const [phones, setPhones] = useState<StoragePhone[]>([]);
@@ -48,29 +51,44 @@ export const ShoppingBasket = () => {
   }, 0);
 
   return (
-    <div className="basket">
-      <div className="basket__cards">
-        {phones.map((phone) => (
-          <BasketCard
-            key={phone.id}
-            phone={phone}
-            handleRemovePhone={handleRemovePhone}
-            handleAddOrRemoveQuantity={handleAddOrRemoveQuantity}
-          />
-        ))}
+    <Container>
+      <LinkLine to={'cart'} title={'Basket'}/>
+      {!totalItems ? (
+        <Container>
+          <h2 className="basket__title">Ooops... Your basket is empty</h2>
+
+          <NavLink to="/phones" className="basket__link">
+            <Button width="50%" height="48px" type="btn__add btn__add-shop">
+              Go to SHOP
+            </Button>
+          </NavLink>
+        </Container>
+      ) : (
+        <div className="basket">
+          <div className="basket__cards">
+            {phones.map((phone) => (
+              <BasketCard
+                key={phone.id}
+                phone={phone}
+                handleRemovePhone={handleRemovePhone}
+                handleAddOrRemoveQuantity={handleAddOrRemoveQuantity}
+              />
+            ))}
+          </div>
+
+          <div className="basket__total">
+            <span className="basket__total-price">{`$${totalPrice}`}</span>
+
+            <span className="basket__total-description">
+              {`Total for ${totalItems} items`}
+            </span>
+
+            <Button width="100%" height="48px" type="btn__add">
+              Checkout
+            </Button>
+          </div>
       </div>
-
-      <div className="basket__total">
-        <span className="basket__total-price">{`$${totalPrice}`}</span>
-
-        <span className="basket__total-description">
-          {`Total for ${totalItems} items`}
-        </span>
-
-        <Button width="100%" height="48px" type="btn__add">
-          Checkout
-        </Button>
-      </div>
-    </div>
+      )}
+    </Container>
   );
 };

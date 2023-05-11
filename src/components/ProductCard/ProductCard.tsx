@@ -19,15 +19,7 @@ export const ProductCard: React.FC<Props> = ({
   cardIds,
   favIds,
 }) => {
-  const {
-    name,
-    fullPrice,
-    price,
-    screen,
-    capacity,
-    ram,
-    id,
-  } = product;
+  const { name, fullPrice, price, screen, capacity, ram, id } = product;
 
   return (
     <div className="card">

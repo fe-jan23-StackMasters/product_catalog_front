@@ -18,8 +18,8 @@ type Props = {
   favIds: string[];
   onCardAdd: () => void;
   onFavouriteAdd: () => void;
-  isError: boolean,
-  isLoading: boolean,
+  isError: boolean;
+  isLoading: boolean;
 };
 
 export const HomeSlider: React.FC<Props> = ({
@@ -102,7 +102,7 @@ export const HomeSlider: React.FC<Props> = ({
       </h2>
 
       {isLoading ? (
-        <div className='slider__loader'>
+        <div className="slider__loader">
           <Loader />
         </div>
       ) : (
