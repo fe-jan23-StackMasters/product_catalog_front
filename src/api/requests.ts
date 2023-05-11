@@ -1,10 +1,10 @@
-import 'dotenv/config.js';
 import axios from 'axios';
 import { ProductType } from '../types/ProductType';
 import { SortBy } from '../types/SortBy';
 import { PhoneCard } from '../types/PhoneCard';
 
-const { BASE_URL } = process.env;
+// const BASE_URL='https://nice-gadgets-api-n5r6.onrender.com'
+const BASE_URL = 'http://localhost:3001';
 
 const get = async <T>(path: string): Promise<T> => {
   const { data } = await axios.get<T>(path);
@@ -13,9 +13,10 @@ const get = async <T>(path: string): Promise<T> => {
 };
 
 type RequestWithParamsResult = {
-  pages: number,
-  products: PhoneCard[],
-}
+  pages: number;
+  products: PhoneCard[];
+  models: number;
+};
 
 export const getProducts = async(
   perPage?: number,
@@ -30,21 +31,25 @@ export const getProducts = async(
   if (sortBy) query.push(`sortBy=${sortBy}`);
 
   if (productType) {
-    productType.forEach(category => query.push(`productType=${category}`));
+    productType.forEach((category) => query.push(`productType=${category}`));
   }
 
-  const path = `${BASE_URL}/products${query.length ? `?${query.join('&')}` : ''}`;
+  const path = `${BASE_URL}/products${
+    query.length ? `?${query.join('&')}` : ''
+  }`;
 
   const { data } = await axios.get<RequestWithParamsResult>(path);
 
   return data;
 };
 
-export const getNew = (limit?: number) => { // default limit is 12
+export const getNew = (limit?: number) => {
+  // default limit is 12
   return get(`${BASE_URL}/products/new${limit ? `?limit=${limit}` : ''}`);
 };
 
-export const getHot = (limit?: number) => { // default limit is 12
+export const getHot = (limit?: number) => {
+  // default limit is 12
   return get(`${BASE_URL}/products/discount${limit ? `?limit=${limit}` : ''}`);
 };
 
