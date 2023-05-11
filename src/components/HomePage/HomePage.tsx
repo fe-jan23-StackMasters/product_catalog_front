@@ -1,5 +1,9 @@
-import { CardList } from '../CardList/CardList';
+// import { CardList } from '../CardList/CardList';
+
+import { useCardsIds } from '../../helpers/hooks/hooks';
+import { BigSlider } from '../BigSlider/BigSlider';
 import { ShopBy } from '../ShopBy';
+import { HomeSlider } from '../Slider/Slider';
 
 const products = [
   {
@@ -65,12 +69,23 @@ const products = [
 ];
 
 export const HomePage = () => {
+  const [cardIds, onCardToggle] = useCardsIds('cart', []);
+  const [favIds, onFavToggle] = useCardsIds('favourite', []);
+
   return (
     <>
       <h1>Welcome to Nice Gadgets store!</h1>
-
+      <BigSlider />
       <ShopBy />
-      <CardList products={products} />
+      {/* <CardList products={products} /> */}
+      <HomeSlider
+        NameSlider={'Brand new models'}
+        favIds={favIds}
+        cardIds={cardIds}
+        onCardAdd={onCardToggle}
+        onFavouriteAdd={onFavToggle}
+        products={products}
+      />
     </>
   );
 };
