@@ -3,10 +3,6 @@
 .slider {
   position: relative;
 
-  @include onTablet {
-    height: 670px;
-  }
-
   &__name {
     max-width: 70%;
     display: block;
@@ -27,14 +23,10 @@
       width: 100%;
     }
   
-    .slick-list {
-      // padding: 0;
-    }
-  
     .slick-prev {
       order: 3;
       position: relative;
-      top: -39px;
+      top: -46px;
       left: calc(100% - 80px);
       display: flex;
       display: block;
@@ -94,12 +86,35 @@
   
     .slick-next {
       right: 0px;
-      top: -39px;
+      top: -46px;
     }
   
     .slick-track {
       display: flex;
       gap: 16px;
+
+      @include onTablet {
+        gap: 24px;
+      }
+
+      @include onDesktop {
+        gap: 32px;
+      }
+    }
+
+    .slick-list {
+      margin: 0 -16px;
+      padding-left: 16px;
+
+      @include onTablet {
+        margin: 0 -24px;
+        padding-left: 24px;
+      }
+
+      @include onDesktop {
+        margin: 0 -32px;
+        padding-left: 32px;
+      }
     }
   } 
 }

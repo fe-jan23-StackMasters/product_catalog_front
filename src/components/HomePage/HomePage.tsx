@@ -36,33 +36,47 @@ export const HomePage = () => {
   });
 
   return (
-    <Container>
-      <h1>Welcome to Nice Gadgets store!</h1>
-      <BigSlider />
+    <section className='HomePage'>
+      <Container>
+        <h1 className='HomePage__title'>Welcome to Nice Gadgets store!</h1>
+      </Container>
 
-      <HomeSlider
-        title={'Brand new models'}
-        favIds={favIds}
-        cardIds={cardIds}
-        onCardAdd={onCardToggle}
-        onFavouriteAdd={onFavToggle}
-        products={newProducts || []}
-        isLoading={isNewLoading}
-        isError={isNewError}
-      />
+      <div className='HomePage__big-slider'>
+        <BigSlider />
+      </div>
 
-      <ShopBy />
+      <Container >
+        <div className='HomePage__section'>
+          <HomeSlider
+            title={'Brand new models'}
+            favIds={favIds}
+            cardIds={cardIds}
+            onCardAdd={onCardToggle}
+            onFavouriteAdd={onFavToggle}
+            products={newProducts || []}
+            isLoading={isNewLoading}
+            isError={isNewError}
+          />
+        </div>
 
-      <HomeSlider
-        title={'Hot prices'}
-        favIds={favIds}
-        cardIds={cardIds}
-        onCardAdd={onCardToggle}
-        onFavouriteAdd={onFavToggle}
-        products={hotProducts || []}
-        isLoading={isHotLoading}
-        isError={isHotError}
-      />
-    </Container>
+        <div className='HomePage__section'>
+          <ShopBy />
+        </div>
+
+        <div className='HomePage__section'>
+          <HomeSlider
+            title={'Hot prices'}
+            favIds={favIds}
+            cardIds={cardIds}
+            onCardAdd={onCardToggle}
+            onFavouriteAdd={onFavToggle}
+            products={hotProducts || []}
+            isLoading={isHotLoading}
+            isError={isHotError}
+          />
+        </div>
+
+      </Container>
+    </section>
   );
 };
