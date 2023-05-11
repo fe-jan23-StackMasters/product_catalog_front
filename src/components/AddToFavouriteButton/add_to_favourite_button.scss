@@ -12,13 +12,16 @@
   border: none;
   cursor: pointer;
 
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 
   &:hover {
     background: $icons-color;
+  }
+  &--added {
+    background: $surface1-color;
   }
 
   &--selected {
     border: 1px solid $elements-color;
   }
-}
+
