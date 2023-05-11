@@ -15,7 +15,10 @@ export const HomePage = () => {
   const [cardIds, onCardToggle] = useCardsIds('cart', []);
   const [favIds, onFavToggle] = useCardsIds('favourite', []);
 
-  useQuery({
+  const {
+    isError: isHotError,
+    isLoading: isHotLoading,
+  } = useQuery({
     queryKey: ['hotProducts'],
     queryFn: () => getHot(),
     onSuccess(data) {
@@ -23,7 +26,10 @@ export const HomePage = () => {
     },
   });
 
-  useQuery({
+  const {
+    isError: isNewError,
+    isLoading: isNewLoading,
+  } = useQuery({
     queryKey: ['newProducts'],
     queryFn: () => getNew(),
     onSuccess(data) {
@@ -37,23 +43,27 @@ export const HomePage = () => {
       <BigSlider />
 
       <HomeSlider
-        NameSlider={'Brand new models'}
+        title={'Brand new models'}
         favIds={favIds}
         cardIds={cardIds}
         onCardAdd={onCardToggle}
         onFavouriteAdd={onFavToggle}
         products={newProducts || []}
+        isLoading={isNewLoading}
+        isError={isNewError}
       />
 
       <ShopBy />
 
       <HomeSlider
-        NameSlider={'Hot prices'}
+        title={'Hot prices'}
         favIds={favIds}
         cardIds={cardIds}
         onCardAdd={onCardToggle}
         onFavouriteAdd={onFavToggle}
         products={hotProducts || []}
+        isLoading={isHotLoading}
+        isError={isHotError}
       />
     </>
   );
