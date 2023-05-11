@@ -22,7 +22,9 @@
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "eol-last": ["error", "always"]
+    "eol-last": ["error", "always"],
+    "curly": "off",
+    "no-shadow": "off"
   },
   "settings": {
     "react": {

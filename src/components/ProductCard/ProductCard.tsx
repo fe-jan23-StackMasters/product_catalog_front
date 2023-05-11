@@ -20,11 +20,9 @@ export const ProductCard: React.FC<Props> = ({
   favIds,
 }) => {
   const {
-    // eslint-disable-next-line no-shadow
     name,
     fullPrice,
     price,
-    // eslint-disable-next-line no-shadow
     screen,
     capacity,
     ram,
