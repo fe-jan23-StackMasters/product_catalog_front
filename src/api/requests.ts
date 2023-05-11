@@ -3,8 +3,7 @@ import { ProductType } from '../types/ProductType';
 import { SortBy } from '../types/SortBy';
 import { PhoneCard } from '../types/PhoneCard';
 
-// const BASE_URL='https://nice-gadgets-api-n5r6.onrender.com'
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = 'https://nice-gadgets-api-n5r6.onrender.com';
 
 const get = async <T>(path: string): Promise<T> => {
   const { data } = await axios.get<T>(path);
