@@ -37,19 +37,54 @@ export const HomeSlider: React.FC<Props> = ({
       <img src={ArrowLeft} />
     </div>
   );
-  const HomeSliderSetings = {
+  const settingsSlider = {
     infinite: false,
     speed: 300,
     variableWidth: true,
     slidesToShow: 4,
-    arrows: false,
     nextArrow: arrowRight,
     prevArrow: arrowLeft,
     responsive: [
       {
-        breakpoint: 480,
+        breakpoint: 4800,
         settings: {
-          arrows: true,
+          slidesToShow: 4,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 2400,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1920,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1220,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
         },
       },
     ],
@@ -59,7 +94,7 @@ export const HomeSlider: React.FC<Props> = ({
     <div className="slider__container">
       <h1 className="name__slider">{NameSlider}</h1>
       <div className="slider">
-        <Slider {...HomeSliderSetings}>
+        <Slider {...settingsSlider}>
           {products.map((product) => (
             <div className="item" key={product.id}>
               <ProductCard
