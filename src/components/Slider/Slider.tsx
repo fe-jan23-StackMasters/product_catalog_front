@@ -9,23 +9,28 @@ import ArrowLeft from '../../icons/arrowLeft.svg';
 import { ProductCard } from '../ProductCard';
 import { PhoneCard } from '../../types/PhoneCard';
 import React from 'react';
+import { Loader } from '../Loader';
 
 type Props = {
-  NameSlider: string;
+  title: string;
   products: PhoneCard[];
   cardIds: string[];
   favIds: string[];
   onCardAdd: () => void;
   onFavouriteAdd: () => void;
+  isError: boolean,
+  isLoading: boolean,
 };
 
 export const HomeSlider: React.FC<Props> = ({
-  NameSlider,
+  title,
   products,
   cardIds,
   favIds,
   onCardAdd,
   onFavouriteAdd,
+  isError,
+  isLoading,
 }) => {
   const arrowRight = (
     <div>
@@ -38,7 +43,7 @@ export const HomeSlider: React.FC<Props> = ({
     </div>
   );
   const settingsSlider = {
-    infinite: false,
+    infinite: true,
     speed: 300,
     variableWidth: true,
     slidesToShow: 4,
@@ -91,23 +96,32 @@ export const HomeSlider: React.FC<Props> = ({
   };
 
   return (
-    <div className="slider__container">
-      <h1 className="name__slider">{NameSlider}</h1>
-      <div className="slider">
-        <Slider {...settingsSlider}>
-          {products.map((product) => (
-            <div className="item" key={product.id}>
-              <ProductCard
-                product={product}
-                onCardAdd={onCardAdd}
-                onFavouriteAdd={onFavouriteAdd}
-                cardIds={cardIds}
-                favIds={favIds}
-              />
-            </div>
-          ))}
-        </Slider>
-      </div>
+    <div className="slider">
+      <h2 className="slider__name">
+        {isError ? 'Something went wrong...' : title}
+      </h2>
+
+      {isLoading ? (
+        <div className='slider__loader'>
+          <Loader />
+        </div>
+      ) : (
+        <div className="slider__container">
+          <Slider {...settingsSlider}>
+            {products.map((product) => (
+              <div className="slider__item" key={product.id}>
+                <ProductCard
+                  product={product}
+                  onCardAdd={onCardAdd}
+                  onFavouriteAdd={onFavouriteAdd}
+                  cardIds={cardIds}
+                  favIds={favIds}
+                />
+              </div>
+            ))}
+          </Slider>
+        </div>
+      )}
     </div>
   );
 };
