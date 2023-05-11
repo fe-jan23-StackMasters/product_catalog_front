@@ -1,1 +1,7 @@
-export const FavouritesPage = () => <h1>FavouritesPage</h1>;
+import { ItemCard } from '../ItemCard';
+
+export const FavouritesPage = () => {
+  return (
+    <ItemCard />
+  );
+};

@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import logoItem from '../../icons/niceGadgets.svg';
 import logoItemOk from '../../icons/Ok.svg';
 import menuOpener from '../../icons/Menu.svg';
@@ -44,27 +44,27 @@ export const Header: FC<Props> = ({
       <div className="header__content">
         <div className="header__right-side">
           {isMobile && (
-            <Link to="/" className="logo">
+            <NavLink to="/" className="logo">
               <img
                 className="logo__image"
                 src={logoItem} alt="Logo icon"
               />
               <img className="logo__ok" src={logoItemOk} alt="ok" />
-            </Link>
+            </NavLink>
           )}
 
           {!isMobile && (
             <nav className="header__nav nav">
               <ul className="nav__panel">
                 <li className='nav__item'>
-                  <Link to="/" className="logo">
+                  <NavLink to="/" className="logo">
                     <img
                       className="logo__image"
                       src={logoItem}
                       alt="Logo icon"
                     />
                     <img className="logo__ok" src={logoItemOk} alt="ok" />
-                  </Link>
+                  </NavLink>
                 </li>
                 {navList.map((item) => (
                   <li key={item} className="nav__item">
@@ -79,7 +79,7 @@ export const Header: FC<Props> = ({
           {!isMobile ? (
             <div className="header__buying-section">
 
-              <a href='/favourites' className="header__case">
+              <NavLink to='/favorites' className="header__case">
               {(favorites.length > 0) ? (
                 <>
                 <div className="header__count-position">
@@ -97,10 +97,10 @@ export const Header: FC<Props> = ({
                 className="header__menu-opener_image" alt="menu"
                 />
               )}
-              </a>
+              </NavLink>
 
-              <a
-                href='/cart'
+              <NavLink
+                to='/basket'
                 className="header__case"
               >
                 <div className="header__count-position">
@@ -114,7 +114,7 @@ export const Header: FC<Props> = ({
                   {cart.length}
                 </span>
                 </div>
-              </a>
+              </NavLink>
             </div>
           ) : (
             <button

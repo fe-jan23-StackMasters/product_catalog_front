@@ -14,11 +14,14 @@ import { BurgerMenu } from './components/BurgerMenu';
 import { useState } from 'react';
 // import { HomeSlider } from './components/Slider/Slider';
 import { PhoneCard } from './types/PhoneCard';
+// import { useCardsIds } from './helpers/hooks/hooks';
 
 export const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [favorites, setFavorites] = useState<PhoneCard[]>([]);
   const [cart, setCart] = useState<PhoneCard[]>([]);
+  // const [cardIds, onCardToggle] = useCardsIds('cart', []);
+  // const [favIds, onFavToggle] = useCardsIds('favourite', []);
 
   // const handleAddToFavorites = (item: PhoneCard) => {
   //   const newFavorites = [...favorites, item];
@@ -27,11 +30,11 @@ export const App = () => {
   //   localStorage.setItem('favorites', JSON.stringify(newFavorites));
   // };
 
-  // const handleAddToCart = (item: PhoneCard) => {
-  //   const newCart = [...cart, item];
+  // const handleAddToCart = (id: string) => {
+  //   const newCart = [...cart, id];
 
   //   setCart(newCart);
-  //   localStorage.setItem('cart', JSON.stringify(newCart));
+  //   useCardsIds('cart', newCart);
   // };
 
   const toggleMenu = () => {
