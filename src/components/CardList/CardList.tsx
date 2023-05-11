@@ -1,44 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { ProductCard } from '../ProductCard';
 import { PhoneCard } from '../../types/PhoneCard';
+
 import './card_list.scss';
+import { useCardsIds } from '../../helpers/hooks/hooks';
 
 interface Props {
   products: PhoneCard[],
-}
-
-function useLocalStorage(key: string, initialValue: string[]) {
-  const [value, setValue] = useState(() => {
-    const storedValue = localStorage.getItem(key);
-
-    return storedValue ? JSON.parse(storedValue) : initialValue;
-  });
-
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
-  }, [key, value]);
-
-  return [value, setValue];
-}
-
-function useCardsIds(key: string, initialValue: string[]) {
-  const [cardsIds, setCardsIds] = useLocalStorage(key, initialValue);
-
-  const onCardToggle = (id: string) => {
-    setCardsIds((prevState: string[]) => {
-      if (prevState.includes(id)) {
-        const newState = prevState.filter(item => item !== id);
-
-        return newState;
-      } else {
-        const newState = [...prevState, id];
-
-        return newState;
-      }
-    });
-  };
-
-  return [cardsIds, onCardToggle];
 }
 
 export const CardList: React.FC<Props> = ({ products }) => {
