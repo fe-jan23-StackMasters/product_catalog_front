@@ -6,6 +6,7 @@
   flex-direction: column;
   padding: 16px;
   margin-bottom: 16px;
+  margin-right: 16px;
   background-color: $surface1-color;
 
   @include onTablet {
@@ -29,6 +30,7 @@
     width: 10px;
     height: 10px;
     margin-right: 26px;
+    cursor: pointer;
 
     &:hover {
       background-color: $surface2-color;
@@ -71,8 +73,13 @@
   }
 
   &-minus {
-    padding: 12px 12px;
+    background-image: url('../../icons/Minus.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    padding: 20px 20px;
     border: 1px solid $elements-color;
+    cursor: pointer;
     transition: all 0.3s;
 
     &:hover {
@@ -81,8 +88,13 @@
   }
 
   &-plus {
-    padding: 12px 12px;
+    background-image: url('../../icons/Plus.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    padding: 20px 20px;
     border: 1px solid $elements-color;
+    cursor: pointer;
     transition: all 0.3s;
 
     &:hover {
