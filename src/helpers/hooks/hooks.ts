@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react';
+import { PhoneCard } from '../../types/PhoneCard';
 
-export function useLocalStorage(key: string, initialValue: string[]) {
+interface StoragePhone {
+  id: string;
+  quantity: string;
+  product: PhoneCard;
+}
+
+export function useLocalStorage(key: string, initialValue: StoragePhone[]) {
   const [value, setValue] = useState(() => {
     const storedValue = localStorage.getItem(key);
 
@@ -14,17 +21,17 @@ export function useLocalStorage(key: string, initialValue: string[]) {
   return [value, setValue];
 }
 
-export function useCardsIds(key: string, initialValue: string[]) {
+export function useCardsIds(key: string, initialValue: StoragePhone[]) {
   const [cardsIds, setCardsIds] = useLocalStorage(key, initialValue);
 
-  const onCardToggle = (id: string) => {
-    setCardsIds((prevState: string[]) => {
-      if (prevState.includes(id)) {
-        const newState = prevState.filter(item => item !== id);
+  const onCardToggle = (basket: any) => {
+    setCardsIds((prevState: StoragePhone[]) => {
+      if (prevState.find((device) => device.id === basket.id)) {
+        const newState = prevState.filter((item) => item.id !== basket.id);
 
         return newState;
       } else {
-        const newState = [...prevState, id];
+        const newState = [...prevState, basket];
 
         return newState;
       }
