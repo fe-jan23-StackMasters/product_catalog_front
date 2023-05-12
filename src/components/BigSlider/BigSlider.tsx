@@ -29,7 +29,7 @@ export const BigSlider: React.FC = () => {
     nextArrow: nexArrow,
     pauseOnFocus: true,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 5000,
     responsive: [
       {
         breakpoint: 640,
@@ -51,16 +51,16 @@ export const BigSlider: React.FC = () => {
   };
 
   return (
-    <div className="sliderBig">
+    <div className="BigSlider">
       <Slider {...settings}>
-        <div className="sliderBig__item">
-          <img className="imageBanner" src={slideBunner} alt="" />
+        <div className="BigSlider__item">
+          <img className="BigSlider__image" src={slideBunner} alt="" />
         </div>
-        <div className="sliderBig__item">
-          <img className="imageBanner" src={slideBunner} alt="" />
+        <div className="BigSlider__item">
+          <img className="BigSlider__image" src={slideBunner} alt="" />
         </div>
-        <div className="sliderBig__item">
-          <img className="imageBanner" src={slideBunner} alt="" />
+        <div className="BigSlider__item">
+          <img className="BigSlider__image" src={slideBunner} alt="" />
         </div>
       </Slider>
     </div>
