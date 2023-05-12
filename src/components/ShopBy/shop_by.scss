@@ -1,7 +1,6 @@
 @import '../../styles/variables.scss';
 @import '../../styles/utils/mixins.scss';
 
-
 .shop-by-category {
   margin-bottom: 56px;
 
@@ -22,7 +21,6 @@
     row-gap: 32px;
     margin: 0;
     display: grid;
-
 
     @include onTablet {
       grid-template-columns: repeat(3, 1fr);
