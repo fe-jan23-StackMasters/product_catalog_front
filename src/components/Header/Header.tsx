@@ -44,16 +44,11 @@ export const Header: FC<Props> = ({
       <div className="header__content">
         <div className="header__right-side">
           {isMobile && (
-<<<<<<< HEAD
             <NavLink to="/" className="logo">
               <img
                 className="logo__image"
                 src={logoItem} alt="Logo icon"
               />
-=======
-            <Link to="/" className="logo">
-              <img className="logo__image" src={logoItem} alt="Logo icon" />
->>>>>>> ab94b49de57bd4d0ae58214b75a801d07f677763
               <img className="logo__ok" src={logoItemOk} alt="ok" />
             </NavLink>
           )}
@@ -61,13 +56,8 @@ export const Header: FC<Props> = ({
           {!isMobile && (
             <nav className="header__nav nav">
               <ul className="nav__panel">
-<<<<<<< HEAD
                 <li className='nav__item'>
                   <NavLink to="/" className="logo">
-=======
-                <li className="nav__item">
-                  <Link to="/" className="logo">
->>>>>>> ab94b49de57bd4d0ae58214b75a801d07f677763
                     <img
                       className="logo__image"
                       src={logoItem}
@@ -86,18 +76,11 @@ export const Header: FC<Props> = ({
           )}
         </div>
 
-<<<<<<< HEAD
           {!isMobile ? (
             <div className="header__buying-section">
 
-              <NavLink to='/favorites' className="header__case">
+              <NavLink to='/favourites' className="header__case">
               {(favorites.length > 0) ? (
-=======
-        {!isMobile ? (
-          <div className="header__buying-section">
-            <a href="/favourites" className="header__case">
-              {hasFavorites ? (
->>>>>>> ab94b49de57bd4d0ae58214b75a801d07f677763
                 <>
                   <div className="header__count-position">
                     <img
@@ -105,7 +88,6 @@ export const Header: FC<Props> = ({
                       className="header__menu-opener_image"
                       alt="menu"
                     />
-<<<<<<< HEAD
                     <span className='header__shoping-bag-count'>
                       {favorites.length}
                     </span>
@@ -119,35 +101,19 @@ export const Header: FC<Props> = ({
               </NavLink>
 
               <NavLink
-                to='/basket'
+                to='/cart'
                 className="header__case"
               >
                 <div className="header__count-position">
-=======
-                    <span className="header__shoping-bag-count">13</span>
-                  </div>
-                </>
-              ) : (
-                <img
-                  src={favorites}
-                  className="header__menu-opener_image"
-                  alt="menu"
-                />
-              )}
-            </a>
->>>>>>> ab94b49de57bd4d0ae58214b75a801d07f677763
 
-            <a href="/cart" className="header__case">
-              <div className="header__count-position">
-                <img
-                  src={shoppingBag}
-                  className="header__menu-opener_image"
-                  alt="menu"
-<<<<<<< HEAD
-                  />
-                <span className='header__shoping-bag-count'>
-                  {cart.length}
-                </span>
+                  <img
+                    src={shoppingBag}
+                    className="header__menu-opener_image"
+                    alt="menu"
+                    />
+                  <span className='header__shoping-bag-count'>
+                    {cart.length}
+                  </span>
                 </div>
               </NavLink>
             </div>
@@ -160,25 +126,9 @@ export const Header: FC<Props> = ({
                 className="header__menu-opener_image"
                 src={menuOpener}
                 alt="menu"
-=======
->>>>>>> ab94b49de57bd4d0ae58214b75a801d07f677763
                 />
-                <span className="header__shoping-bag-count">{expectToBuy}</span>
-              </div>
-            </a>
-          </div>
-        ) : (
-          <button
-            className="header__menu-button header__case"
-            onClick={toggleMenu}
-          >
-            <img
-              className="header__menu-opener_image"
-              src={shoppingBag}
-              alt="menu"
-            />
-          </button>
-        )}
+              </button>
+          )}
       </div>
     </header>
   );
