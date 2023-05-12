@@ -2,14 +2,22 @@
 @import '../../styles/utils/mixins';
 
 .BigSlider {
-  display: flex;
-  justify-content: center;
-  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @include onTablet {
+    gap: 16px;
+    padding: 0 24px;
+  }
+
+  @include onDesktop {
+    padding: 0 32px;
+  }
 
   &__item {
-    display: flex;
-    justify-content: center;
     outline: none;
+    height: 100%;
+    display: block !important;
   }
 
   &__image {
@@ -21,26 +29,29 @@
       content: url('../../images/header/headerPhonePic14Pro.png');
       object-fit: cover;
     }
+  }
+
+  .slick-slider {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(2, auto);
+    column-gap: 16px;
+    row-gap: 18px;
 
     @include onTablet {
-      width: 100%;
+      grid-template-columns: repeat(12, 1fr);
+      
+    }
+
+    @include onDesktop {
+      grid-template-columns: repeat(24, 1fr);
     }
   }
 
   .slick-list {
     width: 100%;
-    border-radius: 10px;
-
-    @include onTablet {
-      width: 84%;
-    }
-  }
-
-  .slick-slider {
-    width: 100%;
-    display: grid;
-    flex-direction: column;
-    justify-items: center;
+    grid-column-start: 2;
+    grid-column-end: -2;
   }
 
   .dot {
@@ -49,9 +60,15 @@
     padding: 0;
     justify-content: center;
     align-items: center;
+    grid-column: 1/-1;
+
+    & button {
+      cursor: pointer;
+    }
 
     & li {
       list-style: none;
+      font-size: 0;
     }
 
     & button {
@@ -70,7 +87,7 @@
   .slick-next {
     display: block;
     grid-row-end: 2;
-    height: 100%;
+    grid-column: -1/-2;
     order: 2;
     right: 3%;
 
@@ -83,6 +100,7 @@
     order: 1;
     left: 3%;
     grid-row-end: 2;
+    grid-column: 1/2;
 
     &:before {
       display: none;
@@ -91,15 +109,20 @@
 
   .slick-arrow {
     height: 100%;
-    width: 32px;
+    width: 100%;
     display: flex !important;
     justify-content: center;
     align-items: center;
-    border: 1px solid $elements-color;
+    background-color: $surface2-color;
+
+    transition: background-color 0.3s;
+
+    & img {
+      filter: brightness(4.25);
+    }
 
     &:hover {
-      border: 1px solid $elements-color;
-      background-color: $surface2-color;
+      background-color: $icons-color;
 
       & img {
         filter: brightness(14);
