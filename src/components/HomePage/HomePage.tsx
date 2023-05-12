@@ -24,10 +24,7 @@ export const HomePage = () => {
     },
   });
 
-  const {
-    isError: isNewError,
-    isLoading: isNewLoading,
-  } = useQuery({
+  const { isError: isNewError, isLoading: isNewLoading } = useQuery({
     queryKey: ['newProducts'],
     queryFn: () => getNew(),
     onSuccess(data) {

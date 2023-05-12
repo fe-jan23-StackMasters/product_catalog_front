@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classNames from 'classnames';
 import { ArrowLeft } from '../Arrows/ArrowLeft';
 import { ArrowRigth } from '../Arrows/ArrowRight';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 interface Props {
   itemsPerPage: number;
   totalItems: number;
   currentPage: number;
+  sortBy: string;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
@@ -15,13 +16,15 @@ export const Paginate: React.FC<Props> = ({
   itemsPerPage,
   totalItems,
   currentPage,
+  sortBy,
   setCurrentPage,
 }) => {
   const pageNumbers = [];
-  const { page = 1 } = useParams();
   const navigate = useNavigate();
 
-  setCurrentPage(+page);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
 
   for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
     pageNumbers.push(i);
@@ -29,13 +32,19 @@ export const Paginate: React.FC<Props> = ({
 
   const goToPrevPage = () => {
     if (currentPage !== 1) {
-      navigate(`/catalog/${+page - 1}`);
+      navigate(
+        `./?page=${currentPage - 1}&perPage=${itemsPerPage}&sort=${sortBy}`,
+      );
+      setCurrentPage((prevPage) => prevPage - 1);
     }
   };
 
   const goToNextPage = () => {
     if (currentPage !== pageNumbers.length) {
-      navigate(`/catalog/${+page + 1}`);
+      navigate(
+        `./?page=${currentPage + 1}&perPage=${itemsPerPage}&sort=${sortBy}`,
+      );
+      setCurrentPage((prevPage) => prevPage + 1);
     }
   };
 
@@ -57,7 +66,15 @@ export const Paginate: React.FC<Props> = ({
             })}
             key={num}
           >
-            <Link to={`/catalog/${num}`} className='pagination__link'>{num}</Link>
+            <NavLink
+              to={`./?page=${num}&perPage=${itemsPerPage}&sort=${sortBy}`}
+              className="pagination__link"
+              onClick={() => {
+                setCurrentPage(num);
+              }}
+            >
+              {num}
+            </NavLink>
           </li>
         ))}
 

@@ -1,22 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import './DropDown.scss';
 
 type Props = {
   variables: string[];
+  returnedValue: any;
+  searchParam?: string | null;
 };
 
-export const DropDown: React.FC<Props> = ({ variables }) => {
+export const DropDown: React.FC<Props> = ({
+  variables,
+  returnedValue,
+  searchParam,
+}) => {
   const [positionDropDown, setPositionDropDown] = useState(false);
-  const [stateDropDown, setStateDropDown] = useState(variables[0]);
+  const [stateDropDown, setStateDropDown] = useState(
+    searchParam || variables[0],
+  );
+  const [isClicked, setIsClicked] = useState(false);
 
   const handlerChange = (point: string) => {
     setStateDropDown(point);
     setPositionDropDown(false);
+    setIsClicked(true);
   };
 
+  useEffect(() => {
+    returnedValue(stateDropDown);
+    setIsClicked(false);
+  }, [isClicked]);
+
   return (
-    <div>
+    <>
       <div
         className="dropdown"
         onClick={() => setPositionDropDown(!positionDropDown)}
@@ -65,6 +80,6 @@ export const DropDown: React.FC<Props> = ({ variables }) => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
