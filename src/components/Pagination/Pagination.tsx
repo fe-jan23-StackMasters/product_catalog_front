@@ -106,19 +106,25 @@ export const Pagination: React.FC = () => {
 
   return (
     <>
-      {/* <div className="phonesPage__dropDown"> */}
-      <DropDown
-        variables={sorts}
-        returnedValue={handlerDropdownSortBy}
-        searchParam={sortParam}
-      />
+      <div className="phonesPage__dropDown">
+        <div className="phonesPage__dropDown--sortBy">
+          Sort By
+          <DropDown
+            variables={sorts}
+            returnedValue={handlerDropdownSortBy}
+            searchParam={sortParam}
+          />
+        </div>
 
-      <DropDown
-        variables={['8', '16', '32']}
-        returnedValue={handlerDropdownItemPerPage}
-        searchParam={perPageParam}
-      />
-      {/* </div> */}
+        <div className="phonesPage__dropDown--ItemsOnPage">
+        Items on page
+          <DropDown
+            variables={['8', '16', '32']}
+            returnedValue={handlerDropdownItemPerPage}
+            searchParam={perPageParam}
+          />
+          </div>
+      </div>
 
       <div className="phonesPage__pagination pagination">
         <div className="pagination__items">

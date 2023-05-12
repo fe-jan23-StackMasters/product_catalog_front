@@ -1,5 +1,18 @@
+@import '../../styles/variables.scss';
+@import '../../styles/utils/mixins';
+
 .phonesPage {
   &__dropDown {
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    color: $secondary-color;
   }
 }
