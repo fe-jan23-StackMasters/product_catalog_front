@@ -1,19 +1,30 @@
 @import '../../styles/variables.scss';
 @import '../../styles/utils/mixins';
 
-.sliderBig {
+.BigSlider {
   display: flex;
   justify-content: center;
   width: 100%;
 
   &__item {
-    display: flex !important;
-    justify-content: center;
-  }
-
-  .sliderBig__item {
     display: flex;
     justify-content: center;
+    outline: none;
+  }
+
+  &__image {
+    order: 3;
+    height: 100%;
+    width: 100%;
+
+    @media (max-width: 640px) {
+      content: url('../../images/header/headerPhonePic14Pro.png');
+      object-fit: cover;
+    }
+
+    @include onTablet {
+      width: 100%;
+    }
   }
 
   .slick-list {
@@ -30,21 +41,6 @@
     display: grid;
     flex-direction: column;
     justify-items: center;
-  }
-
-  .imageBanner {
-    order: 3;
-    height: 100%;
-    width: 100%;
-
-    @media (max-width: 640px) {
-      content: url('../../images/header/headerPhonePic14Pro.png');
-      object-fit: cover;
-    }
-
-    @include onTablet {
-      width: 100%;
-    }
   }
 
   .dot {
@@ -73,8 +69,6 @@
 
   .slick-next {
     display: block;
-    grid-row-start: 0;
-    grid-row-start: 1;
     grid-row-end: 2;
     height: 100%;
     order: 2;
@@ -88,7 +82,6 @@
   .slick-prev {
     order: 1;
     left: 3%;
-    grid-row-start: 1;
     grid-row-end: 2;
 
     &:before {
@@ -100,10 +93,8 @@
     height: 100%;
     width: 32px;
     display: flex !important;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: transparent;
     border: 1px solid $elements-color;
 
     &:hover {

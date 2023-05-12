@@ -41,8 +41,8 @@
       align-items: center;
       justify-content: center;
       width: 32px;
-      background-color: #2a2932;
       border: 1px solid #3b3e4a;
+      transition: 0.3s;
     }
   
     .slick-next:before {
@@ -114,6 +114,11 @@
       @include onDesktop {
         margin: 0 -32px;
         padding-left: 32px;
+      }
+
+      @media (min-width: 1200px) {
+        margin: 0;
+        padding: 0;
       }
     }
   } 
