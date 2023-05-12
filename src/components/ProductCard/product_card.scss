@@ -31,14 +31,20 @@
   }
 
   &__image {
-    width: 100px;
-    height: 130px;
+    width: 148px;
+    height: 129px;
     align-self: center;
     margin-bottom: 24px;
+    object-fit: cover;
 
     @include onTablet {
-      width: 130px;
-      height: 170px;
+      width: 173px;
+      height: 202px;
+    }
+
+    @include onDesktop {
+      width: 208px;
+      height: 196px;
     }
   }
 
