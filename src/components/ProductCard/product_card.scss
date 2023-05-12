@@ -17,11 +17,9 @@
   
   @include onTablet {
     width: 237px;
-    min-height: 512px;
   }
   @include onDesktop {
     width: 272px;
-    min-height: 506px;
   }
 
 
