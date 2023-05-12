@@ -15,6 +15,10 @@
     margin: 0 auto;
   }
 
+  &__item {
+    height: 100%;
+  }
+
   &__container {
     width: 100%;
 
@@ -61,16 +65,25 @@
     }
 
     .slick-track {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, 212px);
+      grid-auto-flow: column dense;
       gap: 16px;
 
+
       @include onTablet {
+        grid-template-columns: repeat(auto-fit, 237px);
         gap: 24px;
       }
 
       @include onDesktop {
+        grid-template-columns: repeat(auto-fit, 272px);
         gap: 32px;
       }
+    }
+
+    .slick-slide > div {
+      height: 100%;
     }
 
     .slick-list {
