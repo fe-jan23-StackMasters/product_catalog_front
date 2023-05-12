@@ -1,19 +1,32 @@
 import React from 'react';
 import { Button } from '../Button/Button';
+import classNames from 'classnames';
 import './add_to_cart_button.scss';
 
 interface Props {
-  height: string,
+  height: string;
+  onCardAdd: () => void;
+  id: string;
+  cardIds: string[];
 }
 
-export const AddToCart: React.FC<Props> = ({ height }) => {
+export const AddToCart: React.FC<Props> = ({
+  height,
+  onCardAdd,
+  id,
+  cardIds,
+}) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const isAddedToCart = cardIds.some((el: any) => el.id === id);
+
   return (
     <Button
-      width="100%"
+      width="77%"
       height={`${height}`}
-      type='btn__add'
+      type={classNames('btn__add', { 'btn__add--added': isAddedToCart })}
+      handler={onCardAdd}
     >
-      Add to cart
+      {isAddedToCart ? 'Added' : 'Add to cart'}
     </Button>
   );
 };

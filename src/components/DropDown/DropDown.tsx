@@ -10,29 +10,28 @@ export const DropDown: React.FC<Props> = ({ variables }) => {
   const [positionDropDown, setPositionDropDown] = useState(false);
   const [stateDropDown, setStateDropDown] = useState(variables[0]);
 
-  const handlerChange = (point:string) => {
+  const handlerChange = (point: string) => {
     setStateDropDown(point);
     setPositionDropDown(false);
   };
 
   return (
     <div>
-      <div className="dropdown"
+      <div
+        className="dropdown"
         onClick={() => setPositionDropDown(!positionDropDown)}
       >
-        <div className="dropdown_default">
-          {stateDropDown}
-        </div>
+        <div className="dropdown_default">{stateDropDown}</div>
         <svg
           width="6"
           height="10"
           viewBox="0 0 6 10"
           fill="none"
-          className={
-            classNames(
-              positionDropDown ? 'dropdown_arrowDrop'
-                : 'dropdown_arrowDrop active_arrow',
-            )}
+          className={classNames(
+            positionDropDown
+              ? 'dropdown_arrowDrop'
+              : 'dropdown_arrowDrop active_arrow',
+          )}
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -50,25 +49,21 @@ export const DropDown: React.FC<Props> = ({ variables }) => {
         </svg>
       </div>
       <div
-        className={
-          classNames(
-            positionDropDown
-              ? 'dropdown_content active-drop'
-              : 'dropdown_content ',
-          )}
+        className={classNames(
+          positionDropDown
+            ? 'dropdown_content active-drop'
+            : 'dropdown_content ',
+        )}
       >
-        {
-          variables.map((item) => (
-            <div
-              className="dropdown_content-item"
-              key={item}
-              onClick={() => handlerChange(item)
-              }
-            >
-              <div className="dropdown_content-item-option">{item}</div>
-            </div>
-          ))
-        }
+        {variables.map((item) => (
+          <div
+            className="dropdown_content-item"
+            key={item}
+            onClick={() => handlerChange(item)}
+          >
+            <div className="dropdown_content-item-option">{item}</div>
+          </div>
+        ))}
       </div>
     </div>
   );

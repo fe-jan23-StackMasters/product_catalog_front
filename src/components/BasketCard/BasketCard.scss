@@ -1,0 +1,111 @@
+@import '../../styles/utils/mixins.scss';
+@import '../../styles/variables.scss';
+
+.basket__card {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  margin-bottom: 16px;
+  margin-right: 16px;
+  background-color: $surface1-color;
+
+  @include onTablet {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+  }
+
+  &-top {
+    display: flex;
+    align-items: center;
+    margin: 0 26px 18px 0;
+
+    @include onTablet {
+      margin-bottom: 0;
+    }
+  }
+
+  &-delete {
+    width: 10px;
+    height: 10px;
+    margin-right: 26px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $surface2-color;
+    }
+
+    @include onTablet {
+      margin-right: 34px;
+    }
+  }
+
+  &-image {
+    width: 66px;
+    height: 66px;
+    margin-right: 22px;
+
+    @include onTablet {
+      margin-right: 32px;
+    }
+  }
+
+  &-title {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  &-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &--increase {
+      display: flex;
+      align-items: center;
+
+      @include onTablet {
+        margin-right: 44px;
+      }
+    }
+  }
+
+  &-minus {
+    background-image: url('../../icons/Minus.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    padding: 20px 20px;
+    border: 1px solid $elements-color;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: $surface2-color;
+    }
+  }
+
+  &-plus {
+    background-image: url('../../icons/Plus.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    padding: 20px 20px;
+    border: 1px solid $elements-color;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: $surface2-color;
+    }
+  }
+
+  &-count {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    margin: 0 14px;
+  }
+}

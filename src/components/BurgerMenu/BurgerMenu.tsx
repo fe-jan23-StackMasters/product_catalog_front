@@ -4,9 +4,14 @@ import logo from '../../icons/Logo.svg';
 import cross from '../../icons/Close.svg';
 import like from '../../icons/favourites.svg';
 import cardIcon from '../../icons/shoppingBag.svg';
+import { PageNavLinkBurger } from '../PageNavLinkBurger';
 
-export const BurgerMenu: React.FC = () => {
-  const menuList: string[] = ['HOME', 'PHONES', 'TABLETS', 'ACCESSORIES'];
+export type Props = {
+  toggleMenu: () => void;
+};
+
+export const BurgerMenu: React.FC<Props> = ({ toggleMenu }) => {
+  const menuList: string[] = ['home', 'phones', 'tablets', 'accessories'];
 
   return (
     <div className="menu">
@@ -18,9 +23,7 @@ export const BurgerMenu: React.FC = () => {
         </div>
         <button
           className="menu__header-contaioner closeButton"
-          onClick={() => {
-            return null;
-          }}
+          onClick={toggleMenu}
         >
           <img src={cross} className="crossIcon" />
         </button>
@@ -29,7 +32,12 @@ export const BurgerMenu: React.FC = () => {
         <ul className="menu__content-list">
           {menuList.map((item) => (
             <li className="menu__content-list item" key={item}>
-              {item}
+              {/* {item} */}
+              <PageNavLinkBurger
+                to={`/${item}`}
+                text={item}
+                toggleMenu={toggleMenu}
+              />
             </li>
           ))}
         </ul>

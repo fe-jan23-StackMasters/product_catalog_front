@@ -1,86 +1,63 @@
 @import '../../styles/variables.scss';
-@import '../../styles/utils/mixins';
+@import '../../styles/utils/mixins.scss';
 
-.shopBy {
-  font-family: "Mont", sans-serif;
-  text-align: start;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.grid {
+  display: grid;
+  column-gap: 16px;
+  grid-template-columns: none;
 
-  &__title {
-    margin-bottom: 24px;
-    font-size: 32px;
-    line-height: 41px;
-    font-weight: bold;
-    letter-spacing: -0.01em;
-    color: $white-color
+  @include onTablet {
+    grid-template-columns: repeat($columns--tablet, 1fr);
   }
 
-  &__categories {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
+  @include onDesktop {
+    grid-template-columns: repeat($columns--desktop, 1fr);
+  }
 
+  &__item {
     @include onTablet {
-      display: flex;
-      flex-direction: row;
-      gap: 16px;
-    }
-  }
-
-  &__category {
-    display: flex;
-    flex-direction: column;
-
-    &-img {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 90%;
-    }
-  }
-
-  &__link {
-    font-size: 20px;
-    line-height: 26px;
-    font-weight: bold;
-    margin-bottom: 4px;
-    display: block;
-    color: $white-color;
-    text-decoration: none;
-  }
-
-  &__category-count {
-    font-size: 14px;
-    line-height: 21px;
-    font-weight: normal;
-    color: $secondary-color;
-  }
-
-  &__container {
-    position: relative;
-    width: 288px;
-    height: 288px;
-    background-color: $bg-purple;
-    margin-bottom: 24px;
-
-    @include onTablet {
-      width: 187px;
-      height: 187px;  
+      @for $start from 1 through $columns--tablet {
+        @for $end from 1 through $columns--tablet {
+          &--tablet_#{$start}-#{$end} {
+            grid-column: #{$start} / #{($end + 1)};
+          }
+        }
+      }
     }
 
     @include onDesktop {
-      width: 368px;
-      height: 368px;
+      @for $start from 1 through $columns--desktop {
+        @for $end from 1 through $columns--desktop {
+          &--desktop_#{$start}-#{$end} {
+            grid-column: #{$start} / #{($end + 1)};
+          }
+        }
+      }
     }
+  }
+}
 
-    &--grey {
-      background-color: $bg-grey;
-    }
+.shop-by-category {
+  margin-bottom: 56px;
 
-    &--red {
-      background-color: $bg-red
+  @include onTablet {
+    margin-bottom: 64px;
+  }
+
+  @include onDesktop {
+    margin-bottom: 80px;
+  }
+
+  &__title {
+    margin-bottom: 24px;
+  }
+
+  &__categories {
+    row-gap: 32px;
+    margin: 0;
+
+    @include onTablet {
+      row-gap: 0px;
     }
   }
 }

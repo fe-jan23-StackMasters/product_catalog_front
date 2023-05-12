@@ -1,78 +1,36 @@
+/* eslint-disable max-len */
 import React from 'react';
 import './shop_by.scss';
+import { CategoryCard } from '../CategoryCard/CategoryCard';
+import { BASE_URL } from '../../api/requests';
 
 export const ShopBy: React.FC = () => {
   return (
-    <section className="page__section shopBy">
-      <div className="container">
-        <h2 className="shopBy__title">
-          Shop by category
-        </h2>
+    <section className="shop-by-category">
+      <h2 className='shop-by-category__title'>Shop by category</h2>
 
-        <div className="shopBy__categories">
-          <div className="shopBy__category">
-            <a
-              href="/phones"
-              className="shopBy__link"
-            >
-              <div className="shopBy__container">
-                <img
-                  // eslint-disable-next-line max-len
-                  src="https://media.discordapp.net/attachments/982936497068072991/1105419709081464902/image_6.png"
-                  alt="phones category"
-                  className="shopBy__category-img"
-                />
-              </div>
-              Mobile phones
-            </a>
-
-            <span className="shopBy__category-count">
-              95 models
-            </span>
-          </div>
-
-          <div className="shopBy__category">
-            <a
-              href="/tablets"
-              className="shopBy__link"
-            >
-              <div className="shopBy__container shopBy__container--grey">
-                <img
-                  // eslint-disable-next-line max-len
-                  src="https://media.discordapp.net/attachments/982936497068072991/1105419709626728558/image_5.png"
-                  alt="phones category"
-                  className="shopBy__category-img"
-                />
-              </div>
-              Tablets
-            </a>
-
-            <span className="shopBy__category-count">
-              24 models
-            </span>
-          </div>
-
-          <div className="shopBy__category">
-            <a
-              href="/accessories"
-              className="shopBy__link"
-            >
-              <div className="shopBy__container shopBy__container--red">
-                <img
-                  // eslint-disable-next-line max-len
-                  src="https://media.discordapp.net/attachments/982936497068072991/1105419709370867803/image_7.png"
-                  alt="phones category"
-                  className="shopBy__category-img"
-                />
-              </div>
-              Accessories
-            </a>
-
-            <span className="shopBy__category-count">
-              100 models
-            </span>
-          </div>
-        </div>
+      <div className="shop-by-category__categories grid">
+        <CategoryCard
+          link="/phones"
+          gridClasses="grid__item--tablet_1-4 grid__item--desktop_1-8"
+          image={`${BASE_URL}/img/category_phones.jpg`}
+          title="Mobile phones"
+          amount={95}
+        />
+        <CategoryCard
+          link="/tablets"
+          gridClasses="grid__item--tablet_5-8 grid__item--desktop_9-16"
+          image={`${BASE_URL}/img/category_tablets.jpg`}
+          title="Tablets"
+          amount={24}
+        />
+        <CategoryCard
+          link="/accessories"
+          gridClasses="grid__item--tablet_9-12 grid__item--desktop_17-24"
+          image={`${BASE_URL}/img/category_accessories.jpg`}
+          title="Accessories"
+          amount={100}
+        />
       </div>
     </section>
   );
