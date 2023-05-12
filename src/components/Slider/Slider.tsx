@@ -16,8 +16,9 @@ type Props = {
   products: PhoneCard[];
   cardIds: string[];
   favIds: string[];
-  onCardAdd: () => void;
-  onFavouriteAdd: () => void;
+
+  onCardToggle: (basket: object) => void;
+  onFavToggle: (basket: object) => void;
   isError: boolean,
   isLoading: boolean,
 };
@@ -27,11 +28,13 @@ export const HomeSlider: React.FC<Props> = ({
   products,
   cardIds,
   favIds,
-  onCardAdd,
-  onFavouriteAdd,
+  onCardToggle,
+  onFavToggle,
   isError,
   isLoading,
 }) => {
+  const quantity = '1';
+
   const arrowRight = (
     <div>
       <img src={ArrowRight} />
@@ -102,7 +105,7 @@ export const HomeSlider: React.FC<Props> = ({
       </h2>
 
       {isLoading ? (
-        <div className='slider__loader'>
+        <div className="slider__loader">
           <Loader />
         </div>
       ) : (
@@ -112,8 +115,12 @@ export const HomeSlider: React.FC<Props> = ({
               <div className="slider__item" key={product.id}>
                 <ProductCard
                   product={product}
-                  onCardAdd={onCardAdd}
-                  onFavouriteAdd={onFavouriteAdd}
+                  onCardAdd={() =>
+                    onCardToggle({ id: product.id, quantity, product })
+                  }
+                  onFavouriteAdd={() =>
+                    onFavToggle({ id: product.id, quantity, product })
+                  }
                   cardIds={cardIds}
                   favIds={favIds}
                 />

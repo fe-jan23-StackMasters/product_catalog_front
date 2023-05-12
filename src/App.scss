@@ -1,4 +1,5 @@
 @import './styles/normalize.scss';
+<<<<<<< HEAD
 @import "./styles/variables.scss";
 @import "./styles/utils/mixins";
 @import "./components/Header/header.scss";
@@ -11,7 +12,29 @@
   max-width: 1200px;
   margin: 0 auto;
 }
+=======
+@import './styles/variables.scss';
+@import './styles/utils/mixins';
+@import './styles/blocks/grid.scss';
+@import './components/Header/header.scss';
+@import './components/Container/Container.scss';
+@import './components/TabletsPage/tablets.scss';
+@import './components/AccessoriesPage/accessories.scss';
+@import './components/HomePage/HomePage.scss';
+>>>>>>> 821bb7ba06a7eadd2a91811da2eaa9311e659192
 
 .no-scroll {
   overflow: hidden;
+}
+
+.main {
+  padding-top: 24px;
+
+  @include onTablet {
+    padding-top: 32px;
+  }
+
+  @include onDesktop {
+    padding-top: 56px;
+  }
 }

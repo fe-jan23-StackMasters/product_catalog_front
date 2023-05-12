@@ -3,6 +3,8 @@ import { AddToCart } from '../AddToCartButton/AddToCartButton';
 import { AddToFavourites } from '../AddToFavouriteButton/AddToFavourite';
 import './product_card.scss';
 import { PhoneCard } from '../../types/PhoneCard';
+import { Link } from 'react-router-dom';
+import { BASE_URL } from '../../api/requests';
 
 interface Props {
   product: PhoneCard;
@@ -27,18 +29,24 @@ export const ProductCard: React.FC<Props> = ({
     capacity,
     ram,
     id,
+    phoneId,
+    image,
   } = product;
 
   return (
     <div className="card">
-      <img
-        // eslint-disable-next-line max-len
-        src="https://media.discordapp.net/attachments/982936497068072991/1105085514358468648/image_2-removebg-preview.png"
-        alt="Phone"
-        className="card__image"
-      />
+      <Link
+        to={`/phones/${phoneId}`}
+        className='card__link'
+      >
+        <img
+          src={`${BASE_URL}/${image}`}
+          alt={name}
+          className="card__image"
+        />
 
-      <h1 className="card__title">{name}</h1>
+        <h1 className="card__title">{name}</h1>
+      </Link>
 
       <div className="card__prices">
         <p className="card__price--sale">${price}</p>

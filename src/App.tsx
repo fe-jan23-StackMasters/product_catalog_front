@@ -12,30 +12,12 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { BurgerMenu } from './components/BurgerMenu';
 import { useState } from 'react';
-// import { HomeSlider } from './components/Slider/Slider';
 import { PhoneCard } from './types/PhoneCard';
-// import { useCardsIds } from './helpers/hooks/hooks';
 
 export const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [favorites, setFavorites] = useState<PhoneCard[]>([]);
   const [cart, setCart] = useState<PhoneCard[]>([]);
-  // const [cardIds, onCardToggle] = useCardsIds('cart', []);
-  // const [favIds, onFavToggle] = useCardsIds('favourite', []);
-
-  // const handleAddToFavorites = (item: PhoneCard) => {
-  //   const newFavorites = [...favorites, item];
-
-  //   setFavorites(newFavorites);
-  //   localStorage.setItem('favorites', JSON.stringify(newFavorites));
-  // };
-
-  // const handleAddToCart = (id: string) => {
-  //   const newCart = [...cart, id];
-
-  //   setCart(newCart);
-  //   useCardsIds('cart', newCart);
-  // };
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -46,7 +28,6 @@ export const App = () => {
 
   return (
     <>
-    <body>
       {!isOpen ? (
         <Header
         toggleMenu={toggleMenu}
@@ -57,26 +38,25 @@ export const App = () => {
         <BurgerMenu toggleMenu={toggleMenu}/>
       )}
 
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/home" element={<Navigate to="/" replace />} />
+      <main className='main'>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/home" element={<Navigate to="/" replace />} />
 
-            <Route path="/phones" element={<Outlet />}>
-              <Route index element={<PhonesPage />} />
-              <Route path=":itemCard" element={<PhonesPage />} />
-            </Route>
+          <Route path="/phones" element={<Outlet />}>
+            <Route index element={<PhonesPage />} />
+            <Route path=":itemCard" element={<PhonesPage />} />
+          </Route>
 
-            <Route path="/tablets" element={<TabletsPage />} />
-            <Route path="/accessories" element={<AccessoriesPage />} />
-            <Route path="/favourites" element={<FavouritesPage />} />
-            <Route path="/cart" element={<ShoppingBasket />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </main>
+          <Route path="/tablets" element={<TabletsPage />} />
+          <Route path="/accessories" element={<AccessoriesPage />} />
+          <Route path="/favourites" element={<FavouritesPage />} />
+          <Route path="/cart" element={<ShoppingBasket />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </main>
 
-        <Footer />
-      </body>
+      <Footer />
     </>
   );
 };

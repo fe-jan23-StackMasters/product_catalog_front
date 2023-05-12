@@ -1,13 +1,15 @@
-import { ReactNode } from 'react';
-import './Container.scss';
+import { ReactNode, FC } from 'react';
 
 type Props = {
   children: ReactNode;
 };
 
-export const Container = ({ children }: Props) => {
+export const Container: FC<Props> = ({ children, ...props }) => {
   return (
-    <div className="container">
+    <div
+      className="container"
+      {...props}
+    >
       {children}
     </div>
   );

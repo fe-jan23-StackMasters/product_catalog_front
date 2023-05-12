@@ -4,7 +4,6 @@ import './category_card.scss';
 
 type Props = {
   link: string;
-  gridClasses: string;
   image: string;
   title: string;
   amount: number;
@@ -12,12 +11,11 @@ type Props = {
 
 export const CategoryCard: React.FC<Props> = ({
   link,
-  gridClasses,
   image,
   title,
   amount,
 }) => (
-  <article className={`category-card ${gridClasses}`}>
+  <article className={`category-card`}>
     <Link to={link} className="category-card__link">
       <img
         className="category-card__image"
