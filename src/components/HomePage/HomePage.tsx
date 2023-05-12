@@ -44,8 +44,8 @@ export const HomePage = () => {
         title={'Brand new models'}
         favIds={favIds}
         cardIds={cardIds}
-        onCardAdd={onCardToggle}
-        onFavouriteAdd={onFavToggle}
+        onCardToggle={onCardToggle}
+        onFavToggle={onFavToggle}
         products={newProducts || []}
         isLoading={isNewLoading}
         isError={isNewError}
@@ -57,8 +57,8 @@ export const HomePage = () => {
         title={'Hot prices'}
         favIds={favIds}
         cardIds={cardIds}
-        onCardAdd={onCardToggle}
-        onFavouriteAdd={onFavToggle}
+        onCardToggle={onCardToggle}
+        onFavToggle={onFavToggle}
         products={hotProducts || []}
         isLoading={isHotLoading}
         isError={isHotError}
