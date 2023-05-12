@@ -1,42 +1,6 @@
 @import '../../styles/variables.scss';
 @import '../../styles/utils/mixins.scss';
 
-.grid-shopby {
-  display: grid;
-  column-gap: 16px;
-  grid-template-columns: none;
-
-  @include onTablet {
-    grid-template-columns: repeat($columns--tablet, 1fr);
-  }
-
-  @include onDesktop {
-    grid-template-columns: repeat($columns--desktop, 1fr);
-  }
-
-  &__item {
-    @include onTablet {
-      @for $start from 1 through $columns--tablet {
-        @for $end from 1 through $columns--tablet {
-          &--tablet_#{$start}-#{$end} {
-            grid-column: #{$start} / #{($end + 1)};
-          }
-        }
-      }
-    }
-
-    @include onDesktop {
-      @for $start from 1 through $columns--desktop {
-        @for $end from 1 through $columns--desktop {
-          &--desktop_#{$start}-#{$end} {
-            grid-column: #{$start} / #{($end + 1)};
-          }
-        }
-      }
-    }
-  }
-}
-
 .shop-by-category {
   margin-bottom: 56px;
 
@@ -53,10 +17,13 @@
   }
 
   &__categories {
+    column-gap: 16px;
     row-gap: 32px;
     margin: 0;
+    display: grid;
 
     @include onTablet {
+      grid-template-columns: repeat(3, 1fr);
       row-gap: 0px;
     }
   }
