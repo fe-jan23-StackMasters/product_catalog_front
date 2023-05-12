@@ -1,5 +1,3 @@
 import './Loader.scss';
 
-export const Loader = () => (
-  <span className="loader" />
-);
+export const Loader = () => <span className="loader" />;
