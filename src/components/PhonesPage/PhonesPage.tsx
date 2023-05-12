@@ -1,1 +1,5 @@
-export const PhonesPage = () => <h1>PhonesPage</h1>;
+export const PhonesPage = () => {
+  return (
+  <h1>PhonesPage</h1>
+  );
+};

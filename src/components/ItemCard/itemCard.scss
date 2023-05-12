@@ -142,6 +142,13 @@
   &__capacities {
     display: flex;
     gap: 8px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #3B3E4A;
+    margin-bottom: 24px;
+
+    @include onTablet {
+      margin-bottom: 32px;
+    }
   }
 
   &__button-capacity {
@@ -167,4 +174,8 @@
       color: $black-color;
     }
   }
+}
+
+.title {
+  margin-bottom: 40px;
 }

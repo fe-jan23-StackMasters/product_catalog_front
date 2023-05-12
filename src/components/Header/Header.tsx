@@ -8,6 +8,7 @@ import favoritesHart from '../../icons/favourites.svg';
 import shoppingBag from '../../icons/shoppingBag.svg';
 import { PageNavLink } from '../PageNavLink';
 import { PhoneCard } from '../../types/PhoneCard';
+import { useCardsIds } from '../../helpers/hooks/hooks';
 
 const navList = ['home', 'phones', 'tablets', 'accessories'];
 
@@ -22,6 +23,8 @@ export const Header: FC<Props> = ({
   favorites,
   cart,
 }) => {
+  const [cardIds] = useCardsIds('cart', []);
+  const [favIds] = useCardsIds('favourite', []);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -89,7 +92,7 @@ export const Header: FC<Props> = ({
                       alt="menu"
                     />
                     <span className='header__shoping-bag-count'>
-                      {favorites.length}
+                      {favIds.length}
                     </span>
                 </div>
                 </>
@@ -112,7 +115,7 @@ export const Header: FC<Props> = ({
                     alt="menu"
                     />
                   <span className='header__shoping-bag-count'>
-                    {cart.length}
+                    {cardIds.length}
                   </span>
                 </div>
               </NavLink>

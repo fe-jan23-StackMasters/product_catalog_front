@@ -121,6 +121,7 @@
   &__panel {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-right: 32px;
     list-style: none;
     padding: 0 17px;
@@ -147,10 +148,10 @@
     text-decoration: none;
     color: $secondary-color;
     text-transform: uppercase;
-    padding: 17.5px 0;
+    padding: 15px 0;
 
     @include onDesktop {
-      padding: 30px 0;
+      padding: 24px 0;
     }
 
     &:hover {
