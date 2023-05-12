@@ -6,8 +6,8 @@ import { BASE_URL } from '../../api/requests';
 
 export const ShopBy: React.FC = () => {
   return (
-    <section className="shop-by-category container">
-      <h2>Shop by category</h2>
+    <section className="shop-by-category">
+      <h2 className='shop-by-category__title'>Shop by category</h2>
 
       <div className="shop-by-category__categories grid">
         <CategoryCard
