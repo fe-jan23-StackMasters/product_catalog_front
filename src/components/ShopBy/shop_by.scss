@@ -48,8 +48,13 @@
     margin-bottom: 80px;
   }
 
+  &__title {
+    margin-bottom: 24px;
+  }
+
   &__categories {
     row-gap: 32px;
+    margin: 0;
 
     @include onTablet {
       row-gap: 0px;
