@@ -52,7 +52,8 @@ export const ShoppingBasket = () => {
 
   return (
     <Container>
-      <LinkLine to={'cart'} title={'Basket'}/>
+      <LinkLine to={'home'} title={'Back'} />
+      <h1 className="title" >Cart</h1>
       {!totalItems ? (
         <Container>
           <h2 className="basket__title">Ooops... Your basket is empty</h2>
@@ -87,7 +88,7 @@ export const ShoppingBasket = () => {
               Checkout
             </Button>
           </div>
-      </div>
+        </div>
       )}
     </Container>
   );

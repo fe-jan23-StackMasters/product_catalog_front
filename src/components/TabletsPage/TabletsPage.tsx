@@ -7,7 +7,7 @@ export const TabletsPage = () => {
         <div className="grid">
           <div className="grid__item grid__item--1-4 grid__item-tablet--1-12">
             <div className="tablets__header">
-            <LinkLine to={'tablets'} title={'Tablets'}/>
+              <LinkLine to={'tablets'} title={'Tablets'} />
 
               <h1 className="tablets__title">Tablets devices</h1>
 

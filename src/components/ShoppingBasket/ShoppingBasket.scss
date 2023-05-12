@@ -36,6 +36,10 @@
   }
 }
 
+.title {
+  margin-bottom: 32px;
+}
+
 .basket {
   display: flex;
   flex-direction: column;
@@ -51,6 +55,7 @@
   @include onDesktop {
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 40px;
   }
 
   &__title {
