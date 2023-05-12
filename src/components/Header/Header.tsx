@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logoItem from '../../icons/niceGadgets.svg';
 import logoItemOk from '../../icons/Ok.svg';
 // import menuOpener from '../../icons/Menu.svg';
@@ -72,7 +72,7 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
 
         {!isMobile ? (
           <div className="header__buying-section">
-            <a href="/favourites" className="header__case">
+            <NavLink to="/favourites" className="header__case">
               {hasFavorites ? (
                 <>
                   <div className="header__count-position">
@@ -91,9 +91,9 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
                   alt="menu"
                 />
               )}
-            </a>
+            </NavLink>
 
-            <a href="/cart" className="header__case">
+            <NavLink to="/cart" className="header__case">
               <div className="header__count-position">
                 <img
                   src={favoritesRed}
@@ -102,7 +102,7 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
                 />
                 <span className="header__shoping-bag-count">{expectToBuy}</span>
               </div>
-            </a>
+            </NavLink>
           </div>
         ) : (
           <button

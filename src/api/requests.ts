@@ -44,15 +44,20 @@ export const getProducts = async(
 
 export const getNew = (limit?: number): Promise<PhoneCard[]> => {
   // default limit is 12
-  return get<PhoneCard[]>(`${BASE_URL}/products/new${limit ? `?limit=${limit}` : ''}`);
+  return get<PhoneCard[]>(
+    `${BASE_URL}/products/new${limit ? `?limit=${limit}` : ''}`,
+  );
 };
 
 export const getHot = (limit?: number): Promise<PhoneCard[]> => {
   // default limit is 12
-  return get<PhoneCard[]>(`${BASE_URL}/products/discount${limit ? `?limit=${limit}` : ''}`);
+  return get<PhoneCard[]>(
+    `${BASE_URL}/products/discount${limit ? `?limit=${limit}` : ''}`,
+  );
 };
 
-export const getDetailedInfo = (id: string) => { // apple-iphone-....
+export const getDetailedInfo = (id: string) => {
+  // apple-iphone-....
   return get(`${BASE_URL}/products/${id}`);
 };
 

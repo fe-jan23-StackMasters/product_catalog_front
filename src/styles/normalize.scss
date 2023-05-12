@@ -23,8 +23,22 @@
   box-sizing: border-box;
 }
 
+body {
+  position: relative;
+  min-height: 100vh;
+}
+
 html {
   font-family: 'Mont', sans-serif;
+}
+
+main {
+  padding-bottom: 360px;
+
+  @include onTablet {
+    padding-bottom: 80px;
+  }
+
 }
 
 h1 {

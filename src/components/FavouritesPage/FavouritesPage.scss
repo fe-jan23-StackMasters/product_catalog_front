@@ -1,0 +1,26 @@
+@import '../../styles/utils/mixins';
+@import '../../styles/variables.scss';
+
+.favourites {
+  &__total {
+    display: block;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    color: $secondary-color;
+    margin-bottom: 32px;
+
+    @include onTablet {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__cards {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 40px;
+    column-gap: 16px;
+    padding-bottom: 40px;
+  }
+}

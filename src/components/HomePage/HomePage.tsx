@@ -24,10 +24,7 @@ export const HomePage = () => {
     },
   });
 
-  const {
-    isError: isNewError,
-    isLoading: isNewLoading,
-  } = useQuery({
+  const { isError: isNewError, isLoading: isNewLoading } = useQuery({
     queryKey: ['newProducts'],
     queryFn: () => getNew(),
     onSuccess(data) {
@@ -51,8 +48,8 @@ export const HomePage = () => {
             title={'Brand new models'}
             favIds={favIds}
             cardIds={cardIds}
-            onCardAdd={onCardToggle}
-            onFavouriteAdd={onFavToggle}
+            onCardToggle={onCardToggle}
+            onFavToggle={onFavToggle}
             products={newProducts || []}
             isLoading={isNewLoading}
             isError={isNewError}
@@ -68,8 +65,8 @@ export const HomePage = () => {
             title={'Hot prices'}
             favIds={favIds}
             cardIds={cardIds}
-            onCardAdd={onCardToggle}
-            onFavouriteAdd={onFavToggle}
+            onCardToggle={onCardToggle}
+            onFavToggle={onFavToggle}
             products={hotProducts || []}
             isLoading={isHotLoading}
             isError={isHotError}
