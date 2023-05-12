@@ -16,6 +16,7 @@ type Props = {
   products: PhoneCard[];
   cardIds: string[];
   favIds: string[];
+
   onCardToggle: (basket: object) => void;
   onFavToggle: (basket: object) => void;
   isError: boolean,
@@ -104,7 +105,7 @@ export const HomeSlider: React.FC<Props> = ({
       </h2>
 
       {isLoading ? (
-        <div className='slider__loader'>
+        <div className="slider__loader">
           <Loader />
         </div>
       ) : (

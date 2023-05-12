@@ -25,6 +25,15 @@
   &--clicked {
     background: $surface2-color;
   }
+
+  &-shop {
+    font-size: 24px;
+    padding: 40px 100px;
+
+    @include onTablet {
+      padding: 0;
+    }
+  }
 }
 
 .basket {
@@ -42,6 +51,22 @@
   @include onDesktop {
     flex-direction: row;
     justify-content: space-between;
+  }
+
+  &__title {
+    text-align: center;
+    margin: 20px 0 20px;
+
+    @include onTablet {
+      margin: 100px 0 40px;
+    }
+  }
+
+  &__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
   }
 
   &__total {
