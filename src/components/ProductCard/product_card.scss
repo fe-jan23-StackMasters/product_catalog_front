@@ -1,4 +1,5 @@
 @import '../../styles/variables.scss';
+@import '../../styles/utils/mixins';
 
 .card {
   color: $white-color;
@@ -19,8 +20,15 @@
   }
 
   &__image {
+    width: 100px;
+    height: 130px;
     align-self: center;
     margin-bottom: 24px;
+
+    @include onTablet {
+      width: 130px;
+      height: 170px;
+    }
   }
 
   &__title {

@@ -5,8 +5,8 @@ import rightArrov from '../../icons/arrowRight.svg';
 import './LinkLine.scss';
 
 interface Props {
-  to: string,
-  title: string,
+  to: string;
+  title: string;
 }
 
 export const LinkLine: FC<Props> = ({ to, title }) => {
@@ -17,11 +17,7 @@ export const LinkLine: FC<Props> = ({ to, title }) => {
       </NavLink>
 
       <NavLink to={`/${to}`} className="accessories__link">
-        <img
-          className="accessories__arrow"
-          src={rightArrov}
-          alt="right"
-        />
+        <img className="accessories__arrow" src={rightArrov} alt="right" />
         {title}
       </NavLink>
     </div>

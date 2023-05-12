@@ -19,7 +19,7 @@ export const BasketCard: React.FC<Props> = ({
   const { price, id, image } = phone.product;
   const isDisableMin = +phone.quantity < 2;
   const isDisableMax = +phone.quantity > 9;
-  const imageLink = BASE_URL + image.slice(3);
+  const imageLink = `${BASE_URL}/${image}`;
 
   return (
     <div className="basket__card">
