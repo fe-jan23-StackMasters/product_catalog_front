@@ -20,11 +20,10 @@
   }
   @include onDesktop {
     width: 272px;
-  }
 
-
-  &:hover {
-    box-shadow: inset 0 0 10px 1px $accent-color;
+    &:hover {
+      box-shadow: inset 0 0 10px 1px $accent-color;
+    }
   }
 
   &__link {
