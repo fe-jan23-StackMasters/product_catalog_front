@@ -9,6 +9,7 @@ interface Props {
   totalItems: number;
   currentPage: number;
   sortBy: string;
+  pages: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
@@ -18,6 +19,7 @@ export const Paginate: React.FC<Props> = ({
   currentPage,
   sortBy,
   setCurrentPage,
+  pages,
 }) => {
   const pageNumbers = [];
   const navigate = useNavigate();
@@ -26,7 +28,7 @@ export const Paginate: React.FC<Props> = ({
     window.scrollTo(0, 0);
   }, [currentPage]);
 
-  for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
+  for (let i = 1; i <= pages; i++) {
     pageNumbers.push(i);
   }
 
