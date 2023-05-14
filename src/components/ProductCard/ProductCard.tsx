@@ -33,6 +33,8 @@ export const ProductCard: React.FC<Props> = ({
     image,
   } = product;
 
+  const inces = screen.split(' ')[0];
+
   return (
     <div className="card">
       <Link
@@ -64,7 +66,7 @@ export const ProductCard: React.FC<Props> = ({
         </div>
 
         <div className="card__characteristics-values">
-          <p className="characteristic__value">{screen}</p>
+          <p className="characteristic__value">{inces}</p>
 
           <p className="characteristic__value">{capacity}</p>
 

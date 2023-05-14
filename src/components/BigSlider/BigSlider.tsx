@@ -39,7 +39,7 @@ export const BigSlider: React.FC = () => {
     prevArrow: prevArrow,
     nextArrow: nexArrow,
     pauseOnFocus: true,
-    // autoplay: true,
+    autoplay: true,
     autoplaySpeed: 5000,
     responsive: [
       {
