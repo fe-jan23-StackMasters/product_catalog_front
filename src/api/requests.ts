@@ -2,6 +2,7 @@ import axios from 'axios';
 import { ProductType } from '../types/ProductType';
 import { SortBy } from '../types/SortBy';
 import { PhoneCard } from '../types/PhoneCard';
+import { Phone } from '../types/Phone';
 
 export const BASE_URL = 'https://nice-gadgets-api-n5r6.onrender.com';
 
@@ -56,11 +57,15 @@ export const getHot = (limit?: number): Promise<PhoneCard[]> => {
   );
 };
 
-export const getDetailedInfo = (id: string) => {
+export const getDetailedInfo = (id: string): Promise<Phone> => {
   // apple-iphone-....
   return get(`${BASE_URL}/products/${id}`);
 };
 
-export const getRecommenations = (id: string) => {
+export const getRecommenations = (id: string): Promise<PhoneCard[]> => {
   return get(`${BASE_URL}/products/${id}/recommended`);
+};
+
+export const getBanners = (): Promise<string[]> => {
+  return get(`${BASE_URL}/images/banners`);
 };

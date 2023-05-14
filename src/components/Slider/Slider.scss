@@ -80,6 +80,10 @@
         grid-template-columns: repeat(auto-fit, 272px);
         gap: 32px;
       }
+
+      @media (min-width: 1200px) {
+        gap: 16px;
+      }
     }
 
     .slick-slide > div {

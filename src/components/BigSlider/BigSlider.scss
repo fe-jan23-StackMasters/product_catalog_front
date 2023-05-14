@@ -16,23 +16,27 @@
 
   &__item {
     outline: none;
-    height: 100%;
+    padding-top: 100%;
+    position: relative;
     display: block !important;
+
+    @include onTablet {
+      
+    padding-top: 38.5%;
+    }
   }
 
   &__image {
-    order: 3;
-    height: 100%;
-    width: 100%;
-
-    @media (max-width: 640px) {
-      content: url('../../images/header/headerPhonePic14Pro.png');
-      object-fit: cover;
-    }
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
   }
 
   .slick-slider {
     display: grid;
+    height: 100%;
     grid-template-columns: auto;
     grid-template-rows: repeat(2, auto);
     column-gap: 16px;
@@ -40,7 +44,7 @@
 
     @include onTablet {
       grid-template-columns: repeat(12, 1fr);
-      
+
     }
 
     @include onDesktop {
