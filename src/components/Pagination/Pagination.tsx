@@ -12,8 +12,9 @@ export const Pagination: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState('8');
+  const [itemsPerPage, setItemsPerPage] = useState('16');
   const [sortBy, setSortBy] = useState<SortBy | string>(SortBy.NEW);
+  const models = 95;
   const navigate = useNavigate();
 
   // const [items, setItems] = useState([]);
@@ -36,8 +37,6 @@ export const Pagination: React.FC = () => {
 
   window.console.log(currentPage);
 
-  // console.log(sortBy);
-
   useEffect(() => {
     const urlParams = locations.search;
 
@@ -51,7 +50,7 @@ export const Pagination: React.FC = () => {
   }, [currentPage]);
 
   useEffect(() => {
-    setItemsPerPage(perPage || '8');
+    setItemsPerPage(perPage || '16');
     setCurrentPage(Number(page) || 1);
     setSortBy(sort || SortBy.NEW);
 
@@ -106,6 +105,10 @@ export const Pagination: React.FC = () => {
 
   return (
     <>
+      <div className="phonesPage__modelsCount">
+        {models} models
+      </div>
+
       <div className="phonesPage__dropDown">
         <div className="phonesPage__dropDown--sortBy">
           Sort By
@@ -116,14 +119,14 @@ export const Pagination: React.FC = () => {
           />
         </div>
 
-        <div className="phonesPage__dropDown--ItemsOnPage">
-        Items on page
+        <div className="phonesPage__dropDown--itemsOnPage">
+          Items on page
           <DropDown
-            variables={['8', '16', '32']}
+            variables={['16', '32', '64']}
             returnedValue={handlerDropdownItemPerPage}
             searchParam={perPageParam}
           />
-          </div>
+        </div>
       </div>
 
       <div className="phonesPage__pagination pagination">

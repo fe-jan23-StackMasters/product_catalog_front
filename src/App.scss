@@ -6,6 +6,10 @@
 @import './components/AccessoriesPage/accessories.scss';
 @import './styles/blocks/grid.scss';
 
+html {
+  scroll-behavior: smooth;
+}
+
 .no-scroll {
   overflow: hidden;
 }
