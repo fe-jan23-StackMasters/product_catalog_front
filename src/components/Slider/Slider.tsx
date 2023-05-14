@@ -6,10 +6,10 @@ import 'slick-carousel/slick/slick-theme.css';
 import './Slider.scss';
 import ArrowRight from '../../icons/arrowRight.svg';
 import ArrowLeft from '../../icons/arrowLeft.svg';
-import { ProductCard } from '../ProductCard';
 import { PhoneCard } from '../../types/PhoneCard';
 import React from 'react';
-import { Loader } from '../Loader';
+import { ProductCard } from '../ProductCard/ProductCard';
+import { ProductCardSkeleton } from '../ProductCardSkeleton';
 
 type Props = {
   title: string;
@@ -19,8 +19,8 @@ type Props = {
 
   onCardToggle: (basket: object) => void;
   onFavToggle: (basket: object) => void;
-  isError: boolean,
-  isLoading: boolean,
+  isError: boolean;
+  isLoading: boolean;
 };
 
 export const HomeSlider: React.FC<Props> = ({
@@ -105,8 +105,14 @@ export const HomeSlider: React.FC<Props> = ({
       </h2>
 
       {isLoading ? (
-        <div className="slider__loader">
-          <Loader />
+        <div className="slider__container">
+          <Slider {...settingsSlider}>
+            {[1, 2, 3, 4, 5, 6].map((product) => (
+              <div className="slider__item" key={product}>
+                <ProductCardSkeleton />
+              </div>
+            ))}
+          </Slider>
         </div>
       ) : (
         <div className="slider__container">
