@@ -30,14 +30,18 @@ export const FavouritesPage: FC = () => {
                   product={product.product}
                   key={product.id}
                   onCardAdd={() =>
-                    onCardToggle(
-                      { id: product.id, quantity, product: product.product },
-                    )
+                    onCardToggle({
+                      id: product.id,
+                      quantity,
+                      product: product.product,
+                    })
                   }
                   onFavouriteAdd={() =>
-                    onFavToggle(
-                      { id: product.id, quantity, product: product.product },
-                    )
+                    onFavToggle({
+                      id: product.id,
+                      quantity,
+                      product: product.product,
+                    })
                   }
                   cardIds={cardIds}
                   favIds={favIds}
@@ -47,13 +51,15 @@ export const FavouritesPage: FC = () => {
           </>
         ) : (
           <Container>
-          <h2 className="basket__title">Ooops... Your favourites are empty</h2>
-          <NavLink to="/phones" className="basket__link">
-            <Button width="50%" height="48px" type="btn__add btn__add-shop">
-              Add
-            </Button>
-          </NavLink>
-        </Container>
+            <h2 className="basket__title">
+              Ooops... Your favourites are empty
+            </h2>
+            <NavLink to="/phones" className="basket__link">
+              <Button width="50%" height="48px" type="btn__add btn__add-shop">
+                Add
+              </Button>
+            </NavLink>
+          </Container>
         )}
       </div>
     </Container>

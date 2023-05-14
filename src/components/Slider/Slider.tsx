@@ -19,8 +19,8 @@ type Props = {
 
   onCardToggle: (basket: object) => void;
   onFavToggle: (basket: object) => void;
-  isError: boolean,
-  isLoading: boolean,
+  isError: boolean;
+  isLoading: boolean;
 };
 
 export const HomeSlider: React.FC<Props> = ({
