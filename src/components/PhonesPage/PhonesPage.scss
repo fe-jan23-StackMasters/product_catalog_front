@@ -59,14 +59,14 @@
     min-width: 320px;
     max-width: 1200px;
     margin: auto;
-    padding: 16px;
+    padding: 0px;
 
     @include onTablet {
-      padding: 36px;
+      padding: 0px;
     }
 
     @include onDesktop {
-      padding: 32px;
+      padding: 0;
     }
   }
 }

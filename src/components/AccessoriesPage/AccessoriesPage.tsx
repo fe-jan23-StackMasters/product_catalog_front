@@ -1,5 +1,4 @@
-import rightArrov from '../../icons/arrowRight.svg';
-import home from '../../icons/Home.svg';
+import { LinkLine } from '../LinkLine';
 
 export const AccessoriesPage = () => {
   return (
@@ -8,20 +7,7 @@ export const AccessoriesPage = () => {
         <div className="grid">
           <div className="grid__item grid__item--1-4 grid__item-tablet--1-12">
             <div className="accessories__header">
-              <div className="accessories__links">
-                <a href="/" className="accessories__link">
-                  <img className="accessories__arrow" src={home} alt="home" />
-                </a>
-
-                <a href="/accessories" className="accessories__link">
-                  <img
-                    className="accessories__arrow"
-                    src={rightArrov}
-                    alt="right"
-                  />
-                  Accessories
-                </a>
-              </div>
+              <LinkLine to={'accessories'} title={'Accessories'} />
 
               <h1 className="accessories__title">Accessories for devices</h1>
 
