@@ -33,17 +33,17 @@ export const HomePage = () => {
   });
 
   return (
-    <section className='HomePage'>
+    <section className="HomePage">
       <Container>
-        <h1 className='HomePage__title'>Welcome to Nice Gadgets store!</h1>
+        <h1 className="HomePage__title">Welcome to Nice Gadgets store!</h1>
       </Container>
 
-      <div className='HomePage__big-slider'>
+      <div className="HomePage__big-slider">
         <BigSlider />
       </div>
 
-      <Container >
-        <div className='HomePage__section'>
+      <Container>
+        <div className="HomePage__section">
           <HomeSlider
             title={'Brand new models'}
             favIds={favIds}
@@ -56,11 +56,11 @@ export const HomePage = () => {
           />
         </div>
 
-        <div className='HomePage__section'>
+        <div className="HomePage__section">
           <ShopBy />
         </div>
 
-        <div className='HomePage__section'>
+        <div className="HomePage__section">
           <HomeSlider
             title={'Hot prices'}
             favIds={favIds}
@@ -72,7 +72,6 @@ export const HomePage = () => {
             isError={isHotError}
           />
         </div>
-
       </Container>
     </section>
   );

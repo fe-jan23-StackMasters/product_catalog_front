@@ -17,11 +17,7 @@ export type Props = {
   cart: PhoneCard[];
 };
 
-export const Header: FC<Props> = ({
-  toggleMenu,
-  favorites,
-  cart,
-}) => {
+export const Header: FC<Props> = ({ toggleMenu, favorites, cart }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -45,10 +41,7 @@ export const Header: FC<Props> = ({
         <div className="header__right-side">
           {isMobile && (
             <NavLink to="/" className="logo">
-              <img
-                className="logo__image"
-                src={logoItem} alt="Logo icon"
-              />
+              <img className="logo__image" src={logoItem} alt="Logo icon" />
               <img className="logo__ok" src={logoItemOk} alt="ok" />
             </NavLink>
           )}
@@ -56,7 +49,7 @@ export const Header: FC<Props> = ({
           {!isMobile && (
             <nav className="header__nav nav">
               <ul className="nav__panel">
-                <li className='nav__item'>
+                <li className="nav__item">
                   <NavLink to="/" className="logo">
                     <img
                       className="logo__image"
@@ -76,11 +69,10 @@ export const Header: FC<Props> = ({
           )}
         </div>
 
-          {!isMobile ? (
-            <div className="header__buying-section">
-
-              <NavLink to='/favourites' className="header__case">
-              {(favorites.length > 0) ? (
+        {!isMobile ? (
+          <div className="header__buying-section">
+            <NavLink to="/favourites" className="header__case">
+              {favorites.length > 0 ? (
                 <>
                   <div className="header__count-position">
                     <img
@@ -88,47 +80,43 @@ export const Header: FC<Props> = ({
                       className="header__menu-opener_image"
                       alt="menu"
                     />
-                    <span className='header__shoping-bag-count'>
+                    <span className="header__shoping-bag-count">
                       {favorites.length}
                     </span>
-                </div>
+                  </div>
                 </>
               ) : (
-                <img src={favoritesHart}
-                className="header__menu-opener_image" alt="menu"
+                <img
+                  src={favoritesHart}
+                  className="header__menu-opener_image"
+                  alt="menu"
                 />
               )}
-              </NavLink>
+            </NavLink>
 
-              <NavLink
-                to='/cart'
-                className="header__case"
-              >
-                <div className="header__count-position">
-
-                  <img
-                    src={shoppingBag}
-                    className="header__menu-opener_image"
-                    alt="menu"
-                    />
-                  <span className='header__shoping-bag-count'>
-                    {cart.length}
-                  </span>
-                </div>
-              </NavLink>
-            </div>
-          ) : (
-            <button
-              className="header__menu-button header__case"
-              onClick={toggleMenu}
-            >
-              <img
-                className="header__menu-opener_image"
-                src={menuOpener}
-                alt="menu"
+            <NavLink to="/cart" className="header__case">
+              <div className="header__count-position">
+                <img
+                  src={shoppingBag}
+                  className="header__menu-opener_image"
+                  alt="menu"
                 />
-              </button>
-          )}
+                <span className="header__shoping-bag-count">{cart.length}</span>
+              </div>
+            </NavLink>
+          </div>
+        ) : (
+          <button
+            className="header__menu-button header__case"
+            onClick={toggleMenu}
+          >
+            <img
+              className="header__menu-opener_image"
+              src={menuOpener}
+              alt="menu"
+            />
+          </button>
+        )}
       </div>
     </header>
   );

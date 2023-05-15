@@ -14,7 +14,7 @@
   text-align: start;
   border: 1px solid $surface1-color;
   transition: all 0.3s ease;
-  
+
   @include onTablet {
     width: 237px;
   }

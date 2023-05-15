@@ -29,16 +29,12 @@ export const App = () => {
   return (
     <>
       {!isOpen ? (
-        <Header
-        toggleMenu={toggleMenu}
-        favorites={favorites}
-        cart={cart}
-        />
+        <Header toggleMenu={toggleMenu} favorites={favorites} cart={cart} />
       ) : (
-        <BurgerMenu toggleMenu={toggleMenu}/>
+        <BurgerMenu toggleMenu={toggleMenu} />
       )}
 
-      <main className='main'>
+      <main className="main">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<Navigate to="/" replace />} />

@@ -12,6 +12,7 @@ export const TabletsPage = () => {
               <h1 className="tablets__title">Tablets devices</h1>
 
               <div className="tablets__models">95 models</div>
+
             </div>
           </div>
         </div>
