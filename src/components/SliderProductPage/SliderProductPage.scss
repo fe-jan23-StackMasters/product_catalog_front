@@ -12,13 +12,19 @@
     &-item {
       display: flex !important;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
 
       .picture {
         width: 100%;
 
         @include onTablet {
-          width: auto;
+          max-width: 274px;
+          max-height: 274px;
+        }
+
+        @include onDesktop {
+          max-width: 442px;
+          max-height: 442px;
         }
       }
     }
@@ -36,7 +42,7 @@
 
     @include onTablet {
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       bottom: 0px
     }
     .slick-active {
