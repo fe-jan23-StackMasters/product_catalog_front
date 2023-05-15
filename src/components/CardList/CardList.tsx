@@ -17,6 +17,7 @@ export const CardList: React.FC<Props> = ({ products }) => {
     <div className="card__list">
       {products.map((product) => (
         <div key={product.id}>
+          {}
           <ProductCard
             product={product}
             onCardAdd={() =>

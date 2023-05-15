@@ -1,4 +1,6 @@
 .about {
+  @include max-block;
+
   &__title {
     position: relative;
     font-family: 'Mont';
@@ -73,6 +75,8 @@
 }
 
 .settings {
+  @include max-block;
+
   &__container-colors {
     @include top-actions;
   }
@@ -174,8 +178,46 @@
       color: $black-color;
     }
   }
+
+  &__add-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 16px;
+  }
+
+  &__add-current-price {
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 41px;
+    color: $white-color;
+  }
+
+  &__add-prev-price {
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 28px;
+    text-decoration-line: line-through;
+    color: #75767F;
+  }
+
+  &__add-buttons {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
 }
 
 .title {
+  @include max-block;
+
   margin-bottom: 40px;
+}
+
+.slider {
+  @include max-block;
 }

@@ -1,33 +1,34 @@
 import { useQuery } from '@tanstack/react-query';
 import { HomeSlider } from '../Slider/Slider';
 import { getDetailedInfo, getHot } from '../../api/requests';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { PhoneCard } from '../../types/PhoneCard';
 import { useCardsIds } from '../../helpers/hooks/hooks';
 import { Phone } from '../../types/Phone';
-// import { AddToCart } from '../AddToCartButton';
-// import { AddToFavourites } from '../AddToFavouriteButton';
-// import { Button } from '../Button';
-// import { AddToCart } from '../AddToCartButton';
-// import { AddToFavourites } from '../AddToFavouriteButton';
+import { AddToCart } from '../AddToCartButton';
+import { AddToFavourites } from '../AddToFavouriteButton';
 
-export const ItemCard = () => {
+interface Props {
+  product: PhoneCard;
+}
+
+export const ItemCard: FC<Props> = ({
+  product,
+}) => {
   const [item, setItem] = useState<Phone | null>(null);
   const [hotProducts, setHotProducts] = useState<PhoneCard[]>();
   const [cardIds, onCardToggle] = useCardsIds('cart', []);
   const [favIds, onFavToggle] = useCardsIds('favourite', []);
 
-  const productId = 'apple-iphone-xs-max-64gb-gold';
-
   useEffect(() => {
-    getDetailedInfo(productId)
+    getDetailedInfo(product.phoneId)
       .then((data) => {
         setItem(data as Phone);
       })
       .catch((error) => {
         throw new Error(error);
       });
-  }, [productId]);
+  }, [product.phoneId]);
 
   const { isError: isHotError, isLoading: isHotLoading } = useQuery({
     queryKey: ['hotProducts'],
@@ -76,22 +77,28 @@ export const ItemCard = () => {
           </div>
 
           <div className="settings__add-header">
-            <h1>{item?.priceDiscount}</h1>
-            <h3>{item?.priceRegular}</h3>
+            <h1 className="settings__add-current-price">
+            &#36;{item?.priceDiscount}
+            </h1>
+            <h3 className="settings__add-prev-price">
+            &#36;{item?.priceRegular}
+            </h3>
           </div>
 
           <div className="settings__add-buttons">
-            {/* <Button
-              width="77%"
-              height={`${height}`}
-              type={classNames('btn__add',
-               { 'btn__add--added': isAddedToCart })}
-              handler={onCardAdd}
-            >
-              {isAddedToCart ? 'Added' : 'Add to cart'}
+            <AddToCart
+              height="48px"
+              onCardAdd={onCardToggle}
+              id={product.id}
+              cardIds={cardIds}
             />
 
-            <AddToFavourites /> */}
+            <AddToFavourites
+              size="48px"
+              onFavouriteAdd={onFavToggle}
+              favIds={favIds}
+              id={product.id}
+            />
           </div>
 
           <div className="settings__add-tablet">
@@ -193,7 +200,7 @@ export const ItemCard = () => {
       </div>
     </section>
 
-    <section className="sliderr">
+    <section className="slider">
       <div className="grid">
        <div className="grid__item grid__phone
       grid__item-tablet--1-12 grid__item-desktop--1-24">

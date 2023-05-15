@@ -7,25 +7,21 @@ import favoritesRed from '../../icons/faqvoritesFilled.svg';
 import favoritesHart from '../../icons/favourites.svg';
 import shoppingBag from '../../icons/shoppingBag.svg';
 import { PageNavLink } from '../PageNavLink';
-import { PhoneCard } from '../../types/PhoneCard';
 import { useCardsIds } from '../../helpers/hooks/hooks';
+import classNames from 'classnames';
 
 const navList = ['home', 'phones', 'tablets', 'accessories'];
 
 export type Props = {
   toggleMenu: () => void;
-  favorites: PhoneCard[];
-  cart: PhoneCard[];
 };
 
 export const Header: FC<Props> = ({
   toggleMenu,
-  favorites,
-  cart,
 }) => {
   const [cardIds] = useCardsIds('cart', []);
   const [favIds] = useCardsIds('favourite', []);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
 
   useEffect(() => {
     const handleResize = () => {
@@ -57,7 +53,7 @@ export const Header: FC<Props> = ({
           )}
 
           {!isMobile && (
-            <nav className="header__nav nav">
+            <nav className="header__nav nav" hidden={isMobile}>
               <ul className="nav__panel">
                 <li className='nav__item'>
                   <NavLink to="/" className="logo">
@@ -82,8 +78,13 @@ export const Header: FC<Props> = ({
           {!isMobile ? (
             <div className="header__buying-section">
 
-              <NavLink to='/favourites' className="header__case">
-              {(favorites.length > 0) ? (
+              <NavLink
+                to='/favourites'
+                className={({ isActive }) => classNames(
+                  'header__case',
+                  { 'header__case--is-active': isActive },
+                )}>
+              {(favIds.length > 0) ? (
                 <>
                   <div className="header__count-position">
                     <img
@@ -105,8 +106,10 @@ export const Header: FC<Props> = ({
 
               <NavLink
                 to='/cart'
-                className="header__case"
-              >
+                className={({ isActive }) => classNames(
+                  'header__case',
+                  { 'header__case--is-active': isActive },
+                )}>
                 <div className="header__count-position">
 
                   <img
@@ -114,9 +117,11 @@ export const Header: FC<Props> = ({
                     className="header__menu-opener_image"
                     alt="menu"
                     />
-                  <span className='header__shoping-bag-count'>
-                    {cardIds.length}
-                  </span>
+                  {cardIds.length > 0 && (
+                    <span className='header__shoping-bag-count'>
+                      {cardIds.length}
+                    </span>
+                  )}
                 </div>
               </NavLink>
             </div>
