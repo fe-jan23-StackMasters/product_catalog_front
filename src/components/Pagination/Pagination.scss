@@ -6,8 +6,6 @@ html {
 }
 
 .pagination {
-  font-family: 'Montserrat';
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,15 +32,17 @@ html {
 
   &__page {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
     justify-content: center;
     list-style: none;
     padding: 0;
-    margin-top: 24px;
+    margin: 24px 0 80px;
 
     @include onTablet {
       margin-top: 40px;
     }
+
   }
 
   &__item {
@@ -53,7 +53,10 @@ html {
     width: 32px;
     cursor: pointer;
     background-color: $surface1-color;
-    // color: white;
+
+    &:hover:not(.pagination__item--selected) {
+      background-color: $elements-color;
+    }
 
     &--selected {
       background-color: $accent-color;

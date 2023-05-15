@@ -60,13 +60,5 @@
     max-width: 1200px;
     margin: auto;
     padding: 0px;
-
-    @include onTablet {
-      padding: 0px;
-    }
-
-    @include onDesktop {
-      padding: 0;
-    }
   }
 }
