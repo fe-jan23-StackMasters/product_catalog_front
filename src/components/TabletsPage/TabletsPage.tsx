@@ -1,4 +1,5 @@
 import { LinkLine } from '../LinkLine';
+import SliderProductPage from '../SliderProductPage/SliderProductPage';
 
 export const TabletsPage = () => {
   return (
@@ -12,6 +13,7 @@ export const TabletsPage = () => {
               <h1 className="tablets__title">Tablets devices</h1>
 
               <div className="tablets__models">95 models</div>
+              <SliderProductPage />
 
             </div>
           </div>

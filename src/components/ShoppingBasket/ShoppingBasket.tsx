@@ -7,10 +7,30 @@ import { ActionBasket } from '../../types/ActionBasket';
 import { Container } from '../Container';
 import { NavLink } from 'react-router-dom';
 import { LinkLine } from '../LinkLine';
+import { AproovedBox } from '../AprooveBox/AprooveBox';
 
 export const ShoppingBasket = () => {
   const [phones, setPhones] = useState<StoragePhone[]>([]);
   const phonesFromStorage = JSON.parse(localStorage.getItem('cart') || '');
+  const [stateAproove, setStateAproove] = useState(false);
+  const [stateCheckout, setStateCheckout] = useState(false);
+
+  const closes = () => {
+    setStateAproove(false);
+    setStateCheckout(false);
+  };
+
+  const openViewCHeck = () => {
+    setStateAproove(!stateAproove);
+
+    setTimeout(() => {
+      setStateCheckout(true);
+    }, 1000);
+
+    setTimeout(() => {
+      closes();
+    }, 2000);
+  };
 
   const handleRemovePhone = (phoneId: string) => {
     const filteredPhones = phones.filter((phone) => phone.id !== phoneId);
@@ -51,45 +71,53 @@ export const ShoppingBasket = () => {
   }, 0);
 
   return (
-    <Container>
-      <LinkLine to={'home'} title={'Back'} />
-      <h1 className="title">Cart</h1>
-      {!totalItems ? (
-        <Container>
-          <h2 className="basket__title">Ooops... Your basket is empty</h2>
+    <>
+      <AproovedBox stateAproove={stateAproove} stateCheckout={stateCheckout} />
+      <Container>
+        <LinkLine to={'home'} title={'Back'} />
+        <h1 className="title">Cart</h1>
+        {!totalItems ? (
+          <Container>
+            <h2 className="basket__title">Ooops... Your basket is empty</h2>
 
-          <NavLink to="/phones" className="basket__link">
-            <Button width="50%" height="48px" type="btn__add btn__add-shop">
-              Go to SHOP
-            </Button>
-          </NavLink>
-        </Container>
-      ) : (
-        <div className="basket">
-          <div className="basket__cards">
-            {phones.map((phone) => (
-              <BasketCard
-                key={phone.id}
-                phone={phone}
-                handleRemovePhone={handleRemovePhone}
-                handleAddOrRemoveQuantity={handleAddOrRemoveQuantity}
-              />
-            ))}
+            <NavLink to="/phones" className="basket__link">
+              <Button width="50%" height="48px" type="btn__add btn__add-shop">
+                Go to SHOP
+              </Button>
+            </NavLink>
+          </Container>
+        ) : (
+          <div className="basket">
+            <div className="basket__cards">
+              {phones.map((phone) => (
+                <BasketCard
+                  key={phone.id}
+                  phone={phone}
+                  handleRemovePhone={handleRemovePhone}
+                  handleAddOrRemoveQuantity={handleAddOrRemoveQuantity}
+                />
+              ))}
+            </div>
+
+            <div className="basket__total">
+              <span className="basket__total-price">{`$${totalPrice}`}</span>
+
+              <span className="basket__total-description">
+                {`Total for ${totalItems} items`}
+              </span>
+
+              <Button
+                width="100%"
+                height="48px"
+                type="btn__add"
+                handler={() => openViewCHeck()}
+              >
+                Checkout
+              </Button>
+            </div>
           </div>
-
-          <div className="basket__total">
-            <span className="basket__total-price">{`$${totalPrice}`}</span>
-
-            <span className="basket__total-description">
-              {`Total for ${totalItems} items`}
-            </span>
-
-            <Button width="100%" height="48px" type="btn__add">
-              Checkout
-            </Button>
-          </div>
-        </div>
-      )}
-    </Container>
+        )}
+      </Container>
+    </>
   );
 };
