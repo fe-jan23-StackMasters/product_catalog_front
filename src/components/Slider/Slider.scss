@@ -46,11 +46,13 @@
       }
     }
 
-    .slick-next:before, .slick-prev:before {
+    .slick-next:before,
+    .slick-prev:before {
       display: none;
     }
 
-    .slick-next:hover, .slick-prev:hover {
+    .slick-next:hover,
+    .slick-prev:hover {
       background: #323542;
 
       & img {
@@ -69,7 +71,6 @@
       grid-template-columns: repeat(auto-fit, 212px);
       grid-auto-flow: column dense;
       gap: 16px;
-
 
       @include onTablet {
         grid-template-columns: repeat(auto-fit, 237px);
