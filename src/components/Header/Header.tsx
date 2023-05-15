@@ -44,10 +44,7 @@ export const Header: FC<Props> = ({
         <div className="header__right-side">
           {isMobile && (
             <NavLink to="/" className="logo">
-              <img
-                className="logo__image"
-                src={logoItem} alt="Logo icon"
-              />
+              <img className="logo__image" src={logoItem} alt="Logo icon" />
               <img className="logo__ok" src={logoItemOk} alt="ok" />
             </NavLink>
           )}
@@ -55,7 +52,7 @@ export const Header: FC<Props> = ({
           {!isMobile && (
             <nav className="header__nav nav" hidden={isMobile}>
               <ul className="nav__panel">
-                <li className='nav__item'>
+                <li className="nav__item">
                   <NavLink to="/" className="logo">
                     <img
                       className="logo__image"
@@ -95,14 +92,16 @@ export const Header: FC<Props> = ({
                     <span className='header__shoping-bag-count'>
                       {favIds.length}
                     </span>
-                </div>
+                  </div>
                 </>
               ) : (
-                <img src={favoritesHart}
-                className="header__menu-opener_image" alt="menu"
+                <img
+                  src={favoritesHart}
+                  className="header__menu-opener_image"
+                  alt="menu"
                 />
               )}
-              </NavLink>
+            </NavLink>
 
               <NavLink
                 to='/cart'
@@ -134,8 +133,8 @@ export const Header: FC<Props> = ({
                 className="header__menu-opener_image"
                 src={menuOpener}
                 alt="menu"
-                />
-              </button>
+              />
+          </button>
           )}
       </div>
     </header>

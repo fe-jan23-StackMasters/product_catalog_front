@@ -23,7 +23,7 @@ export const AddToCart: React.FC<Props> = ({
     <Button
       width="77%"
       height={`${height}`}
-      type={classNames('btn__add', { 'btn__add--added': isAddedToCart })}
+      type={classNames('btn__add-to', { 'btn__add-to--added': isAddedToCart })}
       handler={onCardAdd}
     >
       {isAddedToCart ? 'Added' : 'Add to cart'}

@@ -4,15 +4,6 @@
   z-index: 200;
   background-color: $black-color;
   border-bottom: solid 1px $elements-color;
-  margin-bottom: 24px;
-
-  @include onTablet {
-    margin-bottom: 32px;
-  }
-
-  @include onDesktop {
-    margin-bottom: 56px;
-  }
 
   &__content {
     @include top-actions;

@@ -3,10 +3,6 @@
 .slider {
   position: relative;
 
-  @include onTablet {
-    height: 670px;
-  }
-
   &__name {
     max-width: 70%;
     display: block;
@@ -19,28 +15,20 @@
     margin: 0 auto;
   }
 
+  &__item {
+    height: 100%;
+  }
+
   &__container {
     width: 100%;
 
-    .slick-slider {
-      display: flex;
-      width: 100%;
-    }
-  
-    .slick-list {
-      // padding: 0;
-    }
-  
     .slick-prev {
       order: 3;
-      position: relative;
-      top: -39px;
       left: calc(100% - 80px);
-      display: flex;
       display: block;
       justify-content: center;
     }
-  
+
     .slick-arrow {
       order: 2;
       position: absolute;
@@ -49,57 +37,78 @@
       align-items: center;
       justify-content: center;
       width: 32px;
-      background-color: #2a2932;
       border: 1px solid #3b3e4a;
-    }
-  
-    .slick-next:before {
-      display: none;
-    }
-  
-    .slick-next:focus {
-      background-color: red;
-    }
-  
-    .slick-next:hover {
-      background: #323542;
-      color: #f1f2f9;
-  
-      & img {
-        filter: brightness(4.25);
+      transition: background-color 0.3s;
+      top: -55px;
+
+      @media (min-width: 340px) {
+        top: -40px;
       }
     }
-  
+
+    .slick-next:before,
     .slick-prev:before {
       display: none;
     }
-  
+
+    .slick-next:hover,
     .slick-prev:hover {
       background: #323542;
-  
+
       & img {
         filter: brightness(4.25);
       }
     }
-  
-    .slick-prev:focus {
-      background-color: red;
-    }
-  
-    .slick-arrow .slick-next {
+
+    .slick-next {
       display: flex;
       width: 32px;
       right: 0px;
     }
-  
-    .slick-next {
-      right: 0px;
-      top: -39px;
-    }
-  
+
     .slick-track {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, 212px);
+      grid-auto-flow: column dense;
       gap: 16px;
+
+      @include onTablet {
+        grid-template-columns: repeat(auto-fit, 237px);
+        gap: 24px;
+      }
+
+      @include onDesktop {
+        grid-template-columns: repeat(auto-fit, 272px);
+        gap: 32px;
+      }
+
+      @media (min-width: 1200px) {
+        gap: 16px;
+      }
     }
-  } 
+
+    .slick-slide > div {
+      height: 100%;
+    }
+
+    .slick-list {
+      margin: 0 -16px;
+      padding-left: 16px;
+
+      @include onTablet {
+        margin: 0 -24px;
+        padding-left: 24px;
+      }
+
+      @include onDesktop {
+        margin: 0 -32px;
+        padding-left: 32px;
+      }
+
+      @media (min-width: 1200px) {
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
 }

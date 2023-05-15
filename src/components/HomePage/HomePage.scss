@@ -1,0 +1,37 @@
+.HomePage {
+  &__title {
+    margin-bottom: 24px;
+
+    @include onTablet {
+      margin-bottom: 32px;
+    }
+
+    @include onDesktop {
+      margin-bottom: 56px;
+    }
+  }
+
+  &__big-slider {
+    margin-bottom: 60px;
+
+    @include onTablet {
+      margin-bottom: 70px;
+    }
+
+    @include onDesktop {
+      margin-bottom: 90px;
+    }
+  }
+
+  &__section {
+    margin-bottom: 57px;
+
+    @include onTablet {
+      margin-bottom: 64px;
+    }
+
+    @include onDesktop {
+      margin-bottom: 80px;
+    }
+  }
+}

@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './BigSlider.scss';
 import arrPrev from '../../icons/arrowLeft.svg';
 import arrNext from '../../icons/arrowRight.svg';
-import slideBunner from '../../images/header/Banner.png';
+import { useQuery } from '@tanstack/react-query';
+import { BASE_URL, getBanners } from '../../api/requests';
 
 export const BigSlider: React.FC = () => {
+  const [banners, setBanners] = useState<string[]>([]);
+
+  useQuery({
+    queryKey: ['banners'],
+    queryFn: () => getBanners(),
+    onSuccess(data) {
+      setBanners(data);
+    },
+  });
+
   const prevArrow = (
     <div>
       <img src={arrPrev} />
@@ -29,7 +40,7 @@ export const BigSlider: React.FC = () => {
     nextArrow: nexArrow,
     pauseOnFocus: true,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 5000,
     responsive: [
       {
         breakpoint: 640,
@@ -51,17 +62,20 @@ export const BigSlider: React.FC = () => {
   };
 
   return (
-    <div className="sliderBig">
+    <div className="BigSlider">
       <Slider {...settings}>
-        <div className="sliderBig__item">
-          <img className="imageBanner" src={slideBunner} alt="" />
-        </div>
-        <div className="sliderBig__item">
-          <img className="imageBanner" src={slideBunner} alt="" />
-        </div>
-        <div className="sliderBig__item">
-          <img className="imageBanner" src={slideBunner} alt="" />
-        </div>
+        {banners.map((banner) => (
+          <div className="BigSlider__item" key={banner}>
+            <div
+              className="BigSlider__image"
+              style={{
+                backgroundImage: `url(${BASE_URL}/${banner})`,
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+              }}
+            />
+          </div>
+        ))}
       </Slider>
     </div>
   );

@@ -1,50 +1,60 @@
 @import '../../styles/variables.scss';
 @import '../../styles/utils/mixins';
 
-.sliderBig {
-  display: flex;
-  justify-content: center;
-  width: 100%;
+.BigSlider {
+  max-width: 1200px;
+  margin: 0 auto;
 
-  &__item {
-    display: flex !important;
-    justify-content: center;
+  @include onTablet {
+    gap: 16px;
+    padding: 0 24px;
   }
 
-  .sliderBig__item {
-    display: flex;
-    justify-content: center;
+  @include onDesktop {
+    padding: 0 32px;
+  }
+
+  &__item {
+    outline: none;
+    padding-top: 100%;
+    position: relative;
+    display: block !important;
+
+    @include onTablet {
+      
+    padding-top: 38.5%;
+    }
+  }
+
+  &__image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+
+  .slick-slider {
+    display: grid;
+    height: 100%;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(2, auto);
+    column-gap: 16px;
+    row-gap: 18px;
+
+    @include onTablet {
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    @include onDesktop {
+      grid-template-columns: repeat(24, 1fr);
+    }
   }
 
   .slick-list {
     width: 100%;
-    border-radius: 10px;
-
-    @include onTablet {
-      width: 84%;
-    }
-  }
-
-  .slick-slider {
-    width: 100%;
-    display: grid;
-    flex-direction: column;
-    justify-items: center;
-  }
-
-  .imageBanner {
-    order: 3;
-    height: 100%;
-    width: 100%;
-
-    @media (max-width: 640px) {
-      content: url('../../images/header/headerPhonePic14Pro.png');
-      object-fit: cover;
-    }
-
-    @include onTablet {
-      width: 100%;
-    }
+    grid-column-start: 2;
+    grid-column-end: -2;
   }
 
   .dot {
@@ -53,9 +63,15 @@
     padding: 0;
     justify-content: center;
     align-items: center;
+    grid-column: 1/-1;
+
+    & button {
+      cursor: pointer;
+    }
 
     & li {
       list-style: none;
+      font-size: 0;
     }
 
     & button {
@@ -73,10 +89,8 @@
 
   .slick-next {
     display: block;
-    grid-row-start: 0;
-    grid-row-start: 1;
     grid-row-end: 2;
-    height: 100%;
+    grid-column: -1/-2;
     order: 2;
     right: 3%;
 
@@ -88,8 +102,8 @@
   .slick-prev {
     order: 1;
     left: 3%;
-    grid-row-start: 1;
     grid-row-end: 2;
+    grid-column: 1/2;
 
     &:before {
       display: none;
@@ -98,17 +112,20 @@
 
   .slick-arrow {
     height: 100%;
-    width: 32px;
+    width: 100%;
     display: flex !important;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: transparent;
-    border: 1px solid $elements-color;
+    background-color: $surface2-color;
+
+    transition: background-color 0.3s;
+
+    & img {
+      filter: brightness(4.25);
+    }
 
     &:hover {
-      border: 1px solid $elements-color;
-      background-color: $surface2-color;
+      background-color: $icons-color;
 
       & img {
         filter: brightness(14);

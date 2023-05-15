@@ -1,0 +1,31 @@
+@import '../../styles/variables.scss';
+
+.css-53tbrc-MuiSlider-root {
+  width: 50% !important;
+}
+
+.css-lbpym0-MuiSlider-root {
+  width: 50% !important;
+}
+
+.filterPrice {
+  position: relative;
+  align-items: center;
+  width: 310px;
+  height: 40px;
+  padding: 5px;
+  background: $surface1-color;
+  border: 1px solid $elements-color;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $white-color;
+  }
+
+  &__value {
+    width: 20%;
+    text-align: center;
+  }
+}

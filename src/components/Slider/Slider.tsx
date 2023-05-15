@@ -6,20 +6,21 @@ import 'slick-carousel/slick/slick-theme.css';
 import './Slider.scss';
 import ArrowRight from '../../icons/arrowRight.svg';
 import ArrowLeft from '../../icons/arrowLeft.svg';
-import { ProductCard } from '../ProductCard';
 import { PhoneCard } from '../../types/PhoneCard';
 import React from 'react';
-import { Loader } from '../Loader';
+import { ProductCard } from '../ProductCard/ProductCard';
+import { ProductCardSkeleton } from '../ProductCardSkeleton';
 
 type Props = {
   title: string;
   products: PhoneCard[];
   cardIds: string[];
   favIds: string[];
-  onCardAdd: () => void;
-  onFavouriteAdd: () => void;
-  isError: boolean,
-  isLoading: boolean,
+
+  onCardToggle: (basket: object) => void;
+  onFavToggle: (basket: object) => void;
+  isError: boolean;
+  isLoading: boolean;
 };
 
 export const HomeSlider: React.FC<Props> = ({
@@ -27,11 +28,13 @@ export const HomeSlider: React.FC<Props> = ({
   products,
   cardIds,
   favIds,
-  onCardAdd,
-  onFavouriteAdd,
+  onCardToggle,
+  onFavToggle,
   isError,
   isLoading,
 }) => {
+  const quantity = '1';
+
   const arrowRight = (
     <div>
       <img src={ArrowRight} />
@@ -102,8 +105,14 @@ export const HomeSlider: React.FC<Props> = ({
       </h2>
 
       {isLoading ? (
-        <div className='slider__loader'>
-          <Loader />
+        <div className="slider__container">
+          <Slider {...settingsSlider}>
+            {[1, 2, 3, 4, 5, 6].map((product) => (
+              <div className="slider__item" key={product}>
+                <ProductCardSkeleton />
+              </div>
+            ))}
+          </Slider>
         </div>
       ) : (
         <div className="slider__container">
@@ -112,8 +121,12 @@ export const HomeSlider: React.FC<Props> = ({
               <div className="slider__item" key={product.id}>
                 <ProductCard
                   product={product}
-                  onCardAdd={onCardAdd}
-                  onFavouriteAdd={onFavouriteAdd}
+                  onCardAdd={() =>
+                    onCardToggle({ id: product.id, quantity, product })
+                  }
+                  onFavouriteAdd={() =>
+                    onFavToggle({ id: product.id, quantity, product })
+                  }
                   cardIds={cardIds}
                   favIds={favIds}
                 />

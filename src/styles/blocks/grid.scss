@@ -1,17 +1,16 @@
+@import '../utils/mixins';
+
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 16px;
-  margin: 0 16px;
 
   @include onTablet {
     grid-template-columns: repeat(12, 1fr);
-    margin: 0 24px;
   }
 
   @include onDesktop {
-    grid-template-columns: repeat(auto-fit, minmax(32, 1fr));
-    margin: 0 32px;
+    grid-template-columns: repeat(24, 1fr);
   }
 
   &__phone {

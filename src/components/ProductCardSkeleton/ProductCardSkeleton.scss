@@ -1,0 +1,139 @@
+@import '../../styles/variables.scss';
+@import '../../styles/utils/mixins';
+
+@keyframes pulse {
+  from {
+    opacity: 1;
+  }
+
+  to { 
+    opacity: 0.25;
+  }
+}
+
+%skeleton {
+  background-color: $mockup-color;
+  border-radius: 5px;
+  animation: pulse 1s ease-in-out infinite alternate;
+}
+
+.card-skeleton {
+  width: 212px;
+  height: 100%;
+
+  color: $white-color;
+  background: $surface1-color;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px;
+  text-align: start;
+  border: 1px solid $surface1-color;
+  transition: all 0.3s ease;
+  
+  @include onTablet {
+    width: 237px;
+  }
+  @include onDesktop {
+    width: 272px;
+  }
+
+
+  &:hover {
+    box-shadow: inset 0 0 10px 1px $accent-color;
+  }
+
+  &__link {
+    margin-bottom: 8px;
+    text-decoration: none;
+  }
+
+  &__image {
+    width: 148px;
+    height: 129px;
+    margin: 0 auto 24px;
+    @extend %skeleton;
+
+    @include onTablet {
+      width: 173px;
+      height: 202px;
+    }
+
+    @include onDesktop {
+      width: 208px;
+      height: 196px;
+    }
+  }
+
+  &__title {
+    @extend %skeleton;
+    height: 20px;
+
+    &--1 {
+      width: 100%;
+      margin-bottom: 1px;
+    }
+
+    &--2 {
+      width: 75%;
+      margin-bottom: 8px;
+    }
+  }
+
+  &__prices {
+    @extend %skeleton;
+    height: 30px;
+    margin-bottom: 16px;
+  }
+
+  &__charact {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 16px;
+    padding-top: 16px;
+
+    border-top: 1px solid $elements-color;
+
+    &-titles {
+      font-weight: 700;
+      font-size: 12px;
+      color: $secondary-color;
+    }
+
+    &-title {
+      margin-bottom: 1px;
+    }
+
+    &-values {
+      width: 20%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-value {
+      width: 100%;
+      height: 33%;
+      margin-bottom: 1px;
+      @extend %skeleton;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  &__button1 {
+    @extend %skeleton;
+    height: 40px;
+    width: 70%;
+  }
+
+  &__button2 {
+    @extend %skeleton;
+    height: 40px;
+    width: 30%;
+  }
+}
