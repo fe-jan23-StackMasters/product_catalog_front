@@ -1,9 +1,11 @@
 @import '../../styles/variables.scss';
 
 .css-53tbrc-MuiSlider-root {
-  width: 150px !important;
-  top: -15px;
-  left: 60px;
+  width: 50% !important;
+}
+
+.css-lbpym0-MuiSlider-root {
+  width: 50% !important;
 }
 
 .filterPrice {
@@ -15,14 +17,15 @@
   background: $surface1-color;
   border: 1px solid $elements-color;
 
-  &__value {
+  &__container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     color: $white-color;
   }
 
-  &__slider {
-    position: absolute;
-    top: 15px;
+  &__value {
+    width: 20%;
+    text-align: center;
   }
 }
