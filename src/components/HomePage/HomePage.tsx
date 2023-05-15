@@ -1,5 +1,3 @@
-// import { CardList } from '../CardList/CardList';
-
 import { useState } from 'react';
 import { useCardsIds } from '../../helpers/hooks/hooks';
 import { PhoneCard } from '../../types/PhoneCard';

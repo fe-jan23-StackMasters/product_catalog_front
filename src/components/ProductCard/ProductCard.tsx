@@ -24,6 +24,8 @@ export const ProductCard: React.FC<Props> = ({
   // eslint-disable-next-line max-len
   const { name, fullPrice, price, screen, capacity, ram, id, phoneId, image } = product;
 
+  const inces = screen.split(' ')[0];
+
   return (
     <div className="card">
       <Link to={`/phones/${phoneId}`} className="card__link">
@@ -48,7 +50,7 @@ export const ProductCard: React.FC<Props> = ({
         </div>
 
         <div className="card__characteristics-values">
-          <p className="characteristic__value">{screen}</p>
+          <p className="characteristic__value">{inces}</p>
 
           <p className="characteristic__value">{capacity}</p>
 

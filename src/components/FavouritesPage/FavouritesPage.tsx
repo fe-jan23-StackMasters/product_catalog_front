@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Container } from '../Container';
 import { LinkLine } from '../LinkLine';
 import './FavouritesPage.scss';
-import { ProductCard } from '../ProductCard';
+import { ProductCard } from '../ProductCard/ProductCard';
 import { useCardsIds } from '../../helpers/hooks/hooks';
 import '../../styles/blocks/grid.scss';
 import { StoragePhone } from '../../types/StoragePhone';
