@@ -1,0 +1,31 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/utils/mixins';
+
+.arrow-left {
+  box-sizing: border-box;
+  background-image: url(../../../icons/strokeLeft.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: $surface2-color;
+
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+
+  color: white;
+
+  &:hover {
+    background-color: $icons-color;
+  }
+
+  &--disabled {
+    background-image: url(../../../icons/strokeLeftDisabled.svg);
+    background-color: transparent;
+    border: 1px solid $elements-color;
+
+    &:hover {
+      background-color: transparent;
+      cursor: default;
+    }
+  }
+}
