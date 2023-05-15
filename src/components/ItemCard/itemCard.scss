@@ -15,7 +15,7 @@
       bottom: 0;
       width: 100%;
       position: absolute;
-      background-color: #3B3E4A;
+      background-color: #3b3e4a;
       height: 1px;
       display: block;
     }
@@ -41,10 +41,9 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 21px;
-    color: #75767F;
+    color: #75767f;
     margin-bottom: 32px;
     text-align: justify;
-
   }
 
   &__option {
@@ -58,7 +57,7 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 21px;
-    color: #75767F;
+    color: #75767f;
     text-transform: capitalize;
   }
 
@@ -83,7 +82,7 @@
     font-weight: 700;
     font-size: 12px;
     line-height: 15px;
-    color: #75767F;
+    color: #75767f;
     margin-bottom: 9px;
   }
 
@@ -91,7 +90,7 @@
     display: flex;
     gap: 9px;
     padding-bottom: 24px;
-    border-bottom: 1px solid #3B3E4A;
+    border-bottom: 1px solid #3b3e4a;
     margin-bottom: 24px;
   }
 
@@ -117,22 +116,20 @@
 
     cursor: pointer;
 
-
-
     &--black {
       background-color: black;
     }
     &--green {
-      background-color: #5F7170;
+      background-color: #5f7170;
     }
     &--yellow {
-      background-color: #FCDBC1;
+      background-color: #fcdbc1;
     }
     &--white {
       background-color: $white-color;
     }
     &--purple {
-      background-color: #905BFF;;
+      background-color: #905bff;
     }
     &--red {
       background-color: $red-color;
@@ -151,7 +148,7 @@
 
     width: 63px;
     height: 32px;
-    border: 1px solid #4A4D58;
+    border: 1px solid #4a4d58;
     padding: 8px;
     background-color: $black-color;
     color: $white-color;

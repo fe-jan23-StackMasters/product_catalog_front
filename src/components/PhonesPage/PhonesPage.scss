@@ -1,0 +1,72 @@
+@import '../../styles/variables.scss';
+@import '../../styles/utils/mixins';
+
+.phonesPage {
+  &__dropDown {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 24px;
+
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    color: $secondary-color;
+
+    @include onTablet {
+      justify-content: start;
+    }
+
+    &--sortBy {
+      position: relative;
+      width: 136px;
+
+      @include onTablet {
+        width: 187px;
+      }
+
+      @include onDesktop {
+        width: 176px;
+      }
+    }
+
+    &--itemsOnPage {
+      position: relative;
+      width: 136px;
+
+      @include onDesktop {
+        width: 128px;
+      }
+    }
+  }
+
+  &__modelsCount {
+    margin: 8px 0 40px 0;
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    color: $secondary-color;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    min-width: 320px;
+    max-width: 1200px;
+    margin: auto;
+    padding: 0px;
+
+    @include onTablet {
+      padding: 0px;
+    }
+
+    @include onDesktop {
+      padding: 0;
+    }
+  }
+}

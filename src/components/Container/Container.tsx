@@ -6,10 +6,7 @@ type Props = {
 
 export const Container: FC<Props> = ({ children, ...props }) => {
   return (
-    <div
-      className="container"
-      {...props}
-    >
+    <div className="container" {...props}>
       {children}
     </div>
   );

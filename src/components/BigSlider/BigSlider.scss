@@ -44,7 +44,6 @@
 
     @include onTablet {
       grid-template-columns: repeat(12, 1fr);
-
     }
 
     @include onDesktop {
