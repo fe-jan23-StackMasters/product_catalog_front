@@ -32,6 +32,22 @@
     @include onDesktop {
       padding: 25px;
     }
+
+    &--is-active {
+    position: relative;
+      
+    }
+
+    &--is-active::after {
+      left: 0;
+      right: 0;
+      bottom: 0;
+      position: absolute;
+      content: '';
+      background-color: $white-color;
+      height: 4px;
+      display: block;
+    }
   }
 
   &__menu-opener_image {
@@ -44,6 +60,16 @@
       align-items: center;
       align-items: center;
       @include square(16px);
+    }
+
+    &--is-active::after {
+      bottom: 0;
+      width: 100%;
+      position: absolute;
+      content: '';
+      background-color: $white-color;
+      height: 4px;
+      display: block;
     }
   }
 
@@ -112,6 +138,7 @@
   &__panel {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-right: 32px;
     list-style: none;
     padding: 0 17px;
@@ -138,10 +165,10 @@
     text-decoration: none;
     color: $secondary-color;
     text-transform: uppercase;
-    padding: 17.5px 0;
+    padding: 15px 0;
 
     @include onDesktop {
-      padding: 30px 0;
+      padding: 24px 0;
     }
 
     &:hover {
