@@ -6,7 +6,6 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 interface Props {
   itemsPerPage: number;
-  totalItems: number;
   currentPage: number;
   sortBy: string;
   pages: number;
@@ -15,7 +14,6 @@ interface Props {
 
 export const Paginate: React.FC<Props> = ({
   itemsPerPage,
-  totalItems,
   currentPage,
   sortBy,
   setCurrentPage,
@@ -51,7 +49,7 @@ export const Paginate: React.FC<Props> = ({
   };
 
   return (
-    <div>
+    <>
       <ul className="pagination__page">
         <li>
           <ArrowLeft
@@ -62,7 +60,6 @@ export const Paginate: React.FC<Props> = ({
 
         {pageNumbers.map((num) => (
           <li
-            // key={}
             className={classNames('pagination__item', {
               'pagination__item--selected': num === currentPage,
             })}
@@ -87,6 +84,6 @@ export const Paginate: React.FC<Props> = ({
           />
         </li>
       </ul>
-    </div>
+    </>
   );
 };

@@ -17,8 +17,6 @@ type RequestWithParamsResult = {
 };
 
 export const Pagination: React.FC = () => {
-  const items = [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2];
-
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -29,8 +27,6 @@ export const Pagination: React.FC = () => {
   const [favIds, onFavToggle] = useCardsIds('favourite', []);
   const phones = productInfo?.products;
   const quantity = '1';
-
-  window.console.log(phones);
 
   // const { isError, isLoading } = useQuery({
   //   queryKey: ['phones'],
@@ -54,8 +50,6 @@ export const Pagination: React.FC = () => {
   //   sortBy,
   // );
 
-  // window.console.log(arr);
-
   const [searchParams] = useSearchParams();
 
   const sort = searchParams.get('sort');
@@ -71,8 +65,6 @@ export const Pagination: React.FC = () => {
   const sorts = [SortBy.NAME, SortBy.NEW, SortBy.OLD, SortBy.HIGHT, SortBy.LOW];
 
   const locations = useLocation();
-
-  window.console.log(currentPage);
 
   useEffect(() => {
     const urlParams = locations.search;
@@ -90,8 +82,8 @@ export const Pagination: React.FC = () => {
     setItemsPerPage(perPage || '16');
     setCurrentPage(Number(page) || 1);
 
-    if (sorts.some(by => sort === by.toString())) {
-      setSortBy(sorts.find(by => by.toString() === sort) || SortBy.NEW);
+    if (sorts.some((by) => sort === by.toString())) {
+      setSortBy(sorts.find((by) => by.toString() === sort) || SortBy.NEW);
     } else {
       setSortBy(SortBy.NEW);
     }
@@ -99,7 +91,7 @@ export const Pagination: React.FC = () => {
 
   useEffect(() => {
     (async() => {
-      // setIsLoading(true);
+      setIsLoading(true);
 
       try {
         const dataFromServer = await getProducts(
@@ -118,12 +110,8 @@ export const Pagination: React.FC = () => {
     })();
   }, [itemsPerPage, sortBy, currentPage]);
 
-  window.console.log(productInfo);
-
   window.console.log(isLoading);
   window.console.log(isError);
-
-  window.console.log(itemsPerPage);
 
   const handlerDropdownItemPerPage = (returnedValue: string) => {
     if (currentPage !== 1) {
@@ -151,7 +139,10 @@ export const Pagination: React.FC = () => {
     }
 
     searchParams.set('sort', returnedValue);
-    setSortBy(sorts.find(by => by.toString() === returnedValue) || SortBy.NEW);
+
+    setSortBy(
+      sorts.find((by) => by.toString() === returnedValue) || SortBy.NEW,
+    );
     sortParam = returnedValue;
   };
 
@@ -183,36 +174,32 @@ export const Pagination: React.FC = () => {
 
       <div className="phonesPage__pagination pagination">
         <div className="pagination__items">
-          { phones
-            ? (phones.map((product) => (
-                <ProductCard
-                  product={product}
-                  key={product.id}
-                  onCardAdd={() =>
-                    onCardToggle(
-                      { id: product.id, quantity, product: product },
-                    )
-                  }
-                  onFavouriteAdd={() =>
-                    onFavToggle(
-                      { id: product.id, quantity, product: product },
-                    )
-                  }
-                  cardIds={cardIds}
-                  favIds={favIds}
-                />
-                // <h1 className="card" key={items[0]}>
-                //   Card
-                // </h1>
-            )))
-            : <h1>nothing</h1>
-          }
+          {phones ? (
+            phones.map((product) => (
+              <ProductCard
+                product={product}
+                key={product.id}
+                onCardAdd={() =>
+                  onCardToggle({ id: product.id, quantity, product: product })
+                }
+                onFavouriteAdd={() =>
+                  onFavToggle({ id: product.id, quantity, product: product })
+                }
+                cardIds={cardIds}
+                favIds={favIds}
+              />
+              // <h1 className="card" key={items[0]}>
+              //   Card
+              // </h1>
+            ))
+          ) : (
+            <h1>nothing</h1>
+          )}
           {}
           {/* change key to item.id */}
         </div>
         <Paginate
           itemsPerPage={Number(itemsPerPage)}
-          totalItems={items.length}
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}
           sortBy={sortBy}

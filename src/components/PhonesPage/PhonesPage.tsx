@@ -7,7 +7,7 @@ export const PhonesPage = () => (
   <Container>
     <LinkLine to={'phones'} title={'Phones'} />
     <div className="phonesPage__container">
-      <h1 className='phonesPage__header'>Mobile phones</h1>
+      <h1 className="phonesPage__header">Mobile phones</h1>
 
       <Pagination />
     </div>
