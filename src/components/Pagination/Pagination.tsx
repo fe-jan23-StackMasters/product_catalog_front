@@ -10,7 +10,6 @@ import { ProductType } from '../../types/ProductType';
 import { PhoneCard } from '../../types/PhoneCard';
 import { useCardsIds } from '../../helpers/hooks/hooks';
 import { PriceSlider } from '../PriceSlider';
-import { useDebounce } from 'use-debounce';
 import { ProductCardSkeleton } from '../ProductCardSkeleton';
 
 type RequestWithParamsResult = {
@@ -52,8 +51,7 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
   ));
 
   const [range, setRange] = useState<number | number[]>([0, 5000]);
-  // eslint-disable-next-line no-unused-vars
-  const [value] = useDebounce(range, 600);
+
   const handleChangeFilterPrice = (
     _event: Event, newValue: number | number[],
   ) => {
@@ -62,7 +60,45 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
 
   const priceMin = Array.isArray(range) ? range[0] : 0;
   const priceMax = Array.isArray(range) ? range[1] : 5000;
-  
+
+  const getDataFromServer = async() => {
+    setIsLoading(true);
+
+    try {
+      const dataFromServer = await getProducts(
+        +itemsPerPage,
+        currentPage,
+        [productType],
+        sorts.find((by) => by.toString() === sort) || SortBy.NEW,
+        priceMin,
+        priceMax,
+      );
+
+      setProductInfo(dataFromServer);
+    } catch {
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    // eslint-disable-next-line prefer-const, no-undef
+    let timer: NodeJS.Timeout | undefined;
+
+    if (timer) {
+      clearTimeout(timer);
+    }
+
+    timer = setTimeout(() => {
+      getDataFromServer();
+    }, 500);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [priceMax, priceMin]);
+
   useEffect(() => {
     const urlParams = locations.search;
 
@@ -94,27 +130,8 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
   }, []);
 
   useEffect(() => {
-    (async() => {
-      setIsLoading(true);
-
-      try {
-        const dataFromServer = await getProducts(
-          +itemsPerPage,
-          currentPage,
-          [productType],
-          sortBy,
-          priceMin,
-          priceMax,
-        );
-
-        setProductInfo(dataFromServer);
-      } catch {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
-  }, [itemsPerPage, sortBy, currentPage, priceMax, priceMin]);
+    getDataFromServer();
+  }, [itemsPerPage, sortBy, currentPage]);
 
   const handlerDropdownItemPerPage = (returnedValue: string) => {
     if (currentPage !== 1) {
