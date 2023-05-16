@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { HomeSlider } from '../Slider/Slider';
-import { getDetailedInfo, getHot } from '../../api/requests';
+import { getDetailedInfo, getHot, BASE_URL } from '../../api/requests';
 import { useEffect, useState } from 'react';
 import { PhoneCard } from '../../types/PhoneCard';
 import { useCardsIds } from '../../helpers/hooks/hooks';
@@ -8,12 +8,16 @@ import { Phone } from '../../types/Phone';
 import { AddToCart } from '../AddToCartButton';
 import { AddToFavourites } from '../AddToFavouriteButton';
 import './itemCard.scss';
+import { SliderProductPage } from '../SliderProductPage/SliderProductPage';
 
 export const ItemCard = () => {
   const [item, setItem] = useState<Phone | null>(null);
   const [hotProducts, setHotProducts] = useState<PhoneCard[]>();
   const [cardIds, onCardToggle] = useCardsIds('cart', []);
   const [favIds, onFavToggle] = useCardsIds('favourite', []);
+
+  // eslint-disable-next-line no-console
+  window.console.log(BASE_URL + '/' + item?.images[1]);
 
   const url = window.location.href;
   const parts = url.split('/');
@@ -48,8 +52,9 @@ export const ItemCard = () => {
 
     <section className="settings">
       <div className="grid">
+        <SliderProductPage items = {item?.images}/>
         <div className="grid__item grid__phone
-        grid__item-tablet--6-12 grid__item-desktop--13-24">
+        grid__item-tablet--8-12 grid__item-desktop--13-24">
           <div className="settings__container">
             <div className="settings__container-colors">
               <p className="settings__title">Available colors</p>

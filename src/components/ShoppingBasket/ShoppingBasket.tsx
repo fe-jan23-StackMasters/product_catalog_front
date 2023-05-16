@@ -5,12 +5,32 @@ import './ShoppingBasket.scss';
 import { StoragePhone } from '../../types/StoragePhone';
 import { ActionBasket } from '../../types/ActionBasket';
 import { Container } from '../Container';
-import { Link, NavLink } from 'react-router-dom';
-import leftArrov from '../../icons/arrowLeft.svg';
+import { NavLink } from 'react-router-dom';
+import { LinkLine } from '../LinkLine';
+import { AproovedBox } from '../AprooveBox/AprooveBox';
 
 export const ShoppingBasket = () => {
   const [phones, setPhones] = useState<StoragePhone[]>([]);
   const phonesFromStorage = JSON.parse(localStorage.getItem('cart') || '');
+  const [stateAproove, setStateAproove] = useState(false);
+  const [stateCheckout, setStateCheckout] = useState(false);
+
+  const closes = () => {
+    setStateAproove(false);
+    setStateCheckout(false);
+  };
+
+  const openViewCHeck = () => {
+    setStateAproove(!stateAproove);
+
+    setTimeout(() => {
+      setStateCheckout(true);
+    }, 1000);
+
+    setTimeout(() => {
+      closes();
+    }, 2000);
+  };
 
   const handleRemovePhone = (phoneId: string) => {
     const filteredPhones = phones.filter((phone) => phone.id !== phoneId);
@@ -51,50 +71,53 @@ export const ShoppingBasket = () => {
   }, 0);
 
   return (
-    <Container>
-      <Link to="/home" className="backLink" >
-        <img className="backLink__image" src={leftArrov} alt="left" />
-        Back
-      </Link>
+    <>
+      <AproovedBox stateAproove={stateAproove} stateCheckout={stateCheckout} />
+      <Container>
+        <LinkLine title={'Back'} />
+        <h1 className="title">Cart</h1>
+        {!totalItems ? (
+          <Container>
+            <h2 className="basket__title">Ooops... Your basket is empty</h2>
 
-      <h1 className="title">Cart</h1>
+            <NavLink to="/phones" className="basket__link">
+              <Button width="50%" height="48px" type="btn__add btn__add-shop">
+                Go to SHOP
+              </Button>
+            </NavLink>
+          </Container>
+        ) : (
+          <div className="basket">
+            <div className="basket__cards">
+              {phones.map((phone) => (
+                <BasketCard
+                  key={phone.id}
+                  phone={phone}
+                  handleRemovePhone={handleRemovePhone}
+                  handleAddOrRemoveQuantity={handleAddOrRemoveQuantity}
+                />
+              ))}
+            </div>
 
-      {!totalItems ? (
-        <Container>
-          <h2 className="basket__title">Ooops... Your basket is empty</h2>
+            <div className="basket__total">
+              <span className="basket__total-price">{`$${totalPrice}`}</span>
 
-          <NavLink to="/phones" className="basket__link">
-            <Button width="50%" height="48px" type="btn__add btn__add-shop">
-              Go to SHOP
-            </Button>
-          </NavLink>
-        </Container>
-      ) : (
-        <div className="basket">
-          <div className="basket__cards">
-            {phones.map((phone) => (
-              <BasketCard
-                key={phone.id}
-                phone={phone}
-                handleRemovePhone={handleRemovePhone}
-                handleAddOrRemoveQuantity={handleAddOrRemoveQuantity}
-              />
-            ))}
+              <span className="basket__total-description">
+                {`Total for ${totalItems} items`}
+              </span>
+
+              <Button
+                width="100%"
+                height="48px"
+                type="btn__add"
+                handler={() => openViewCHeck()}
+              >
+                Checkout
+              </Button>
+            </div>
           </div>
-
-          <div className="basket__total">
-            <span className="basket__total-price">{`$${totalPrice}`}</span>
-
-            <span className="basket__total-description">
-              {`Total for ${totalItems} items`}
-            </span>
-
-            <Button width="100%" height="48px" type="btn__add">
-              Checkout
-            </Button>
-          </div>
-        </div>
-      )}
-    </Container>
+        )}
+      </Container>
+    </>
   );
 };

@@ -170,6 +170,7 @@
     @include onDesktop {
       padding: 24px 0;
     }
+    
 
     &:hover {
       color: $white-color;
@@ -192,6 +193,7 @@
 }
 
 .searchInput {
+  display: none;
   background: none;
   color: $white-color;
   width: 170px;

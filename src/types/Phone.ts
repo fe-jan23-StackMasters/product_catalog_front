@@ -1,4 +1,6 @@
 export interface Phone {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  map(arg0: (point: any) => void): import('react').ReactNode;
   id: string;
   namespaceId: string;
   name: string;
