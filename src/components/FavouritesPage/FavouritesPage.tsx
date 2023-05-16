@@ -19,7 +19,7 @@ export const FavouritesPage: FC = () => {
   return (
     <Container>
       <div className="favourites">
-        <LinkLine to={'favourites'} title={'Favourites'} />
+        <LinkLine title={'Favourites'} />
         <h1 className="favourites__title">Favourites</h1>
         {favouritesCount ? (
           <>

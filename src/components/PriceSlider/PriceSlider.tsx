@@ -3,8 +3,8 @@ import { useState } from 'react';
 import './PriceSlider.scss';
 
 export const PriceSlider = () => {
-  const [range, setRange] = useState<number |number[]>([0, 5000]);
-  const handleChanges = (_event: Event, newValue: number |number[]) => {
+  const [range, setRange] = useState<number | number[]>([0, 5000]);
+  const handleChanges = (_event: Event, newValue: number | number[]) => {
     setRange(newValue);
   };
 
