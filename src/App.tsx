@@ -12,24 +12,21 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { BurgerMenu } from './components/BurgerMenu';
 import { useState } from 'react';
-import { PhoneCard } from './types/PhoneCard';
 
 export const App = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [favorites, setFavorites] = useState<PhoneCard[]>([]);
-  const [cart, setCart] = useState<PhoneCard[]>([]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
     document.body.classList.toggle('no-scroll');
-    setFavorites([]);
-    setCart([]);
   };
 
   return (
     <>
       {!isOpen ? (
-        <Header toggleMenu={toggleMenu} favorites={favorites} cart={cart} />
+        <Header
+        toggleMenu={toggleMenu}
+        />
       ) : (
         <BurgerMenu toggleMenu={toggleMenu} />
       )}

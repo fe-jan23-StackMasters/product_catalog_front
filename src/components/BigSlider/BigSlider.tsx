@@ -64,7 +64,7 @@ export const BigSlider: React.FC = () => {
   return (
     <div className="BigSlider">
       <Slider {...settings}>
-        {banners.map((banner) => (
+        {/* {banners.map((banner) => (
           <div className="BigSlider__item" key={banner}>
             <div
               className="BigSlider__image"
@@ -75,7 +75,37 @@ export const BigSlider: React.FC = () => {
               }}
             />
           </div>
-        ))}
+        ))} */}
+        <div className="BigSlider__item">
+            <div
+              className="BigSlider__image"
+              style={{
+                backgroundImage: `url(${BASE_URL}/${banners[0]})`,
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+              }}
+            />
+          </div>
+          <div className="BigSlider__item" >
+            <div
+              className="BigSlider__image"
+              style={{
+                backgroundImage: `url(${BASE_URL}/${banners[1]})`,
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+              }}
+            />
+          </div>
+          <div className="BigSlider__item">
+            <div
+              className="BigSlider__image"
+              style={{
+                backgroundImage: `url(${BASE_URL}/${banners[2]})`,
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+              }}
+            />
+          </div>
       </Slider>
     </div>
   );
