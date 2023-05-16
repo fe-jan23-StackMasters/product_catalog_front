@@ -9,14 +9,10 @@ export const PageNotFound = () => (
       </div>
       <div className="shadow"></div>
 
-      <h1 className='boo-title'>Whoops!</h1>
-      <p className='boo-text'>
-        it seems you got lost..
-      </p>
+      <h1 className="boo-title">Whoops!</h1>
+      <p className="boo-text">it seems you got lost..</p>
       <Link to={'/'}>
-        <button className='boo-button'>
-          Back to Home
-        </button>
+        <button className="boo-button">Back to Home</button>
       </Link>
     </div>
   </div>

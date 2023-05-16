@@ -4,6 +4,7 @@ import React from 'react';
 import { StorageProduct } from '../../types/StorageProduct';
 import { ActionBasket } from '../../types/ActionBasket';
 import { BASE_URL } from '../../api/requests';
+import { Link } from 'react-router-dom';
 
 type Props = {
   product: StorageProduct;
@@ -16,10 +17,11 @@ export const BasketCard: React.FC<Props> = ({
   handleRemovePhone,
   handleAddOrRemoveQuantity,
 }) => {
-  const { price, id, image } = product.info;
+  const { price, id, image, itemId, name } = product.info;
   const isDisableMin = product.quantity < 2;
   const isDisableMax = product.quantity > 9;
   const imageLink = `${BASE_URL}/${image}`;
+  const totalPrice = price * product.quantity;
 
   return (
     <div className="basket__card">
@@ -30,8 +32,14 @@ export const BasketCard: React.FC<Props> = ({
           className="basket__card-delete"
           onClick={() => handleRemovePhone(id)}
         />
-        <img src={imageLink} alt="iphone" className="basket__card-image" />
-        <span className="basket__card-title">{product.info.name}</span>
+
+        <Link to={`/phones/${itemId}`}>
+          <img src={imageLink} alt="iphone" className="basket__card-image" />
+        </Link>
+
+        <Link to={`/phones/${itemId}`} className="basket__card-title" >
+          <span className="basket__card-title">{name}</span>
+        </Link>
       </div>
 
       <div className="basket__card-bottom">
@@ -50,7 +58,7 @@ export const BasketCard: React.FC<Props> = ({
             disabled={isDisableMax}
           />
         </div>
-        <div className="basket__card-price">{`$${price}`}</div>
+        <div className="basket__card-price">{`$${totalPrice}`}</div>
       </div>
     </div>
   );

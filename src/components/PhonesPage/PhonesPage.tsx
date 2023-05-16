@@ -7,7 +7,7 @@ import './PhonesPage.scss';
 
 export const PhonesPage = () => (
   <Container>
-    <LinkLine to={'phones'} title={'Phones'} />
+    <LinkLine title={'Phones'} />
       <h1 className="phonesPage__header">Mobile phones</h1>
 
       <Pagination productType={ProductType.PHONE}/>
