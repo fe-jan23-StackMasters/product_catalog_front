@@ -4,6 +4,7 @@ import React from 'react';
 import { StoragePhone } from '../../types/StoragePhone';
 import { ActionBasket } from '../../types/ActionBasket';
 import { BASE_URL } from '../../api/requests';
+import { Link } from 'react-router-dom';
 
 type Props = {
   phone: StoragePhone;
@@ -16,10 +17,12 @@ export const BasketCard: React.FC<Props> = ({
   handleRemovePhone,
   handleAddOrRemoveQuantity,
 }) => {
-  const { price, id, image } = phone.product;
+  const { price, id, image, name, phoneId } = phone.product;
+  const { quantity } = phone;
   const isDisableMin = +phone.quantity < 2;
   const isDisableMax = +phone.quantity > 9;
   const imageLink = `${BASE_URL}/${image}`;
+  const totalPrice = price * +quantity;
 
   return (
     <div className="basket__card">
@@ -30,8 +33,14 @@ export const BasketCard: React.FC<Props> = ({
           className="basket__card-delete"
           onClick={() => handleRemovePhone(id)}
         />
-        <img src={imageLink} alt="iphone" className="basket__card-image" />
-        <span className="basket__card-title">{phone.product.name}</span>
+
+        <Link to={`/phones/${phoneId}`}>
+          <img src={imageLink} alt="iphone" className="basket__card-image" />
+        </Link>
+
+        <Link to={`/phones/${phoneId}`} className="basket__card-title" >
+          <span className="basket__card-title">{name}</span>
+        </Link>
       </div>
 
       <div className="basket__card-bottom">
@@ -42,7 +51,7 @@ export const BasketCard: React.FC<Props> = ({
             onClick={() => handleAddOrRemoveQuantity(id, 'delete')}
             disabled={isDisableMin}
           />
-          <span className="basket__card-count">{phone.quantity}</span>
+          <span className="basket__card-count">{quantity}</span>
           <button
             type="button"
             className="basket__card-plus"
@@ -50,7 +59,7 @@ export const BasketCard: React.FC<Props> = ({
             disabled={isDisableMax}
           />
         </div>
-        <div className="basket__card-price">{`$${price}`}</div>
+        <div className="basket__card-price">{`$${totalPrice}`}</div>
       </div>
     </div>
   );

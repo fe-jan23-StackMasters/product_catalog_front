@@ -4,18 +4,20 @@ import './DropDown.scss';
 
 type Props = {
   variables: string[];
-  returnedValue: any;
+  getValueFromDropDown: (value:string) => void;
   searchParam?: string | null;
+  defaultValue?: number;
 };
 
 export const DropDown: React.FC<Props> = ({
   variables,
-  returnedValue,
+  getValueFromDropDown,
   searchParam,
+  defaultValue = 0,
 }) => {
   const [positionDropDown, setPositionDropDown] = useState(false);
   const [stateDropDown, setStateDropDown] = useState(
-    searchParam || variables[0],
+    searchParam || variables[defaultValue],
   );
   const [isClicked, setIsClicked] = useState(false);
 
@@ -26,7 +28,7 @@ export const DropDown: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    returnedValue(stateDropDown);
+    getValueFromDropDown(stateDropDown);
     setIsClicked(false);
   }, [isClicked]);
 

@@ -19,7 +19,7 @@ export const Paginate: React.FC<Props> = ({
   setCurrentPage,
   pages,
 }) => {
-  const pageNumbers = [];
+  const pageNumbers: number[] = [];
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,6 +47,13 @@ export const Paginate: React.FC<Props> = ({
       setCurrentPage((prevPage) => prevPage + 1);
     }
   };
+
+  useEffect(() => {
+    if (!pageNumbers.includes(currentPage)) {
+      navigate(`./?page=1&perPage=${itemsPerPage}&sort=${sortBy}`);
+      setCurrentPage(1);
+    }
+  }, []);
 
   return (
     <>

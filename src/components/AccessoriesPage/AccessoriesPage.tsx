@@ -7,7 +7,7 @@ export const AccessoriesPage = () => {
         <div className="grid">
           <div className="grid__item grid__item--1-4 grid__item-tablet--1-12">
             <div className="accessories__header">
-              <LinkLine to={'accessories'} title={'Accessories'} />
+              <LinkLine title={'Accessories'} />
 
               <h1 className="accessories__title">Accessories for devices</h1>
 
