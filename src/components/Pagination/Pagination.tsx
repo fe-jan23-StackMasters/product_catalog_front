@@ -9,6 +9,7 @@ import { getProducts } from '../../api/requests';
 import { ProductType } from '../../types/ProductType';
 import { PhoneCard } from '../../types/PhoneCard';
 import { useCardsIds } from '../../helpers/hooks/hooks';
+import { ProductCardSkeleton } from '../ProductCardSkeleton';
 
 type RequestWithParamsResult = {
   pages: number;
@@ -42,6 +43,9 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
   let sortParam = sorts.find((by) => by.toString() === sort) || 'newest';
   let perPageParam = arrayOfItemsOnPage
     .find((by) => by.toString() === perPage) || '16';
+  const skeletons = Array.from({ length: Number(perPageParam) }, (_, index) => (
+    index + 1
+  ));
 
   useEffect(() => {
     const urlParams = locations.search;
@@ -157,7 +161,7 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
 
       <div className="phonesPage__pagination pagination">
         <div className="pagination__items">
-          {phones ? (
+          {phones !== undefined ? (
             phones.map((product) => (
               <ProductCard
                 product={product}
@@ -172,8 +176,10 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
                 favIds={favIds}
               />
             ))
-          ) : !isError ? (
-            <h2>Loading</h2>
+          ) : isLoading ? (
+            (skeletons).map((skeleton) => (
+              <ProductCardSkeleton key={skeleton}/>
+            ))
           ) : (
             <h2>Unable</h2>
           )}

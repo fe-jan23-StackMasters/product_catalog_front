@@ -55,7 +55,6 @@
   @include onDesktop {
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 40px;
   }
 
   &__title {
@@ -81,11 +80,6 @@
     height: 206px;
     padding: 24px;
     border: 1px solid $elements-color;
-    margin-bottom: 58px;
-
-    @include onTablet {
-      margin-bottom: 64px;
-    }
 
     @include onDesktop {
       width: 368px;
