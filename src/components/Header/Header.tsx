@@ -3,12 +3,11 @@ import { NavLink } from 'react-router-dom';
 import logoItem from '../../icons/niceGadgets.svg';
 import logoItemOk from '../../icons/Ok.svg';
 import menuOpener from '../../icons/Menu.svg';
-import favoritesRed from '../../icons/faqvoritesFilled.svg';
 import favoritesHart from '../../icons/favourites.svg';
 import shoppingBag from '../../icons/shoppingBag.svg';
 import { PageNavLink } from '../PageNavLink';
-import { useCardsIds } from '../../helpers/hooks/hooks';
 import classNames from 'classnames';
+import { useLocalStorageContext } from '../../context/StorageContext';
 
 const navList = ['home', 'phones', 'tablets', 'accessories'];
 
@@ -16,12 +15,13 @@ export type Props = {
   toggleMenu: () => void;
 };
 
-export const Header: FC<Props> = ({
-  toggleMenu,
-}) => {
-  const [cardIds] = useCardsIds('cart', []);
-  const [favIds] = useCardsIds('favourite', []);
+export const Header: FC<Props> = ({ toggleMenu }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+
+  const {
+    favorites,
+    cartItems,
+  } = useLocalStorageContext();
 
   useEffect(() => {
     const handleResize = () => {
@@ -72,70 +72,62 @@ export const Header: FC<Props> = ({
           )}
         </div>
 
-          {!isMobile ? (
-            <div className="header__buying-section">
-
-              <NavLink
-                to='/favourites'
-                className={({ isActive }) => classNames(
-                  'header__case',
-                  { 'header__case--is-active': isActive },
-                )}>
-              {(favIds.length > 0) ? (
-                <>
-                  <div className="header__count-position">
-                    <img
-                      src={favoritesRed}
-                      className="header__menu-opener_image"
-                      alt="menu"
-                    />
-                    <span className='header__shoping-bag-count'>
-                      {favIds.length}
-                    </span>
-                  </div>
-                </>
-              ) : (
+        {!isMobile ? (
+          <div className="header__buying-section">
+            <NavLink
+              to="/favourites"
+              className={({ isActive }) =>
+                classNames('header__case', {
+                  'header__case--is-active': isActive,
+                })
+              }
+            >
+              <div className="header__count-position">
                 <img
                   src={favoritesHart}
                   className="header__menu-opener_image"
                   alt="menu"
                 />
-              )}
+                <span className="header__shoping-bag-count">
+                  {favorites.length}
+                </span>
+              </div>
             </NavLink>
 
-              <NavLink
-                to='/cart'
-                className={({ isActive }) => classNames(
-                  'header__case',
-                  { 'header__case--is-active': isActive },
-                )}>
-                <div className="header__count-position">
-
-                  <img
-                    src={shoppingBag}
-                    className="header__menu-opener_image"
-                    alt="menu"
-                    />
-                  {cardIds.length > 0 && (
-                    <span className='header__shoping-bag-count'>
-                      {cardIds.length}
-                    </span>
-                  )}
-                </div>
-              </NavLink>
-            </div>
-          ) : (
-            <button
-              className="header__menu-button header__case"
-              onClick={toggleMenu}
+            <NavLink
+              to="/cart"
+              className={({ isActive }) =>
+                classNames('header__case', {
+                  'header__case--is-active': isActive,
+                })
+              }
             >
-              <img
-                className="header__menu-opener_image"
-                src={menuOpener}
-                alt="menu"
-              />
+              <div className="header__count-position">
+                <img
+                  src={shoppingBag}
+                  className="header__menu-opener_image"
+                  alt="menu"
+                />
+                {cartItems.length > 0 && (
+                  <span className="header__shoping-bag-count">
+                    {cartItems.length}
+                  </span>
+                )}
+              </div>
+            </NavLink>
+          </div>
+        ) : (
+          <button
+            className="header__menu-button header__case"
+            onClick={toggleMenu}
+          >
+            <img
+              className="header__menu-opener_image"
+              src={menuOpener}
+              alt="menu"
+            />
           </button>
-          )}
+        )}
       </div>
     </header>
   );

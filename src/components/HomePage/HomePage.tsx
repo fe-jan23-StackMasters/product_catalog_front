@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useCardsIds } from '../../helpers/hooks/hooks';
 import { PhoneCard } from '../../types/PhoneCard';
 import { BigSlider } from '../BigSlider/BigSlider';
 import { ShopBy } from '../ShopBy';
@@ -11,8 +10,6 @@ import { Container } from '../Container';
 export const HomePage = () => {
   const [newProducts, setNewProducts] = useState<PhoneCard[]>();
   const [hotProducts, setHotProducts] = useState<PhoneCard[]>();
-  const [cardIds, onCardToggle] = useCardsIds('cart', []);
-  const [favIds, onFavToggle] = useCardsIds('favourite', []);
 
   const { isError: isHotError, isLoading: isHotLoading } = useQuery({
     queryKey: ['hotProducts'],
@@ -44,10 +41,6 @@ export const HomePage = () => {
         <div className="HomePage__section">
           <HomeSlider
             title={'Brand new models'}
-            favIds={favIds}
-            cardIds={cardIds}
-            onCardToggle={onCardToggle}
-            onFavToggle={onFavToggle}
             products={newProducts || []}
             isLoading={isNewLoading}
             isError={isNewError}
@@ -61,10 +54,6 @@ export const HomePage = () => {
         <div className="HomePage__section">
           <HomeSlider
             title={'Hot prices'}
-            favIds={favIds}
-            cardIds={cardIds}
-            onCardToggle={onCardToggle}
-            onFavToggle={onFavToggle}
             products={hotProducts || []}
             isLoading={isHotLoading}
             isError={isHotError}

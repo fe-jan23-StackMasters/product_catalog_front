@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { PhoneCard } from '../../types/PhoneCard';
 
-interface StoragePhone {
+interface StorageProduct {
   id: string;
   quantity: string;
   product: PhoneCard;
 }
 
-export function useLocalStorage(key: string, initialValue: StoragePhone[]) {
+export function useLocalStorage(key: string, initialValue: StorageProduct[]) {
   const [value, setValue] = useState(() => {
     const storedValue = localStorage.getItem(key);
 
@@ -21,12 +21,12 @@ export function useLocalStorage(key: string, initialValue: StoragePhone[]) {
   return [value, setValue];
 }
 
-export function useCardsIds(key: string, initialValue: StoragePhone[]) {
+export function useCardsIds(key: string, initialValue: StorageProduct[]) {
   const [cardsIds, setCardsIds] = useLocalStorage(key, initialValue);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onCardToggle = (basket: any) => {
-    setCardsIds((prevState: StoragePhone[]) => {
+    setCardsIds((prevState: StorageProduct[]) => {
       if (prevState.find((device) => device.id === basket.id)) {
         const newState = prevState.filter((item) => item.id !== basket.id);
 

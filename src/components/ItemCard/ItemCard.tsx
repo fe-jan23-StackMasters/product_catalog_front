@@ -1,9 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { HomeSlider } from '../Slider/Slider';
-import { getDetailedInfo, getHot } from '../../api/requests';
+import { getDetailedInfo, getRecommenations } from '../../api/requests';
 import { FC, useEffect, useState } from 'react';
 import { PhoneCard } from '../../types/PhoneCard';
-import { useCardsIds } from '../../helpers/hooks/hooks';
 import { Phone } from '../../types/Phone';
 import { AddToCart } from '../AddToCartButton';
 import { AddToFavourites } from '../AddToFavouriteButton';
@@ -16,9 +15,7 @@ export const ItemCard: FC<Props> = ({
   product,
 }) => {
   const [item, setItem] = useState<Phone | null>(null);
-  const [hotProducts, setHotProducts] = useState<PhoneCard[]>();
-  const [cardIds, onCardToggle] = useCardsIds('cart', []);
-  const [favIds, onFavToggle] = useCardsIds('favourite', []);
+  const [recommendedProducts, setRecommendedProducts] = useState<PhoneCard[]>();
 
   useEffect(() => {
     getDetailedInfo(product.phoneId)
@@ -31,10 +28,10 @@ export const ItemCard: FC<Props> = ({
   }, [product.phoneId]);
 
   const { isError: isHotError, isLoading: isHotLoading } = useQuery({
-    queryKey: ['hotProducts'],
-    queryFn: () => getHot(),
+    queryKey: ['recommendedProducts'],
+    queryFn: () => getRecommenations(product.id),
     onSuccess(data) {
-      setHotProducts(data);
+      setRecommendedProducts(data);
     },
   });
 
@@ -87,17 +84,13 @@ export const ItemCard: FC<Props> = ({
 
           <div className="settings__add-buttons">
             <AddToCart
+              product={product}
               height="48px"
-              onCardAdd={onCardToggle}
-              id={product.id}
-              cardIds={cardIds}
             />
 
             <AddToFavourites
+              product={product}
               size="48px"
-              onFavouriteAdd={onFavToggle}
-              favIds={favIds}
-              id={product.id}
             />
           </div>
 
@@ -206,11 +199,7 @@ export const ItemCard: FC<Props> = ({
       grid__item-tablet--1-12 grid__item-desktop--1-24">
           <HomeSlider
             title={'You may also like'}
-            favIds={favIds}
-            cardIds={cardIds}
-            onCardToggle={onCardToggle}
-            onFavToggle={onFavToggle}
-            products={hotProducts || []}
+            products={recommendedProducts || []}
             isLoading={isHotLoading}
             isError={isHotError}
           />

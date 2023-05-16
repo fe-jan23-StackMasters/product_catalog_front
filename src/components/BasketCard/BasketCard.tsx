@@ -1,24 +1,24 @@
 import './BasketCard.scss';
 import deleteIcon from '../../icons/Close.svg';
 import React from 'react';
-import { StoragePhone } from '../../types/StoragePhone';
+import { StorageProduct } from '../../types/StorageProduct';
 import { ActionBasket } from '../../types/ActionBasket';
 import { BASE_URL } from '../../api/requests';
 
 type Props = {
-  phone: StoragePhone;
+  product: StorageProduct;
   handleRemovePhone: (phoneId: string) => void;
   handleAddOrRemoveQuantity: (phoneId: string, action: ActionBasket) => void;
 };
 
 export const BasketCard: React.FC<Props> = ({
-  phone,
+  product,
   handleRemovePhone,
   handleAddOrRemoveQuantity,
 }) => {
-  const { price, id, image } = phone.product;
-  const isDisableMin = +phone.quantity < 2;
-  const isDisableMax = +phone.quantity > 9;
+  const { price, id, image } = product.info;
+  const isDisableMin = product.quantity < 2;
+  const isDisableMax = product.quantity > 9;
   const imageLink = `${BASE_URL}/${image}`;
 
   return (
@@ -31,7 +31,7 @@ export const BasketCard: React.FC<Props> = ({
           onClick={() => handleRemovePhone(id)}
         />
         <img src={imageLink} alt="iphone" className="basket__card-image" />
-        <span className="basket__card-title">{phone.product.name}</span>
+        <span className="basket__card-title">{product.info.name}</span>
       </div>
 
       <div className="basket__card-bottom">
@@ -42,7 +42,7 @@ export const BasketCard: React.FC<Props> = ({
             onClick={() => handleAddOrRemoveQuantity(id, 'delete')}
             disabled={isDisableMin}
           />
-          <span className="basket__card-count">{phone.quantity}</span>
+          <span className="basket__card-count">{product.quantity}</span>
           <button
             type="button"
             className="basket__card-plus"

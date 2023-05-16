@@ -1,32 +1,45 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Button } from '../Button/Button';
 import classNames from 'classnames';
 import './add_to_cart_button.scss';
+import { useLocalStorageContext } from '../../context/StorageContext';
+import { PhoneCard } from '../../types/PhoneCard';
 
 interface Props {
   height: string;
-  onCardAdd: () => void;
-  id: string;
-  cardIds: string[];
+  product: PhoneCard;
 }
 
 export const AddToCart: React.FC<Props> = ({
   height,
-  onCardAdd,
-  id,
-  cardIds,
+  product,
 }) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const isAddedToCart = cardIds.some((el: any) => el.id === id);
+  const {
+    addToCart,
+    removeFromCart,
+    isAddedToCart,
+  } = useLocalStorageContext();
+
+  const isInCart = isAddedToCart(product.id);
+
+  const handleClick = useCallback(() => {
+    if (isInCart) {
+      removeFromCart(product.id);
+    } else {
+      addToCart({ info: product, quantity: 1 });
+    }
+  }, [isInCart]);
 
   return (
     <Button
       width="77%"
       height={`${height}`}
-      type={classNames('btn__add-to', { 'btn__add-to--added': isAddedToCart })}
-      handler={onCardAdd}
+      type={classNames('btn__add-to', {
+        'btn__add-to--added': isInCart,
+      })}
+      handler={handleClick}
     >
-      {isAddedToCart ? 'Added' : 'Add to cart'}
+      {isInCart ? 'Added' : 'Add to cart'}
     </Button>
   );
 };
