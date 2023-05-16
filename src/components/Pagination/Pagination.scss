@@ -51,7 +51,7 @@ html {
     justify-content: center;
     list-style: none;
     padding: 0;
-    margin: 24px 0 80px;
+    margin-top: 24px;
 
     @include onTablet {
       margin-top: 40px;
