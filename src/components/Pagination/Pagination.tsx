@@ -8,7 +8,6 @@ import { useSearchParams, useLocation, useNavigate } from 'react-router-dom';
 import { getProducts } from '../../api/requests';
 import { ProductType } from '../../types/ProductType';
 import { PhoneCard } from '../../types/PhoneCard';
-import { useCardsIds } from '../../helpers/hooks/hooks';
 import { ProductCardSkeleton } from '../ProductCardSkeleton';
 import { PriceSlider } from '../PriceSlider';
 import { useDebounce } from 'use-debounce';
@@ -30,15 +29,12 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
   const [itemsPerPage, setItemsPerPage] = useState('16');
   const [sortBy, setSortBy] = useState<SortBy>(SortBy.NEW);
   const [productInfo, setProductInfo] = useState<RequestWithParamsResult>();
-  const [cardIds, onCardToggle] = useCardsIds('cart', []);
-  const [favIds, onFavToggle] = useCardsIds('favourite', []);
   const sorts = [SortBy.NAME, SortBy.NEW, SortBy.OLD, SortBy.HIGHT, SortBy.LOW];
   const arrayOfItemsOnPage = ['8', '16', '32', '64'];
   const [searchParams] = useSearchParams();
   const phones = productInfo?.products;
   const navigate = useNavigate();
   const locations = useLocation();
-  const quantity = '1';
   const sort = searchParams.get('sort');
   const perPage = searchParams.get('perPage');
   const page = searchParams.get('page');
@@ -210,14 +206,6 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
               <ProductCard
                 product={product}
                 key={product.id}
-                onCardAdd={() =>
-                  onCardToggle({ id: product.id, quantity, product: product })
-                }
-                onFavouriteAdd={() =>
-                  onFavToggle({ id: product.id, quantity, product: product })
-                }
-                cardIds={cardIds}
-                favIds={favIds}
               />
             ))
           ) : isLoading ? (

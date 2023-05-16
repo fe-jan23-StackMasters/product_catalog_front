@@ -85,11 +85,10 @@
     text-decoration: none;
     font-family: 'Mont';
     font-size: 9px;
-    line-height: 11px;
+    line-height: 0;
     color: $white-color;
 
     @include square(14px);
-    padding: 3px;
 
     background-color: $red-color;
     border: $black-color 1px solid;
