@@ -15,7 +15,7 @@ export const ItemCard = () => {
   const [recommendedProducts, setRecommendedProducts] = useState<PhoneCard[]>();
 
   const location = useLocation();
-  const productId = location.pathname[2];
+  const productId = location.pathname.split('/')[2];
 
   useEffect(() => {
     getDetailedInfo(productId)
@@ -57,7 +57,7 @@ export const ItemCard = () => {
             <div className="settings__container">
               <div className="settings__container-colors">
                 <p className="settings__title">Available colors</p>
-                <p className="settings__title">ID: 1234567</p>
+                <p className="settings__title">{`ID: ${item?.productId}`}</p>
               </div>
 
               <div className="settings__colors">
