@@ -40,17 +40,32 @@
   margin-bottom: 32px;
 }
 
+.backLink {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  text-decoration: none;
+  margin-bottom: 16px;
+
+  color: $secondary-color;
+
+  &:hover {
+    color: $white-color;
+  }
+
+  &__image {
+    margin-right: 10px;
+  }
+}
+
 .basket {
   display: flex;
   flex-direction: column;
   font-family: 'Mont';
   font-style: normal;
   color: $white-color;
-  padding: 0 16px;
-
-  @include onTablet {
-    padding: 0 24px;
-  }
 
   @include onDesktop {
     flex-direction: row;

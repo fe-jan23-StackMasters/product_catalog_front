@@ -23,12 +23,16 @@ export const getProducts = async(
   page?: number,
   productType?: ProductType[],
   sortBy?: SortBy,
+  priceMin?: number,
+  priceMax?: number,
 ): Promise<RequestWithParamsResult> => {
   const query = [];
 
   if (perPage) query.push(`perPage=${perPage}`);
   if (page) query.push(`page=${page}`);
   if (sortBy) query.push(`sortBy=${sortBy}`);
+  if (priceMin) query.push(`priceMin=${priceMin}`);
+  if (priceMax) query.push(`priceMax=${priceMax}`);
 
   if (productType) {
     productType.forEach((category) => query.push(`productType=${category}`));
