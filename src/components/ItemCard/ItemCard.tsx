@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { HomeSlider } from '../Slider/Slider';
+import { HomeSlider } from '../Slider';
 import { getDetailedInfo, getRecommenations } from '../../api/requests';
 import { useEffect, useState } from 'react';
 import { PhoneCard } from '../../types/PhoneCard';

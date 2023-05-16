@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { PhoneCard } from '../../types/PhoneCard';
-import { BigSlider } from '../BigSlider/BigSlider';
+import { BigSlider } from '../BigSlider';
 import { ShopBy } from '../ShopBy';
-import { HomeSlider } from '../Slider/Slider';
+import { HomeSlider } from '../Slider';
 import { useQuery } from '@tanstack/react-query';
 import { getHot, getNew } from '../../api/requests';
 import { Container } from '../Container';
