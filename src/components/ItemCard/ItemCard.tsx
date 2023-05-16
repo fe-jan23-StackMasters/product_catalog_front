@@ -7,7 +7,6 @@ import { useCardsIds } from '../../helpers/hooks/hooks';
 import { Phone } from '../../types/Phone';
 import { AddToCart } from '../AddToCartButton';
 import { AddToFavourites } from '../AddToFavouriteButton';
-import './itemCard.scss';
 
 interface Props {
   product: PhoneCard;

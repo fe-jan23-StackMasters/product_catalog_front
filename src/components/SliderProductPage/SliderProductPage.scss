@@ -1,0 +1,67 @@
+@import '../../styles/utils/mixins';
+
+.slick {
+  &-slider {
+    @include onTablet {
+      display: flex !important;
+      flex-direction: row-reverse;
+    }
+  }
+
+  &__soloSlider {
+    &-item {
+      display: flex !important;
+      align-items: center;
+      justify-content: flex-start;
+
+      .picture {
+        width: 100%;
+
+        @include onTablet {
+          max-width: 274px;
+          max-height: 274px;
+        }
+
+        @include onDesktop {
+          max-width: 442px;
+          max-height: 442px;
+        }
+      }
+    }
+  }
+
+  &__point {
+    width: 43px;
+    height: 43px;
+  }
+
+  &-dots {
+    position: relative;
+    display: flex !important;
+    justify-content: space-around;
+
+    @include onTablet {
+      flex-direction: column;
+      justify-content: flex-start;
+      bottom: 0px
+    }
+    .slick-active {
+      opacity: 1;
+    }
+
+    & li {
+      height: auto;
+      width: 50px;
+      border: solid 1px white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 4px;
+      opacity: 0.5;
+
+      @include onTablet {
+        margin-top: 8px;
+      }
+    }
+  }
+}

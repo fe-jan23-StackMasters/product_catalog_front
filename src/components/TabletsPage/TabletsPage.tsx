@@ -1,4 +1,5 @@
 import { LinkLine } from '../LinkLine';
+import { SliderProductPage } from '../SliderProductPage/SliderProductPage';
 
 export const TabletsPage = () => {
   return (
@@ -17,6 +18,7 @@ export const TabletsPage = () => {
           </div>
         </div>
       </div>
+      <SliderProductPage />
     </section>
   );
 };
