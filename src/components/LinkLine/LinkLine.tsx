@@ -5,21 +5,20 @@ import rightArrov from '../../icons/arrowRight.svg';
 import './LinkLine.scss';
 
 interface Props {
-  to: string;
   title: string;
 }
 
-export const LinkLine: FC<Props> = ({ to, title }) => {
+export const LinkLine: FC<Props> = ({ title }) => {
   return (
     <div className="accessories__links">
       <NavLink to="/" className="accessories__link">
         <img className="accessories__arrow" src={home} alt="home" />
       </NavLink>
 
-      <NavLink to={`/${to}`} className="accessories__link">
+      <span className="accessories__link">
         <img className="accessories__arrow" src={rightArrov} alt="right" />
         {title}
-      </NavLink>
+      </span>
     </div>
   );
 };

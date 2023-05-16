@@ -45,6 +45,7 @@
     width: 66px;
     height: 66px;
     margin-right: 22px;
+    object-fit: contain;
 
     @include onTablet {
       margin-right: 32px;
@@ -55,6 +56,8 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 21px;
+    color: $white-color;
+    text-decoration: none;
   }
 
   &-bottom {
@@ -103,9 +106,14 @@
   }
 
   &-count {
+    width: 32px;
+    text-align: center;
     font-weight: 600;
     font-size: 14px;
     line-height: 21px;
-    margin: 0 14px;
+  }
+
+  &-price {
+    width: 42px;
   }
 }

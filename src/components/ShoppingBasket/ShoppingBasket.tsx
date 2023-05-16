@@ -5,8 +5,8 @@ import './ShoppingBasket.scss';
 import { StoragePhone } from '../../types/StoragePhone';
 import { ActionBasket } from '../../types/ActionBasket';
 import { Container } from '../Container';
-import { NavLink } from 'react-router-dom';
-import { LinkLine } from '../LinkLine';
+import { Link, NavLink } from 'react-router-dom';
+import leftArrov from '../../icons/arrowLeft.svg';
 
 export const ShoppingBasket = () => {
   const [phones, setPhones] = useState<StoragePhone[]>([]);
@@ -52,8 +52,13 @@ export const ShoppingBasket = () => {
 
   return (
     <Container>
-      <LinkLine to={'home'} title={'Back'} />
+      <Link to="/home" className="backLink" >
+        <img className="backLink__image" src={leftArrov} alt="left" />
+        Back
+      </Link>
+
       <h1 className="title">Cart</h1>
+
       {!totalItems ? (
         <Container>
           <h2 className="basket__title">Ooops... Your basket is empty</h2>

@@ -1,27 +1,43 @@
 @import '../../styles/variables.scss';
+@import '../../styles/utils/mixins';
 
 .css-53tbrc-MuiSlider-root {
   width: 50% !important;
+  color: $accent-color !important;
+}
+
+.css-1623zc {
+  width: 50% !important;
+  color: $accent-color !important;
 }
 
 .css-lbpym0-MuiSlider-root {
   width: 50% !important;
+  color: $accent-color !important;
 }
 
 .filterPrice {
   position: relative;
   align-items: center;
-  width: 310px;
+  width: 288px;
   height: 40px;
   padding: 5px;
-  background: $surface1-color;
+  background-color: $surface2-color;
   border: 1px solid $elements-color;
+
+  @include onTablet {
+    width: 260px;
+  }
 
   &__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: $white-color;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 21px;
   }
 
   &__value {

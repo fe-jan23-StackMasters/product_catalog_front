@@ -5,6 +5,20 @@ html {
   background-color: #0f1121;
 }
 
+.phonesPage__priceSlider {
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  color: $secondary-color;
+  margin-bottom: 24px;
+
+  @include onTablet {
+    align-items: start;
+  }
+}
+
 .pagination {
   display: flex;
   flex-direction: column;
