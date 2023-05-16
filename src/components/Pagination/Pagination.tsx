@@ -9,6 +9,7 @@ import { getProducts } from '../../api/requests';
 import { ProductType } from '../../types/ProductType';
 import { PhoneCard } from '../../types/PhoneCard';
 import { useCardsIds } from '../../helpers/hooks/hooks';
+import { PriceSlider } from '../PriceSlider';
 
 type RequestWithParamsResult = {
   pages: number;
@@ -127,6 +128,8 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
     sortParam = returnedValue;
   };
 
+  const windowWidth = window.innerWidth;
+
   return (
     <>
       <div className="phonesPage__modelsCount">
@@ -153,7 +156,21 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
             defaultValue={1}
           />
         </div>
+
+        {windowWidth > 670 && (
+          <div className="phonesPage__priceSlider">
+            Price
+            <PriceSlider />
+          </div>
+        )}
       </div>
+
+      {windowWidth <= 670 && (
+        <div className="phonesPage__priceSlider">
+          Price
+          <PriceSlider />
+        </div>
+      )}
 
       <div className="phonesPage__pagination pagination">
         <div className="pagination__items">

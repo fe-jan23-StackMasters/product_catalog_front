@@ -3,15 +3,11 @@ import './ProductCardSkeleton.scss';
 export const ProductCardSkeleton = () => {
   return (
     <div className="card-skeleton">
-      <div
-        className='card-skeleton__link'
-      >
-        <div
-          className="card-skeleton__image"
-        />
+      <div className="card-skeleton__link">
+        <div className="card-skeleton__image" />
 
-        <div className="card-skeleton__title card-skeleton__title--1"/>
-        <div className="card-skeleton__title card-skeleton__title--2"/>
+        <div className="card-skeleton__title card-skeleton__title--1" />
+        <div className="card-skeleton__title card-skeleton__title--2" />
       </div>
 
       <div className="card-skeleton__prices" />
@@ -26,11 +22,11 @@ export const ProductCardSkeleton = () => {
         </div>
 
         <div className="card-skeleton__charact-values">
-          <div className="card-skeleton__charact-value"/>
+          <div className="card-skeleton__charact-value" />
 
-          <div className="card-skeleton__charact-value"/>
+          <div className="card-skeleton__charact-value" />
 
-          <div className="card-skeleton__charact-value"/>
+          <div className="card-skeleton__charact-value" />
         </div>
       </div>
 
