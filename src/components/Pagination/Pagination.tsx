@@ -8,7 +8,9 @@ import { useSearchParams, useLocation, useNavigate } from 'react-router-dom';
 import { getProducts } from '../../api/requests';
 import { ProductType } from '../../types/ProductType';
 import { PhoneCard } from '../../types/PhoneCard';
+import { ProductCardSkeleton } from '../ProductCardSkeleton';
 import { PriceSlider } from '../PriceSlider';
+import { useDebounce } from 'use-debounce';
 
 type RequestWithParamsResult = {
   pages: number;
@@ -36,9 +38,26 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
   const sort = searchParams.get('sort');
   const perPage = searchParams.get('perPage');
   const page = searchParams.get('page');
+  // const priceMinFromUrl = searchParams.get('priceMin');
+  // const priceMaxFromUrl = searchParams.get('priceMax');
   let sortParam = sorts.find((by) => by.toString() === sort) || 'newest';
   let perPageParam = arrayOfItemsOnPage
     .find((by) => by.toString() === perPage) || '16';
+  const skeletons = Array.from({ length: Number(perPageParam) }, (_, index) => (
+    index + 1
+  ));
+
+  const [range, setRange] = useState<number | number[]>([0, 5000]);
+  // eslint-disable-next-line no-unused-vars
+  const [value] = useDebounce(range, 600);
+  const handleChangeFilterPrice = (
+    _event: Event, newValue: number | number[],
+  ) => {
+    setRange(newValue);
+  };
+
+  const priceMin = Array.isArray(range) ? range[0] : 0;
+  const priceMax = Array.isArray(range) ? range[1] : 5000;
 
   useEffect(() => {
     const urlParams = locations.search;
@@ -80,6 +99,8 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
           currentPage,
           [productType],
           sortBy,
+          priceMin,
+          priceMax,
         );
 
         setProductInfo(dataFromServer);
@@ -89,17 +110,17 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
         setIsLoading(false);
       }
     })();
-  }, [itemsPerPage, sortBy, currentPage]);
+  }, [itemsPerPage, sortBy, currentPage, priceMax, priceMin]);
 
   const handlerDropdownItemPerPage = (returnedValue: string) => {
     if (currentPage !== 1) {
-      navigate(`./?page=1&perPage=${returnedValue}&sort=${sort || SortBy.NEW}`);
+      navigate(`./?page=1&perPage=${returnedValue}&sort=${sort || SortBy.NEW}&priceMin=${priceMin || 0}&priceMax=${priceMax || 5000}`);
       setCurrentPage(1);
     } else {
       navigate(
         `./?page=${page || '1'}&perPage=${returnedValue}&sort=${
           sort || SortBy.NEW
-        }`,
+        }&priceMin=${priceMin || 0}&priceMax=${priceMax || 5000}`,
       );
     }
 
@@ -110,10 +131,12 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
 
   const handlerDropdownSortBy = (returnedValue: string) => {
     if (currentPage !== 1) {
-      navigate(`./?page=1&perPage=${perPage}&sort=${returnedValue}`);
+      navigate(`
+        ./?page=1&perPage=${perPage}&sort=${returnedValue}&priceMin=${priceMin || 0}&priceMax=${priceMax || 5000}
+      `);
       setCurrentPage(1);
     } else {
-      navigate(`./?page=${page}&perPage=${perPage}&sort=${returnedValue}`);
+      navigate(`./?page=${page}&perPage=${perPage}&sort=${returnedValue}&priceMin=${priceMin || 0}&priceMax=${priceMax || 5000}`);
     }
 
     searchParams.set('sort', returnedValue);
@@ -153,32 +176,42 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
           />
         </div>
 
-        {windowWidth > 670 && (
+        {windowWidth >= 640 && (
           <div className="phonesPage__priceSlider">
             Price
-            <PriceSlider />
+            <PriceSlider
+            priceMin={priceMin}
+            priceMax={priceMax}
+            handleChangeFilterPrice={handleChangeFilterPrice}
+          />
           </div>
         )}
       </div>
 
-      {windowWidth <= 670 && (
+      {windowWidth < 640 && (
         <div className="phonesPage__priceSlider">
           Price
-          <PriceSlider />
+          <PriceSlider
+            priceMin={priceMin}
+            priceMax={priceMax}
+            handleChangeFilterPrice={handleChangeFilterPrice}
+          />
         </div>
       )}
 
       <div className="phonesPage__pagination pagination">
         <div className="pagination__items">
-          {phones ? (
+          {phones !== undefined ? (
             phones.map((product) => (
               <ProductCard
                 product={product}
                 key={product.id}
               />
             ))
-          ) : !isError ? (
-            <h2>Loading</h2>
+          ) : isLoading ? (
+            (skeletons).map((skeleton) => (
+              <ProductCardSkeleton key={skeleton}/>
+            ))
           ) : (
             <h2>Unable</h2>
           )}

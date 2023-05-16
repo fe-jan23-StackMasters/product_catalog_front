@@ -3,22 +3,31 @@
 
 .css-53tbrc-MuiSlider-root {
   width: 50% !important;
+  color: $accent-color !important;
+}
 
-  // @include onTablet {}
+.css-1623zc {
+  width: 50% !important;
+  color: $accent-color !important;
 }
 
 .css-lbpym0-MuiSlider-root {
   width: 50% !important;
+  color: $accent-color !important;
 }
 
 .filterPrice {
   position: relative;
   align-items: center;
-  width: 284px;
+  width: 288px;
   height: 40px;
   padding: 5px;
   background-color: $surface2-color;
   border: 1px solid $elements-color;
+
+  @include onTablet {
+    width: 260px;
+  }
 
   &__container {
     display: flex;

@@ -23,7 +23,7 @@
     }
   }
 
-  &__section {
+  &__section:not(:last-child) {
     margin-bottom: 57px;
 
     @include onTablet {
