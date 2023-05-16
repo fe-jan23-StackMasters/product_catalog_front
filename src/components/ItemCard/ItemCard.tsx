@@ -1,34 +1,33 @@
 import { useQuery } from '@tanstack/react-query';
 import { HomeSlider } from '../Slider/Slider';
 import { getDetailedInfo, getHot } from '../../api/requests';
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PhoneCard } from '../../types/PhoneCard';
 import { useCardsIds } from '../../helpers/hooks/hooks';
 import { Phone } from '../../types/Phone';
 import { AddToCart } from '../AddToCartButton';
 import { AddToFavourites } from '../AddToFavouriteButton';
+import './itemCard.scss';
 
-interface Props {
-  product: PhoneCard;
-}
-
-export const ItemCard: FC<Props> = ({
-  product,
-}) => {
+export const ItemCard = () => {
   const [item, setItem] = useState<Phone | null>(null);
   const [hotProducts, setHotProducts] = useState<PhoneCard[]>();
   const [cardIds, onCardToggle] = useCardsIds('cart', []);
   const [favIds, onFavToggle] = useCardsIds('favourite', []);
 
+  const url = window.location.href;
+  const parts = url.split('/');
+  const phoneId = parts[parts.length - 1];
+
   useEffect(() => {
-    getDetailedInfo(product.phoneId)
+    getDetailedInfo(phoneId)
       .then((data) => {
         setItem(data as Phone);
       })
       .catch((error) => {
         throw new Error(error);
       });
-  }, [product.phoneId]);
+  }, [phoneId]);
 
   const { isError: isHotError, isLoading: isHotLoading } = useQuery({
     queryKey: ['hotProducts'],
@@ -89,7 +88,7 @@ export const ItemCard: FC<Props> = ({
             <AddToCart
               height="48px"
               onCardAdd={onCardToggle}
-              id={product.id}
+              id={phoneId}
               cardIds={cardIds}
             />
 
@@ -97,7 +96,7 @@ export const ItemCard: FC<Props> = ({
               size="48px"
               onFavouriteAdd={onFavToggle}
               favIds={favIds}
-              id={product.id}
+              id={phoneId}
             />
           </div>
 

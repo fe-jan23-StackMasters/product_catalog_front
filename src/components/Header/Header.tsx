@@ -42,14 +42,12 @@ export const Header: FC<Props> = ({
     <header className="header">
       <div className="header__content">
         <div className="header__right-side">
-          {isMobile && (
+          {isMobile ? (
             <NavLink to="/" className="logo">
               <img className="logo__image" src={logoItem} alt="Logo icon" />
               <img className="logo__ok" src={logoItemOk} alt="ok" />
             </NavLink>
-          )}
-
-          {!isMobile && (
+          ) : (
             <nav className="header__nav nav" hidden={isMobile}>
               <ul className="nav__panel">
                 <li className="nav__item">
@@ -68,6 +66,8 @@ export const Header: FC<Props> = ({
                   </li>
                 ))}
               </ul>
+              <input type="search"
+            className="searchInput" placeholder="Search products..." />
             </nav>
           )}
         </div>
