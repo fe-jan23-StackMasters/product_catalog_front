@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import classNames from 'classnames';
 import { ArrowLeft } from '../Arrows/ArrowLeft';
 import { ArrowRigth } from '../Arrows/ArrowRight';
-import { useSearchParams, Link, useLocation } from 'react-router-dom';
+// import { useSearchParams, Link, useLocation } from 'react-router-dom';
 
 interface Props {
   itemsPerPage: number;
@@ -24,13 +24,13 @@ export const Paginate: React.FC<Props> = ({
   priceMax,
 }) => {
   const pageNumbers: number[] = [];
-  const [searchParams, setSearchParams] = useSearchParams();
-  const locations = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const page = parseInt(queryParams.get('page')) || 1;
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // const locations = useLocation();
+  // const queryParams = new URLSearchParams(location.search);
+  // const page = parseInt(queryParams.get('page')) || 1;
 
-  const params = Object.fromEntries(searchParams.entries());
-  const queryString = new URLSearchParams(params).toString();
+  // const params = Object.fromEntries(searchParams.entries());
+  // const queryString = new URLSearchParams(params).toString();
 
   // const navigate = useNavigate();
 
@@ -49,8 +49,8 @@ export const Paginate: React.FC<Props> = ({
       //     sortBy}&priceMin=${priceMin}&priceMax=${priceMax}`,
       // );
       setCurrentPage((prevPage) => prevPage - 1);
-      searchParams.set('page', currentPage - 1 + '');
-      setSearchParams(searchParams);
+      // searchParams.set('page', currentPage - 1 + '');
+      // setSearchParams(searchParams);
     }
   };
 
@@ -61,8 +61,8 @@ export const Paginate: React.FC<Props> = ({
       //     sortBy}&priceMin=${priceMin}&priceMax=${priceMax}`,
       // );
       setCurrentPage((prevPage) => prevPage + 1);
-      searchParams.set('page', currentPage + 1 + '');
-      setSearchParams(searchParams);
+      // searchParams.set('page', currentPage + 1 + '');
+      // setSearchParams(searchParams);
     }
   };
 
@@ -70,8 +70,8 @@ export const Paginate: React.FC<Props> = ({
     if (!pageNumbers.includes(currentPage)) {
       // navigate(`./?page=1&perPage=${itemsPerPage}&sort=${
       //   sortBy}&priceMin=${priceMin}&priceMax=${priceMax}`);
-      searchParams.set('page', '1');
-      setSearchParams(searchParams);
+      // searchParams.set('page', '1');
+      // setSearchParams(searchParams);
       setCurrentPage(1);
     }
   }, []);
@@ -93,20 +93,20 @@ export const Paginate: React.FC<Props> = ({
             })}
             key={num}
           >
-            <Link
-              to={{
-                pathname: '',
-                search: locations.search.includes('page') ? locations.search.split(`page=${currentPage}`).join(`page=${num}`) : locations.search + `page=${num}`, // Передача текущих параметров поиска
-              }}
+            <div
+              // to={{
+              //   pathname: '',
+              //   search: locations.search.includes('page') ? locations.search.split(`page=${currentPage}`).join(`page=${num}`) : locations.search + `page=${num}`, // Передача текущих параметров поиска
+              // }}
               className="pagination__link"
               onClick={() => {
-                searchParams.set('page', num.toString());
-                setSearchParams(searchParams);
+                // searchParams.set('page', num.toString());
+                // setSearchParams(searchParams);
                 setCurrentPage(num);
               }}
             >
               {num}
-            </Link>
+            </div>
           </li>
         ))}
 

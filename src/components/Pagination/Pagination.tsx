@@ -4,7 +4,7 @@ import { Paginate } from './PageSelector';
 import { ProductCard } from '../ProductCard';
 import { DropDown } from '../DropDown/DropDown';
 import { SortBy } from '../../types/SortBy';
-import { useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams, useLocation, useNavigate } from 'react-router-dom';
 import { getProducts } from '../../api/requests';
 import { ProductType } from '../../types/ProductType';
 import { PhoneCard } from '../../types/PhoneCard';
@@ -33,7 +33,7 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
   const arrayOfItemsOnPage = ['8', '16', '32', '64'];
   const [searchParams, setSearchParams] = useSearchParams();
   const phones = productInfo?.products;
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const locations = useLocation();
   const sort = searchParams.get('sort');
   const perPage = searchParams.get('perPage');
@@ -50,6 +50,7 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
   );
 
   const [range, setRange] = useState<number | number[]>([0, 5000]);
+
 
   const handleChangeFilterPrice = (
     _event: Event,
@@ -115,6 +116,7 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
 
         searchParams.set('priceMin', priceMin + '');
         searchParams.set('priceMax', priceMax + '');
+        setSearchParams(searchParams);
       }
 
       setIsFirstRender(false);
@@ -172,10 +174,34 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
 
   useEffect(() => {
     getDataFromServer();
-  }, [itemsPerPage, sortBy, currentPage]);
+  }, [itemsPerPage, sortBy]);
+
+  useEffect(() => {
+    if (currentPage === 1) {
+      searchParams.delete('page');
+
+      // if (!isFirstRender) {
+      //   setSearchParams(searchParams);
+      // }
+    } else {
+      searchParams.set('page', currentPage + '');
+      // setSearchParams({ page: currentPage.toString() });
+    }
+
+    getDataFromServer();
+  }, [currentPage]);
+
+  console.log(page)
+
+  useEffect(() => {
+    if (page) {
+      setCurrentPage(+page);
+    } else {
+      setCurrentPage(1);
+    }
+  }, [page]);
 
   const handlerDropdownItemPerPage = (returnedValue: string) => {
-    if (currentPage !== 1) {
     //   navigate(
     //     `./?page=1&perPage=${returnedValue}&sort=${
     //       sort || SortBy.NEW
@@ -188,16 +214,20 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
     //       sort || SortBy.NEW
     //     }&priceMin=${priceMin || 0}&priceMax=${priceMax || 5000}`,
     //   );
-    }
 
     searchParams.set('perPage', returnedValue);
+
     setItemsPerPage(returnedValue);
     perPageParamValidator = returnedValue;
-    setSearchParams(searchParams);
+
+    if (currentPage !== 1) {
+      setCurrentPage(1);
+    } else {
+      setSearchParams(searchParams);
+    }
   };
 
   const handlerDropdownSortBy = (returnedValue: string) => {
-    // if (currentPage !== 1) {
     //   navigate(`./?page=1&perPage=${perPage}&sort=${
     // returnedValue}&priceMin=${priceMin || 0}&priceMax=${priceMax || 5000}`);
     //   setCurrentPage(1);
@@ -207,7 +237,6 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
     //       priceMin || 0
     //     }&priceMax=${priceMax || 5000}`,
     //   );
-    // }
 
     searchParams.set('sort', returnedValue);
 
@@ -216,7 +245,11 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
     sortParamValidator = returnedValue;
 
     // if (!isFirstRender) {
-    setSearchParams(searchParams);
+    if (currentPage !== 1) {
+      setCurrentPage(1);
+    } else {
+      setSearchParams(searchParams);
+    }
     // }
   };
 
