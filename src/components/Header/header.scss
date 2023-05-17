@@ -96,15 +96,15 @@
     position: absolute;
     @include squareForPosition(7.5px);
   }
+
+  &__menu-container {
+    display: flex;
+  }
 }
 
 .logo {
   position: relative;
   margin-left: 16px;
-
-  @include onTablet {
-    margin-left: 0;
-  }
 
   &__image {
     position: relative;

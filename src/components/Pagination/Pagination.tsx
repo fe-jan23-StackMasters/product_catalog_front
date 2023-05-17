@@ -97,20 +97,16 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
 
       if (!isFirstRender) {
         navigate(
-          `./?page=1&perPage=${perPage}&sort=${sort}&priceMin=${
-            priceMin
-          }&priceMax=${priceMax}`,
+          `./?page=1&perPage=${perPage}&sort=${sort}&priceMin=${priceMin}&priceMax=${priceMax}`,
         );
         setCurrentPage(1);
       } else {
-        if ((!page || !productInfo?.pages) || (productInfo?.pages < +page)) {
+        if (!page || !productInfo?.pages || productInfo?.pages < +page) {
           setCurrentPage(1);
         }
 
         navigate(
-          `./?page=${page}&perPage=${perPage}&sort=${sort}&priceMin=${
-            priceMin
-          }&priceMax=${priceMax}`,
+          `./?page=${page}&perPage=${perPage}&sort=${sort}&priceMin=${priceMin}&priceMax=${priceMax}`,
         );
       }
 
@@ -194,7 +190,11 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
 
   const handlerDropdownSortBy = (returnedValue: string) => {
     if (currentPage !== 1) {
-      navigate(`./?page=1&perPage=${perPage}&sort=${returnedValue}&priceMin=${priceMin || 0}&priceMax=${priceMax || 5000}`);
+      navigate(
+        `./?page=1&perPage=${perPage}&sort=${returnedValue}&priceMin=${
+          priceMin || 0
+        }&priceMax=${priceMax || 5000}`,
+      );
       setCurrentPage(1);
     } else {
       navigate(
@@ -254,28 +254,30 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
       </div>
 
       {windowWidth < 640 && (
-        <div className="phonesPage__priceSlider">
-          Price
-          <PriceSlider
-            priceMin={priceMin}
-            priceMax={priceMax}
-            handleChangeFilterPrice={handleChangeFilterPrice}
-          />
+        <>
+          <div className="phonesPage__priceSlider">
+            <span className="phonesPage__priceSlider-title" >Price</span>
+            <PriceSlider
+              priceMin={priceMin}
+              priceMax={priceMax}
+              handleChangeFilterPrice={handleChangeFilterPrice}
+            />
         </div>
+        </>
       )}
 
       <div className="phonesPage__pagination pagination">
         <div className="pagination__items">
           {isLoading ? (
             skeletons.map((skeleton) => <ProductCardSkeleton key={skeleton} />)
-          ) : phones !== undefined ? (phones.length === 0
-            ? (<h2>There is nothing</h2>)
-            : phones.map((product) => (
-              <ProductCard
-                product={product}
-                key={product.id}
-              />
-            ))
+          ) : phones !== undefined ? (
+            phones.length === 0 ? (
+              <h2>There is nothing</h2>
+            ) : (
+              phones.map((product) => (
+                <ProductCard product={product} key={product.id} />
+              ))
+            )
           ) : (
             <h2>Unable to load data</h2>
           )}

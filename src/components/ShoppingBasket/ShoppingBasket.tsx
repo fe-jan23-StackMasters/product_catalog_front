@@ -7,11 +7,7 @@ import leftArrov from '../../icons/arrowLeft.svg';
 import { useLocalStorageContext } from '../../context/StorageContext';
 
 export const ShoppingBasket = () => {
-  const {
-    totalPrice,
-    totalQuantity,
-    cartItems,
-  } = useLocalStorageContext();
+  const { totalPrice, totalQuantity, cartItems } = useLocalStorageContext();
 
   return (
     <Container>
@@ -22,7 +18,7 @@ export const ShoppingBasket = () => {
 
       <h1 className="title">Cart</h1>
 
-      {!cartItems ? (
+      {!cartItems.length ? (
         <Container>
           <h2 className="basket__title">Ooops... Your basket is empty</h2>
 
@@ -36,10 +32,7 @@ export const ShoppingBasket = () => {
         <div className="basket">
           <div className="basket__cards">
             {cartItems.map((product) => (
-              <BasketCard
-                key={product.info.id}
-                product={product}
-              />
+              <BasketCard key={product.info.id} product={product} />
             ))}
           </div>
 

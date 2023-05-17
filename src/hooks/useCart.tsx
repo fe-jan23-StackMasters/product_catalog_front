@@ -3,20 +3,21 @@ import { StorageProduct } from '../types/StorageProduct';
 import { useCallback, useMemo } from 'react';
 
 export function useCart() {
-  const [
-    cartItems, setCartItems,
-  ] = useLocalStorage<StorageProduct[]>('cart', []);
+  const [cartItems, setCartItems] = useLocalStorage<StorageProduct[]>(
+    'cart',
+    [],
+  );
 
   const isInCart = useCallback(
     (itemId: string) => {
-      return cartItems.some(product => product.info.id === itemId);
+      return cartItems.some((product) => product.info.id === itemId);
     },
     [cartItems],
   );
 
   const addToCart = useCallback(
     (cartItem: StorageProduct) => {
-      setCartItems(prev => {
+      setCartItems((prev) => {
         return isInCart(cartItem.info.id) ? prev : [...prev, cartItem];
       });
     },
@@ -25,8 +26,8 @@ export function useCart() {
 
   const removeFromCart = useCallback(
     (itemId: string) => {
-      setCartItems(prev => {
-        return prev.filter(cartItem => cartItem.info.id !== itemId);
+      setCartItems((prev) => {
+        return prev.filter((cartItem) => cartItem.info.id !== itemId);
       });
     },
     [setCartItems],
@@ -34,8 +35,8 @@ export function useCart() {
 
   const increaseQuantity = useCallback(
     (itemId: string) => {
-      setCartItems(prev =>
-        prev.map(cartItem => {
+      setCartItems((prev) =>
+        prev.map((cartItem) => {
           return cartItem.info.id === itemId
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
             : cartItem;
@@ -46,12 +47,14 @@ export function useCart() {
 
   const decreaseQuantity = useCallback(
     (itemId: string) => {
-      const cartItem = cartItems.find(cartItem => cartItem.info.id === itemId);
+      const cartItem = cartItems.find(
+        (cartItem) => cartItem.info.id === itemId,
+      );
 
       return cartItem && cartItem.quantity === 1
         ? removeFromCart(itemId)
-        : setCartItems(prev =>
-          prev.map(cartItem => {
+        : setCartItems((prev) =>
+          prev.map((cartItem) => {
             return cartItem.info.id === itemId
               ? { ...cartItem, quantity: cartItem.quantity - 1 }
               : cartItem;

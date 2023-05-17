@@ -13,9 +13,7 @@ export const CardList: React.FC<Props> = ({ products }) => {
       {products.map((product) => (
         <div key={product.id}>
           {}
-          <ProductCard
-            product={product}
-          />
+          <ProductCard product={product} />
         </div>
       ))}
     </div>

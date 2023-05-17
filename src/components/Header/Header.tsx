@@ -8,6 +8,7 @@ import shoppingBag from '../../icons/shoppingBag.svg';
 import { PageNavLink } from '../PageNavLink';
 import classNames from 'classnames';
 import { useLocalStorageContext } from '../../context/StorageContext';
+import { SearchLine } from '../SearchLine';
 
 const navList = ['home', 'phones', 'tablets', 'accessories'];
 
@@ -18,10 +19,7 @@ export type Props = {
 export const Header: FC<Props> = ({ toggleMenu }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
 
-  const {
-    favorites,
-    cartItems,
-  } = useLocalStorageContext();
+  const { favorites, cartItems } = useLocalStorageContext();
 
   useEffect(() => {
     const handleResize = () => {
@@ -38,45 +36,64 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
     };
   }, []);
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpenInput = () => {
+    setIsOpen(true);
+  };
+
+  const windowSize = window.innerWidth;
+
   return (
     <header className="header">
       <div className="header__content">
         <div className="header__right-side">
-          {isMobile ? (
+          {((windowSize > 420 && windowSize < 828) && isOpen) && (
             <NavLink to="/" className="logo">
               <img className="logo__image" src={logoItem} alt="Logo icon" />
               <img className="logo__ok" src={logoItemOk} alt="ok" />
             </NavLink>
-          ) : (
-            <nav className="header__nav nav" hidden={isMobile}>
-              <ul className="nav__panel">
-                <li className="nav__item">
-                  <NavLink to="/" className="logo">
-                    <img
-                      className="logo__image"
-                      src={logoItem}
-                      alt="Logo icon"
-                    />
-                    <img className="logo__ok" src={logoItemOk} alt="ok" />
-                  </NavLink>
-                </li>
-                {navList.map((item) => (
-                  <li key={item} className="nav__item">
-                    <PageNavLink to={`/${item}`} text={item} />
-                  </li>
-                ))}
-              </ul>
-              <input
-                type="search"
-                className="searchInput"
-                placeholder="Search products..."
-              />
-            </nav>
+          )}
+
+          {(!(windowSize < 828) || !isOpen) && (
+            <>
+              {isMobile ? (
+                <NavLink to="/" className="logo">
+                  <img className="logo__image" src={logoItem} alt="Logo icon" />
+                  <img className="logo__ok" src={logoItemOk} alt="ok" />
+                </NavLink>
+              ) : (
+                <nav className="header__nav nav" hidden={isMobile}>
+                  <ul className="nav__panel">
+                    <li className="nav__item">
+                      <NavLink to="/" className="logo">
+                        <img
+                          className="logo__image"
+                          src={logoItem}
+                          alt="Logo icon"
+                        />
+                        <img className="logo__ok" src={logoItemOk} alt="ok" />
+                      </NavLink>
+                    </li>
+                    {navList.map((item) => (
+                      <li key={item} className="nav__item">
+                        <PageNavLink to={`/${item}`} text={item} />
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              )}
+            </>
           )}
         </div>
 
         {!isMobile ? (
           <div className="header__buying-section">
+            <SearchLine
+              isOpen={isOpen}
+              handleOpenInput={handleOpenInput}
+              setIsOpen={setIsOpen}
+            />
             <NavLink
               to="/favourites"
               className={({ isActive }) =>
@@ -122,16 +139,23 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
             </NavLink>
           </div>
         ) : (
-          <button
-            className="header__menu-button header__case"
-            onClick={toggleMenu}
-          >
-            <img
-              className="header__menu-opener_image"
-              src={menuOpener}
-              alt="menu"
+          <div className="header__menu-container">
+            <SearchLine
+              isOpen={isOpen}
+              handleOpenInput={handleOpenInput}
+              setIsOpen={setIsOpen}
             />
-          </button>
+            <button
+              className="header__menu-button header__case"
+              onClick={toggleMenu}
+            >
+              <img
+                className="header__menu-opener_image"
+                src={menuOpener}
+                alt="menu"
+              />
+            </button>
+          </div>
         )}
       </div>
     </header>

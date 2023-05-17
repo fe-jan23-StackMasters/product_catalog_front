@@ -47,9 +47,7 @@ export const getProducts = async(
   return data;
 };
 
-export const getMinMax = (
-  category: ProductType,
-): Promise<number[]> => {
+export const getMinMax = (category: ProductType): Promise<number[]> => {
   return get(`${BASE_URL}/products/minmax?category=${category}`);
 };
 
