@@ -10,7 +10,6 @@ import { ProductType } from '../../types/ProductType';
 import { PhoneCard } from '../../types/PhoneCard';
 import { ProductCardSkeleton } from '../ProductCardSkeleton';
 import { PriceSlider } from '../PriceSlider';
-import { useDebounce } from 'use-debounce';
 
 type RequestWithParamsResult = {
   pages: number;
@@ -38,8 +37,6 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
   const sort = searchParams.get('sort');
   const perPage = searchParams.get('perPage');
   const page = searchParams.get('page');
-  // const priceMinFromUrl = searchParams.get('priceMin');
-  // const priceMaxFromUrl = searchParams.get('priceMax');
   let sortParam = sorts.find((by) => by.toString() === sort) || 'newest';
   let perPageParam = arrayOfItemsOnPage
     .find((by) => by.toString() === perPage) || '16';
@@ -48,10 +45,9 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
   ));
 
   const [range, setRange] = useState<number | number[]>([0, 5000]);
-  // eslint-disable-next-line no-unused-vars
-  const [value] = useDebounce(range, 600);
   const handleChangeFilterPrice = (
-    _event: Event, newValue: number | number[],
+    _event: Event,
+    newValue: number | number[],
   ) => {
     setRange(newValue);
   };
@@ -82,8 +78,9 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
     }
 
     if (arrayOfItemsOnPage.some((by) => perPage === by.toString())) {
-      setItemsPerPage(arrayOfItemsOnPage
-        .find((by) => by.toString() === perPage) || '16');
+      setItemsPerPage(
+        arrayOfItemsOnPage.find((by) => by.toString() === perPage) || '16',
+      );
     } else {
       setItemsPerPage('16');
     }
@@ -114,7 +111,11 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
 
   const handlerDropdownItemPerPage = (returnedValue: string) => {
     if (currentPage !== 1) {
-      navigate(`./?page=1&perPage=${returnedValue}&sort=${sort || SortBy.NEW}&priceMin=${priceMin || 0}&priceMax=${priceMax || 5000}`);
+      navigate(
+        `./?page=1&perPage=${returnedValue}&sort=${
+          sort || SortBy.NEW
+        }&priceMin=${priceMin || 0}&priceMax=${priceMax || 5000}`,
+      );
       setCurrentPage(1);
     } else {
       navigate(
@@ -132,11 +133,16 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
   const handlerDropdownSortBy = (returnedValue: string) => {
     if (currentPage !== 1) {
       navigate(`
-        ./?page=1&perPage=${perPage}&sort=${returnedValue}&priceMin=${priceMin || 0}&priceMax=${priceMax || 5000}
+        ./?page=1&perPage=${perPage}&sort=${returnedValue}&priceMin=${
+  priceMin || 0}&priceMax=${priceMax || 5000}
       `);
       setCurrentPage(1);
     } else {
-      navigate(`./?page=${page}&perPage=${perPage}&sort=${returnedValue}&priceMin=${priceMin || 0}&priceMax=${priceMax || 5000}`);
+      navigate(
+        `./?page=${page}&perPage=${perPage}&sort=${returnedValue}&priceMin=${
+          priceMin || 0
+        }&priceMax=${priceMax || 5000}`,
+      );
     }
 
     searchParams.set('sort', returnedValue);
@@ -180,10 +186,10 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
           <div className="phonesPage__priceSlider">
             Price
             <PriceSlider
-            priceMin={priceMin}
-            priceMax={priceMax}
-            handleChangeFilterPrice={handleChangeFilterPrice}
-          />
+              priceMin={priceMin}
+              priceMax={priceMax}
+              handleChangeFilterPrice={handleChangeFilterPrice}
+            />
           </div>
         )}
       </div>
@@ -216,13 +222,15 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
             <h2>Unable</h2>
           )}
         </div>
-        {!isError && !isLoading && <Paginate
-          itemsPerPage={Number(itemsPerPage)}
-          setCurrentPage={setCurrentPage}
-          currentPage={currentPage}
-          sortBy={sortBy}
-          pages={productInfo?.pages || 1}
-        />}
+        {!isError && !isLoading && (
+          <Paginate
+            itemsPerPage={Number(itemsPerPage)}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+            sortBy={sortBy}
+            pages={productInfo?.pages || 1}
+          />
+        )}
       </div>
     </>
   );
