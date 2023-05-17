@@ -102,9 +102,11 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
                   className="header__menu-opener_image"
                   alt="menu"
                 />
-                <span className="header__shoping-bag-count">
-                  {favorites.length}
-                </span>
+                {favorites.length > 0 && (
+                  <span className="header__shoping-bag-count">
+                    {favorites.length}
+                  </span>
+                )}
               </div>
             </NavLink>
 

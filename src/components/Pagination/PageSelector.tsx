@@ -9,6 +9,8 @@ interface Props {
   currentPage: number;
   sortBy: string;
   pages: number;
+  priceMin: number
+  priceMax: number
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
@@ -18,6 +20,8 @@ export const Paginate: React.FC<Props> = ({
   sortBy,
   setCurrentPage,
   pages,
+  priceMin,
+  priceMax,
 }) => {
   const pageNumbers: number[] = [];
   const navigate = useNavigate();
@@ -33,7 +37,8 @@ export const Paginate: React.FC<Props> = ({
   const goToPrevPage = () => {
     if (currentPage !== 1) {
       navigate(
-        `./?page=${currentPage - 1}&perPage=${itemsPerPage}&sort=${sortBy}`,
+        `./?page=${currentPage - 1}&perPage=${itemsPerPage}&sort=${
+          sortBy}&priceMin=${priceMin}&priceMax=${priceMax}`,
       );
       setCurrentPage((prevPage) => prevPage - 1);
     }
@@ -42,7 +47,8 @@ export const Paginate: React.FC<Props> = ({
   const goToNextPage = () => {
     if (currentPage !== pageNumbers.length) {
       navigate(
-        `./?page=${currentPage + 1}&perPage=${itemsPerPage}&sort=${sortBy}`,
+        `./?page=${currentPage + 1}&perPage=${itemsPerPage}&sort=${
+          sortBy}&priceMin=${priceMin}&priceMax=${priceMax}`,
       );
       setCurrentPage((prevPage) => prevPage + 1);
     }
@@ -50,7 +56,8 @@ export const Paginate: React.FC<Props> = ({
 
   useEffect(() => {
     if (!pageNumbers.includes(currentPage)) {
-      navigate(`./?page=1&perPage=${itemsPerPage}&sort=${sortBy}`);
+      navigate(`./?page=1&perPage=${itemsPerPage}&sort=${
+        sortBy}&priceMin=${priceMin}&priceMax=${priceMax}`);
       setCurrentPage(1);
     }
   }, []);
@@ -73,7 +80,8 @@ export const Paginate: React.FC<Props> = ({
             key={num}
           >
             <NavLink
-              to={`./?page=${num}&perPage=${itemsPerPage}&sort=${sortBy}`}
+              to={`./?page=${num}&perPage=${itemsPerPage}&sort=${
+                sortBy}&priceMin=${priceMin}&priceMax=${priceMax}`}
               className="pagination__link"
               onClick={() => {
                 setCurrentPage(num);

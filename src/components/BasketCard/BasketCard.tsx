@@ -2,24 +2,19 @@ import './BasketCard.scss';
 import deleteIcon from '../../icons/Close.svg';
 import React from 'react';
 import { StorageProduct } from '../../types/StorageProduct';
-import { ActionBasket } from '../../types/ActionBasket';
 import { BASE_URL } from '../../api/requests';
 import { Link } from 'react-router-dom';
+import { useLocalStorageContext } from '../../context/StorageContext';
 
 type Props = {
   product: StorageProduct;
-  handleRemovePhone: (phoneId: string) => void;
-  handleAddOrRemoveQuantity: (phoneId: string, action: ActionBasket) => void;
 };
 
-export const BasketCard: React.FC<Props> = ({
-  product,
-  handleRemovePhone,
-  handleAddOrRemoveQuantity,
-}) => {
+export const BasketCard: React.FC<Props> = ({ product }) => {
+  const { decreaseQuantity, increaseQuantity, removeFromCart }
+    = useLocalStorageContext();
+
   const { price, id, image, itemId, name } = product.info;
-  const isDisableMin = product.quantity < 2;
-  const isDisableMax = product.quantity > 9;
   const imageLink = `${BASE_URL}/${image}`;
   const totalPrice = price * product.quantity;
 
@@ -30,7 +25,7 @@ export const BasketCard: React.FC<Props> = ({
           src={deleteIcon}
           alt="delete"
           className="basket__card-delete"
-          onClick={() => handleRemovePhone(id)}
+          onClick={() => removeFromCart(id)}
         />
 
         <Link to={`/phones/${itemId}`}>
@@ -47,15 +42,15 @@ export const BasketCard: React.FC<Props> = ({
           <button
             type="button"
             className="basket__card-minus"
-            onClick={() => handleAddOrRemoveQuantity(id, 'delete')}
-            disabled={isDisableMin}
+            onClick={() => decreaseQuantity(id)}
+            disabled={product.quantity === 1}
           />
           <span className="basket__card-count">{product.quantity}</span>
           <button
             type="button"
             className="basket__card-plus"
-            onClick={() => handleAddOrRemoveQuantity(id, 'add')}
-            disabled={isDisableMax}
+            onClick={() => increaseQuantity(id)}
+            disabled={product.quantity >= 20}
           />
         </div>
         <div className="basket__card-price">{`$${totalPrice}`}</div>
