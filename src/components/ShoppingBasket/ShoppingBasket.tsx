@@ -2,18 +2,18 @@ import { useMemo, useState } from 'react';
 import { BasketCard } from '../BasketCard';
 import { Button } from '../Button';
 import './ShoppingBasket.scss';
-import { StoragePhone } from '../../types/StoragePhone';
+import { StorageProduct } from '../../types/StorageProduct';
 import { ActionBasket } from '../../types/ActionBasket';
 import { Container } from '../Container';
 import { Link, NavLink } from 'react-router-dom';
 import leftArrov from '../../icons/arrowLeft.svg';
 
 export const ShoppingBasket = () => {
-  const [phones, setPhones] = useState<StoragePhone[]>([]);
+  const [phones, setPhones] = useState<StorageProduct[]>([]);
   const phonesFromStorage = JSON.parse(localStorage.getItem('cart') || '');
 
-  const handleRemovePhone = (phoneId: string) => {
-    const filteredPhones = phones.filter((phone) => phone.id !== phoneId);
+  const handleRemovePhone = (id: string) => {
+    const filteredPhones = phones.filter((product) => product.info.id !== id);
 
     localStorage.setItem('cart', JSON.stringify(filteredPhones));
 
@@ -22,11 +22,11 @@ export const ShoppingBasket = () => {
 
   const handleAddOrRemoveQuantity = (phoneId: string, action: ActionBasket) => {
     const updatedPhones = phones.map((phone) => {
-      if (phone.id === phoneId) {
+      if (phone.info.id === phoneId) {
         if (action === 'add') {
-          phone.quantity = String(+phone.quantity + 1);
+          phone.quantity = phone.quantity + 1;
         } else {
-          phone.quantity = String(+phone.quantity - 1);
+          phone.quantity = +phone.quantity - 1;
         }
       }
 
@@ -43,7 +43,7 @@ export const ShoppingBasket = () => {
   }, []);
 
   const totalPrice = phones.reduce((acc, curr) => {
-    return acc + curr.product.price * +curr.quantity;
+    return acc + curr.info.price * curr.quantity;
   }, 0);
 
   const totalItems = phones.reduce((acc, curr) => {
@@ -72,10 +72,10 @@ export const ShoppingBasket = () => {
       ) : (
         <div className="basket">
           <div className="basket__cards">
-            {phones.map((phone) => (
+            {phones.map((product) => (
               <BasketCard
-                key={phone.id}
-                phone={phone}
+                key={product.info.id}
+                product={product}
                 handleRemovePhone={handleRemovePhone}
                 handleAddOrRemoveQuantity={handleAddOrRemoveQuantity}
               />
