@@ -1,29 +1,11 @@
 @import '../../styles/utils/mixins';
 
 .slick {
-  &__container {
+  &-container {
     height: 400px;
 
     @include onTablet {
       height: 450px;
-    }
-  }
-
-  &-list {
-    grid-column: 2;
-  }
-
-  &-slider {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-
-    @include onTablet {
-      display: grid;
-      grid-template-columns: 15% 85%;
-      grid-gap: 5px;
-    //   display: flex !important;
-    //   flex-direction: row-reverse;
     }
   }
 
@@ -52,43 +34,61 @@
     }
   }
 
-  &__point {
-    width: 43px;
-    height: 43px;
-    object-fit: contain;
-  }
-
-  &-dots {
-    display: flex !important;
-    flex-direction: row;
-    align-items: center;
-    bottom: 35px;
-    justify-content: space-around;
-
-    @include onTablet {
-      grid-column: 1 / 2;
-      flex-direction: column;
-      justify-content: flex-start;
-      top: 0px
+    &-list {
+      grid-column: 2;
     }
 
-    .slick-active {
-      opacity: 1;
-    }
-
-    & li {
-      height: auto;
-      width: 50px;
-      border: solid 1px white;
+    &__soloSlider {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 4px;
-      opacity: 0.5;
+      flex-direction: column;
+      height: 100%;
 
       @include onTablet {
-        margin-top: 8px;
+        display: grid;
+        grid-template-columns: 15% 85%;
+        grid-gap: 5px;
+        //   display: flex !important;
+        //   flex-direction: row-reverse;
       }
     }
-  }
+  
+    &__point {
+      width: 43px;
+      height: 43px;
+      object-fit: contain;
+    }
+
+    &-dots {
+      display: flex !important;
+      flex-direction: row;
+      align-items: center;
+      bottom: 35px;
+      justify-content: space-around;
+
+      @include onTablet {
+        grid-column: 1 / 2;
+        flex-direction: column;
+        justify-content: flex-start;
+        top: 0px
+      }
+
+      .slick-active {
+        opacity: 1;
+      }
+
+      & li {
+        height: auto;
+        width: 50px;
+        border: solid 1px white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 4px;
+        opacity: 0.5;
+
+        @include onTablet {
+          margin-top: 8px;
+        }
+      }
+    }
 }

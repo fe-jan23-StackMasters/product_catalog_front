@@ -50,6 +50,7 @@ export const HomeSlider: React.FC<Props> = ({
     speed: 300,
     variableWidth: true,
     slidesToShow: 4,
+    swipeToSlide: true,
     nextArrow: arrowRight,
     prevArrow: arrowLeft,
     responsive: [
@@ -57,42 +58,36 @@ export const HomeSlider: React.FC<Props> = ({
         breakpoint: 4800,
         settings: {
           slidesToShow: 4,
-          slidesToScroll: 1,
         },
       },
       {
         breakpoint: 2400,
         settings: {
           slidesToShow: 4,
-          slidesToScroll: 1,
         },
       },
       {
         breakpoint: 1920,
         settings: {
           slidesToShow: 4,
-          slidesToScroll: 1,
         },
       },
       {
         breakpoint: 1220,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1,
         },
       },
       {
         breakpoint: 900,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
         },
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1,
         },
       },
     ],

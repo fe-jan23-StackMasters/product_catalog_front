@@ -31,7 +31,7 @@ export const SliderProductPage: React.FC<PropsSliderProduct>
     };
 
     return (
-      <div className="slick__container  grid__phone
+      <div className="slick-container  grid__phone
       grid__item-tablet--1-7 grid__item-desktop--1-12">
         <Slider {...settings} className="slick__soloSlider">
           {
