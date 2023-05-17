@@ -32,8 +32,12 @@ interface LocalStorageProviderProps {
 export const LocalStorageProvider = ({
   children,
 }: LocalStorageProviderProps) => {
-  const { favorites, isInFavorites, addToFavorites, removeFromFavorites }
-    = useFavorites();
+  const {
+    favorites,
+    isInFavorites,
+    addToFavorites,
+    removeFromFavorites,
+  } = useFavorites();
 
   const {
     cartItems,

@@ -96,6 +96,10 @@
     position: absolute;
     @include squareForPosition(7.5px);
   }
+
+  &__menu-container {
+    display: flex;
+  }
 }
 
 .logo {

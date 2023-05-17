@@ -10,9 +10,7 @@ interface Props {
   product: PhoneCard;
 }
 
-export const ProductCard: React.FC<Props> = ({
-  product,
-}) => {
+export const ProductCard: React.FC<Props> = ({ product }) => {
   const {
     name,
     fullPrice,
@@ -59,15 +57,9 @@ export const ProductCard: React.FC<Props> = ({
       </div>
 
       <div className="card__buttons">
-        <AddToCart
-          height="40px"
-          product={product}
-        />
+        <AddToCart height="40px" product={product} />
 
-        <AddToFavourites
-          size="40px"
-          product={product}
-        />
+        <AddToFavourites size="40px" product={product} />
       </div>
     </div>
   );

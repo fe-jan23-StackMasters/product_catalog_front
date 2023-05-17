@@ -40,9 +40,10 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
   let sortParam = sorts.find((by) => by.toString() === sort) || 'newest';
   let perPageParam = arrayOfItemsOnPage
     .find((by) => by.toString() === perPage) || '16';
-  const skeletons = Array.from({ length: Number(perPageParam) }, (_, index) => (
-    index + 1
-  ));
+  const skeletons = Array.from(
+    { length: Number(perPageParam) },
+    (_, index) => index + 1,
+  );
 
   const [range, setRange] = useState<number | number[]>([0, 5000]);
   const handleChangeFilterPrice = (
@@ -209,15 +210,10 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
         <div className="pagination__items">
           {phones !== undefined ? (
             phones.map((product) => (
-              <ProductCard
-                product={product}
-                key={product.id}
-              />
+              <ProductCard product={product} key={product.id} />
             ))
           ) : isLoading ? (
-            (skeletons).map((skeleton) => (
-              <ProductCardSkeleton key={skeleton}/>
-            ))
+            skeletons.map((skeleton) => <ProductCardSkeleton key={skeleton} />)
           ) : (
             <h2>Unable</h2>
           )}
