@@ -1,5 +1,4 @@
 import Slider from '@mui/material/Slider';
-// import { useState } from 'react';
 import './PriceSlider.scss';
 import React from 'react';
 
@@ -7,7 +6,7 @@ type Props = {
   priceMin: number;
   priceMax: number;
   handleChangeFilterPrice: (e: Event, newValue: number | number[]) => void;
-}
+};
 
 export const PriceSlider: React.FC<Props> = ({
   priceMax,

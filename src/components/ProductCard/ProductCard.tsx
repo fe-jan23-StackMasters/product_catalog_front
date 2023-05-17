@@ -21,8 +21,15 @@ export const ProductCard: React.FC<Props> = ({
   cardIds,
   favIds,
 }) => {
-  // eslint-disable-next-line max-len
-  const { name, fullPrice, price, screen, capacity, ram, id, phoneId, image } = product;
+  const { name,
+    fullPrice,
+    price,
+    screen,
+    capacity,
+    ram,
+    id,
+    phoneId,
+    image } = product;
 
   const inces = screen.split(' ')[0];
 

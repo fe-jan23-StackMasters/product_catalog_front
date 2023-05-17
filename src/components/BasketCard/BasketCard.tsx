@@ -38,7 +38,7 @@ export const BasketCard: React.FC<Props> = ({
           <img src={imageLink} alt="iphone" className="basket__card-image" />
         </Link>
 
-        <Link to={`/phones/${phoneId}`} className="basket__card-title" >
+        <Link to={`/phones/${phoneId}`} className="basket__card-title">
           <span className="basket__card-title">{name}</span>
         </Link>
       </div>

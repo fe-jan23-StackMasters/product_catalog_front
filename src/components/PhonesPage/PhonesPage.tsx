@@ -8,8 +8,8 @@ import './PhonesPage.scss';
 export const PhonesPage = () => (
   <Container>
     <LinkLine title={'Phones'} />
-      <h1 className="phonesPage__header">Mobile phones</h1>
+    <h1 className="phonesPage__header">Mobile phones</h1>
 
-      <Pagination productType={ProductType.PHONE}/>
+    <Pagination productType={ProductType.PHONE} />
   </Container>
 );

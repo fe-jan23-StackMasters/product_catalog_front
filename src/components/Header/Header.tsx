@@ -16,9 +16,7 @@ export type Props = {
   toggleMenu: () => void;
 };
 
-export const Header: FC<Props> = ({
-  toggleMenu,
-}) => {
+export const Header: FC<Props> = ({ toggleMenu }) => {
   const [cardIds] = useCardsIds('cart', []);
   const [favIds] = useCardsIds('favourite', []);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
@@ -66,22 +64,26 @@ export const Header: FC<Props> = ({
                   </li>
                 ))}
               </ul>
-              <input type="search"
-            className="searchInput" placeholder="Search products..." />
+              <input
+                type="search"
+                className="searchInput"
+                placeholder="Search products..."
+              />
             </nav>
           )}
         </div>
 
-          {!isMobile ? (
-            <div className="header__buying-section">
-
-              <NavLink
-                to='/favourites'
-                className={({ isActive }) => classNames(
-                  'header__case',
-                  { 'header__case--is-active': isActive },
-                )}>
-              {(favIds.length > 0) ? (
+        {!isMobile ? (
+          <div className="header__buying-section">
+            <NavLink
+              to="/favourites"
+              className={({ isActive }) =>
+                classNames('header__case', {
+                  'header__case--is-active': isActive,
+                })
+              }
+            >
+              {favIds.length > 0 ? (
                 <>
                   <div className="header__count-position">
                     <img
@@ -89,7 +91,7 @@ export const Header: FC<Props> = ({
                       className="header__menu-opener_image"
                       alt="menu"
                     />
-                    <span className='header__shoping-bag-count'>
+                    <span className="header__shoping-bag-count">
                       {favIds.length}
                     </span>
                   </div>
@@ -103,39 +105,40 @@ export const Header: FC<Props> = ({
               )}
             </NavLink>
 
-              <NavLink
-                to='/cart'
-                className={({ isActive }) => classNames(
-                  'header__case',
-                  { 'header__case--is-active': isActive },
-                )}>
-                <div className="header__count-position">
-
-                  <img
-                    src={shoppingBag}
-                    className="header__menu-opener_image"
-                    alt="menu"
-                    />
-                  {cardIds.length > 0 && (
-                    <span className='header__shoping-bag-count'>
-                      {cardIds.length}
-                    </span>
-                  )}
-                </div>
-              </NavLink>
-            </div>
-          ) : (
-            <button
-              className="header__menu-button header__case"
-              onClick={toggleMenu}
+            <NavLink
+              to="/cart"
+              className={({ isActive }) =>
+                classNames('header__case', {
+                  'header__case--is-active': isActive,
+                })
+              }
             >
-              <img
-                className="header__menu-opener_image"
-                src={menuOpener}
-                alt="menu"
-              />
+              <div className="header__count-position">
+                <img
+                  src={shoppingBag}
+                  className="header__menu-opener_image"
+                  alt="menu"
+                />
+                {cardIds.length > 0 && (
+                  <span className="header__shoping-bag-count">
+                    {cardIds.length}
+                  </span>
+                )}
+              </div>
+            </NavLink>
+          </div>
+        ) : (
+          <button
+            className="header__menu-button header__case"
+            onClick={toggleMenu}
+          >
+            <img
+              className="header__menu-opener_image"
+              src={menuOpener}
+              alt="menu"
+            />
           </button>
-          )}
+        )}
       </div>
     </header>
   );

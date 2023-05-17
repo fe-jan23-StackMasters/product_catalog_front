@@ -52,7 +52,7 @@ export const ShoppingBasket = () => {
 
   return (
     <Container>
-      <Link to="/home" className="backLink" >
+      <Link to="/home" className="backLink">
         <img className="backLink__image" src={leftArrov} alt="left" />
         Back
       </Link>
