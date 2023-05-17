@@ -8,28 +8,21 @@ import { BASE_URL } from '../../api/requests';
 
 interface Props {
   product: PhoneCard;
-  onCardAdd: () => void;
-  onFavouriteAdd: () => void;
-  cardIds: string[];
-  favIds: string[];
 }
 
 export const ProductCard: React.FC<Props> = ({
   product,
-  onCardAdd,
-  onFavouriteAdd,
-  cardIds,
-  favIds,
 }) => {
-  const { name,
+  const {
+    name,
     fullPrice,
     price,
     screen,
     capacity,
     ram,
-    id,
     phoneId,
-    image } = product;
+    image,
+  } = product;
 
   const inces = screen.split(' ')[0];
 
@@ -68,16 +61,12 @@ export const ProductCard: React.FC<Props> = ({
       <div className="card__buttons">
         <AddToCart
           height="40px"
-          onCardAdd={onCardAdd}
-          id={id}
-          cardIds={cardIds}
+          product={product}
         />
 
         <AddToFavourites
           size="40px"
-          onFavouriteAdd={onFavouriteAdd}
-          favIds={favIds}
-          id={id}
+          product={product}
         />
       </div>
     </div>

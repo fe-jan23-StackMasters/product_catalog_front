@@ -3,12 +3,11 @@ import { NavLink } from 'react-router-dom';
 import logoItem from '../../icons/niceGadgets.svg';
 import logoItemOk from '../../icons/Ok.svg';
 import menuOpener from '../../icons/Menu.svg';
-import favoritesRed from '../../icons/faqvoritesFilled.svg';
 import favoritesHart from '../../icons/favourites.svg';
 import shoppingBag from '../../icons/shoppingBag.svg';
 import { PageNavLink } from '../PageNavLink';
-import { useCardsIds } from '../../helpers/hooks/hooks';
 import classNames from 'classnames';
+import { useLocalStorageContext } from '../../context/StorageContext';
 
 const navList = ['home', 'phones', 'tablets', 'accessories'];
 
@@ -17,9 +16,12 @@ export type Props = {
 };
 
 export const Header: FC<Props> = ({ toggleMenu }) => {
-  const [cardIds] = useCardsIds('cart', []);
-  const [favIds] = useCardsIds('favourite', []);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+
+  const {
+    favorites,
+    cartItems,
+  } = useLocalStorageContext();
 
   useEffect(() => {
     const handleResize = () => {
@@ -83,26 +85,16 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
                 })
               }
             >
-              {favIds.length > 0 ? (
-                <>
-                  <div className="header__count-position">
-                    <img
-                      src={favoritesRed}
-                      className="header__menu-opener_image"
-                      alt="menu"
-                    />
-                    <span className="header__shoping-bag-count">
-                      {favIds.length}
-                    </span>
-                  </div>
-                </>
-              ) : (
+              <div className="header__count-position">
                 <img
                   src={favoritesHart}
                   className="header__menu-opener_image"
                   alt="menu"
                 />
-              )}
+                <span className="header__shoping-bag-count">
+                  {favorites.length}
+                </span>
+              </div>
             </NavLink>
 
             <NavLink
@@ -119,9 +111,9 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
                   className="header__menu-opener_image"
                   alt="menu"
                 />
-                {cardIds.length > 0 && (
+                {cartItems.length > 0 && (
                   <span className="header__shoping-bag-count">
-                    {cardIds.length}
+                    {cartItems.length}
                   </span>
                 )}
               </div>

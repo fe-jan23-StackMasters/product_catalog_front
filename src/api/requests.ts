@@ -47,6 +47,12 @@ export const getProducts = async(
   return data;
 };
 
+export const getMinMax = (
+  category: ProductType,
+): Promise<number[]> => {
+  return get(`${BASE_URL}/products/minmax?category=${category}`);
+};
+
 export const getNew = (limit?: number): Promise<PhoneCard[]> => {
   // default limit is 12
   return get<PhoneCard[]>(

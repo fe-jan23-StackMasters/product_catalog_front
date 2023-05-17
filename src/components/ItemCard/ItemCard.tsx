@@ -1,41 +1,41 @@
 import { useQuery } from '@tanstack/react-query';
-import { HomeSlider } from '../Slider/Slider';
-import { getDetailedInfo, getHot } from '../../api/requests';
+import { HomeSlider } from '../Slider';
+import { getDetailedInfo, getRecommenations } from '../../api/requests';
 import { useEffect, useState } from 'react';
 import { PhoneCard } from '../../types/PhoneCard';
-import { useCardsIds } from '../../helpers/hooks/hooks';
 import { Phone } from '../../types/Phone';
 import { AddToCart } from '../AddToCartButton';
 import { AddToFavourites } from '../AddToFavouriteButton';
+import { useLocation } from 'react-router-dom';
 import './itemCard.scss';
+import { getShortInfo } from '../../helpers/detailedToShortInfo';
 
 export const ItemCard = () => {
   const [item, setItem] = useState<Phone | null>(null);
-  const [hotProducts, setHotProducts] = useState<PhoneCard[]>();
-  const [cardIds, onCardToggle] = useCardsIds('cart', []);
-  const [favIds, onFavToggle] = useCardsIds('favourite', []);
+  const [recommendedProducts, setRecommendedProducts] = useState<PhoneCard[]>();
 
-  const url = window.location.href;
-  const parts = url.split('/');
-  const phoneId = parts[parts.length - 1];
+  const location = useLocation();
+  const productId = location.pathname.split('/')[2];
 
   useEffect(() => {
-    getDetailedInfo(phoneId)
+    getDetailedInfo(productId)
       .then((data) => {
         setItem(data as Phone);
       })
       .catch((error) => {
         throw new Error(error);
       });
-  }, [phoneId]);
+  }, [productId]);
 
   const { isError: isHotError, isLoading: isHotLoading } = useQuery({
-    queryKey: ['hotProducts'],
-    queryFn: () => getHot(),
+    queryKey: ['recommendedProducts'],
+    queryFn: () => getRecommenations(productId),
     onSuccess(data) {
-      setHotProducts(data);
+      setRecommendedProducts(data);
     },
   });
+
+  const shortInfo = item ? getShortInfo(item) : item;
 
   return (
     <>
@@ -57,7 +57,7 @@ export const ItemCard = () => {
             <div className="settings__container">
               <div className="settings__container-colors">
                 <p className="settings__title">Available colors</p>
-                <p className="settings__title">ID: 1234567</p>
+                <p className="settings__title">{`ID: ${item?.productId}`}</p>
               </div>
 
               <div className="settings__colors">
@@ -91,19 +91,13 @@ export const ItemCard = () => {
             </div>
 
             <div className="settings__add-buttons">
-              <AddToCart
-                height="48px"
-                onCardAdd={onCardToggle}
-                id={phoneId}
-                cardIds={cardIds}
-              />
+              {shortInfo && (
+                <>
+                  <AddToCart product={shortInfo} height="48px" />
 
-              <AddToFavourites
-                size="48px"
-                onFavouriteAdd={onFavToggle}
-                favIds={favIds}
-                id={phoneId}
-              />
+                  <AddToFavourites product={shortInfo} size="48px" />
+                </>
+              )}
             </div>
 
             <div className="settings__add-tablet">
@@ -215,11 +209,7 @@ export const ItemCard = () => {
           >
             <HomeSlider
               title={'You may also like'}
-              favIds={favIds}
-              cardIds={cardIds}
-              onCardToggle={onCardToggle}
-              onFavToggle={onFavToggle}
-              products={hotProducts || []}
+              products={recommendedProducts || []}
               isLoading={isHotLoading}
               isError={isHotError}
             />

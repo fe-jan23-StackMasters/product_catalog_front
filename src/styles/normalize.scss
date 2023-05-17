@@ -36,7 +36,11 @@ main {
   padding-bottom: 360px;
 
   @include onTablet {
-    padding-bottom: 80px;
+    padding-bottom: 164px;
+  }
+
+  @include onDesktop {
+    padding-bottom: 180px;
   }
 }
 

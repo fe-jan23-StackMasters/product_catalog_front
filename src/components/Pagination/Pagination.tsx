@@ -8,7 +8,7 @@ import { useSearchParams, useLocation, useNavigate } from 'react-router-dom';
 import { getProducts } from '../../api/requests';
 import { ProductType } from '../../types/ProductType';
 import { PhoneCard } from '../../types/PhoneCard';
-import { useCardsIds } from '../../helpers/hooks/hooks';
+import { ProductCardSkeleton } from '../ProductCardSkeleton';
 import { PriceSlider } from '../PriceSlider';
 
 type RequestWithParamsResult = {
@@ -28,21 +28,21 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
   const [itemsPerPage, setItemsPerPage] = useState('16');
   const [sortBy, setSortBy] = useState<SortBy>(SortBy.NEW);
   const [productInfo, setProductInfo] = useState<RequestWithParamsResult>();
-  const [cardIds, onCardToggle] = useCardsIds('cart', []);
-  const [favIds, onFavToggle] = useCardsIds('favourite', []);
   const sorts = [SortBy.NAME, SortBy.NEW, SortBy.OLD, SortBy.HIGHT, SortBy.LOW];
   const arrayOfItemsOnPage = ['8', '16', '32', '64'];
   const [searchParams] = useSearchParams();
   const phones = productInfo?.products;
   const navigate = useNavigate();
   const locations = useLocation();
-  const quantity = '1';
   const sort = searchParams.get('sort');
   const perPage = searchParams.get('perPage');
   const page = searchParams.get('page');
   let sortParam = sorts.find((by) => by.toString() === sort) || 'newest';
   let perPageParam = arrayOfItemsOnPage
     .find((by) => by.toString() === perPage) || '16';
+  const skeletons = Array.from({ length: Number(perPageParam) }, (_, index) => (
+    index + 1
+  ));
 
   const [range, setRange] = useState<number | number[]>([0, 5000]);
   const handleChangeFilterPrice = (
@@ -207,23 +207,17 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
 
       <div className="phonesPage__pagination pagination">
         <div className="pagination__items">
-          {phones ? (
+          {phones !== undefined ? (
             phones.map((product) => (
               <ProductCard
                 product={product}
                 key={product.id}
-                onCardAdd={() =>
-                  onCardToggle({ id: product.id, quantity, product: product })
-                }
-                onFavouriteAdd={() =>
-                  onFavToggle({ id: product.id, quantity, product: product })
-                }
-                cardIds={cardIds}
-                favIds={favIds}
               />
             ))
-          ) : !isError ? (
-            <h2>Loading</h2>
+          ) : isLoading ? (
+            (skeletons).map((skeleton) => (
+              <ProductCardSkeleton key={skeleton}/>
+            ))
           ) : (
             <h2>Unable</h2>
           )}
