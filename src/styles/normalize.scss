@@ -23,6 +23,23 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $surface1-color;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $surface2-color;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $accent-color;
+}
+
 body {
   position: relative;
   min-height: 100vh;
@@ -36,7 +53,11 @@ main {
   padding-bottom: 360px;
 
   @include onTablet {
-    padding-bottom: 80px;
+    padding-bottom: 164px;
+  }
+
+  @include onDesktop {
+    padding-bottom: 180px;
   }
 }
 

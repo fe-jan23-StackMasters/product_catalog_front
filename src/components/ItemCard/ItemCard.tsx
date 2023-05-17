@@ -3,7 +3,6 @@ import { HomeSlider } from '../Slider/Slider';
 import { getDetailedInfo, getHot, getProducts } from '../../api/requests';
 import { useEffect, useState } from 'react';
 import { PhoneCard } from '../../types/PhoneCard';
-import { useCardsIds } from '../../helpers/hooks/hooks';
 import { Phone } from '../../types/Phone';
 import { AddToCart } from '../AddToCartButton';
 import { AddToFavourites } from '../AddToFavouriteButton';
@@ -12,12 +11,10 @@ import rightArrov from '../../icons/arrowRight.svg';
 import { LinkLine } from '../LinkLine';
 
 export const ItemCard = () => {
-  const [phoneId, setPhoneId] = useState<string>('');
+  const [itemId, setPhoneId] = useState<string>('');
   const [item, setItem] = useState<Phone | null>(null);
   const [items, setItems] = useState<PhoneCard[]>([]);
   const [hotProducts, setHotProducts] = useState<PhoneCard[]>();
-  const [cardIds, onCardToggle] = useCardsIds('cart', []);
-  const [favIds, onFavToggle] = useCardsIds('favourite', []);
 
   useEffect(() => {
     const getAllPhones = async() => {
@@ -37,13 +34,13 @@ export const ItemCard = () => {
   useEffect(() => {
     const url = window.location.href;
     const parts = url.split('/');
-    const phoneId = parts[parts.length - 1];
+    const itemId = parts[parts.length - 1];
 
-    setPhoneId(phoneId);
+    setPhoneId(itemId);
 
     window.scrollTo(0, 0);
 
-    getDetailedInfo(phoneId)
+    getDetailedInfo(itemId)
       .then((data) => {
         setItem(data as Phone);
       })
@@ -60,6 +57,10 @@ export const ItemCard = () => {
     },
   });
 
+  const product: PhoneCard | undefined = items.find(
+    (item) => itemId === item.phoneId,
+  );
+
   const handleFindByColor = (selectedColor: string) => {
     const finedItem: PhoneCard | undefined = items.find(
       (item) => item.color === selectedColor,
@@ -67,13 +68,12 @@ export const ItemCard = () => {
 
     if (finedItem) {
       const { phoneId } = finedItem;
-      const path = `/phones/${phoneId}`;
 
       setPhoneId(phoneId);
-
-      window.location.href = path;
     }
   };
+
+  window.console.log(product);
 
   return (
     <>
@@ -135,19 +135,19 @@ export const ItemCard = () => {
           </div>
 
           <div className="settings__add-buttons">
-            <AddToCart
-              height="48px"
-              onCardAdd={onCardToggle}
-              id={phoneId}
-              cardIds={cardIds}
-            />
+            {product && (
+              <>
+              <AddToCart
+                height="48px"
+                product={product}
+              />
 
-            <AddToFavourites
+              <AddToFavourites
               size="48px"
-              onFavouriteAdd={onFavToggle}
-              favIds={favIds}
-              id={phoneId}
-            />
+              product={product}
+              />
+            </>
+            )}
           </div>
 
           <div className="settings__add-tablet">
@@ -255,10 +255,10 @@ export const ItemCard = () => {
       grid__item-tablet--1-12 grid__item-desktop--1-24">
           <HomeSlider
             title={'You may also like'}
-            favIds={favIds}
-            cardIds={cardIds}
-            onCardToggle={onCardToggle}
-            onFavToggle={onFavToggle}
+            // favIds={favIds}
+            // cardIds={cardIds}
+            // onCardToggle={onCardToggle}
+            // onFavToggle={onFavToggle}
             products={hotProducts || []}
             isLoading={isHotLoading}
             isError={isHotError}

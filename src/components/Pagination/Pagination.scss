@@ -8,8 +8,6 @@ html {
 .phonesPage__priceSlider {
   display: flex;
   flex-direction: column;
-  text-align: center;
-  align-items: center;
   font-weight: 700;
   font-size: 12px;
   line-height: 15px;
@@ -17,8 +15,7 @@ html {
   margin-bottom: 24px;
 
   @include onTablet {
-    display: inline;
-    text-align: start;
+    align-items: start;
   }
 }
 
@@ -54,12 +51,11 @@ html {
     justify-content: center;
     list-style: none;
     padding: 0;
-    margin: 24px 0 80px;
+    margin-top: 24px;
 
     @include onTablet {
       margin-top: 40px;
     }
-
   }
 
   &__item {

@@ -3,48 +3,30 @@ import { Container } from '../Container';
 import { LinkLine } from '../LinkLine';
 import './FavouritesPage.scss';
 import { ProductCard } from '../ProductCard/ProductCard';
-import { useCardsIds } from '../../helpers/hooks/hooks';
 import '../../styles/blocks/grid.scss';
-import { StoragePhone } from '../../types/StoragePhone';
 import { NavLink } from 'react-router-dom';
 import { Button } from '../Button';
+import { PhoneCard } from '../../types/PhoneCard';
+import { useLocalStorageContext } from '../../context/StorageContext';
 
 export const FavouritesPage: FC = () => {
-  const [cardIds, onCardToggle] = useCardsIds('cart', []);
-  const [favIds, onFavToggle] = useCardsIds('favourite', []);
-
-  const favouritesCount = favIds.length;
-  const quantity = '1';
+  const {
+    favorites,
+  } = useLocalStorageContext();
 
   return (
     <Container>
       <div className="favourites">
         <LinkLine title={'Favourites'} />
         <h1 className="favourites__title">Favourites</h1>
-        {favouritesCount ? (
+        {favorites.length ? (
           <>
-            <span className="favourites__total">{`${favouritesCount} items`}</span>
+            <span className="favourites__total">{`${favorites.length} items`}</span>
             <div className="favourites__cards">
-              {favIds.map((product: StoragePhone) => (
+              {favorites.map((product: PhoneCard) => (
                 <ProductCard
-                  product={product.product}
+                  product={product}
                   key={product.id}
-                  onCardAdd={() =>
-                    onCardToggle({
-                      id: product.id,
-                      quantity,
-                      product: product.product,
-                    })
-                  }
-                  onFavouriteAdd={() =>
-                    onFavToggle({
-                      id: product.id,
-                      quantity,
-                      product: product.product,
-                    })
-                  }
-                  cardIds={cardIds}
-                  favIds={favIds}
                 />
               ))}
             </div>

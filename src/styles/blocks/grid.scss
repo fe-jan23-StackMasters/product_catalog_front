@@ -8,8 +8,7 @@
 
   @include onTablet {
     grid-template-columns: repeat(12, 1fr);
-  margin: 0 24px;
-
+    margin: 0 24px;
   }
 
   @include onDesktop {
@@ -23,7 +22,6 @@
 
   &--tablet {
     display: block;
-
 
     @include onDesktop {
       display: grid;
