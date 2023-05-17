@@ -30,7 +30,7 @@
       background-color: $surface2-color;
       border: none;
       outline: none;
-  
+
       &:focus {
         border: none;
         outline: none;
@@ -52,6 +52,7 @@
   &__image {
     width: 16px;
     height: 16px;
+    cursor: pointer;
 
     &-position {
       margin-right: 20px;

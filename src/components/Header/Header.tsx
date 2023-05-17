@@ -48,37 +48,43 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
     <header className="header">
       <div className="header__content">
         <div className="header__right-side">
-        {(!(windowSize < 800) || !isOpen) && (
-          <>
-            {isMobile ? (
-              <NavLink to="/" className="logo">
-                <img className="logo__image" src={logoItem} alt="Logo icon" />
-                <img className="logo__ok" src={logoItemOk} alt="ok" />
-              </NavLink>
-            ) : (
-              <nav className="header__nav nav" hidden={isMobile}>
-                <ul className="nav__panel">
-                  <li className="nav__item">
-                    <NavLink to="/" className="logo">
-                      <img
-                        className="logo__image"
-                        src={logoItem}
-                        alt="Logo icon"
-                      />
-                      <img className="logo__ok" src={logoItemOk} alt="ok" />
-                    </NavLink>
-                  </li>
-                  {navList.map((item) => (
-                    <li key={item} className="nav__item">
-                      <PageNavLink to={`/${item}`} text={item} />
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            )}
-          </>
-        )}
+          {((windowSize > 420 && windowSize < 828) && isOpen) && (
+            <NavLink to="/" className="logo">
+              <img className="logo__image" src={logoItem} alt="Logo icon" />
+              <img className="logo__ok" src={logoItemOk} alt="ok" />
+            </NavLink>
+          )}
 
+          {(!(windowSize < 828) || !isOpen) && (
+            <>
+              {isMobile ? (
+                <NavLink to="/" className="logo">
+                  <img className="logo__image" src={logoItem} alt="Logo icon" />
+                  <img className="logo__ok" src={logoItemOk} alt="ok" />
+                </NavLink>
+              ) : (
+                <nav className="header__nav nav" hidden={isMobile}>
+                  <ul className="nav__panel">
+                    <li className="nav__item">
+                      <NavLink to="/" className="logo">
+                        <img
+                          className="logo__image"
+                          src={logoItem}
+                          alt="Logo icon"
+                        />
+                        <img className="logo__ok" src={logoItemOk} alt="ok" />
+                      </NavLink>
+                    </li>
+                    {navList.map((item) => (
+                      <li key={item} className="nav__item">
+                        <PageNavLink to={`/${item}`} text={item} />
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              )}
+            </>
+          )}
         </div>
 
         {!isMobile ? (
@@ -134,7 +140,7 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
           </div>
         ) : (
           <div className="header__menu-container">
-              <SearchLine
+            <SearchLine
               isOpen={isOpen}
               handleOpenInput={handleOpenInput}
               setIsOpen={setIsOpen}

@@ -8,7 +8,7 @@ type Props = {
   isOpen: boolean;
   handleOpenInput: () => void;
   setIsOpen: (value: boolean) => void;
-}
+};
 
 export const SearchLine: FC<Props> = ({
   isOpen,
@@ -28,10 +28,9 @@ export const SearchLine: FC<Props> = ({
       <img
         src={dandruff}
         alt="dandruff"
-        className={classNames(
-          'searchLine__image',
-          { 'searchLine__image-position': isOpen },
-        )}
+        className={classNames('searchLine__image', {
+          'searchLine__image-position': isOpen,
+        })}
         onClick={handleOpenInput}
       />
       {isOpen && (
@@ -51,9 +50,7 @@ export const SearchLine: FC<Props> = ({
             onClick={() => setIsOpen(false)}
           />
         </div>
-
       )}
-
     </div>
   );
 };

@@ -106,10 +106,6 @@
   position: relative;
   margin-left: 16px;
 
-  @include onTablet {
-    margin-left: 0;
-  }
-
   &__image {
     position: relative;
     width: 64px;

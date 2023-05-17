@@ -11,16 +11,8 @@ interface Props {
 }
 
 export const ProductCard: React.FC<Props> = ({ product }) => {
-  const {
-    name,
-    fullPrice,
-    price,
-    screen,
-    capacity,
-    ram,
-    phoneId,
-    image,
-  } = product;
+  // eslint-disable-next-line max-len
+  const { name, fullPrice, price, screen, capacity, ram, phoneId, image } = product;
 
   const inces = screen.split(' ')[0];
 
