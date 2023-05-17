@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { HomeSlider } from '../Slider/Slider';
-import { getDetailedInfo, getHot } from '../../api/requests';
+import { getDetailedInfo, getHot, getProducts } from '../../api/requests';
 import { useEffect, useState } from 'react';
 import { PhoneCard } from '../../types/PhoneCard';
 import { useCardsIds } from '../../helpers/hooks/hooks';
@@ -8,18 +8,41 @@ import { Phone } from '../../types/Phone';
 import { AddToCart } from '../AddToCartButton';
 import { AddToFavourites } from '../AddToFavouriteButton';
 import './itemCard.scss';
+import rightArrov from '../../icons/arrowRight.svg';
+import { LinkLine } from '../LinkLine';
 
 export const ItemCard = () => {
+  const [phoneId, setPhoneId] = useState<string>('');
   const [item, setItem] = useState<Phone | null>(null);
+  const [items, setItems] = useState<PhoneCard[]>([]);
   const [hotProducts, setHotProducts] = useState<PhoneCard[]>();
   const [cardIds, onCardToggle] = useCardsIds('cart', []);
   const [favIds, onFavToggle] = useCardsIds('favourite', []);
 
-  const url = window.location.href;
-  const parts = url.split('/');
-  const phoneId = parts[parts.length - 1];
+  useEffect(() => {
+    const getAllPhones = async() => {
+      try {
+        const result = await getProducts();
+        const allPhones = result.products;
+
+        setItems(allPhones);
+      } catch (error) {
+        throw new Error('Error fetching all phones: ' + error);
+      }
+    };
+
+    getAllPhones();
+  }, []);
 
   useEffect(() => {
+    const url = window.location.href;
+    const parts = url.split('/');
+    const phoneId = parts[parts.length - 1];
+
+    setPhoneId(phoneId);
+
+    window.scrollTo(0, 0);
+
     getDetailedInfo(phoneId)
       .then((data) => {
         setItem(data as Phone);
@@ -27,7 +50,7 @@ export const ItemCard = () => {
       .catch((error) => {
         throw new Error(error);
       });
-  }, [phoneId]);
+  }, []);
 
   const { isError: isHotError, isLoading: isHotLoading } = useQuery({
     queryKey: ['hotProducts'],
@@ -37,11 +60,33 @@ export const ItemCard = () => {
     },
   });
 
+  const handleFindByColor = (selectedColor: string) => {
+    const finedItem: PhoneCard | undefined = items.find(
+      (item) => item.color === selectedColor,
+    );
+
+    if (finedItem) {
+      const { phoneId } = finedItem;
+      const path = `/phones/${phoneId}`;
+
+      setPhoneId(phoneId);
+
+      window.location.href = path;
+    }
+  };
+
   return (
     <>
+
     <div className="grid">
       <div className="grid__item grid__phone
         grid__item-tablet--1-12 grid__item-desktop--1-24">
+        <div className="line">
+          <LinkLine title={'Phones'}/>
+          <img className="line__arrow" src={rightArrov} alt="right" />
+          <p className='line__id'>{item?.id}</p>
+        </div>
+
         <h1 className='title'>{item?.name}</h1>
       </div>
     </div>
@@ -49,7 +94,7 @@ export const ItemCard = () => {
     <section className="settings">
       <div className="grid">
         <div className="grid__item grid__phone
-        grid__item-tablet--6-12 grid__item-desktop--13-24">
+        grid__item-tablet--8-12 grid__item-desktop--14-24">
           <div className="settings__container">
             <div className="settings__container-colors">
               <p className="settings__title">Available colors</p>
@@ -59,7 +104,12 @@ export const ItemCard = () => {
             <div className="settings__colors">
               {item?.colorsAvailable.map(color => (
                 <div key={color} className="settings__button-color">
-                  <button className={`settings__color settings__color--${color}`}></button>
+                  <button
+                    className={`settings__color settings__color--${color}`}
+                    onClick={() => handleFindByColor(color)}
+                  >
+                  </button>
+                  <span className='settings__button-color_text'>{color}</span>
                 </div>
               ))}
             </div>
@@ -151,7 +201,7 @@ export const ItemCard = () => {
         </div>
 
         <div className="grid__item
-          grid__item-tablet--1-12 grid__item-desktop--13-24">
+          grid__item-tablet--1-12 grid__item-desktop--14-24">
           <h2 className="about__title">Tech specs</h2>
 
           <div className="about__content">

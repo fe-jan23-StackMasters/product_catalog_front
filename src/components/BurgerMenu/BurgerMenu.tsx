@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './BurgerMenu.scss';
 import logo from '../../icons/Logo.svg';
 import cross from '../../icons/Close.svg';
@@ -43,12 +44,20 @@ export const BurgerMenu: React.FC<Props> = ({ toggleMenu }) => {
         </ul>
       </div>
       <div className="menu__content footer">
-        <button className="btn likeButton">
+        <NavLink
+          to='/favourites'
+          className="btn likeButton"
+          onClick={toggleMenu}
+        >
           <img src={like} />
-        </button>
-        <button className="btn cardButton">
+        </NavLink>
+        <NavLink
+          to='/cart'
+          className="btn cardButton"
+          onClick={toggleMenu}
+        >
           <img src={cardIcon} />
-        </button>
+        </NavLink>
       </div>
     </div>
   );

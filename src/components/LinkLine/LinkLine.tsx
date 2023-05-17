@@ -5,7 +5,7 @@ import rightArrov from '../../icons/arrowRight.svg';
 import './LinkLine.scss';
 
 interface Props {
-  title: string;
+  title: string | undefined;
 }
 
 export const LinkLine: FC<Props> = ({ title }) => {

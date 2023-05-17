@@ -66,8 +66,12 @@ export const Header: FC<Props> = ({
                   </li>
                 ))}
               </ul>
-              <input type="search"
-            className="searchInput" placeholder="Search products..." />
+
+              <input
+                type="search"
+                className="searchInput"
+                placeholder="Search products..."
+              />
             </nav>
           )}
         </div>

@@ -12,7 +12,8 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { BurgerMenu } from './components/BurgerMenu';
 import { useState } from 'react';
-import { ItemCard } from './components/ItemCard';
+import { ItemPageScelet } from './components/ItemPageScelet/ItemPageScelet';
+// import { ItemCard } from './components/ItemCard';
 
 export const App = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +40,7 @@ export const App = () => {
 
           <Route path="/phones" element={<Outlet />}>
             <Route index element={<PhonesPage />} />
-            <Route path=":itemCard" element={<ItemCard />} />
+            <Route path=":itemCard" element={<ItemPageScelet />} />
           </Route>
 
           <Route path="/tablets" element={<TabletsPage />} />
