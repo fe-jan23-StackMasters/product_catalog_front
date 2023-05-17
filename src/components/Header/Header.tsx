@@ -66,8 +66,11 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
                   </li>
                 ))}
               </ul>
-              <input type="search"
-            className="searchInput" placeholder="Search products..." />
+              <input
+                type="search"
+                className="searchInput"
+                placeholder="Search products..."
+              />
             </nav>
           )}
         </div>
