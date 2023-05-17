@@ -4,7 +4,7 @@ import { Paginate } from './PageSelector';
 import { ProductCard } from '../ProductCard';
 import { DropDown } from '../DropDown/DropDown';
 import { SortBy } from '../../types/SortBy';
-import { useSearchParams, useLocation, useNavigate } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import { getProducts } from '../../api/requests';
 import { ProductType } from '../../types/ProductType';
 import { PhoneCard } from '../../types/PhoneCard';
@@ -31,9 +31,9 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
   const [isFirstRender, setIsFirstRender] = useState(true);
   const sorts = [SortBy.NAME, SortBy.NEW, SortBy.OLD, SortBy.HIGHT, SortBy.LOW];
   const arrayOfItemsOnPage = ['8', '16', '32', '64'];
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const phones = productInfo?.products;
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const locations = useLocation();
   const sort = searchParams.get('sort');
   const perPage = searchParams.get('perPage');
@@ -91,27 +91,30 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
     }
 
     timer = setTimeout(() => {
-      getDataFromServer();
-      searchParams.set('priceMin', priceMin.toString());
-      searchParams.set('priceMax', priceMax.toString());
+      // searchParams.set('priceMin', priceMin.toString());
+      // searchParams.set('priceMax', priceMax.toString());
 
       if (!isFirstRender) {
-        navigate(
-          `./?page=1&perPage=${perPage}&sort=${sort}&priceMin=${
-            priceMin
-          }&priceMax=${priceMax}`,
-        );
-        setCurrentPage(1);
-      } else {
-        if ((!page || !productInfo?.pages) || (productInfo?.pages < +page)) {
-          setCurrentPage(1);
-        }
+        getDataFromServer();
+        //   navigate(
+        //     `./?page=1&perPage=${perPage}&sort=${sort}&priceMin=${
+        //       priceMin
+        //     }&priceMax=${priceMax}`,
+        //   );
+        //   setCurrentPage(1);
+        // } else {
+        // if ((!page || !productInfo?.pages) || (productInfo?.pages < +page)) {
+        //     setCurrentPage(1);
+        //   }
 
-        navigate(
-          `./?page=${page}&perPage=${perPage}&sort=${sort}&priceMin=${
-            priceMin
-          }&priceMax=${priceMax}`,
-        );
+        //   navigate(
+        //     `./?page=${page}&perPage=${perPage}&sort=${sort}&priceMin=${
+        //       priceMin
+        //     }&priceMax=${priceMax}`,
+        //   );
+
+        searchParams.set('priceMin', priceMin + '');
+        searchParams.set('priceMax', priceMax + '');
       }
 
       setIsFirstRender(false);
@@ -120,19 +123,19 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
     return () => {
       clearTimeout(timer);
     };
-  }, [priceMax, priceMin]);
+  }, [priceMin, priceMax]);
 
-  useEffect(() => {
-    const urlParams = locations.search;
+  // useEffect(() => {
+  //   const urlParams = locations.search;
 
-    if (locations.search.includes('page=')) {
-      const matchPage = urlParams.match(/page=(\d+)/);
+  //   if (locations.search.includes('page=')) {
+  //     const matchPage = urlParams.match(/page=(\d+)/);
 
-      if (matchPage && +matchPage[1] !== currentPage) {
-        setCurrentPage(+matchPage[1]);
-      }
-    }
-  }, [currentPage]);
+  //     if (matchPage && +matchPage[1] !== currentPage) {
+  //       setCurrentPage(+matchPage[1]);
+  //     }
+  //   }
+  // }, [currentPage]);
 
   useEffect(() => {
     setItemsPerPage(perPage || '16');
@@ -173,43 +176,48 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
 
   const handlerDropdownItemPerPage = (returnedValue: string) => {
     if (currentPage !== 1) {
-      navigate(
-        `./?page=1&perPage=${returnedValue}&sort=${
-          sort || SortBy.NEW
-        }&priceMin=${priceMin || 0}&priceMax=${priceMax || 5000}`,
-      );
-      setCurrentPage(1);
-    } else {
-      navigate(
-        `./?page=${page || '1'}&perPage=${returnedValue}&sort=${
-          sort || SortBy.NEW
-        }&priceMin=${priceMin || 0}&priceMax=${priceMax || 5000}`,
-      );
+    //   navigate(
+    //     `./?page=1&perPage=${returnedValue}&sort=${
+    //       sort || SortBy.NEW
+    //     }&priceMin=${priceMin || 0}&priceMax=${priceMax || 5000}`,
+    //   );
+    //   setCurrentPage(1);
+    // } else {
+    //   navigate(
+    //     `./?page=${page || '1'}&perPage=${returnedValue}&sort=${
+    //       sort || SortBy.NEW
+    //     }&priceMin=${priceMin || 0}&priceMax=${priceMax || 5000}`,
+    //   );
     }
 
     searchParams.set('perPage', returnedValue);
     setItemsPerPage(returnedValue);
     perPageParamValidator = returnedValue;
+    setSearchParams(searchParams);
   };
 
   const handlerDropdownSortBy = (returnedValue: string) => {
-    if (currentPage !== 1) {
-      navigate(`./?page=1&perPage=${perPage}&sort=${returnedValue}&priceMin=${priceMin || 0}&priceMax=${priceMax || 5000}`);
-      setCurrentPage(1);
-    } else {
-      navigate(
-        `./?page=${page}&perPage=${perPage}&sort=${returnedValue}&priceMin=${
-          priceMin || 0
-        }&priceMax=${priceMax || 5000}`,
-      );
-    }
+    // if (currentPage !== 1) {
+    //   navigate(`./?page=1&perPage=${perPage}&sort=${
+    // returnedValue}&priceMin=${priceMin || 0}&priceMax=${priceMax || 5000}`);
+    //   setCurrentPage(1);
+    // } else {
+    //   navigate(
+    //     `./?page=${page}&perPage=${perPage}&sort=${returnedValue}&priceMin=${
+    //       priceMin || 0
+    //     }&priceMax=${priceMax || 5000}`,
+    //   );
+    // }
 
     searchParams.set('sort', returnedValue);
 
-    setSortBy(
-      sorts.find((by) => by.toString() === returnedValue) || SortBy.NEW,
-    );
+    setSortBy(sorts
+      .find((by) => by.toString() === returnedValue) || SortBy.NEW);
     sortParamValidator = returnedValue;
+
+    // if (!isFirstRender) {
+    setSearchParams(searchParams);
+    // }
   };
 
   const windowWidth = window.innerWidth;
