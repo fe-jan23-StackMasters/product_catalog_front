@@ -45,7 +45,7 @@ export const ItemCard = () => {
 
     setPhoneId(productId);
 
-    // window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
 
     getDetailedInfo(productId)
       .then((data) => {
