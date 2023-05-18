@@ -41,18 +41,23 @@
   }
 
   &__small-title {
+    width: 270px;
+    background-color: #4a4d58;
+    border-radius: 4px;
     font-family: 'Mont';
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
     line-height: 26px;
-    color: $white-color;
+    color: #4a4d58;
     margin-bottom: 16px;
   }
 
   &__text {
-    height: 250px;
+    height: 24px;
+    margin-bottom: 10px;
     background-color: #4a4d58;
+    border-radius: 4px;
     animation: pulse 1s ease-in-out infinite alternate;
   }
 
@@ -75,12 +80,36 @@
     font-size: 12px;
     background-color: #4a4d58;
     color: #4a4d58;
+    border-radius: 4px;
     animation: pulse 1s ease-in-out infinite alternate;
   }
 }
 
 .scelet-settings {
   @include max-block;
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    border-radius: 4px;
+    animation: pulse 1s ease-in-out infinite alternate;
+  }
+
+  &__cart-button {
+    height: 50px;
+    width: 90%;
+    background-color: #4a4d58;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+
+  &__fav-button {
+    height: 50px;
+    width: 10%;
+    border-radius: 4px;
+    background-color: #4a4d58;
+  }
 
   &__container-colors {
     @include top-actions;
@@ -103,10 +132,10 @@
 
     &-div {
       height: 12px;
-      width: 77px;
+      width: 35px;
       background-color: #4a4d58;
       animation: pulse 1s ease-in-out infinite alternate;
-
+      border-radius: 4px;
     }
   }
 
@@ -163,6 +192,7 @@
     padding-bottom: 24px;
     border-bottom: 1px solid #3B3E4A;
     margin-bottom: 24px;
+    border-radius: 4px;
     animation: pulse 1s ease-in-out infinite alternate;
 
 
@@ -181,9 +211,11 @@
     border: 1px solid #4a4d58;
     padding: 8px;
     background-color: $black-color;
+    border-radius: 4px;
     color: $white-color;
 
     &_in {
+      border-radius: 4px;
       background-color: #4a4d58;
       height: 14px;
       width: 40px;
@@ -194,7 +226,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding-bottom: 16px;
+    border-radius: 4px;
     animation: pulse 1s ease-in-out infinite alternate;
   }
 
@@ -205,18 +237,20 @@
     font-style: normal;
     font-weight: 800;
     font-size: 32px;
-    line-height: 41px;
+    line-height: 30px;
+    border-radius: 4px;
     color: #4a4d58;
   }
 
   &__add-prev-price {
     background-color: #4a4d58;
+    border-radius: 4px;
 
     font-family: 'Mont';
     font-style: normal;
     font-weight: 600;
     font-size: 22px;
-    line-height: 28px;
+    line-height: 24px;
     text-decoration-line: line-through;
     color: #4a4d58;
   }
@@ -241,9 +275,21 @@
 }
 
 .scelet-title {
-  @include max-block;
-
+  height: 75px;
+  width: 420px;
+  background-color: #4a4d58;
   margin-bottom: 40px;
+  border-radius: 4px;
+  animation: pulse 1s ease-in-out infinite alternate;
+
+  @include onTablet {
+    width: 630px;
+    height: 50px;
+  }
+  @include onDesktop {
+    width: 900px;
+    height: 50px;
+  }
 }
 
 .scelet-slider {
@@ -256,12 +302,15 @@
 }
 
 .scelet-line {
-  display: flex;
-  text-align: left;
-  max-width: 1200px;
-
+  width: 350px;
   height: 15px;
-  width: 40%;
-  margin-bottom: 40px;
+  background-color: #4a4d58;
+  color: #4a4d58;
+  margin-bottom: 45px;
+  border-radius: 4px;
   animation: pulse 1s ease-in-out infinite alternate;
+}
+
+.page {
+  @include max-block;
 }

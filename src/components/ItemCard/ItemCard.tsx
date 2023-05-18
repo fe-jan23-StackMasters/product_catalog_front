@@ -11,6 +11,7 @@ import './itemCard.scss';
 import rightArrov from '../../icons/arrowRight.svg';
 import { LinkLine } from '../LinkLine';
 import { Link, useLocation } from 'react-router-dom';
+import { colorsObject } from './colorsObject';
 
 export const ItemCard = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -43,7 +44,7 @@ export const ItemCard = () => {
 
     setPhoneId(productId);
 
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
 
     getDetailedInfo(productId)
       .then((data) => {
@@ -95,17 +96,19 @@ export const ItemCard = () => {
             <div className="settings__container">
               <div className="settings__container-colors">
                 <p className="settings__title">Available colors</p>
-                <p className="settings__title">ID: {item?.id}</p>
+                <p className="settings__title">ID: {item?.productId}</p>
               </div>
 
               <div className="settings__colors">
                 {item?.colorsAvailable.map(color => (
                   <div key={color} className="settings__button-color">
                     <Link
-                      to={`/phones/${item.namespaceId}-${item.capacity}-${color}`}
+                      to={`/phones/${item.namespaceId}-${item.capacity.toLowerCase()}-${color}`}
                       title={color}
-                      className={`settings__color settings__color--${color}`}
-                      // onClick={() => handleFindByColor(color)}
+                      style={{
+                        backgroundColor: colorsObject[color],
+                      }}
+                      className={`settings__color settingss__color--${color}`}
                     >
                     </Link>
                   </div>
@@ -117,9 +120,12 @@ export const ItemCard = () => {
 
             <div className="settings__capacities">
               {item?.capacityAvailable.map(capacity => (
-                <button key={capacity} className="settings__button-capacity">
+                <Link
+                  to={`/phones/${item.namespaceId}-${capacity.toLowerCase()}-${item.color}`}
+                  key={capacity} className="settings__button-capacity"
+                >
                   {capacity}
-                </button>
+                </Link>
               ))}
             </div>
 

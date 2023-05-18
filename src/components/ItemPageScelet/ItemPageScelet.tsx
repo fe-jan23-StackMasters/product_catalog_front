@@ -3,14 +3,12 @@ import './itemPageScelet.scss';
 
 export const ItemPageScelet = () => {
   return (
-    <>
+    <div className='page'>
     <div className="grid">
       <div className="grid__item grid__phone
         grid__item-tablet--1-12 grid__item-desktop--1-24">
-        <div className="scelet-line">
-        </div>
-
-        <h1 className='scelet-title'>Apple iPhone</h1>
+        <div className="scelet-line"></div>
+        <div className='scelet-title'></div>
       </div>
     </div>
 
@@ -82,6 +80,11 @@ export const ItemPageScelet = () => {
             </div>
           </div>
 
+          <div className="scelet-settings__buttons">
+            <div className="scelet-settings__cart-button"></div>
+            <div className="scelet-settings__fav-button"></div>
+          </div>
+
           <div className="scelet-settings__add-tablet">
           <div className="scelet-about__option">
               <p className="scelet-about__option-name">screen</p>
@@ -116,16 +119,31 @@ export const ItemPageScelet = () => {
 
               <div className="scelet-about__content">
                 <div className="scelet-about__container">
-                  <h3 className="scelet-about__small-title">
+                  <div className="scelet-about__small-title
+                  scelet-about__small-titlee">
                     And then...
-                  </h3>
+                  </div>
 
+                  <div className="scelet-about__text"></div>
+                  <div className="scelet-about__text"></div>
+                  <div className="scelet-about__text"></div>
+                  <div className="scelet-about__text"></div>
+                  <div className="scelet-about__text"></div>
+                  <div className="scelet-about__text"></div>
+                  <div className="scelet-about__text"></div>
                   <div className="scelet-about__text"></div>
 
                   <h3 className="scelet-about__small-title">
                     Camera
                   </h3>
 
+                  <div className="scelet-about__text"></div>
+                  <div className="scelet-about__text"></div>
+                  <div className="scelet-about__text"></div>
+                  <div className="scelet-about__text"></div>
+                  <div className="scelet-about__text"></div>
+                  <div className="scelet-about__text"></div>
+                  <div className="scelet-about__text"></div>
                   <div className="scelet-about__text"></div>
               </div>
             </div>
@@ -196,6 +214,6 @@ export const ItemPageScelet = () => {
         </div>
       </div>
     </section>
-    </>
+    </div>
   );
 };
