@@ -1,9 +1,10 @@
-import { useEffect, useRef, FC, useState, useCallback } from 'react';
+import React, { useEffect, useRef, FC, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SearchLine.scss';
 import dandruff from '../../icons/Search.svg';
 import close from '../../icons/Close.svg';
 import classNames from 'classnames';
+import { motion, AnimatePresence } from 'framer-motion';
 
 type Props = {
   isOpen: boolean;
@@ -59,7 +60,7 @@ export const SearchLine: FC<Props> = ({
   // }, []);
 
   return (
-    <div className="searchLine" id="test" >
+    <div className={classNames('searchLine', { 'searchLine--active': isOpen })}>
       <img
         src={dandruff}
         alt="dandruff"
@@ -68,29 +69,46 @@ export const SearchLine: FC<Props> = ({
         })}
         onClick={redirectPage}
       />
-      {isOpen && (
-        <div className="searchLine__container">
-          <input
-            ref={inputRef}
-            type="text"
-            className="searchLine__container-input"
-            placeholder="Search"
-            onBlur={() => {
-              redirectPage();
-              closeInput();
-            }}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
 
-          <img
-            src={close}
-            alt="close"
-            className="searchLine__container-image"
-            onClick={() => closeInput()}
-          />
-        </div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <form className="searchLine__container">
+            <motion.input
+              ref={inputRef}
+              key={'/'}
+              initial={{ width: 0 }}
+              animate={{ width: 200 }}
+              exit={{
+                width: 0,
+                paddingLeft: 0,
+                paddingRight: 0,
+              }}
+              transition={{ duration: 0.2 }}
+              type="text"
+              className="searchLine__container-input"
+              placeholder="Search"
+              onBlur={() => {
+                redirectPage();
+                closeInput();
+              }}
+              value={searchQuery}
+              // eslint-disable-next-line max-len
+              onChange={(event: { target: { value: React.SetStateAction<string>; }; }) => setSearchQuery(event.target.value)}
+            />
+
+            <motion.img
+              src={close}
+              alt="close search"
+              initial={{ display: 'none' }}
+              animate={{ display: 'block' }}
+              exit={{ display: 'none' }}
+              transition={{ duration: 0 }}
+              className="searchLine__container-image"
+              onClick={() => closeInput()}
+            />
+          </form>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

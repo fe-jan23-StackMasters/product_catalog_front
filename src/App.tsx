@@ -15,25 +15,32 @@ import { useState } from 'react';
 import { ItemCard } from './components/ItemCard';
 import { SearchPage } from './components/SearchPage';
 
+import { AnimatePresence } from 'framer-motion';
+
 import { ProductType } from './types/ProductType';
 
 const categories = Object.values(ProductType);
 
 export const App = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
-    document.body.classList.toggle('no-scroll');
+    setIsBurgerOpen(!isBurgerOpen);
+
+    setTimeout(
+      () => {
+        document.body.classList.toggle('no-scroll');
+      },
+      !isBurgerOpen ? 300 : 0,
+    );
   };
 
   return (
     <>
-      {!isOpen ? (
-        <Header toggleMenu={toggleMenu} />
-      ) : (
-        <BurgerMenu toggleMenu={toggleMenu} />
-      )}
+      <Header toggleMenu={toggleMenu} isMenuOpen={isBurgerOpen}/>
+      <AnimatePresence>
+        {isBurgerOpen && <BurgerMenu toggleMenu={toggleMenu} />}
+      </AnimatePresence>
 
       <main className="main">
         <Routes>
