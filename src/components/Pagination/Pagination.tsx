@@ -140,6 +140,10 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
 
   useEffect(() => {
     getDataFromServer();
+  }, [productType]);
+
+  useEffect(() => {
+    getDataFromServer();
   }, [itemsPerPage, sortBy]);
 
   useEffect(() => {
