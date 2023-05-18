@@ -95,17 +95,16 @@ export const ItemCard = () => {
             <div className="settings__container">
               <div className="settings__container-colors">
                 <p className="settings__title">Available colors</p>
-                <p className="settings__title">ID: {item?.id}</p>
+                <p className="settings__title">ID: {item?.productId}</p>
               </div>
 
               <div className="settings__colors">
                 {item?.colorsAvailable.map(color => (
                   <div key={color} className="settings__button-color">
                     <Link
-                      to={`/phones/${item.namespaceId}-${item.capacity}-${color}`}
+                      to={`/phones/${item.namespaceId}-${item.capacity.toLowerCase()}-${color}`}
                       title={color}
                       className={`settings__color settings__color--${color}`}
-                      // onClick={() => handleFindByColor(color)}
                     >
                     </Link>
                   </div>
