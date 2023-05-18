@@ -32,7 +32,6 @@ export const BurgerMenu: React.FC<Props> = ({ toggleMenu }) => {
         <ul className="menu__content-list">
           {menuList.map((item) => (
             <li className="menu__content-list item" key={item}>
-              {/* {item} */}
               <PageNavLinkBurger
                 to={`/${item}`}
                 text={item}
@@ -44,10 +43,14 @@ export const BurgerMenu: React.FC<Props> = ({ toggleMenu }) => {
       </div>
       <div className="menu__content footer">
         <button className="btn likeButton">
-          <img src={like} />
+          <a href='/favorutes' className='btn-url'>
+            <img src={like} />
+          </a>
         </button>
         <button className="btn cardButton">
-          <img src={cardIcon} />
+          <a href='/cart' className='btn-url'>
+            <img src={cardIcon} />
+          </a>
         </button>
       </div>
     </div>

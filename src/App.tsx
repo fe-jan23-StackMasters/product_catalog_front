@@ -15,6 +15,10 @@ import { useState } from 'react';
 import { ItemCard } from './components/ItemCard';
 import { Querypage } from './components/QeuryPage';
 
+import { ProductType } from './types/ProductType';
+
+const categories = Object.values(ProductType);
+
 export const App = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,12 +40,15 @@ export const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<Navigate to="/" replace />} />
 
-          <Route path="/phones" element={<Outlet />}>
-            <Route index element={<PhonesPage />} />
-            <Route path=":itemCard" element={<ItemCard />} />
-          </Route>
-          <Route path="/search" element={<Querypage />} />
+          {categories.map(category => (
+            <Route path={category} key={category} element={<Outlet />}>
+              <Route index element={<PhonesPage
+                productType={category}/>} />
+              <Route path=":itemCard" element={<ItemCard />} />
+            </Route>
+          ))}
 
+          <Route path="/search" element={<Querypage />} />
           <Route path="/tablets" element={<TabletsPage />} />
           <Route path="/accessories" element={<AccessoriesPage />} />
           <Route path="/favourites" element={<FavouritesPage />} />
