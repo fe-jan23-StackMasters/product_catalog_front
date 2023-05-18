@@ -5,6 +5,7 @@ import { Container } from '../Container';
 import { Link, NavLink } from 'react-router-dom';
 import leftArrov from '../../icons/arrowLeft.svg';
 import { useLocalStorageContext } from '../../context/StorageContext';
+import { AnimatePresence } from 'framer-motion';
 
 export const ShoppingBasket = () => {
   const { totalPrice, totalQuantity, cartItems } = useLocalStorageContext();
@@ -30,11 +31,13 @@ export const ShoppingBasket = () => {
         </Container>
       ) : (
         <div className="basket">
-          <div className="basket__cards">
-            {cartItems.map((product) => (
-              <BasketCard key={product.info.id} product={product} />
-            ))}
-          </div>
+          <ul className="basket__cards">
+            <AnimatePresence>
+              {cartItems.map((product) => (
+                <BasketCard key={product.info.id} product={product} />
+              ))}
+            </AnimatePresence>
+          </ul>
 
           <div className="basket__total">
             <span className="basket__total-price">{`$${totalPrice}`}</span>

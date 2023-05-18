@@ -22,6 +22,10 @@ interface Props {
   query?: string | undefined;
 }
 
+const sorts = [SortBy.NAME, SortBy.NEW, SortBy.OLD, SortBy.HIGHT, SortBy.LOW];
+
+const arrayOfItemsOnPage = ['8', '16', '32', '64'];
+
 export const Pagination: React.FC<Props> = ({ productType, query }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -30,8 +34,6 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
   const [sortBy, setSortBy] = useState<SortBy>(SortBy.NEW);
   const [productInfo, setProductInfo] = useState<RequestWithParamsResult>();
   const [isFirstRender, setIsFirstRender] = useState(true);
-  const sorts = [SortBy.NAME, SortBy.NEW, SortBy.OLD, SortBy.HIGHT, SortBy.LOW];
-  const arrayOfItemsOnPage = ['8', '16', '32', '64'];
   const [searchParams, setSearchParams] = useSearchParams();
   const phones = productInfo?.products;
   const sort = searchParams.get('sort');
@@ -39,10 +41,10 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
   const page = searchParams.get('page');
   const priceMinFromUrl = searchParams.get('priceMin');
   const priceMaxFromUrl = searchParams.get('priceMax');
-  let sortParamValidator = sorts
-    .find((by) => by.toString() === sort) || 'newest';
-  let perPageParamValidator = arrayOfItemsOnPage
-    .find((by) => by.toString() === perPage) || '16';
+  let sortParamValidator
+    = sorts.find((by) => by.toString() === sort) || 'newest';
+  let perPageParamValidator
+    = arrayOfItemsOnPage.find((by) => by.toString() === perPage) || '16';
   const skeletons = Array.from(
     { length: Number(perPageParamValidator) },
     (_, index) => index + 1,
@@ -204,7 +206,8 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
 
       <div className="phonesPage__dropDown">
         <div className="phonesPage__dropDown--sortBy">
-          Sort By
+          <p className="phonesPage__dropDown-title">Sort by</p>
+
           <DropDown
             variables={sorts}
             getValueFromDropDown={handlerDropdownSortBy}
@@ -214,7 +217,8 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
         </div>
 
         <div className="phonesPage__dropDown--itemsOnPage">
-          Items on page
+          <p className="phonesPage__dropDown-title">Items on page</p>
+
           <DropDown
             variables={arrayOfItemsOnPage}
             getValueFromDropDown={handlerDropdownItemPerPage}
@@ -225,7 +229,8 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
 
         {windowWidth >= 640 && (
           <div className="phonesPage__priceSlider">
-            Price
+            <p className="phonesPage__dropDown-title">Price</p>
+
             <PriceSlider
               priceMin={priceMin}
               priceMax={priceMax}
@@ -253,8 +258,8 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
           {isLoading ? (
             skeletons.map((skeleton) => <ProductCardSkeleton key={skeleton} />)
           ) : phones !== undefined ? (
-            phones.length === 0 ? (
-              <h2>There is nothing</h2>
+            phones?.length === 0 ? (
+              <h2 className="pagination__nothing">Nothing found 😔</h2>
             ) : (
               phones.map((product) => (
                 <ProductCard product={product} key={product.id} />
@@ -265,7 +270,7 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
           )}
         </div>
         {!isError && !isLoading && (
-          <Paginate currentPage={currentPage} pages={productInfo?.pages || 1} />
+          <Paginate currentPage={currentPage} pages={productInfo?.pages || 0} />
         )}
       </div>
     </>

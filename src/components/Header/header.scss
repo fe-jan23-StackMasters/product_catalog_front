@@ -49,17 +49,6 @@
     &--is-active {
       position: relative;
     }
-
-    &--is-active::after {
-      left: 0;
-      right: 0;
-      bottom: 0;
-      position: absolute;
-      content: '';
-      background-color: $white-color;
-      height: 4px;
-      display: block;
-    }
   }
 
   &__menu-opener_image {
@@ -182,14 +171,12 @@
       color: $white-color;
     }
 
-    &--is-active::after {
-      bottom: 0;
-      width: 100%;
+    &-underline {
       position: absolute;
-      content: '';
-      background-color: $white-color;
+      bottom: 0;
       height: 4px;
-      display: block;
+      width: 100%;
+      background-color: $white-color;
     }
   }
 }
