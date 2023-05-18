@@ -48,7 +48,7 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
     <header className="header">
       <div className="header__content">
         <div className="header__right-side">
-          {((windowSize > 420 && windowSize < 828) && isOpen) && (
+          {windowSize > 420 && windowSize < 828 && isOpen && (
             <NavLink to="/" className="logo">
               <img className="logo__image" src={logoItem} alt="Logo icon" />
               <img className="logo__ok" src={logoItemOk} alt="ok" />

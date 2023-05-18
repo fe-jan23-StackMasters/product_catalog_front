@@ -1,4 +1,4 @@
-import { useEffect, useRef, FC } from 'react';
+import { useEffect, useRef, FC, useState } from 'react';
 import './SearchLine.scss';
 import dandruff from '../../icons/Search.svg';
 import close from '../../icons/Close.svg';
@@ -15,6 +15,7 @@ export const SearchLine: FC<Props> = ({
   handleOpenInput,
   setIsOpen,
 }) => {
+  const [searchQuery, setSearchQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -22,6 +23,12 @@ export const SearchLine: FC<Props> = ({
       inputRef.current?.focus();
     }
   }, [isOpen]);
+
+  const redirectPage = () => {
+    window.location.href = `http://localhost:3000/search?query=${searchQuery}`;
+    // eslint-disable-next-line max-len
+    // window.location.href = 'https://nice-gadgets-stack-masters.netlify.app/search';
+  };
 
   return (
     <div className="searchLine">
@@ -40,14 +47,23 @@ export const SearchLine: FC<Props> = ({
             type="text"
             className="searchLine__container-input"
             placeholder="Search"
-            onBlur={() => setIsOpen(false)}
+            onBlur={() => {
+              setIsOpen(false);
+              setSearchQuery('');
+              redirectPage();
+            }}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
 
           <img
             src={close}
             alt="close"
             className="searchLine__container-image"
-            onClick={() => setIsOpen(false)}
+            onClick={() => {
+              setIsOpen(false);
+              setSearchQuery('');
+            }}
           />
         </div>
       )}

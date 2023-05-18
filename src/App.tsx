@@ -13,6 +13,7 @@ import { Footer } from './components/Footer';
 import { BurgerMenu } from './components/BurgerMenu';
 import { useState } from 'react';
 import { ItemCard } from './components/ItemCard';
+import { Querypage } from './components/QeuryPage';
 
 export const App = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,6 +40,7 @@ export const App = () => {
             <Route index element={<PhonesPage />} />
             <Route path=":itemCard" element={<ItemCard />} />
           </Route>
+          <Route path="/search" element={<Querypage />} />
 
           <Route path="/tablets" element={<TabletsPage />} />
           <Route path="/accessories" element={<AccessoriesPage />} />
