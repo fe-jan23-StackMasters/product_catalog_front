@@ -22,14 +22,7 @@ export const App = () => {
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
 
   const toggleMenu = () => {
-    setIsBurgerOpen(!isBurgerOpen);
-
-    setTimeout(
-      () => {
-        document.body.classList.toggle('no-scroll');
-      },
-      !isBurgerOpen ? 300 : 0,
-    );
+    setIsBurgerOpen(prev => !prev);
   };
 
   return (

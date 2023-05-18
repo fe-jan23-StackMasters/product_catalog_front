@@ -24,11 +24,11 @@ export const BasketCard: React.FC<Props> = ({ product }) => {
       className="basket__card"
       initial={{
         opacity: 0,
-        translateX: -100,
+        translateY: -100,
       }}
       animate={{
         opacity: 1,
-        translateX: 0,
+        translateY: 0,
       }}
       exit={{
         height: 0,
