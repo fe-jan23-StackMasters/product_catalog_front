@@ -3,6 +3,7 @@
 .dropdown {
   width: 100%;
   z-index: 11;
+  position: relative;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
@@ -40,17 +41,27 @@
 .dropdown_content {
   position: absolute;
   width: 100%;
+  top: 40px;
   left: 0;
   right: 0;
   opacity: 0;
-  transform: translateY(-100%);
-  transition: 1s;
   box-sizing: border-box;
-  z-index: 10;
+  z-index: 5;
   pointer-events: none;
-  margin-top: 4px;
   border: 1px $elements-color solid;
   box-shadow: 0px 2px 15px 0px #0000000d;
+  background-color: $black-color;
+  transition: 0.3s;
+
+  &--active {
+    display: block;
+    opacity: 1;
+    pointer-events: all;
+
+    & .dropdown_content-item {
+      height: 40px;
+    }
+  }
 
   &-item {
     display: flex;
@@ -59,9 +70,11 @@
     align-items: center;
     color: $secondary-color;
     width: 100%;
-    height: 40px;
+    height: 0px;
+    background-color: $black-color;
     text-align: left;
     background-color: $black-color;
+    transition: height 0.3s;
 
     &:hover {
       background-color: $surface2-color;
@@ -86,10 +99,4 @@
   transform: rotate(270deg);
 }
 
-.active-drop {
-  display: block;
-  opacity: 1;
-  transition: 0.5s;
-  pointer-events: all;
-  transform: translateY(0%);
-}
+

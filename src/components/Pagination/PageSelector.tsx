@@ -38,6 +38,10 @@ export const Paginate: React.FC<Props> = ({
     }
   };
 
+  if (pages === 0) {
+    return null;
+  }
+
   return (
     <>
       <ul className="pagination__page">
