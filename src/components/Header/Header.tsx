@@ -1,5 +1,5 @@
 import { FC, useEffect, useState, useCallback } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import logo from '../../icons/Logo.svg';
 import favoritesHart from '../../icons/favourites.svg';
 import shoppingBag from '../../icons/shoppingBag.svg';
@@ -21,6 +21,9 @@ export const Header: FC<Props> = ({ toggleMenu, isMenuOpen }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
 
   const { favorites, cartItems } = useLocalStorageContext();
+
+  const location = useLocation();
+  const page = location.pathname;
 
   useEffect(() => {
     const handleResize = () => {
@@ -111,6 +114,12 @@ export const Header: FC<Props> = ({ toggleMenu, isMenuOpen }) => {
                   </span>
                 )}
               </div>
+              {page === '/favourites' ? (
+                <motion.div
+                  className="nav__link-underline"
+                  layoutId="underline"
+                />
+              ) : null}
             </NavLink>
 
             <NavLink
@@ -133,6 +142,12 @@ export const Header: FC<Props> = ({ toggleMenu, isMenuOpen }) => {
                   </span>
                 )}
               </div>
+              {page === '/cart' ? (
+                <motion.div
+                  className="nav__link-underline"
+                  layoutId="underline"
+                />
+              ) : null}
             </NavLink>
           </div>
         ) : (
@@ -142,7 +157,7 @@ export const Header: FC<Props> = ({ toggleMenu, isMenuOpen }) => {
               handleOpenInput={handleOpenInput}
               setIsOpen={setIsSearchOpen}
             />
-            <MenuToggler isOpen={isMenuOpen} onToggle={toggleMenu}/>
+            <MenuToggler isOpen={isMenuOpen} onToggle={toggleMenu} />
           </div>
         )}
       </div>

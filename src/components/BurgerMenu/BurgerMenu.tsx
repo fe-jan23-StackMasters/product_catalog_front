@@ -26,7 +26,7 @@ export const BurgerMenu: React.FC<Props> = ({ toggleMenu }) => {
         transform: 'translateX(0)',
       }}
       exit={{
-        transform: 'translateX(-100%)',
+        transform: 'translateX(100%)',
       }}
       transition={{ duration: 0.2 }}
     >

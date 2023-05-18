@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import classNames from 'classnames';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export type Props = {
   to: string;
@@ -14,6 +15,9 @@ export const PageNavLink: FC<Props> = ({ to, text }) => {
     href = '/';
   }
 
+  const location = useLocation();
+  const page = location.pathname;
+
   return (
     <NavLink
       to={href}
@@ -22,6 +26,9 @@ export const PageNavLink: FC<Props> = ({ to, text }) => {
       }
     >
       {text}
+      {href === page ? (
+        <motion.div className="nav__link-underline" layoutId="underline" />
+      ) : null}
     </NavLink>
   );
 };
