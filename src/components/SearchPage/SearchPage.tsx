@@ -16,7 +16,16 @@ export const SearchPage = () => {
   return (
     <Container>
       <LinkLine title="Search" />
-      <h1 className="phonesPage__header">Search</h1>
+      {query ? (
+        <h2 className="phonesPage__header">
+          {`Search for results - ${query}`}
+        </h2>
+      ) : (
+        <h2 className="phonesPage__header">
+          All products
+      </h2>
+      )}
+
       <Pagination
        productType={[
          ProductType.PHONE,

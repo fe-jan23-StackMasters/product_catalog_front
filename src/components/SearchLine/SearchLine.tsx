@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, FC, useState, useCallback } from 'react';
+import { useEffect, useRef, FC, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SearchLine.scss';
 import dandruff from '../../icons/Search.svg';
@@ -8,13 +8,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 type Props = {
   isOpen: boolean;
-  handleOpenInput: () => void;
   setIsOpen: (value: boolean) => void;
 };
 
 export const SearchLine: FC<Props> = ({
   isOpen,
-  handleOpenInput,
   setIsOpen,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -39,25 +37,25 @@ export const SearchLine: FC<Props> = ({
       navigate('/search')
     );
 
-    handleOpenInput();
+    setIsOpen(false);
   };
 
-  // const searhDevice = useCallback(
-  //   (event: KeyboardEvent) => {
-  //     if (event.key === 'Enter') {
-  //       event.preventDefault();
-  //       redirectPage();
-  //     }
-  //   }, [],
-  // );
+  const searhDevice = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeInput();
+      }
+    }, [],
+  );
 
-  // useEffect(() => {
-  //   document.addEventListener('keyup', searhDevice);
+  useEffect(() => {
+    document.addEventListener('keyup', searhDevice);
 
-  //   return () => {
-  //     document.removeEventListener('keyup', searhDevice);
-  //   };
-  // }, []);
+    return () => {
+      document.removeEventListener('keyup', searhDevice);
+    };
+  }, []);
 
   return (
     <div className={classNames('searchLine', { 'searchLine--active': isOpen })}>
@@ -67,12 +65,18 @@ export const SearchLine: FC<Props> = ({
         className={classNames('searchLine__image', {
           'searchLine__image-position': isOpen,
         })}
-        onClick={redirectPage}
+        onClick={() => setIsOpen(true)}
       />
 
       <AnimatePresence>
         {isOpen && (
-          <form className="searchLine__container">
+          <form
+            className="searchLine__container"
+            onSubmit={(e) => {
+              e.preventDefault();
+              redirectPage();
+            }}
+          >
             <motion.input
               ref={inputRef}
               key={'/'}
@@ -92,8 +96,7 @@ export const SearchLine: FC<Props> = ({
                 closeInput();
               }}
               value={searchQuery}
-              // eslint-disable-next-line max-len
-              onChange={(event: { target: { value: React.SetStateAction<string>; }; }) => setSearchQuery(event.target.value)}
+              onChange={(event) => setSearchQuery(event.target.value)}
             />
 
             <motion.img
