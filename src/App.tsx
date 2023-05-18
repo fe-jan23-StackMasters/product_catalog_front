@@ -25,9 +25,7 @@ export const App = () => {
   return (
     <>
       {!isOpen ? (
-        <Header
-        toggleMenu={toggleMenu}
-        />
+        <Header toggleMenu={toggleMenu} />
       ) : (
         <BurgerMenu toggleMenu={toggleMenu} />
       )}

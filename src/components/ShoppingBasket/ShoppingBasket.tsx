@@ -1,65 +1,24 @@
-import { useMemo, useState } from 'react';
 import { BasketCard } from '../BasketCard';
 import { Button } from '../Button';
 import './ShoppingBasket.scss';
-import { StorageProduct } from '../../types/StorageProduct';
-import { ActionBasket } from '../../types/ActionBasket';
 import { Container } from '../Container';
 import { Link, NavLink } from 'react-router-dom';
 import leftArrov from '../../icons/arrowLeft.svg';
+import { useLocalStorageContext } from '../../context/StorageContext';
 
 export const ShoppingBasket = () => {
-  const [phones, setPhones] = useState<StorageProduct[]>([]);
-  const phonesFromStorage = JSON.parse(localStorage.getItem('cart') || '');
-
-  const handleRemovePhone = (id: string) => {
-    const filteredPhones = phones.filter((product) => product.info.id !== id);
-
-    localStorage.setItem('cart', JSON.stringify(filteredPhones));
-
-    setPhones(filteredPhones);
-  };
-
-  const handleAddOrRemoveQuantity = (phoneId: string, action: ActionBasket) => {
-    const updatedPhones = phones.map((phone) => {
-      if (phone.info.id === phoneId) {
-        if (action === 'add') {
-          phone.quantity = phone.quantity + 1;
-        } else {
-          phone.quantity = +phone.quantity - 1;
-        }
-      }
-
-      return phone;
-    });
-
-    localStorage.setItem('cart', JSON.stringify(updatedPhones));
-
-    setPhones(updatedPhones);
-  };
-
-  useMemo(() => {
-    setPhones(phonesFromStorage);
-  }, []);
-
-  const totalPrice = phones.reduce((acc, curr) => {
-    return acc + curr.info.price * curr.quantity;
-  }, 0);
-
-  const totalItems = phones.reduce((acc, curr) => {
-    return acc + +curr.quantity;
-  }, 0);
+  const { totalPrice, totalQuantity, cartItems } = useLocalStorageContext();
 
   return (
     <Container>
-      <Link to="/home" className="backLink" >
+      <Link to="/home" className="backLink">
         <img className="backLink__image" src={leftArrov} alt="left" />
         Back
       </Link>
 
       <h1 className="title">Cart</h1>
 
-      {!totalItems ? (
+      {!cartItems.length ? (
         <Container>
           <h2 className="basket__title">Ooops... Your basket is empty</h2>
 
@@ -72,13 +31,8 @@ export const ShoppingBasket = () => {
       ) : (
         <div className="basket">
           <div className="basket__cards">
-            {phones.map((product) => (
-              <BasketCard
-                key={product.info.id}
-                product={product}
-                handleRemovePhone={handleRemovePhone}
-                handleAddOrRemoveQuantity={handleAddOrRemoveQuantity}
-              />
+            {cartItems.map((product) => (
+              <BasketCard key={product.info.id} product={product} />
             ))}
           </div>
 
@@ -86,7 +40,7 @@ export const ShoppingBasket = () => {
             <span className="basket__total-price">{`$${totalPrice}`}</span>
 
             <span className="basket__total-description">
-              {`Total for ${totalItems} items`}
+              {`Total for ${totalQuantity} items`}
             </span>
 
             <Button width="100%" height="48px" type="btn__add">

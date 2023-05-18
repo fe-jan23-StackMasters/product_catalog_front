@@ -12,12 +12,12 @@ interface Props {
   product: PhoneCard;
 }
 
-export const AddToFavourites: React.FC<Props> = ({
-  size,
-  product,
-}) => {
-  const { addToFavorites, removeFromFavorites, isInFavorites }
-    = useLocalStorageContext();
+export const AddToFavourites: React.FC<Props> = ({ size, product }) => {
+  const {
+    addToFavorites,
+    removeFromFavorites,
+    isInFavorites,
+  } = useLocalStorageContext();
 
   const isFavorite = isInFavorites(product.id);
 

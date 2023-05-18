@@ -1,0 +1,61 @@
+@import '../../styles/variables.scss';
+@import '../../styles/utils/mixins';
+
+.searchLine {
+  display: flex;
+  align-items: center;
+  padding: 14px;
+  height: 48px;
+  border-left: 1px solid $elements-color;
+
+  @include onTablet {
+    height: 50px;
+  }
+
+  @include onDesktop {
+    padding: 25px;
+    height: 66px;
+  }
+
+  &__container {
+    position: relative;
+
+    &-input {
+      font-family: inherit;
+      padding: 6px 30px 6px 6px;
+      margin: -6px;
+      width: 200px;
+      color: $white-color;
+      letter-spacing: 0.07em;
+      background-color: $surface2-color;
+      border: none;
+      outline: none;
+
+      &:focus {
+        border: none;
+        outline: none;
+      }
+    }
+
+    &-image {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      transition: all 0.3s;
+
+      &:hover {
+        background-color: $black-color;
+      }
+    }
+  }
+
+  &__image {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+
+    &-position {
+      margin-right: 20px;
+    }
+  }
+}

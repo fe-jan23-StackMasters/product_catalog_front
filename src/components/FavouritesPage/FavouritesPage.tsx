@@ -10,9 +10,7 @@ import { PhoneCard } from '../../types/PhoneCard';
 import { useLocalStorageContext } from '../../context/StorageContext';
 
 export const FavouritesPage: FC = () => {
-  const {
-    favorites,
-  } = useLocalStorageContext();
+  const { favorites } = useLocalStorageContext();
 
   return (
     <Container>
@@ -24,10 +22,7 @@ export const FavouritesPage: FC = () => {
             <span className="favourites__total">{`${favorites.length} items`}</span>
             <div className="favourites__cards">
               {favorites.map((product: PhoneCard) => (
-                <ProductCard
-                  product={product}
-                  key={product.id}
-                />
+                <ProductCard product={product} key={product.id} />
               ))}
             </div>
           </>

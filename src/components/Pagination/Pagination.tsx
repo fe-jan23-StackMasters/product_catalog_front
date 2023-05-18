@@ -222,14 +222,16 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
       </div>
 
       {windowWidth < 640 && (
-        <div className="phonesPage__priceSlider">
-          Price
-          <PriceSlider
-            priceMin={priceMin}
-            priceMax={priceMax}
-            handleChangeFilterPrice={handleChangeFilterPrice}
-          />
+        <>
+          <div className="phonesPage__priceSlider">
+            <span className="phonesPage__priceSlider-title" >Price</span>
+            <PriceSlider
+              priceMin={priceMin}
+              priceMax={priceMax}
+              handleChangeFilterPrice={handleChangeFilterPrice}
+            />
         </div>
+        </>
       )}
 
       <div className="phonesPage__pagination pagination">

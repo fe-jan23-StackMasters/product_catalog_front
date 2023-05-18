@@ -4,7 +4,7 @@ import './DropDown.scss';
 
 type Props = {
   variables: string[];
-  getValueFromDropDown: (value:string) => void;
+  getValueFromDropDown: (value: string) => void;
   searchParam?: string | null;
   defaultValue?: number;
 };
