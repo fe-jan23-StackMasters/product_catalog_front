@@ -18,10 +18,11 @@ type RequestWithParamsResult = {
 };
 
 interface Props {
-  productType: ProductType;
+  productType: ProductType[];
+  query?: string | undefined;
 }
 
-export const Pagination: React.FC<Props> = ({ productType }) => {
+export const Pagination: React.FC<Props> = ({ productType, query }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -66,10 +67,11 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
       const dataFromServer = await getProducts(
         +itemsPerPage,
         currentPage,
-        [productType],
+        productType,
         sorts.find((by) => by.toString() === sort) || SortBy.NEW,
         priceMin,
         priceMax,
+        query,
       );
 
       setProductInfo(dataFromServer);
@@ -79,6 +81,14 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
       setIsLoading(false);
     }
   };
+
+  if (!query) {
+    searchParams.delete('query');
+  }
+
+  useEffect(() => {
+    getDataFromServer();
+  }, [query]);
 
   useEffect(() => {
     // eslint-disable-next-line prefer-const, no-undef
@@ -255,10 +265,7 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
           )}
         </div>
         {!isError && !isLoading && (
-          <Paginate
-            currentPage={currentPage}
-            pages={productInfo?.pages || 1}
-          />
+          <Paginate currentPage={currentPage} pages={productInfo?.pages || 1} />
         )}
       </div>
     </>

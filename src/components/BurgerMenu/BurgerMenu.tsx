@@ -43,12 +43,12 @@ export const BurgerMenu: React.FC<Props> = ({ toggleMenu }) => {
       </div>
       <div className="menu__content footer">
         <button className="btn likeButton">
-          <a href='/favorutes' className='btn-url'>
+          <a href="/favorutes" className="btn-url">
             <img src={like} />
           </a>
         </button>
         <button className="btn cardButton">
-          <a href='/cart' className='btn-url'>
+          <a href="/cart" className="btn-url">
             <img src={cardIcon} />
           </a>
         </button>

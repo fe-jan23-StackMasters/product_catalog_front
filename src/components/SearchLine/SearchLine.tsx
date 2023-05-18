@@ -1,4 +1,5 @@
-import { useEffect, useRef, FC, useState } from 'react';
+import { useEffect, useRef, FC, useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './SearchLine.scss';
 import dandruff from '../../icons/Search.svg';
 import close from '../../icons/Close.svg';
@@ -17,6 +18,7 @@ export const SearchLine: FC<Props> = ({
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isOpen) {
@@ -24,21 +26,47 @@ export const SearchLine: FC<Props> = ({
     }
   }, [isOpen]);
 
+  const closeInput = useCallback(() => {
+    setIsOpen(false);
+    setSearchQuery('');
+  }, []);
+
   const redirectPage = () => {
-    window.location.href = `http://localhost:3000/search?query=${searchQuery}`;
-    // eslint-disable-next-line max-len
-    // window.location.href = 'https://nice-gadgets-stack-masters.netlify.app/search';
+    if (searchQuery) {
+      navigate(`/search?query=${searchQuery}`);
+    } else (
+      navigate('/search')
+    );
+
+    handleOpenInput();
   };
 
+  // const searhDevice = useCallback(
+  //   (event: KeyboardEvent) => {
+  //     if (event.key === 'Enter') {
+  //       event.preventDefault();
+  //       redirectPage();
+  //     }
+  //   }, [],
+  // );
+
+  // useEffect(() => {
+  //   document.addEventListener('keyup', searhDevice);
+
+  //   return () => {
+  //     document.removeEventListener('keyup', searhDevice);
+  //   };
+  // }, []);
+
   return (
-    <div className="searchLine">
+    <div className="searchLine" id="test" >
       <img
         src={dandruff}
         alt="dandruff"
         className={classNames('searchLine__image', {
           'searchLine__image-position': isOpen,
         })}
-        onClick={handleOpenInput}
+        onClick={redirectPage}
       />
       {isOpen && (
         <div className="searchLine__container">
@@ -48,9 +76,8 @@ export const SearchLine: FC<Props> = ({
             className="searchLine__container-input"
             placeholder="Search"
             onBlur={() => {
-              setIsOpen(false);
-              setSearchQuery('');
               redirectPage();
+              closeInput();
             }}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -60,10 +87,7 @@ export const SearchLine: FC<Props> = ({
             src={close}
             alt="close"
             className="searchLine__container-image"
-            onClick={() => {
-              setIsOpen(false);
-              setSearchQuery('');
-            }}
+            onClick={() => closeInput()}
           />
         </div>
       )}

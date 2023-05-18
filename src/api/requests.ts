@@ -37,7 +37,8 @@ export const getProducts = async(
   if (query) queryParams.push(`query=${query}`);
 
   if (productType) {
-    productType.forEach((category) => queryParams.push(`productType=${category}`));
+    productType.forEach((category) =>
+      queryParams.push(`productType=${category}`));
   }
 
   const path = `${BASE_URL}/products${

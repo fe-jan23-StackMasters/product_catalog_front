@@ -13,7 +13,7 @@ import { Footer } from './components/Footer';
 import { BurgerMenu } from './components/BurgerMenu';
 import { useState } from 'react';
 import { ItemCard } from './components/ItemCard';
-import { Querypage } from './components/QeuryPage';
+import { SearchPage } from './components/SearchPage';
 
 import { ProductType } from './types/ProductType';
 
@@ -40,15 +40,14 @@ export const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<Navigate to="/" replace />} />
 
-          {categories.map(category => (
+          {categories.map((category) => (
             <Route path={category} key={category} element={<Outlet />}>
-              <Route index element={<PhonesPage
-                productType={category}/>} />
+              <Route index element={<PhonesPage productType={category} />} />
               <Route path=":itemCard" element={<ItemCard />} />
             </Route>
           ))}
 
-          <Route path="/search" element={<Querypage />} />
+          <Route path="/search" element={<SearchPage />} />
           <Route path="/tablets" element={<TabletsPage />} />
           <Route path="/accessories" element={<AccessoriesPage />} />
           <Route path="/favourites" element={<FavouritesPage />} />

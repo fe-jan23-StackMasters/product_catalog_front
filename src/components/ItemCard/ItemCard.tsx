@@ -51,7 +51,7 @@ export const ItemCard = () => {
 
       <section className="settings">
         <div className="grid">
-        <SliderProductPage items = {item?.images}/>
+          <SliderProductPage items={item?.images} />
           <div
             className="grid__item grid__phone
         grid__item-tablet--7-12 grid__item-desktop--13-24"
