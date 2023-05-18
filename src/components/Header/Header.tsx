@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, useCallback } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../../icons/Logo.svg';
 import favoritesHart from '../../icons/favourites.svg';
@@ -38,10 +38,6 @@ export const Header: FC<Props> = ({ toggleMenu, isMenuOpen }) => {
   }, []);
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-
-  const handleOpenInput = useCallback(() => {
-    setIsSearchOpen(true);
-  }, [setIsSearchOpen]);
 
   const windowSize = window.innerWidth;
   const isLogoHidden = windowSize < 420 && isSearchOpen;
@@ -88,7 +84,6 @@ export const Header: FC<Props> = ({ toggleMenu, isMenuOpen }) => {
           <div className="header__buying-section">
             <SearchLine
               isOpen={isSearchOpen}
-              handleOpenInput={handleOpenInput}
               setIsOpen={setIsSearchOpen}
             />
             <NavLink
@@ -139,7 +134,6 @@ export const Header: FC<Props> = ({ toggleMenu, isMenuOpen }) => {
           <div className="header__menu-container">
             <SearchLine
               isOpen={isSearchOpen}
-              handleOpenInput={handleOpenInput}
               setIsOpen={setIsSearchOpen}
             />
             <MenuToggler isOpen={isMenuOpen} onToggle={toggleMenu}/>

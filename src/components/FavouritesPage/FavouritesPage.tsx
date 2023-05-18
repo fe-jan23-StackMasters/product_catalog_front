@@ -21,9 +21,11 @@ export const FavouritesPage: FC = () => {
           <>
             <span className="favourites__total">{`${favorites.length} items`}</span>
             <div className="favourites__cards">
-              {favorites.map((product: PhoneCard) => (
-                <ProductCard product={product} key={product.id} />
-              ))}
+              <div className="favourites__card">
+                {favorites.map((product: PhoneCard) => (
+                  <ProductCard product={product} key={product.id} />
+                ))}
+              </div>
             </div>
           </>
         ) : (
