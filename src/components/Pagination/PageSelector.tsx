@@ -2,29 +2,19 @@ import React, { useEffect } from 'react';
 import classNames from 'classnames';
 import { ArrowLeft } from '../Arrows/ArrowLeft';
 import { ArrowRigth } from '../Arrows/ArrowRight';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 interface Props {
-  itemsPerPage: number;
   currentPage: number;
-  sortBy: string;
   pages: number;
-  priceMin: number;
-  priceMax: number;
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const Paginate: React.FC<Props> = ({
-  itemsPerPage,
   currentPage,
-  sortBy,
-  setCurrentPage,
   pages,
-  priceMin,
-  priceMax,
 }) => {
   const pageNumbers: number[] = [];
-  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -36,34 +26,17 @@ export const Paginate: React.FC<Props> = ({
 
   const goToPrevPage = () => {
     if (currentPage !== 1) {
-      navigate(
-        `./?page=${
-          currentPage - 1
-        }&perPage=${itemsPerPage}&sort=${sortBy}&priceMin=${priceMin}&priceMax=${priceMax}`,
-      );
-      setCurrentPage((prevPage) => prevPage - 1);
+      searchParams.set('page', currentPage - 1 + '');
+      setSearchParams(searchParams);
     }
   };
 
   const goToNextPage = () => {
     if (currentPage !== pageNumbers.length) {
-      navigate(
-        `./?page=${
-          currentPage + 1
-        }&perPage=${itemsPerPage}&sort=${sortBy}&priceMin=${priceMin}&priceMax=${priceMax}`,
-      );
-      setCurrentPage((prevPage) => prevPage + 1);
+      searchParams.set('page', currentPage + 1 + '');
+      setSearchParams(searchParams);
     }
   };
-
-  useEffect(() => {
-    if (!pageNumbers.includes(currentPage)) {
-      navigate(
-        `./?page=1&perPage=${itemsPerPage}&sort=${sortBy}&priceMin=${priceMin}&priceMax=${priceMax}`,
-      );
-      setCurrentPage(1);
-    }
-  }, []);
 
   return (
     <>
@@ -82,15 +55,15 @@ export const Paginate: React.FC<Props> = ({
             })}
             key={num}
           >
-            <NavLink
-              to={`./?page=${num}&perPage=${itemsPerPage}&sort=${sortBy}&priceMin=${priceMin}&priceMax=${priceMax}`}
+            <div
               className="pagination__link"
               onClick={() => {
-                setCurrentPage(num);
+                searchParams.set('page', num + '');
+                setSearchParams(searchParams);
               }}
             >
               {num}
-            </NavLink>
+            </div>
           </li>
         ))}
 

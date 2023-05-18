@@ -4,7 +4,7 @@ import { Paginate } from './PageSelector';
 import { ProductCard } from '../ProductCard';
 import { DropDown } from '../DropDown/DropDown';
 import { SortBy } from '../../types/SortBy';
-import { useSearchParams, useLocation, useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { getProducts } from '../../api/requests';
 import { ProductType } from '../../types/ProductType';
 import { PhoneCard } from '../../types/PhoneCard';
@@ -31,10 +31,8 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
   const [isFirstRender, setIsFirstRender] = useState(true);
   const sorts = [SortBy.NAME, SortBy.NEW, SortBy.OLD, SortBy.HIGHT, SortBy.LOW];
   const arrayOfItemsOnPage = ['8', '16', '32', '64'];
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const phones = productInfo?.products;
-  const navigate = useNavigate();
-  const locations = useLocation();
   const sort = searchParams.get('sort');
   const perPage = searchParams.get('perPage');
   const page = searchParams.get('page');
@@ -91,23 +89,12 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
     }
 
     timer = setTimeout(() => {
-      getDataFromServer();
-      searchParams.set('priceMin', priceMin.toString());
-      searchParams.set('priceMax', priceMax.toString());
-
       if (!isFirstRender) {
-        navigate(
-          `./?page=1&perPage=${perPage}&sort=${sort}&priceMin=${priceMin}&priceMax=${priceMax}`,
-        );
+        getDataFromServer();
+        searchParams.set('priceMin', priceMin + '');
+        searchParams.set('priceMax', priceMax + '');
+        setSearchParams(searchParams);
         setCurrentPage(1);
-      } else {
-        if (!page || !productInfo?.pages || productInfo?.pages < +page) {
-          setCurrentPage(1);
-        }
-
-        navigate(
-          `./?page=${page}&perPage=${perPage}&sort=${sort}&priceMin=${priceMin}&priceMax=${priceMax}`,
-        );
       }
 
       setIsFirstRender(false);
@@ -116,19 +103,7 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
     return () => {
       clearTimeout(timer);
     };
-  }, [priceMax, priceMin]);
-
-  useEffect(() => {
-    const urlParams = locations.search;
-
-    if (locations.search.includes('page=')) {
-      const matchPage = urlParams.match(/page=(\d+)/);
-
-      if (matchPage && +matchPage[1] !== currentPage) {
-        setCurrentPage(+matchPage[1]);
-      }
-    }
-  }, [currentPage]);
+  }, [priceMin, priceMax]);
 
   useEffect(() => {
     setItemsPerPage(perPage || '16');
@@ -165,51 +140,48 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
 
   useEffect(() => {
     getDataFromServer();
-  }, [itemsPerPage, sortBy, currentPage]);
+  }, [productType]);
 
-  const handlerDropdownItemPerPage = (returnedValue: string) => {
-    if (currentPage !== 1) {
-      navigate(
-        `./?page=1&perPage=${returnedValue}&sort=${
-          sort || SortBy.NEW
-        }&priceMin=${priceMin || 0}&priceMax=${priceMax || 5000}`,
-      );
-      setCurrentPage(1);
+  useEffect(() => {
+    getDataFromServer();
+  }, [itemsPerPage, sortBy]);
+
+  useEffect(() => {
+    if (page) {
+      setCurrentPage(+page);
     } else {
-      navigate(
-        `./?page=${page || '1'}&perPage=${returnedValue}&sort=${
-          sort || SortBy.NEW
-        }&priceMin=${priceMin || 0}&priceMax=${priceMax || 5000}`,
-      );
+      setCurrentPage(1);
     }
 
+    getDataFromServer();
+  }, [page]);
+
+  const handlerDropdownItemPerPage = (returnedValue: string) => {
     searchParams.set('perPage', returnedValue);
+
     setItemsPerPage(returnedValue);
     perPageParamValidator = returnedValue;
+
+    if (currentPage !== 1) {
+      setCurrentPage(1);
+    } else {
+      setSearchParams(searchParams);
+    }
   };
 
   const handlerDropdownSortBy = (returnedValue: string) => {
-    if (currentPage !== 1) {
-      navigate(
-        `./?page=1&perPage=${perPage}&sort=${returnedValue}&priceMin=${
-          priceMin || 0
-        }&priceMax=${priceMax || 5000}`,
-      );
-      setCurrentPage(1);
-    } else {
-      navigate(
-        `./?page=${page}&perPage=${perPage}&sort=${returnedValue}&priceMin=${
-          priceMin || 0
-        }&priceMax=${priceMax || 5000}`,
-      );
-    }
-
     searchParams.set('sort', returnedValue);
 
     setSortBy(
       sorts.find((by) => by.toString() === returnedValue) || SortBy.NEW,
     );
     sortParamValidator = returnedValue;
+
+    if (currentPage !== 1) {
+      setCurrentPage(1);
+    } else {
+      setSearchParams(searchParams);
+    }
   };
 
   const windowWidth = window.innerWidth;
@@ -284,13 +256,8 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
         </div>
         {!isError && !isLoading && (
           <Paginate
-            itemsPerPage={Number(itemsPerPage)}
-            setCurrentPage={setCurrentPage}
             currentPage={currentPage}
-            sortBy={sortBy}
             pages={productInfo?.pages || 1}
-            priceMin={priceMin}
-            priceMax={priceMax}
           />
         )}
       </div>

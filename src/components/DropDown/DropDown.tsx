@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import './DropDown.scss';
 
@@ -19,18 +19,12 @@ export const DropDown: React.FC<Props> = ({
   const [stateDropDown, setStateDropDown] = useState(
     searchParam || variables[defaultValue],
   );
-  const [isClicked, setIsClicked] = useState(false);
 
   const handlerChange = (point: string) => {
     setStateDropDown(point);
     setPositionDropDown(false);
-    setIsClicked(true);
+    getValueFromDropDown(point);
   };
-
-  useEffect(() => {
-    getValueFromDropDown(stateDropDown);
-    setIsClicked(false);
-  }, [isClicked]);
 
   return (
     <>
