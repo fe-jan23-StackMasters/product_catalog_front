@@ -5,9 +5,8 @@
   display: flex;
   flex-direction: column;
   padding: 16px;
-  margin-bottom: 16px;
-  margin-right: 16px;
   background-color: $surface1-color;
+  // transition: transform 0.3s;
 
   @include onTablet {
     flex-direction: row;
@@ -68,10 +67,6 @@
     &--increase {
       display: flex;
       align-items: center;
-
-      @include onTablet {
-        margin-right: 44px;
-      }
     }
   }
 
@@ -124,7 +119,7 @@
   }
 
   &-price {
-    width: 42px;
-    text-align: center;
+    text-align: end;
+    width: 100px;
   }
 }

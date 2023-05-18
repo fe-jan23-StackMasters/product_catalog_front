@@ -12,6 +12,7 @@ import rightArrov from '../../icons/arrowRight.svg';
 import { LinkLine } from '../LinkLine';
 import { Link, useLocation } from 'react-router-dom';
 import { colorsObject } from './colorsObject';
+import { SliderProductPage } from '../SliderProductPage/SliderProductPage';
 
 export const ItemCard = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -91,8 +92,11 @@ export const ItemCard = () => {
 
       <section className="settings">
         <div className="grid">
-          <div className="grid__item grid__phone
-          grid__item-tablet--8-12 grid__item-desktop--14-21">
+          <SliderProductPage items={item?.images} />
+          <div
+            className="grid__item grid__phone
+            grid__item-tablet--8-12 grid__item-desktop--14-21"
+          >
             <div className="settings__container">
               <div className="settings__container-colors">
                 <p className="settings__title">Available colors</p>

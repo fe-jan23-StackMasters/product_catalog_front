@@ -13,7 +13,6 @@ html {
   font-size: 12px;
   line-height: 15px;
   color: $secondary-color;
-  margin-bottom: 24px;
 
   @include onTablet {
     align-items: start;
@@ -34,6 +33,10 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  &__nothing {
+    margin-top: 50px;
+  }
 
   &__items {
     display: grid;
