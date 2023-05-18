@@ -6,19 +6,14 @@ import favouriteIconFilled from '../../icons/faqvoritesFilled.svg';
 import classNames from 'classnames';
 import { useLocalStorageContext } from '../../context/StorageContext';
 import { PhoneCard } from '../../types/PhoneCard';
-
 interface Props {
   size: string;
   product: PhoneCard;
 }
 
 export const AddToFavourites: React.FC<Props> = ({ size, product }) => {
-  const {
-    addToFavorites,
-    removeFromFavorites,
-    isInFavorites,
-  } = useLocalStorageContext();
-
+  const { addToFavorites, removeFromFavorites, isInFavorites }
+    = useLocalStorageContext();
   const isFavorite = isInFavorites(product.id);
 
   const imagePath = useMemo(
@@ -41,7 +36,11 @@ export const AddToFavourites: React.FC<Props> = ({ size, product }) => {
       type={classNames('btn__fav', { 'btn__fav--added': isFavorite })}
       handler={handleClick}
     >
-      <img src={imagePath} alt="favourite" />
+      <img
+        src={imagePath}
+        alt="favourite"
+        className={classNames({ 'btn__fav-heart--animating': isFavorite })}
+      />
     </Button>
   );
 };

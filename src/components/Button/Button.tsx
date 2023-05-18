@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 
 interface Props {
@@ -16,13 +17,14 @@ export const Button: React.FC<Props> = ({
   handler,
 }) => {
   return (
-    <button
+    <motion.button
+      whileTap={{ scale: 0.97 }}
       type="button"
       className={type}
       style={{ width: `${width}`, height: `${height}` }}
       onClick={handler}
     >
       {children}
-    </button>
+    </motion.button>
   );
 };
