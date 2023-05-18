@@ -32,7 +32,7 @@ export const AddToCart: React.FC<Props> = ({
 
   return (
     <Button
-      width="77%"
+      width="90%"
       height={`${height}`}
       type={classNames('btn__add-to', {
         'btn__add-to--added': isInCart,

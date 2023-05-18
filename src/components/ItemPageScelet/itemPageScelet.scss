@@ -11,7 +11,7 @@
   }
 }
 
-.about {
+.scelet-about {
   @include max-block;
 
   &__title {
@@ -79,7 +79,7 @@
   }
 }
 
-.settings {
+.scelet-settings {
   @include max-block;
 
   &__container-colors {
@@ -226,15 +226,27 @@
     gap: 8px;
     margin-bottom: 32px;
   }
+
+  &__add-tablet {
+    margin-bottom: 55px;
+
+    @include onTablet {
+      margin-bottom: 65px;
+    }
+
+    @include onDesktop {
+      margin-bottom: 110px;
+    }
+  }
 }
 
-.title {
+.scelet-title {
   @include max-block;
 
   margin-bottom: 40px;
 }
 
-.slider {
+.scelet-slider {
   @include max-block;
 
   &__carts {
@@ -243,12 +255,11 @@
   }
 }
 
-.line {
+.scelet-line {
   display: flex;
   text-align: left;
   max-width: 1200px;
 
-  background-color: #4a4d58;
   height: 15px;
   width: 40%;
   margin-bottom: 40px;
