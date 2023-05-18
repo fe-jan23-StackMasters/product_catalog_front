@@ -5,8 +5,6 @@
   display: flex;
   flex-direction: column;
   padding: 16px;
-  margin-bottom: 16px;
-  margin-right: 16px;
   background-color: var(--surface1-color);
 
   @include onTablet {
@@ -68,10 +66,6 @@
     &--increase {
       display: flex;
       align-items: center;
-
-      @include onTablet {
-        margin-right: 44px;
-      }
     }
   }
 
@@ -89,8 +83,13 @@
       background-image: url('../../icons/blackMinus.svg');
     }
 
-    &:hover {
-      background-color: var(--surface2-color);
+    &:disabled {
+      cursor: default;
+      opacity: 0.5;
+    }
+
+    &:not(:disabled):hover {
+      background-color: $surface2-color;
     }
   }
 
@@ -108,8 +107,13 @@
       background-image: url('../../icons/blackPlus.svg');
     }
 
-    &:hover {
-      background-color: var(--surface2-color);
+    &:disabled {
+      cursor: default;
+      opacity: 0.5;
+    }
+
+    &:not(:disabled):hover {
+      background-color: $surface2-color;
     }
   }
 
@@ -122,6 +126,7 @@
   }
 
   &-price {
-    width: 42px;
+    text-align: end;
+    width: 100px;
   }
 }

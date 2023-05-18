@@ -4,12 +4,12 @@ import { Paginate } from './PageSelector';
 import { ProductCard } from '../ProductCard';
 import { DropDown } from '../DropDown/DropDown';
 import { SortBy } from '../../types/SortBy';
-import { useSearchParams, useLocation, useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { getProducts } from '../../api/requests';
 import { ProductType } from '../../types/ProductType';
 import { PhoneCard } from '../../types/PhoneCard';
-import { useCardsIds } from '../../helpers/hooks/hooks';
 import { PriceSlider } from '../PriceSlider';
+import { ProductCardSkeleton } from '../ProductCardSkeleton';
 
 type RequestWithParamsResult = {
   pages: number;
@@ -18,47 +18,122 @@ type RequestWithParamsResult = {
 };
 
 interface Props {
-  productType: ProductType;
+  productType: ProductType[];
+  query?: string | undefined;
 }
 
-export const Pagination: React.FC<Props> = ({ productType }) => {
+const sorts = [SortBy.NAME, SortBy.NEW, SortBy.OLD, SortBy.HIGHT, SortBy.LOW];
+
+const arrayOfItemsOnPage = ['8', '16', '32', '64'];
+
+export const Pagination: React.FC<Props> = ({ productType, query }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState('16');
   const [sortBy, setSortBy] = useState<SortBy>(SortBy.NEW);
   const [productInfo, setProductInfo] = useState<RequestWithParamsResult>();
-  const [cardIds, onCardToggle] = useCardsIds('cart', []);
-  const [favIds, onFavToggle] = useCardsIds('favourite', []);
-  const sorts = [SortBy.NAME, SortBy.NEW, SortBy.OLD, SortBy.HIGHT, SortBy.LOW];
-  const arrayOfItemsOnPage = ['8', '16', '32', '64'];
-  const [searchParams] = useSearchParams();
+  const [isFirstRender, setIsFirstRender] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
   const phones = productInfo?.products;
-  const navigate = useNavigate();
-  const locations = useLocation();
-  const quantity = '1';
   const sort = searchParams.get('sort');
   const perPage = searchParams.get('perPage');
   const page = searchParams.get('page');
-  let sortParam = sorts.find((by) => by.toString() === sort) || 'newest';
-  let perPageParam = arrayOfItemsOnPage
-    .find((by) => by.toString() === perPage) || '16';
+  const priceMinFromUrl = searchParams.get('priceMin');
+  const priceMaxFromUrl = searchParams.get('priceMax');
+  let sortParamValidator
+    = sorts.find((by) => by.toString() === sort) || 'newest';
+  let perPageParamValidator
+    = arrayOfItemsOnPage.find((by) => by.toString() === perPage) || '16';
+  const skeletons = Array.from(
+    { length: Number(perPageParamValidator) },
+    (_, index) => index + 1,
+  );
+
+  const [range, setRange] = useState<number | number[]>([0, 5000]);
+
+  const handleChangeFilterPrice = (
+    _event: Event,
+    newValue: number | number[],
+  ) => {
+    setRange(newValue);
+  };
+
+  let priceMin = Array.isArray(range) ? range[0] : 0;
+  let priceMax = Array.isArray(range) ? range[1] : 5000;
+
+  const getDataFromServer = async() => {
+    setIsLoading(true);
+
+    try {
+      const dataFromServer = await getProducts(
+        +itemsPerPage,
+        currentPage,
+        productType,
+        sorts.find((by) => by.toString() === sort) || SortBy.NEW,
+        priceMin,
+        priceMax,
+        query,
+      );
+
+      setProductInfo(dataFromServer);
+    } catch {
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (!query) {
+    searchParams.delete('query');
+  }
 
   useEffect(() => {
-    const urlParams = locations.search;
+    getDataFromServer();
+  }, [query]);
 
-    if (locations.search.includes('page=')) {
-      const matchPage = urlParams.match(/page=(\d+)/);
+  useEffect(() => {
+    // eslint-disable-next-line prefer-const, no-undef
+    let timer: NodeJS.Timeout | undefined;
 
-      if (matchPage && +matchPage[1] !== currentPage) {
-        setCurrentPage(+matchPage[1]);
-      }
+    if (timer) {
+      clearTimeout(timer);
     }
-  }, [currentPage]);
+
+    timer = setTimeout(() => {
+      if (!isFirstRender) {
+        getDataFromServer();
+        searchParams.set('priceMin', priceMin + '');
+        searchParams.set('priceMax', priceMax + '');
+        setSearchParams(searchParams);
+        setCurrentPage(1);
+      }
+
+      setIsFirstRender(false);
+    }, 500);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [priceMin, priceMax]);
 
   useEffect(() => {
     setItemsPerPage(perPage || '16');
     setCurrentPage(Number(page) || 1);
+
+    if (!(isNaN(Number(priceMinFromUrl)) || priceMinFromUrl === null)) {
+      priceMin = Number(priceMinFromUrl);
+    } else {
+      priceMin = 0;
+    }
+
+    if (!(isNaN(Number(priceMaxFromUrl)) || priceMaxFromUrl === null)) {
+      priceMax = Number(priceMaxFromUrl);
+    } else {
+      priceMax = 5000;
+    }
+
+    setRange([priceMin, priceMax]);
 
     if (sorts.some((by) => sort === by.toString())) {
       setSortBy(sorts.find((by) => by.toString() === sort) || SortBy.NEW);
@@ -67,65 +142,58 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
     }
 
     if (arrayOfItemsOnPage.some((by) => perPage === by.toString())) {
-      setItemsPerPage(arrayOfItemsOnPage
-        .find((by) => by.toString() === perPage) || '16');
+      setItemsPerPage(
+        arrayOfItemsOnPage.find((by) => by.toString() === perPage) || '16',
+      );
     } else {
       setItemsPerPage('16');
     }
   }, []);
 
   useEffect(() => {
-    (async() => {
-      setIsLoading(true);
+    getDataFromServer();
+  }, [productType]);
 
-      try {
-        const dataFromServer = await getProducts(
-          +itemsPerPage,
-          currentPage,
-          [productType],
-          sortBy,
-        );
+  useEffect(() => {
+    getDataFromServer();
+  }, [itemsPerPage, sortBy]);
 
-        setProductInfo(dataFromServer);
-      } catch {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
-  }, [itemsPerPage, sortBy, currentPage]);
-
-  const handlerDropdownItemPerPage = (returnedValue: string) => {
-    if (currentPage !== 1) {
-      navigate(`./?page=1&perPage=${returnedValue}&sort=${sort || SortBy.NEW}`);
-      setCurrentPage(1);
+  useEffect(() => {
+    if (page) {
+      setCurrentPage(+page);
     } else {
-      navigate(
-        `./?page=${page || '1'}&perPage=${returnedValue}&sort=${
-          sort || SortBy.NEW
-        }`,
-      );
+      setCurrentPage(1);
     }
 
+    getDataFromServer();
+  }, [page]);
+
+  const handlerDropdownItemPerPage = (returnedValue: string) => {
     searchParams.set('perPage', returnedValue);
+
     setItemsPerPage(returnedValue);
-    perPageParam = returnedValue;
+    perPageParamValidator = returnedValue;
+
+    if (currentPage !== 1) {
+      setCurrentPage(1);
+    } else {
+      setSearchParams(searchParams);
+    }
   };
 
   const handlerDropdownSortBy = (returnedValue: string) => {
-    if (currentPage !== 1) {
-      navigate(`./?page=1&perPage=${perPage}&sort=${returnedValue}`);
-      setCurrentPage(1);
-    } else {
-      navigate(`./?page=${page}&perPage=${perPage}&sort=${returnedValue}`);
-    }
-
     searchParams.set('sort', returnedValue);
 
     setSortBy(
       sorts.find((by) => by.toString() === returnedValue) || SortBy.NEW,
     );
-    sortParam = returnedValue;
+    sortParamValidator = returnedValue;
+
+    if (currentPage !== 1) {
+      setCurrentPage(1);
+    } else {
+      setSearchParams(searchParams);
+    }
   };
 
   const windowWidth = window.innerWidth;
@@ -138,70 +206,72 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
 
       <div className="phonesPage__dropDown">
         <div className="phonesPage__dropDown--sortBy">
-          Sort By
+          <p className="phonesPage__dropDown-title">Sort by</p>
+
           <DropDown
             variables={sorts}
             getValueFromDropDown={handlerDropdownSortBy}
-            searchParam={sortParam}
+            searchParam={sortParamValidator}
             defaultValue={1}
           />
         </div>
 
         <div className="phonesPage__dropDown--itemsOnPage">
-          Items on page
+          <p className="phonesPage__dropDown-title">Items on page</p>
+
           <DropDown
             variables={arrayOfItemsOnPage}
             getValueFromDropDown={handlerDropdownItemPerPage}
-            searchParam={perPageParam}
+            searchParam={perPageParamValidator}
             defaultValue={1}
           />
         </div>
 
-        {windowWidth > 670 && (
+        {windowWidth >= 640 && (
           <div className="phonesPage__priceSlider">
-            Price
-            <PriceSlider />
+            <p className="phonesPage__dropDown-title">Price</p>
+
+            <PriceSlider
+              priceMin={priceMin}
+              priceMax={priceMax}
+              handleChangeFilterPrice={handleChangeFilterPrice}
+            />
           </div>
         )}
       </div>
 
-      {windowWidth <= 670 && (
-        <div className="phonesPage__priceSlider">
-          Price
-          <PriceSlider />
-        </div>
+      {windowWidth < 640 && (
+        <>
+          <div className="phonesPage__priceSlider">
+            <span className="phonesPage__priceSlider-title">Price</span>
+            <PriceSlider
+              priceMin={priceMin}
+              priceMax={priceMax}
+              handleChangeFilterPrice={handleChangeFilterPrice}
+            />
+          </div>
+        </>
       )}
 
       <div className="phonesPage__pagination pagination">
         <div className="pagination__items">
-          {phones ? (
-            phones.map((product) => (
-              <ProductCard
-                product={product}
-                key={product.id}
-                onCardAdd={() =>
-                  onCardToggle({ id: product.id, quantity, product: product })
-                }
-                onFavouriteAdd={() =>
-                  onFavToggle({ id: product.id, quantity, product: product })
-                }
-                cardIds={cardIds}
-                favIds={favIds}
-              />
-            ))
-          ) : !isError ? (
-            <h2>Loading</h2>
+          {isLoading ? (
+            skeletons.map((skeleton) => <ProductCardSkeleton key={skeleton} />)
+          ) : phones !== undefined ? (
+            phones?.length === 0 ? (
+              <h2 className="pagination__nothing">Nothing found 😔</h2>
+            ) : (
+              phones.map((product) => (
+                <ProductCard product={product} key={product.id} />
+              ))
+            )
           ) : (
-            <h2>Unable</h2>
+            <h2>Unable to load data</h2>
           )}
         </div>
-        {!isError && !isLoading && <Paginate
-          itemsPerPage={Number(itemsPerPage)}
-          setCurrentPage={setCurrentPage}
-          currentPage={currentPage}
-          sortBy={sortBy}
-          pages={productInfo?.pages || 1}
-        />}
+        {!isError && !isLoading && (
+          <Paginate currentPage={currentPage} pages={productInfo?.pages || 0} />
+        )}
       </div>
     </>
   );

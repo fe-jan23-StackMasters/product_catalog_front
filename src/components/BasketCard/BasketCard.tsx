@@ -2,30 +2,25 @@ import './BasketCard.scss';
 import deleteIcon from '../../icons/Close.svg';
 import blackDeleteIcon from '../../icons/blackClose.svg';
 import React, { useContext } from 'react';
-import { StoragePhone } from '../../types/StoragePhone';
-import { ActionBasket } from '../../types/ActionBasket';
+import { StorageProduct } from '../../types/StorageProduct';
 import { BASE_URL } from '../../api/requests';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../../context/toggleContext';
+import { useLocalStorageContext } from '../../context/StorageContext';
+import { motion } from 'framer-motion';
 import classNames from 'classnames';
 
 type Props = {
-  phone: StoragePhone;
-  handleRemovePhone: (phoneId: string) => void;
-  handleAddOrRemoveQuantity: (phoneId: string, action: ActionBasket) => void;
+  product: StorageProduct;
 };
 
-export const BasketCard: React.FC<Props> = ({
-  phone,
-  handleRemovePhone,
-  handleAddOrRemoveQuantity,
-}) => {
-  const { price, id, image, name, phoneId } = phone.product;
-  const { quantity } = phone;
-  const isDisableMin = +phone.quantity < 2;
-  const isDisableMax = +phone.quantity > 9;
+export const BasketCard: React.FC<Props> = ({ product }) => {
+  const { decreaseQuantity, increaseQuantity, removeFromCart }
+    = useLocalStorageContext();
+
+  const { price, id, image, itemId, name } = product.info;
   const imageLink = `${BASE_URL}/${image}`;
-  const totalPrice = price * +quantity;
+  const totalPrice = price * product.quantity;
   const { theme } = useContext(ThemeContext);
   let deletePath = deleteIcon;
   let isLight = false;
@@ -38,21 +33,54 @@ export const BasketCard: React.FC<Props> = ({
   }
 
   return (
-    <div className="basket__card">
+    <motion.li
+      className="basket__card"
+      initial={{
+        opacity: 0,
+        translateY: -100,
+      }}
+      animate={{
+        opacity: 1,
+        translateY: 0,
+      }}
+      exit={{
+        height: 0,
+        paddingTop: 0,
+        paddingBottom: 0,
+        opacity: 0,
+      }}
+      transition={{ duration: 0.2 }}
+    >
       <div className="basket__card-top">
         <img
           src={deletePath}
           alt="delete"
           className="basket__card-delete"
-          onClick={() => handleRemovePhone(id)}
+          onClick={() => removeFromCart(id)}
         />
 
-        <Link to={`/phones/${phoneId}`}>
-          <img src={imageLink} alt="iphone" className="basket__card-image" />
+        <Link to={`/phones/${itemId}`}>
+          <motion.img
+            src={imageLink}
+            alt="iphone"
+            className="basket__card-image"
+            exit={{
+              scaleY: 0,
+            }}
+            transition={{ duration: 0.2 }}
+          />
         </Link>
 
-        <Link to={`/phones/${phoneId}`} className="basket__card-title" >
-          <span className="basket__card-title">{name}</span>
+        <Link to={`/phones/${itemId}`} className="basket__card-title">
+          <motion.span
+            className="basket__card-title"
+            exit={{
+              scaleY: 0,
+            }}
+            transition={{ duration: 0.2 }}
+          >
+            {name}
+          </motion.span>
         </Link>
       </div>
 
@@ -63,21 +91,21 @@ export const BasketCard: React.FC<Props> = ({
             className={classNames('basket__card-minus', {
               'basket__card-minus--light': isLight,
             })}
-            onClick={() => handleAddOrRemoveQuantity(id, 'delete')}
-            disabled={isDisableMin}
+            onClick={() => decreaseQuantity(id)}
+            disabled={product.quantity === 1}
           />
-          <span className="basket__card-count">{quantity}</span>
+          <span className="basket__card-count">{product.quantity}</span>
           <button
             type="button"
             className={classNames('basket__card-plus', {
               'basket__card-plus--light': isLight,
             })}
-            onClick={() => handleAddOrRemoveQuantity(id, 'add')}
-            disabled={isDisableMax}
+            onClick={() => increaseQuantity(id)}
+            disabled={product.quantity >= 20}
           />
         </div>
         <div className="basket__card-price">{`$${totalPrice}`}</div>
       </div>
-    </div>
+    </motion.li>
   );
 };

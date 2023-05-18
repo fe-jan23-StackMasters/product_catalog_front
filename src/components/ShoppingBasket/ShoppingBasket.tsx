@@ -1,65 +1,25 @@
-import { useMemo, useState } from 'react';
 import { BasketCard } from '../BasketCard';
 import { Button } from '../Button';
 import './ShoppingBasket.scss';
-import { StoragePhone } from '../../types/StoragePhone';
-import { ActionBasket } from '../../types/ActionBasket';
 import { Container } from '../Container';
 import { Link, NavLink } from 'react-router-dom';
 import leftArrov from '../../icons/arrowLeft.svg';
+import { useLocalStorageContext } from '../../context/StorageContext';
+import { AnimatePresence } from 'framer-motion';
 
 export const ShoppingBasket = () => {
-  const [phones, setPhones] = useState<StoragePhone[]>([]);
-  const phonesFromStorage = JSON.parse(localStorage.getItem('cart') || '');
-
-  const handleRemovePhone = (phoneId: string) => {
-    const filteredPhones = phones.filter((phone) => phone.id !== phoneId);
-
-    localStorage.setItem('cart', JSON.stringify(filteredPhones));
-
-    setPhones(filteredPhones);
-  };
-
-  const handleAddOrRemoveQuantity = (phoneId: string, action: ActionBasket) => {
-    const updatedPhones = phones.map((phone) => {
-      if (phone.id === phoneId) {
-        if (action === 'add') {
-          phone.quantity = String(+phone.quantity + 1);
-        } else {
-          phone.quantity = String(+phone.quantity - 1);
-        }
-      }
-
-      return phone;
-    });
-
-    localStorage.setItem('cart', JSON.stringify(updatedPhones));
-
-    setPhones(updatedPhones);
-  };
-
-  useMemo(() => {
-    setPhones(phonesFromStorage);
-  }, []);
-
-  const totalPrice = phones.reduce((acc, curr) => {
-    return acc + curr.product.price * +curr.quantity;
-  }, 0);
-
-  const totalItems = phones.reduce((acc, curr) => {
-    return acc + +curr.quantity;
-  }, 0);
+  const { totalPrice, totalQuantity, cartItems } = useLocalStorageContext();
 
   return (
     <Container>
-      <Link to="/home" className="backLink" >
+      <Link to="/home" className="backLink">
         <img className="backLink__image" src={leftArrov} alt="left" />
         Back
       </Link>
 
       <h1 className="title">Cart</h1>
 
-      {!totalItems ? (
+      {!cartItems.length ? (
         <Container>
           <h2 className="basket__title">Ooops... Your basket is empty</h2>
 
@@ -71,22 +31,19 @@ export const ShoppingBasket = () => {
         </Container>
       ) : (
         <div className="basket">
-          <div className="basket__cards">
-            {phones.map((phone) => (
-              <BasketCard
-                key={phone.id}
-                phone={phone}
-                handleRemovePhone={handleRemovePhone}
-                handleAddOrRemoveQuantity={handleAddOrRemoveQuantity}
-              />
-            ))}
-          </div>
+          <ul className="basket__cards">
+            <AnimatePresence>
+              {cartItems.map((product) => (
+                <BasketCard key={product.info.id} product={product} />
+              ))}
+            </AnimatePresence>
+          </ul>
 
           <div className="basket__total">
             <span className="basket__total-price">{`$${totalPrice}`}</span>
 
             <span className="basket__total-description">
-              {`Total for ${totalItems} items`}
+              {`Total for ${totalQuantity} items`}
             </span>
 
             <Button width="100%" height="48px" type="btn__add">

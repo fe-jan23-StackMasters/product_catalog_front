@@ -1,41 +1,35 @@
 import { FC, useEffect, useState, useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import logoItem from '../../icons/niceGadgets.svg';
 import blackLogoItem from '../../icons/blackNice.svg';
 import blackShoping from '../../icons/blackShopingCart.svg';
-import logoItemOk from '../../icons/Ok.svg';
-import menuOpener from '../../icons/Menu.svg';
-import blackMenuOpener from '../../icons/blackMenu.svg';
-import favoritesRed from '../../icons/faqvoritesFilled.svg';
 import favoritesHart from '../../icons/favourites.svg';
 import blackFavHeart from '../../icons/blackHeart.svg';
 import shoppingBag from '../../icons/shoppingBag.svg';
 import moonIcon from '../../icons/moonIcon.svg';
 import sunIcon from '../../icons/sunIcon.svg';
 import { PageNavLink } from '../PageNavLink';
-import { useCardsIds } from '../../helpers/hooks/hooks';
 import classNames from 'classnames';
 import { ThemeContext } from '../../context/toggleContext';
+import { useLocalStorageContext } from '../../context/StorageContext';
+import { SearchLine } from '../SearchLine';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MenuToggler } from '../MenuToggler';
 
 const navList = ['home', 'phones', 'tablets', 'accessories'];
 
 export type Props = {
   toggleMenu: () => void;
+  isMenuOpen: boolean;
   toggleTheme: () => void;
 };
 
-export const Header: FC<Props> = ({
-  toggleMenu,
-  toggleTheme,
-}) => {
-  const [cardIds] = useCardsIds('cart', []);
-  const [favIds] = useCardsIds('favourite', []);
+export const Header: FC<Props> = ({ toggleMenu, isMenuOpen, toggleTheme }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
   const { theme } = useContext(ThemeContext);
   let logoPath = logoItem;
   let cartPath = shoppingBag;
   let heartPath = favoritesHart;
-  let menuPath = menuOpener;
   let themePath = sunIcon;
   let isLight = false;
 
@@ -45,10 +39,14 @@ export const Header: FC<Props> = ({
     logoPath = blackLogoItem;
     cartPath = blackShoping;
     heartPath = blackFavHeart;
-    menuPath = blackMenuOpener;
   } else {
     isLight = false;
   }
+
+  const { favorites, cartItems } = useLocalStorageContext();
+
+  const location = useLocation();
+  const page = location.pathname;
 
   useEffect(() => {
     const handleResize = () => {
@@ -65,42 +63,55 @@ export const Header: FC<Props> = ({
     };
   }, []);
 
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  const windowSize = window.innerWidth;
+  const isLogoHidden = windowSize < 420 && isSearchOpen;
+  const isNavbarHidden = windowSize < 810 && isSearchOpen;
+
   return (
     <header className="header">
       <div className="header__content">
-        <div className="header__right-side">
-          {isMobile ? (
+        <div className="header__left-side">
+          {!isLogoHidden && (
             <NavLink to="/" className="logo">
               <img className="logo__image" src={logoPath} alt="Logo icon" />
-              <img className="logo__ok" src={logoItemOk} alt="ok" />
             </NavLink>
-          ) : (
-            <nav className="header__nav nav" hidden={isMobile}>
-              <ul className="nav__panel">
-                <li className="nav__item">
-                  <NavLink to="/" className="logo">
-                    <img
-                      className="logo__image"
-                      src={logoPath}
-                      alt="Logo icon"
-                    />
-                    <img className="logo__ok" src={logoItemOk} alt="ok" />
-                  </NavLink>
-                </li>
-                {navList.map((item) => (
-                  <li key={item} className="nav__item">
-                    <PageNavLink to={`/${item}`} text={item} />
-                  </li>
-                ))}
-              </ul>
-              <input type="search"
-            className="searchInput" placeholder="Search products..." />
-            </nav>
           )}
+          <AnimatePresence>
+            {!isNavbarHidden && (
+              <motion.nav
+                className="header__nav nav"
+                initial={{
+                  opacity: 0,
+                  position: 'absolute',
+                  transform: 'translateX(-50px)',
+                }}
+                animate={{
+                  opacity: 1,
+                  position: 'relative',
+                  transform: 'translateX(0)',
+                }}
+                transition={{ duration: 0.2, delay: 0.2 }}
+              >
+                <ul className="nav__panel">
+                  {navList.map((item) => (
+                    <li key={item} className="nav__item">
+                      <PageNavLink to={`/${item}`} text={item} />
+                    </li>
+                  ))}
+                </ul>
+              </motion.nav>
+            )}
+          </AnimatePresence>
         </div>
 
-          {!isMobile ? (
-            <div className="header__buying-section">
+        {!isMobile ? (
+          <div className="header__buying-section">
+            <SearchLine
+              isOpen={isSearchOpen}
+              setIsOpen={setIsSearchOpen}
+            />
 
               <button
                 type="button"
@@ -112,67 +123,71 @@ export const Header: FC<Props> = ({
                 <img src={themePath} alt={theme} />
               </button>
 
-              <NavLink
-                to='/favourites'
-                className={({ isActive }) => classNames(
-                  'header__case',
-                  { 'header__case--is-active': isActive },
-                )}>
-              {(favIds.length > 0) ? (
-                <>
-                  <div className="header__count-position">
-                    <img
-                      src={favoritesRed}
-                      className="header__menu-opener_image"
-                      alt="menu"
-                    />
-                    <span className='header__shoping-bag-count'>
-                      {favIds.length}
-                    </span>
-                  </div>
-                </>
-              ) : (
+            <NavLink
+              to="/favourites"
+              className={({ isActive }) =>
+                classNames('header__case', {
+                  'header__case--is-active': isActive,
+                })
+              }
+            >
+              <div className="header__count-position">
                 <img
                   src={heartPath}
                   className="header__menu-opener_image"
                   alt="menu"
                 />
-              )}
+                {favorites.length > 0 && (
+                  <span className="header__shoping-bag-count">
+                    {favorites.length}
+                  </span>
+                )}
+              </div>
+              {page === '/favourites' ? (
+                <motion.div
+                  className="nav__link-underline"
+                  layoutId="underline"
+                />
+              ) : null}
             </NavLink>
 
-              <NavLink
-                to='/cart'
-                className={({ isActive }) => classNames(
-                  'header__case',
-                  { 'header__case--is-active': isActive },
-                )}>
-                <div className="header__count-position">
-
-                  <img
-                    src={cartPath}
-                    className="header__menu-opener_image"
-                    alt="menu"
-                    />
-                  {cardIds.length > 0 && (
-                    <span className='header__shoping-bag-count'>
-                      {cardIds.length}
-                    </span>
-                  )}
-                </div>
-              </NavLink>
-            </div>
-          ) : (
-            <button
-              className="header__menu-button header__case"
-              onClick={toggleMenu}
+            <NavLink
+              to="/cart"
+              className={({ isActive }) =>
+                classNames('header__case', {
+                  'header__case--is-active': isActive,
+                })
+              }
             >
-              <img
-                className="header__menu-opener_image"
-                src={menuPath}
-                alt="menu"
-              />
-          </button>
-          )}
+              <div className="header__count-position">
+                <img
+                  src={cartPath}
+                  className="header__menu-opener_image"
+                  alt="menu"
+                />
+                {cartItems.length > 0 && (
+                  <span className="header__shoping-bag-count">
+                    {cartItems.length}
+                  </span>
+                )}
+              </div>
+              {page === '/cart' ? (
+                <motion.div
+                  className="nav__link-underline"
+                  layoutId="underline"
+                />
+              ) : null}
+            </NavLink>
+          </div>
+        ) : (
+          <div className="header__menu-container">
+            <SearchLine
+              isOpen={isSearchOpen}
+              setIsOpen={setIsSearchOpen}
+            />
+            <MenuToggler isOpen={isMenuOpen} onToggle={toggleMenu} />
+          </div>
+        )}
       </div>
     </header>
   );

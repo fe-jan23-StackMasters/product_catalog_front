@@ -4,17 +4,23 @@
 .phonesPage__priceSlider {
   display: flex;
   flex-direction: column;
-  text-align: center;
   align-items: center;
   font-weight: 700;
   font-size: 12px;
   line-height: 15px;
   color: var(--secondary-color);
-  margin-bottom: 24px;
 
   @include onTablet {
-    display: inline;
-    text-align: start;
+    align-items: start;
+  }
+
+  &-title {
+    position: relative;
+    left: -128px;
+
+    @include onTablet {
+      position: static;
+    }
   }
 }
 
@@ -23,6 +29,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  &__nothing {
+    margin-top: 50px;
+  }
 
   &__items {
     display: grid;
@@ -50,12 +60,11 @@
     justify-content: center;
     list-style: none;
     padding: 0;
-    margin: 24px 0 80px;
+    margin-top: 24px;
 
     @include onTablet {
       margin-top: 40px;
     }
-
   }
 
   &__item {

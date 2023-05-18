@@ -1,0 +1,45 @@
+@import '../../styles/utils/mixins';
+@import '../../styles/variables';
+
+:root {
+  --header-icon-size: 14px;
+  --burger-gap: calc(var(--header-icon-size) / 6);
+  --burger-line-height: calc(var(--header-icon-size) / 9);
+}
+
+.burger {
+  &__container {
+    height: var(--header-icon-size);
+    width: var(--header-icon-size);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    align-items: flex-end;
+  }
+
+  &__line {
+    height: 11%;
+    width: 100%;
+
+    background-color: $white-color;
+    border-radius: 10px;
+
+    transition: width 0.3s, transform 0.3s;
+  }
+
+  &--opened {
+    .burger__line--1 {
+      transform: translateY(calc(var(--burger-gap) + var(--burger-line-height))) rotate(45deg);
+    }
+
+    .burger__line--2 {
+      transform: translateX(calc(-1 * var(--header-icon-size) / 2));
+      width: 0;
+    }
+
+    .burger__line--3 {
+      transform: translateY(calc(-1 * (var(--burger-gap) + var(--burger-line-height)))) rotate(-45deg);
+    }
+  }
+}

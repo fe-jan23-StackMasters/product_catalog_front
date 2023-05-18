@@ -14,11 +14,6 @@ import { ProductCardSkeleton } from '../ProductCardSkeleton';
 type Props = {
   title: string;
   products: PhoneCard[];
-  cardIds: string[];
-  favIds: string[];
-
-  onCardToggle: (basket: object) => void;
-  onFavToggle: (basket: object) => void;
   isError: boolean;
   isLoading: boolean;
 };
@@ -26,15 +21,9 @@ type Props = {
 export const HomeSlider: React.FC<Props> = ({
   title,
   products,
-  cardIds,
-  favIds,
-  onCardToggle,
-  onFavToggle,
   isError,
   isLoading,
 }) => {
-  const quantity = '1';
-
   const arrowRight = (
     <div>
       <img src={ArrowRight} />
@@ -119,17 +108,7 @@ export const HomeSlider: React.FC<Props> = ({
           <Slider {...settingsSlider}>
             {products.map((product) => (
               <div className="slider__item" key={product.id}>
-                <ProductCard
-                  product={product}
-                  onCardAdd={() =>
-                    onCardToggle({ id: product.id, quantity, product })
-                  }
-                  onFavouriteAdd={() =>
-                    onFavToggle({ id: product.id, quantity, product })
-                  }
-                  cardIds={cardIds}
-                  favIds={favIds}
-                />
+                <ProductCard product={product} />
               </div>
             ))}
           </Slider>

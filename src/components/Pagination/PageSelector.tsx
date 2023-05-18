@@ -2,25 +2,16 @@ import React, { useEffect } from 'react';
 import classNames from 'classnames';
 import { ArrowLeft } from '../Arrows/ArrowLeft';
 import { ArrowRigth } from '../Arrows/ArrowRight';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 interface Props {
-  itemsPerPage: number;
   currentPage: number;
-  sortBy: string;
   pages: number;
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const Paginate: React.FC<Props> = ({
-  itemsPerPage,
-  currentPage,
-  sortBy,
-  setCurrentPage,
-  pages,
-}) => {
+export const Paginate: React.FC<Props> = ({ currentPage, pages }) => {
   const pageNumbers: number[] = [];
-  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -32,28 +23,21 @@ export const Paginate: React.FC<Props> = ({
 
   const goToPrevPage = () => {
     if (currentPage !== 1) {
-      navigate(
-        `./?page=${currentPage - 1}&perPage=${itemsPerPage}&sort=${sortBy}`,
-      );
-      setCurrentPage((prevPage) => prevPage - 1);
+      searchParams.set('page', currentPage - 1 + '');
+      setSearchParams(searchParams);
     }
   };
 
   const goToNextPage = () => {
     if (currentPage !== pageNumbers.length) {
-      navigate(
-        `./?page=${currentPage + 1}&perPage=${itemsPerPage}&sort=${sortBy}`,
-      );
-      setCurrentPage((prevPage) => prevPage + 1);
+      searchParams.set('page', currentPage + 1 + '');
+      setSearchParams(searchParams);
     }
   };
 
-  useEffect(() => {
-    if (!pageNumbers.includes(currentPage)) {
-      navigate(`./?page=1&perPage=${itemsPerPage}&sort=${sortBy}`);
-      setCurrentPage(1);
-    }
-  }, []);
+  if (pages === 0) {
+    return null;
+  }
 
   return (
     <>
@@ -72,17 +56,17 @@ export const Paginate: React.FC<Props> = ({
             })}
             key={num}
           >
-            <NavLink
-              to={`./?page=${num}&perPage=${itemsPerPage}&sort=${sortBy}`}
+            <div
               className={classNames('pagination__link', {
                 'pagination__link--selected': num === currentPage,
               })}
               onClick={() => {
-                setCurrentPage(num);
+                searchParams.set('page', num + '');
+                setSearchParams(searchParams);
               }}
             >
               {num}
-            </NavLink>
+            </div>
           </li>
         ))}
 

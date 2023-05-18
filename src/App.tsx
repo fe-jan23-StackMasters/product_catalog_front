@@ -14,9 +14,14 @@ import { BurgerMenu } from './components/BurgerMenu';
 import { useContext, useState } from 'react';
 import { ItemCard } from './components/ItemCard';
 import { ThemeContext } from './context/toggleContext';
+import { SearchPage } from './components/SearchPage';
+import { AnimatePresence } from 'framer-motion';
+import { ProductType } from './types/ProductType';
+
+const categories = Object.values(ProductType);
 
 export const App = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const { theme, setTheme } = useContext(ThemeContext);
 
   const toggleTheme = () => {
@@ -26,31 +31,33 @@ export const App = () => {
   };
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
-    document.body.classList.toggle('no-scroll');
+    setIsBurgerOpen(prev => !prev);
   };
 
   return (
     <div data-theme={theme}>
-      {!isOpen ? (
         <Header
           toggleMenu={toggleMenu}
           toggleTheme={toggleTheme}
+          isMenuOpen={isBurgerOpen}
         />
-      ) : (
-        <BurgerMenu toggleMenu={toggleMenu} />
-      )}
+        <AnimatePresence>
+          {isBurgerOpen && <BurgerMenu toggleMenu={toggleMenu} />}
+        </AnimatePresence>
 
       <main className="main">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<Navigate to="/" replace />} />
 
-          <Route path="/phones" element={<Outlet />}>
-            <Route index element={<PhonesPage />} />
-            <Route path=":itemCard" element={<ItemCard />} />
-          </Route>
+          {categories.map((category) => (
+            <Route path={category} key={category} element={<Outlet />}>
+              <Route index element={<PhonesPage productType={category} />} />
+              <Route path=":itemCard" element={<ItemCard />} />
+            </Route>
+          ))}
 
+          <Route path="/search" element={<SearchPage />} />
           <Route path="/tablets" element={<TabletsPage />} />
           <Route path="/accessories" element={<AccessoriesPage />} />
           <Route path="/favourites" element={<FavouritesPage />} />

@@ -9,6 +9,15 @@
     @include top-actions;
   }
 
+  &__left-side {
+    display: flex;
+    gap: 32px;
+
+    @include onTablet {
+      gap: 48px;
+    }
+  }
+
   &__buying-section {
     display: flex;
   }
@@ -20,6 +29,7 @@
   &__menu-button {
     background-color: var(--black-color);
     border: none;
+    width: 45px;
 
     cursor: pointer;
   }
@@ -27,7 +37,10 @@
   &__case {
     border-left: solid 1px var(--elements-color);
     flex-shrink: 0;
-    padding: 17px;
+    width: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &-button {
       border: none;
@@ -73,7 +86,7 @@
     }
 
     @include onDesktop {
-      padding: 25px;
+      width: 64px;
     }
 
     &--is-active {
@@ -128,11 +141,10 @@
     text-decoration: none;
     font-family: 'Mont';
     font-size: 9px;
-    line-height: 11px;
-    color: #fff;
+    line-height: 0;
+    color: $white-color;
 
     @include square(14px);
-    padding: 3px;
 
     background-color: var(--red-color);
     border: var(--black-color) 1px solid;
@@ -141,14 +153,20 @@
     position: absolute;
     @include squareForPosition(7.5px);
   }
+
+  &__menu-container {
+    display: flex;
+  }
 }
 
 .logo {
   position: relative;
+  display: flex;
+  align-items: center;
   margin-left: 16px;
 
-  @include onTablet {
-    margin-left: 0;
+  @include onDesktop {
+    margin-left: 24px;
   }
 
   &__image {
@@ -157,44 +175,30 @@
 
     @include onDesktop {
       width: 80px;
-      margin-left: 24px;
-    }
-  }
-
-  &__ok {
-    position: absolute;
-    width: 9px;
-    height: 12px;
-    top: -8px;
-    right: 23px;
-
-    @include onDesktop {
-      width: 11px;
-      height: 15px;
-      top: -13px;
-      right: 29px;
     }
   }
 }
 
+
 .nav {
+  display: none;
+
+  @include onTablet {
+    display: block;
+  }
+
   &__panel {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: 32px;
     list-style: none;
-    padding: 0 17px;
+    padding: 0;
     margin: 0;
-  }
+    gap: 32px;
 
-  &__item {
-    margin-right: 32px;
-
-    &:not(:first-child) {
-      @include onDesktop {
-        margin-right: 64px;
-      }
+    @include onDesktop {
+      gap: 64px
     }
   }
 
@@ -222,14 +226,12 @@
       color: var(--white-color);
     }
 
-    &--is-active::after {
-      bottom: 0;
-      width: 100%;
+    &-underline {
       position: absolute;
-      content: '';
-      background-color: var(--white-color);
+      bottom: 0;
       height: 4px;
-      display: block;
+      width: 100%;
+      background-color: var(--white-color);
     }
   }
 }
@@ -239,6 +241,7 @@
   color: var(--white-color);
   width: 170px;
   height: 30px;
+
   &::placeholder {
     color: rgba(240, 248, 255, 0.36);
   }

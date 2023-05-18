@@ -8,21 +8,11 @@ import { BASE_URL } from '../../api/requests';
 
 interface Props {
   product: PhoneCard;
-  onCardAdd: () => void;
-  onFavouriteAdd: () => void;
-  cardIds: string[];
-  favIds: string[];
 }
 
-export const ProductCard: React.FC<Props> = ({
-  product,
-  onCardAdd,
-  onFavouriteAdd,
-  cardIds,
-  favIds,
-}) => {
+export const ProductCard: React.FC<Props> = ({ product }) => {
   // eslint-disable-next-line max-len
-  const { name, fullPrice, price, screen, capacity, ram, id, phoneId, image } = product;
+  const { name, fullPrice, price, screen, capacity, ram, phoneId, image } = product;
 
   const inces = screen.split(' ')[0];
 
@@ -59,19 +49,9 @@ export const ProductCard: React.FC<Props> = ({
       </div>
 
       <div className="card__buttons">
-        <AddToCart
-          height="40px"
-          onCardAdd={onCardAdd}
-          id={id}
-          cardIds={cardIds}
-        />
+        <AddToCart height="40px" product={product} />
 
-        <AddToFavourites
-          size="40px"
-          onFavouriteAdd={onFavouriteAdd}
-          favIds={favIds}
-          id={id}
-        />
+        <AddToFavourites size="40px" product={product} />
       </div>
     </div>
   );
