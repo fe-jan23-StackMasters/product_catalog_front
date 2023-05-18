@@ -28,16 +28,16 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: $surface1-color;
+  background: var(--surface1-color);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $surface2-color;
+  background: var(--surface2-color);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: $accent-color;
+  background: var(--accent-color);
 }
 
 body {
@@ -45,6 +45,8 @@ body {
   min-height: 100vh;
   background-color: var(--bg-color);
   overflow-y: scroll;
+
+  transition: background-color 0.3s;
 }
 
 html {

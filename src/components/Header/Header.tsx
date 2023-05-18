@@ -1,7 +1,7 @@
 import { FC, useEffect, useState, useContext } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import logoItem from '../../icons/niceGadgets.svg';
-import blackLogoItem from '../../icons/blackNice.svg';
+import logoItem from '../../icons/Logo.svg';
+import blackLogoItem from '../../icons/LogoItem.svg';
 import blackShoping from '../../icons/blackShopingCart.svg';
 import favoritesHart from '../../icons/favourites.svg';
 import blackFavHeart from '../../icons/blackHeart.svg';
@@ -113,15 +113,15 @@ export const Header: FC<Props> = ({ toggleMenu, isMenuOpen, toggleTheme }) => {
               setIsOpen={setIsSearchOpen}
             />
 
-              <button
-                type="button"
-                onClick={toggleTheme}
-                className={classNames('header__case header__case-button', {
-                  'header__case-button--moon': isLight,
-                })}
-              >
-                <img src={themePath} alt={theme} />
-              </button>
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className={classNames('header__case header__case-button', {
+                'header__case-button--moon': isLight,
+              })}
+            >
+              <img src={themePath} alt={theme} />
+            </button>
 
             <NavLink
               to="/favourites"
@@ -185,6 +185,17 @@ export const Header: FC<Props> = ({ toggleMenu, isMenuOpen, toggleTheme }) => {
               isOpen={isSearchOpen}
               setIsOpen={setIsSearchOpen}
             />
+
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className={classNames('header__case header__case-button', {
+                'header__case-button--moon': isLight,
+              })}
+            >
+              <img src={themePath} alt={theme} />
+            </button>
+
             <MenuToggler isOpen={isMenuOpen} onToggle={toggleMenu} />
           </div>
         )}

@@ -5,6 +5,8 @@
   background-color: var(--black-color);
   border-bottom: solid 1px var(--elements-color);
 
+  transition: background-color 0.3s, border 0.3s;
+
   &__content {
     @include top-actions;
   }
@@ -142,7 +144,7 @@
     font-family: 'Mont';
     font-size: 9px;
     line-height: 0;
-    color: $white-color;
+    color: #fff;
 
     @include square(14px);
 

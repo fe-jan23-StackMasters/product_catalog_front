@@ -1,9 +1,5 @@
 import React, { useContext } from 'react';
 import './BurgerMenu.scss';
-import logo from '../../icons/Logo.svg';
-import blackLogo from '../../icons/blackNice.svg';
-import cross from '../../icons/Close.svg';
-import blackCross from '../../icons/blackClose.svg';
 import like from '../../icons/favourites.svg';
 import blackLike from '../../icons/blackHeart.svg';
 import cardIcon from '../../icons/shoppingBag.svg';
@@ -23,14 +19,10 @@ const menuList: string[] = ['home', 'phones', 'tablets', 'accessories'];
 export const BurgerMenu: React.FC<Props> = ({ toggleMenu }) => {
   const { theme } = useContext(ThemeContext);
   const { favorites, cartItems } = useLocalStorageContext();
-  let logoPath = logo;
-  let closePath = cross;
   let likePath = like;
   let cartPath = cardIcon;
 
   if (theme === 'light') {
-    logoPath = blackLogo;
-    closePath = blackCross;
     likePath = blackLike;
     cartPath = blackCartIcon;
   }
@@ -49,19 +41,6 @@ export const BurgerMenu: React.FC<Props> = ({ toggleMenu }) => {
       }}
       transition={{ duration: 0.2 }}
     >
-      <div className="menu__header">
-        <div className="menu__header-contaioner logo">
-          <a href="/Home" className="menu__icon">
-            <img src={logoPath} className="menu__icon-logoIcon" />
-          </a>
-        </div>
-        <button
-          className="menu__header-contaioner closeButton"
-          onClick={toggleMenu}
-        >
-          <img src={closePath} className="crossIcon" />
-        </button>
-      </div>
       <div className="menu__content">
         <ul className="menu__content-list">
           {menuList.map((item) => (

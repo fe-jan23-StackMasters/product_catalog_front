@@ -89,7 +89,7 @@
     }
 
     &:not(:disabled):hover {
-      background-color: $surface2-color;
+      background-color: var(--surface2-color);
     }
   }
 
@@ -113,7 +113,7 @@
     }
 
     &:not(:disabled):hover {
-      background-color: $surface2-color;
+      background-color: var(--surface2-color);
     }
   }
 
