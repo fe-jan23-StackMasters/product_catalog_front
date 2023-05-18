@@ -8,6 +8,7 @@ import './styles/normalize.scss';
 import { App } from './App';
 import { ThemeProvider } from './context/toggleContext';
 import { LocalStorageProvider } from './context/StorageContext';
+import { ResizeProvider } from './context/ResizeContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -16,13 +17,15 @@ const root = ReactDOM.createRoot(
 const queryClient = new QueryClient();
 
 root.render(
-  <ThemeProvider>
-    <LocalStorageProvider>
+  <LocalStorageProvider>
+    <ThemeProvider>
       <QueryClientProvider client={queryClient}>
-        <Router>
-          <App />
-        </Router>
+        <ResizeProvider>
+          <Router>
+            <App />
+          </Router>
+        </ResizeProvider>
       </QueryClientProvider>
-    </LocalStorageProvider>
-  </ThemeProvider>,
+    </ThemeProvider>
+  </LocalStorageProvider>,
 );

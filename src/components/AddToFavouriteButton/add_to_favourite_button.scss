@@ -22,4 +22,30 @@
   &--added {
     background: var(--surface1-color);
   }
+
+  &-heart--animating {
+    animation: beat 1s linear 2;
+  }
+}
+
+@keyframes beat {
+  0% {
+    transform: scale(1);
+  }
+
+  35% {
+    transform: scale(1.2);
+  }
+
+  50% {
+    transform: scale(0.9);
+  }
+
+  65% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }

@@ -8,7 +8,6 @@ import classNames from 'classnames';
 import { ThemeContext } from '../../context/toggleContext';
 import { useLocalStorageContext } from '../../context/StorageContext';
 import { PhoneCard } from '../../types/PhoneCard';
-
 interface Props {
   size: string;
   product: PhoneCard;
@@ -52,7 +51,11 @@ export const AddToFavourites: React.FC<Props> = ({ size, product }) => {
       type={classNames('btn__fav', { 'btn__fav--added': isFavorite })}
       handler={handleClick}
     >
-      <img src={imagePath} alt="favourite" />
+      <img
+        src={imagePath}
+        alt="favourite"
+        className={classNames({ 'btn__fav-heart--animating': isFavorite })}
+      />
     </Button>
   );
 };

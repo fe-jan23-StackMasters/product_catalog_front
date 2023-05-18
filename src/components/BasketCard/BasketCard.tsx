@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { ThemeContext } from '../../context/toggleContext';
 import { useLocalStorageContext } from '../../context/StorageContext';
 import { motion } from 'framer-motion';
+import { useResizeContext } from '../../context/ResizeContext';
 import classNames from 'classnames';
 
 type Props = {
@@ -17,6 +18,9 @@ type Props = {
 export const BasketCard: React.FC<Props> = ({ product }) => {
   const { decreaseQuantity, increaseQuantity, removeFromCart }
     = useLocalStorageContext();
+
+  const { isMobileScreen } = useResizeContext();
+  const height = isMobileScreen ? 164 : 128;
 
   const { price, id, image, itemId, name } = product.info;
   const imageLink = `${BASE_URL}/${image}`;
@@ -36,10 +40,12 @@ export const BasketCard: React.FC<Props> = ({ product }) => {
     <motion.li
       className="basket__card"
       initial={{
+        height: 0,
         opacity: 0,
         translateY: -100,
       }}
       animate={{
+        height,
         opacity: 1,
         translateY: 0,
       }}
@@ -49,7 +55,7 @@ export const BasketCard: React.FC<Props> = ({ product }) => {
         paddingBottom: 0,
         opacity: 0,
       }}
-      transition={{ duration: 0.2 }}
+      transition={{ duration: 0.3 }}
     >
       <div className="basket__card-top">
         <img
@@ -67,7 +73,7 @@ export const BasketCard: React.FC<Props> = ({ product }) => {
             exit={{
               scaleY: 0,
             }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.3 }}
           />
         </Link>
 
@@ -77,7 +83,7 @@ export const BasketCard: React.FC<Props> = ({ product }) => {
             exit={{
               scaleY: 0,
             }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.3 }}
           >
             {name}
           </motion.span>

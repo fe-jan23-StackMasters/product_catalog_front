@@ -1,6 +1,5 @@
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import './App.scss';
-
 import { PageNotFound } from './components/PageNotFound';
 import { HomePage } from './components/HomePage';
 import { PhonesPage } from './components/PhonesPage';
@@ -31,19 +30,19 @@ export const App = () => {
   };
 
   const toggleMenu = () => {
-    setIsBurgerOpen(prev => !prev);
+    setIsBurgerOpen((prev) => !prev);
   };
 
   return (
     <div data-theme={theme}>
-        <Header
-          toggleMenu={toggleMenu}
-          toggleTheme={toggleTheme}
-          isMenuOpen={isBurgerOpen}
-        />
-        <AnimatePresence>
-          {isBurgerOpen && <BurgerMenu toggleMenu={toggleMenu} />}
-        </AnimatePresence>
+      <Header
+        toggleMenu={toggleMenu}
+        toggleTheme={toggleTheme}
+        isMenuOpen={isBurgerOpen}
+      />
+      <AnimatePresence>
+        {isBurgerOpen && <BurgerMenu toggleMenu={toggleMenu} />}
+      </AnimatePresence>
 
       <main className="main">
         <Routes>
