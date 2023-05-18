@@ -6,11 +6,11 @@
   justify-content: center;
   align-items: center;
 
-  background: $accent-color;
+  background: var(--accent-color);
   font-weight: 700;
   font-size: 14px;
   text-align: center;
-  color: $white-color;
+  color: var(--white-color);
   text-decoration: none;
 
   border: none;
@@ -19,11 +19,11 @@
   transition: background 0.3s ease;
 
   &:hover {
-    background: $hover-color;
+    background: var(--hover-color);
   }
 
   &--clicked {
-    background: $surface2-color;
+    background: var(--surface2-color);
   }
 
   &-shop {
@@ -49,10 +49,10 @@
   text-decoration: none;
   margin-bottom: 16px;
 
-  color: $secondary-color;
+  color: var(--secondary-color);
 
   &:hover {
-    color: $white-color;
+    color: var(--white-color);
   }
 
   &__image {
@@ -65,7 +65,7 @@
   flex-direction: column;
   font-family: 'Mont';
   font-style: normal;
-  color: $white-color;
+  color: var(--white-color);
 
   @include onDesktop {
     flex-direction: row;
@@ -95,7 +95,7 @@
     align-items: center;
     height: 206px;
     padding: 24px;
-    border: 1px solid $elements-color;
+    border: 1px solid var(--elements-color);
     margin-bottom: 58px;
 
     @include onTablet {
@@ -124,8 +124,8 @@
       padding-bottom: 16px;
       text-align: center;
 
-      color: $secondary-color;
-      border-bottom: 1px solid $elements-color;
+      color: var(--secondary-color);
+      border-bottom: 1px solid var(--elements-color);
 
       @include onDesktop {
         margin-bottom: 24px;

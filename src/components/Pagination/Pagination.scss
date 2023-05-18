@@ -1,10 +1,6 @@
 @import '../../styles/variables.scss';
 @import '../../styles/utils/mixins';
 
-html {
-  background-color: #0f1121;
-}
-
 .phonesPage__priceSlider {
   display: flex;
   flex-direction: column;
@@ -13,7 +9,7 @@ html {
   font-weight: 700;
   font-size: 12px;
   line-height: 15px;
-  color: $secondary-color;
+  color: var(--secondary-color);
   margin-bottom: 24px;
 
   @include onTablet {
@@ -69,14 +65,14 @@ html {
     height: 32px;
     width: 32px;
     cursor: pointer;
-    background-color: $surface1-color;
+    background-color: var(--surface1-color);
 
     &:hover:not(.pagination__item--selected) {
-      background-color: $elements-color;
+      background-color: var(--elements-color);
     }
 
     &--selected {
-      background-color: $accent-color;
+      background-color: var(--accent-color);
     }
   }
 
@@ -87,7 +83,7 @@ html {
     line-height: 21px;
     padding: 4px 12px;
 
-    color: $white-color;
+    color: var(--white-color);
     text-decoration: none;
   }
 }

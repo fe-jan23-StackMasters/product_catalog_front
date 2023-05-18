@@ -24,16 +24,16 @@
     font-weight: 700;
     font-size: 12px;
     line-height: 15px;
-    color: $secondary-color;
+    color: var(--secondary-color);
     text-decoration: none;
     cursor: pointer;
 
     &:hover {
-      color: $white-color;
+      color: var(--white-color);
     }
 
     &:hover .backToTop__button--img {
-      background-color: $icons-color;
+      background-color: var(--icons-color);
     }
   }
 
@@ -45,6 +45,6 @@
     background-image: url(../../icons/stroke.svg);
     background-repeat: no-repeat;
     background-position: center;
-    background-color: $surface2-color;
+    background-color: var(--surface2-color);
   }
 }

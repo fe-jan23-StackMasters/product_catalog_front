@@ -2,8 +2,8 @@
 @import '../../styles/utils/mixins';
 
 .footer {
-  background-color: $black-color;
-  border-top: 1px solid $elements-color;
+  background-color: var(--black-color);
+  border-top: 1px solid var(--elements-color);
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -81,12 +81,12 @@
     font-size: 12px;
     line-height: 11px;
     letter-spacing: 0.04em;
-    color: $white-color;
+    color: var(--white-color);
     text-decoration: none;
 
     &:hover {
       padding-bottom: 8px;
-      border-bottom: 2px solid $white-color;
+      border-bottom: 2px solid var(--white-color);
     }
   }
 }

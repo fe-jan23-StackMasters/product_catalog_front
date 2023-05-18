@@ -7,7 +7,9 @@ interface StoragePhone {
   product: PhoneCard;
 }
 
-export function useLocalStorage(key: string, initialValue: StoragePhone[]) {
+export function useLocalStorage(
+  key: string, initialValue: StoragePhone[] | string,
+) {
   const [value, setValue] = useState(() => {
     const storedValue = localStorage.getItem(key);
 
@@ -21,7 +23,9 @@ export function useLocalStorage(key: string, initialValue: StoragePhone[]) {
   return [value, setValue];
 }
 
-export function useCardsIds(key: string, initialValue: StoragePhone[]) {
+export function useCardsIds(
+  key: string, initialValue: StoragePhone[] | string,
+) {
   const [cardsIds, setCardsIds] = useLocalStorage(key, initialValue);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

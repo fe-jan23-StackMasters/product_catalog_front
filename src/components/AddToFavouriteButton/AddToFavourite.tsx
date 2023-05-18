@@ -1,9 +1,11 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useContext } from 'react';
 import { Button } from '../Button/Button';
 import './add_to_favourite_button.scss';
 import favouriteIcon from '../../icons/favourites.svg';
 import favouriteIconFilled from '../../icons/faqvoritesFilled.svg';
+import blackHeart from '../../icons/blackHeart.svg';
 import classNames from 'classnames';
+import { ThemeContext } from '../../context/toggleContext';
 
 interface Props {
   size: string;
@@ -20,11 +22,20 @@ export const AddToFavourites: React.FC<Props> = ({
 }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const isFavorite = favIds.some((el: any) => el.id === id);
+  const { theme } = useContext(ThemeContext);
+  let imagePath;
 
-  const imagePath = useMemo(
-    () => (isFavorite ? favouriteIconFilled : favouriteIcon),
-    [isFavorite],
-  );
+  if (theme === 'light') {
+    imagePath = useMemo(
+      () => (isFavorite ? favouriteIconFilled : blackHeart),
+      [theme, isFavorite],
+    );
+  } else {
+    imagePath = useMemo(
+      () => (isFavorite ? favouriteIconFilled : favouriteIcon),
+      [theme, isFavorite],
+    );
+  }
 
   return (
     <Button

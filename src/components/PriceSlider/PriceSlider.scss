@@ -17,14 +17,14 @@
   width: 284px;
   height: 40px;
   padding: 5px;
-  background-color: $surface2-color;
-  border: 1px solid $elements-color;
+  background-color: var(--surface2-color);
+  border: 1px solid var(--elements-color);
 
   &__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: $white-color;
+    color: var(--white-color);
     font-style: normal;
     font-weight: 700;
     font-size: 14px;

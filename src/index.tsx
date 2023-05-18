@@ -5,6 +5,7 @@ import './index.scss';
 import './styles/utils/_reset.scss';
 import './styles/normalize.scss';
 import { App } from './App';
+import { ThemeProvider } from './context/toggleContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -13,9 +14,11 @@ const root = ReactDOM.createRoot(
 const queryClient = new QueryClient();
 
 root.render(
-  <QueryClientProvider client={queryClient}>
-    <Router>
-      <App />
-    </Router>
-  </QueryClientProvider>,
+  <ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <App />
+      </Router>
+    </QueryClientProvider>
+  </ThemeProvider>,
 );

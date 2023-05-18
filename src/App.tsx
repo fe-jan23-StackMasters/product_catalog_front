@@ -11,11 +11,19 @@ import { ShoppingBasket } from './components/ShoppingBasket';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { BurgerMenu } from './components/BurgerMenu';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { ItemCard } from './components/ItemCard';
+import { ThemeContext } from './context/toggleContext';
 
 export const App = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+
+    setTheme(newTheme);
+  };
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -23,10 +31,11 @@ export const App = () => {
   };
 
   return (
-    <>
+    <div data-theme={theme}>
       {!isOpen ? (
         <Header
-        toggleMenu={toggleMenu}
+          toggleMenu={toggleMenu}
+          toggleTheme={toggleTheme}
         />
       ) : (
         <BurgerMenu toggleMenu={toggleMenu} />
@@ -51,6 +60,6 @@ export const App = () => {
       </main>
 
       <Footer />
-    </>
+    </div>
   );
 };

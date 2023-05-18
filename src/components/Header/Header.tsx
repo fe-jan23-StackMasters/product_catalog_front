@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import logoItem from '../../icons/niceGadgets.svg';
 import logoItemOk from '../../icons/Ok.svg';
@@ -9,19 +9,23 @@ import shoppingBag from '../../icons/shoppingBag.svg';
 import { PageNavLink } from '../PageNavLink';
 import { useCardsIds } from '../../helpers/hooks/hooks';
 import classNames from 'classnames';
+import { ThemeContext } from '../../context/toggleContext';
 
 const navList = ['home', 'phones', 'tablets', 'accessories'];
 
 export type Props = {
   toggleMenu: () => void;
+  toggleTheme: () => void;
 };
 
 export const Header: FC<Props> = ({
   toggleMenu,
+  toggleTheme,
 }) => {
   const [cardIds] = useCardsIds('cart', []);
   const [favIds] = useCardsIds('favourite', []);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     const handleResize = () => {
@@ -71,6 +75,13 @@ export const Header: FC<Props> = ({
             </nav>
           )}
         </div>
+
+        <button
+          type="button"
+          onClick={toggleTheme}
+        >
+          {theme}
+        </button>
 
           {!isMobile ? (
             <div className="header__buying-section">
