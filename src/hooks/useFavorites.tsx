@@ -3,18 +3,19 @@ import { useLocalStorage } from './useLocalStorage';
 import { useCallback } from 'react';
 
 export const useFavorites = () => {
-  const [
-    favorites, setFavorites,
-  ] = useLocalStorage<PhoneCard[]>('favorites', []);
+  const [favorites, setFavorites] = useLocalStorage<PhoneCard[]>(
+    'favorites',
+    [],
+  );
 
   const isInFavorites = useCallback(
-    (productId: string) => favorites.some(item => item.id === productId),
+    (productId: string) => favorites.some((item) => item.id === productId),
     [favorites],
   );
 
   const addToFavorites = useCallback(
     (product: PhoneCard) => {
-      setFavorites(prev =>
+      setFavorites((prev) =>
         isInFavorites(product.id) ? prev : [...prev, product]);
     },
     [isInFavorites, setFavorites],
@@ -22,7 +23,8 @@ export const useFavorites = () => {
 
   const removeFromFavorites = useCallback(
     (productId: string) => {
-      setFavorites(prev => prev.filter(product => product.id !== productId));
+      setFavorites((prev) =>
+        prev.filter((product) => product.id !== productId));
     },
     [setFavorites],
   );

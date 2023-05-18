@@ -10,19 +10,9 @@ interface Props {
   product: PhoneCard;
 }
 
-export const ProductCard: React.FC<Props> = ({
-  product,
-}) => {
-  const {
-    name,
-    fullPrice,
-    price,
-    screen,
-    capacity,
-    ram,
-    phoneId,
-    image,
-  } = product;
+export const ProductCard: React.FC<Props> = ({ product }) => {
+  // eslint-disable-next-line max-len
+  const { name, fullPrice, price, screen, capacity, ram, phoneId, image } = product;
 
   const inces = screen.split(' ')[0];
 
@@ -59,15 +49,9 @@ export const ProductCard: React.FC<Props> = ({
       </div>
 
       <div className="card__buttons">
-        <AddToCart
-          height="40px"
-          product={product}
-        />
+        <AddToCart height="40px" product={product} />
 
-        <AddToFavourites
-          size="40px"
-          product={product}
-        />
+        <AddToFavourites size="40px" product={product} />
       </div>
     </div>
   );

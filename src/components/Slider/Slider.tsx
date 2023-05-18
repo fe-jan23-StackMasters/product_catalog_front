@@ -108,9 +108,7 @@ export const HomeSlider: React.FC<Props> = ({
           <Slider {...settingsSlider}>
             {products.map((product) => (
               <div className="slider__item" key={product.id}>
-                <ProductCard
-                  product={product}
-                />
+                <ProductCard product={product} />
               </div>
             ))}
           </Slider>

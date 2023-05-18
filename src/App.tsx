@@ -14,32 +14,44 @@ import { BurgerMenu } from './components/BurgerMenu';
 import { useState } from 'react';
 // import { ItemPageScelet } from './components/ItemPageScelet/ItemPageScelet';
 import { ItemCard } from './components/ItemCard';
+import { AnimatePresence } from 'framer-motion';
+import { ProductType } from './types/ProductType';
+
+const categories = Object.values(ProductType);
 
 export const App = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
-    document.body.classList.toggle('no-scroll');
+    setIsBurgerOpen(!isBurgerOpen);
+
+    setTimeout(
+      () => {
+        document.body.classList.toggle('no-scroll');
+      },
+      !isBurgerOpen ? 300 : 0,
+    );
   };
 
   return (
     <>
-      {!isOpen ? (
-        <Header toggleMenu={toggleMenu} />
-      ) : (
-        <BurgerMenu toggleMenu={toggleMenu} />
-      )}
+      <Header toggleMenu={toggleMenu} isMenuOpen={isBurgerOpen}/>
+      <AnimatePresence>
+        {isBurgerOpen && <BurgerMenu toggleMenu={toggleMenu} />}
+      </AnimatePresence>
 
       <main className="main">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<Navigate to="/" replace />} />
 
-          <Route path="/phones" element={<Outlet />}>
-            <Route index element={<PhonesPage />} />
-            <Route path=":itemCard" element={<ItemCard />} />
-          </Route>
+          {categories.map(category => (
+            <Route path={category} key={category} element={<Outlet />}>
+              <Route index element={<PhonesPage
+                productType={category}/>} />
+              <Route path=":itemCard" element={<ItemCard />} />
+            </Route>
+          ))}
 
           <Route path="/tablets" element={<TabletsPage />} />
           <Route path="/accessories" element={<AccessoriesPage />} />

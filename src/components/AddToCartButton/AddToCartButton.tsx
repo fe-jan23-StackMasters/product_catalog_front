@@ -10,15 +10,8 @@ interface Props {
   product: PhoneCard;
 }
 
-export const AddToCart: React.FC<Props> = ({
-  height,
-  product,
-}) => {
-  const {
-    addToCart,
-    removeFromCart,
-    isAddedToCart,
-  } = useLocalStorageContext();
+export const AddToCart: React.FC<Props> = ({ height, product }) => {
+  const { addToCart, removeFromCart, isAddedToCart } = useLocalStorageContext();
 
   const isInCart = isAddedToCart(product.id);
 

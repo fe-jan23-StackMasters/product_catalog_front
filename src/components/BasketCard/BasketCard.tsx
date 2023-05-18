@@ -11,8 +11,11 @@ type Props = {
 };
 
 export const BasketCard: React.FC<Props> = ({ product }) => {
-  const { decreaseQuantity, increaseQuantity, removeFromCart }
-    = useLocalStorageContext();
+  const {
+    decreaseQuantity,
+    increaseQuantity,
+    removeFromCart,
+  } = useLocalStorageContext();
 
   const { price, id, image, itemId, name } = product.info;
   const imageLink = `${BASE_URL}/${image}`;

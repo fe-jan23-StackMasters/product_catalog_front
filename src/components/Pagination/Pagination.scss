@@ -2,12 +2,13 @@
 @import '../../styles/utils/mixins';
 
 html {
-  background-color: #0f1121;
+  background-color: $black-color;
 }
 
 .phonesPage__priceSlider {
   display: flex;
   flex-direction: column;
+  align-items: center;
   font-weight: 700;
   font-size: 12px;
   line-height: 15px;
@@ -16,6 +17,15 @@ html {
 
   @include onTablet {
     align-items: start;
+  }
+
+  &-title {
+    position: relative;
+    left: -128px;
+
+    @include onTablet {
+      position: static;
+    }
   }
 }
 
