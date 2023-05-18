@@ -9,6 +9,7 @@ import { AddToFavourites } from '../AddToFavouriteButton';
 import { useLocation } from 'react-router-dom';
 import './itemCard.scss';
 import { getShortInfo } from '../../helpers/detailedToShortInfo';
+import { SliderProductPage } from '../SliderProductPage/SliderProductPage';
 
 export const ItemCard = () => {
   const [item, setItem] = useState<Phone | null>(null);
@@ -50,9 +51,10 @@ export const ItemCard = () => {
 
       <section className="settings">
         <div className="grid">
+        <SliderProductPage items = {item?.images}/>
           <div
             className="grid__item grid__phone
-        grid__item-tablet--6-12 grid__item-desktop--13-24"
+        grid__item-tablet--7-12 grid__item-desktop--13-24"
           >
             <div className="settings__container">
               <div className="settings__container-colors">

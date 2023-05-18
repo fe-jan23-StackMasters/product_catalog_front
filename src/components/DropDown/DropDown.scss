@@ -22,7 +22,7 @@
     height: 10px;
     width: 8px;
     fill: $secondary-color;
-    transform: rotate(270deg);
+    transform: rotate(90deg);
     transition: 0.5s;
   }
 
@@ -83,7 +83,7 @@
 }
 
 .active_arrow {
-  transform: rotate(90deg);
+  transform: rotate(270deg);
 }
 
 .active-drop {
