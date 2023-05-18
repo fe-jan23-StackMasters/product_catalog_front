@@ -57,7 +57,9 @@ export const Paginate: React.FC<Props> = ({ currentPage, pages }) => {
             key={num}
           >
             <div
-              className="pagination__link"
+              className={classNames('pagination__link', {
+                'pagination__link--selected': num === currentPage,
+              })}
               onClick={() => {
                 searchParams.set('page', num + '');
                 setSearchParams(searchParams);

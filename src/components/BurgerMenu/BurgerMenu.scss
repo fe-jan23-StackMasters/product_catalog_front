@@ -8,7 +8,7 @@
   bottom: 0;
   width: 100%;
   z-index: 300;
-  background-color: $black-color;
+  background-color: var(--black-color);
   padding: 32px 0 0;
   margin: 0 auto;
 
@@ -20,7 +20,7 @@
       padding: 0;
       margin: 0 auto;
       display: flex;
-      color: $secondary-color;
+      color: var(--secondary-color);
       align-items: center;
       justify-content: center;
       flex-direction: column;
@@ -49,11 +49,11 @@
         }
 
         &:hover {
-          color: $white-color;
+          color: var(--white-color);
           cursor: pointer;
 
           &::after {
-            background-color: $white-color;
+            background-color: var(--white-color);
           }
         }
       }
@@ -90,7 +90,7 @@
     align-items: center;
     background-color: transparent;
     border: 0;
-    border-top: 1px $elements-color solid;
+    border-top: 1px var(--elements-color) solid;
     border-bottom: 2px transparent solid;
     transition: 0.3s;
 
@@ -103,12 +103,12 @@
     }
 
     &:hover {
-      border-bottom: 2px $white-color solid;
+      border-bottom: 2px var(--white-color) solid;
     }
 
     &.likeButton {
       background-color: transparent;
-      border-right: 1px $elements-color solid;
+      border-right: 1px var(--elements-color) solid;
     }
 
     &.cardButton {

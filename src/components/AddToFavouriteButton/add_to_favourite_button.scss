@@ -8,18 +8,18 @@
   margin: 0;
   padding: 0;
 
-  background: $surface2-color;
+  background: var(--surface2-color);
   border: none;
   cursor: pointer;
 
   transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
 
   &:hover {
-    background: $icons-color;
+    background: var(--icons-color);
   }
 
   &--added {
-    background: $surface1-color;
-    border: 1px solid $elements-color;
+    background: var(--surface1-color);
   }
 }

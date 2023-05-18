@@ -1,10 +1,20 @@
-import { useEffect, useRef, FC, useState, useCallback } from 'react';
+import {
+  useEffect,
+  useRef,
+  FC,
+  useState,
+  useCallback,
+  useContext,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SearchLine.scss';
 import dandruff from '../../icons/Search.svg';
+import blackDandruff from '../../icons/blackSearch.svg';
 import close from '../../icons/Close.svg';
+import blackClose from '../../icons/blackClose.svg';
 import classNames from 'classnames';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ThemeContext } from '../../context/toggleContext';
 
 type Props = {
   isOpen: boolean;
@@ -15,9 +25,17 @@ export const SearchLine: FC<Props> = ({
   isOpen,
   setIsOpen,
 }) => {
+  const { theme } = useContext(ThemeContext);
   const [searchQuery, setSearchQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  let dandruffPath = dandruff;
+  let closePath = close;
+
+  if (theme === 'light') {
+    dandruffPath = blackDandruff;
+    closePath = blackClose;
+  }
 
   useEffect(() => {
     if (isOpen) {
@@ -60,7 +78,7 @@ export const SearchLine: FC<Props> = ({
   return (
     <div className={classNames('searchLine', { 'searchLine--active': isOpen })}>
       <img
-        src={dandruff}
+        src={dandruffPath}
         alt="dandruff"
         className={classNames('searchLine__image', {
           'searchLine__image-position': isOpen,
@@ -100,7 +118,7 @@ export const SearchLine: FC<Props> = ({
             />
 
             <motion.img
-              src={close}
+              src={closePath}
               alt="close search"
               initial={{ display: 'none' }}
               animate={{ display: 'block' }}

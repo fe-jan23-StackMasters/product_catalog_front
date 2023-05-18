@@ -6,7 +6,7 @@
   align-items: center;
   padding: 14px;
   height: 48px;
-  border-left: 1px solid $elements-color;
+  border-left: 1px solid var(--elements-color);
 
   @include onTablet {
     height: 50px;
@@ -25,9 +25,9 @@
       padding: 6px 30px 6px 6px;
       margin: -6px;
       width: 200px;
-      color: $white-color;
+      color: var(--white-color);
       letter-spacing: 0.07em;
-      background-color: $surface1-color;
+      background-color: var(--surface1-color);
       border: none;
       outline: none;
       z-index: 0;
@@ -44,10 +44,6 @@
       right: 4px;
       transition: all 0.3s;
       cursor: pointer;
-
-      &:hover {
-        background-color: $black-color;
-      }
     }
   }
 

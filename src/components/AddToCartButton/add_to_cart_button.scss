@@ -5,11 +5,11 @@
   justify-content: center;
   align-items: center;
 
-  background: $accent-color;
+  background: var(--accent-color);
   font-weight: 700;
   font-size: 14px;
   text-align: center;
-  color: $white-color;
+  color: var(--cart-text);
   text-decoration: none;
 
   border: none;
@@ -18,10 +18,13 @@
   transition: all 0.3s ease;
 
   &:hover {
-    background: $hover-color;
+    background: var(--hover-color);
+    color: var(--cart-text-active);
   }
 
   &--added {
-    background: $surface2-color;
+    color: var(--cart-text-active);
+    background: var(--surface2-color);
+    border: 1px solid var(--border-color);
   }
 }

@@ -5,8 +5,7 @@
   display: flex;
   flex-direction: column;
   padding: 16px;
-  background-color: $surface1-color;
-  // transition: transform 0.3s;
+  background-color: var(--surface1-color);
 
   @include onTablet {
     flex-direction: row;
@@ -32,7 +31,7 @@
     cursor: pointer;
 
     &:hover {
-      background-color: $surface2-color;
+      background-color: var(--surface2-color);
     }
 
     @include onTablet {
@@ -55,7 +54,7 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 21px;
-    color: $white-color;
+    color: var(--white-color);
     text-decoration: none;
   }
 
@@ -76,9 +75,13 @@
     background-position: center;
     background-color: transparent;
     padding: 20px 20px;
-    border: 1px solid $elements-color;
+    border: 1px solid var(--border-color);
     cursor: pointer;
     transition: all 0.3s;
+
+    &--light {
+      background-image: url('../../icons/blackMinus.svg');
+    }
 
     &:disabled {
       cursor: default;
@@ -86,7 +89,7 @@
     }
 
     &:not(:disabled):hover {
-      background-color: $surface2-color;
+      background-color: var(--surface2-color);
     }
   }
 
@@ -96,9 +99,13 @@
     background-position: center;
     background-color: transparent;
     padding: 20px 20px;
-    border: 1px solid $elements-color;
+    border: 1px solid var(--border-color);
     cursor: pointer;
     transition: all 0.3s;
+
+    &--light {
+      background-image: url('../../icons/blackPlus.svg');
+    }
 
     &:disabled {
       cursor: default;
@@ -106,7 +113,7 @@
     }
 
     &:not(:disabled):hover {
-      background-color: $surface2-color;
+      background-color: var(--surface2-color);
     }
   }
 

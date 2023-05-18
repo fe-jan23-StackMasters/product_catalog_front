@@ -3,17 +3,17 @@
 
 .css-53tbrc-MuiSlider-root {
   width: 50% !important;
-  color: $accent-color !important;
+  color: var(--accent-color) !important;
 }
 
 .css-1623zc {
   width: 50% !important;
-  color: $accent-color !important;
+  color: var(--accent-color) !important;
 }
 
 .css-lbpym0-MuiSlider-root {
   width: 50% !important;
-  color: $accent-color !important;
+  color: var(--accent-color) !important;
 }
 
 .filterPrice {
@@ -22,8 +22,8 @@
   width: 288px;
   height: 40px;
   padding: 5px;
-  background-color: $surface2-color;
-  border: 1px solid $elements-color;
+  background-color: var(--surface2-color);
+  border: 1px solid var(--elements-color);
 
   @include onTablet {
     width: 260px;
@@ -33,7 +33,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: $white-color;
+    color: var(--white-color);
     font-style: normal;
     font-weight: 700;
     font-size: 14px;

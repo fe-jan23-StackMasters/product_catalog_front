@@ -14,7 +14,7 @@
     font-weight: 700;
     font-size: 12px;
     line-height: 15px;
-    color: $secondary-color;
+    color: var(--secondary-color);
 
     @include onTablet {
       justify-content: start;
@@ -54,7 +54,7 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 21px;
-    color: $secondary-color;
+    color: var(--secondary-color);
   }
 
   &__container {
