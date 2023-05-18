@@ -25,21 +25,24 @@ export const getProducts = async(
   sortBy?: SortBy,
   priceMin?: number,
   priceMax?: number,
+  query?: string,
 ): Promise<RequestWithParamsResult> => {
-  const query = [];
+  const queryParams = [];
 
-  if (perPage) query.push(`perPage=${perPage}`);
-  if (page) query.push(`page=${page}`);
-  if (sortBy) query.push(`sortBy=${sortBy}`);
-  if (priceMin) query.push(`priceMin=${priceMin}`);
-  if (priceMax) query.push(`priceMax=${priceMax}`);
+  if (perPage) queryParams.push(`perPage=${perPage}`);
+  if (page) queryParams.push(`page=${page}`);
+  if (sortBy) queryParams.push(`sortBy=${sortBy}`);
+  if (priceMin) queryParams.push(`priceMin=${priceMin}`);
+  if (priceMax) queryParams.push(`priceMax=${priceMax}`);
+  if (query) queryParams.push(`query=${query}`);
 
   if (productType) {
-    productType.forEach((category) => query.push(`productType=${category}`));
+    productType.forEach((category) =>
+      queryParams.push(`productType=${category}`));
   }
 
   const path = `${BASE_URL}/products${
-    query.length ? `?${query.join('&')}` : ''
+    queryParams.length ? `?${queryParams.join('&')}` : ''
   }`;
 
   const { data } = await axios.get<RequestWithParamsResult>(path);

@@ -9,10 +9,7 @@ interface Props {
   pages: number;
 }
 
-export const Paginate: React.FC<Props> = ({
-  currentPage,
-  pages,
-}) => {
+export const Paginate: React.FC<Props> = ({ currentPage, pages }) => {
   const pageNumbers: number[] = [];
   const [searchParams, setSearchParams] = useSearchParams();
 
