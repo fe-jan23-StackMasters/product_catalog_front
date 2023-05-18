@@ -13,22 +13,28 @@ import { Footer } from './components/Footer';
 import { BurgerMenu } from './components/BurgerMenu';
 import { useState } from 'react';
 import { ItemCard } from './components/ItemCard';
+import { AnimatePresence } from 'framer-motion';
 
 export const App = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
-    document.body.classList.toggle('no-scroll');
+    setIsBurgerOpen(!isBurgerOpen);
+
+    setTimeout(
+      () => {
+        document.body.classList.toggle('no-scroll');
+      },
+      !isBurgerOpen ? 300 : 0,
+    );
   };
 
   return (
     <>
-      {!isOpen ? (
-        <Header toggleMenu={toggleMenu} />
-      ) : (
-        <BurgerMenu toggleMenu={toggleMenu} />
-      )}
+      <Header toggleMenu={toggleMenu} isMenuOpen={isBurgerOpen}/>
+      <AnimatePresence>
+        {isBurgerOpen && <BurgerMenu toggleMenu={toggleMenu} />}
+      </AnimatePresence>
 
       <main className="main">
         <Routes>

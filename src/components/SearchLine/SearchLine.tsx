@@ -3,6 +3,7 @@ import './SearchLine.scss';
 import dandruff from '../../icons/Search.svg';
 import close from '../../icons/Close.svg';
 import classNames from 'classnames';
+import { motion, AnimatePresence } from 'framer-motion';
 
 type Props = {
   isOpen: boolean;
@@ -24,7 +25,7 @@ export const SearchLine: FC<Props> = ({
   }, [isOpen]);
 
   return (
-    <div className="searchLine">
+    <div className={classNames('searchLine', { 'searchLine--active': isOpen })}>
       <img
         src={dandruff}
         alt="dandruff"
@@ -33,24 +34,40 @@ export const SearchLine: FC<Props> = ({
         })}
         onClick={handleOpenInput}
       />
-      {isOpen && (
-        <div className="searchLine__container">
-          <input
-            ref={inputRef}
-            type="text"
-            className="searchLine__container-input"
-            placeholder="Search"
-            onBlur={() => setIsOpen(false)}
-          />
 
-          <img
-            src={close}
-            alt="close"
-            className="searchLine__container-image"
-            onClick={() => setIsOpen(false)}
-          />
-        </div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <form className="searchLine__container">
+            <motion.input
+              ref={inputRef}
+              key={'/'}
+              initial={{ width: 0 }}
+              animate={{ width: 200 }}
+              exit={{
+                width: 0,
+                paddingLeft: 0,
+                paddingRight: 0,
+              }}
+              transition={{ duration: 0.2 }}
+              type="text"
+              className="searchLine__container-input"
+              placeholder="Search"
+              onBlur={() => setIsOpen(false)}
+            />
+
+            <motion.img
+              src={close}
+              alt="close search"
+              initial={{ display: 'none' }}
+              animate={{ display: 'block' }}
+              exit={{ display: 'none' }}
+              transition={{ duration: 0 }}
+              className="searchLine__container-image"
+              onClick={() => setIsOpen(false)}
+            />
+          </form>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
