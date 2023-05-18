@@ -23,21 +23,25 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--surface1-color);
+  background: #75767f;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--surface2-color);
+  background: #313237;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-color);
+  background: #bdbdbd;
 }
 
 body {

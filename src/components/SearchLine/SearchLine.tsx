@@ -51,14 +51,12 @@ export const SearchLine: FC<Props> = ({
   const redirectPage = () => {
     if (searchQuery) {
       navigate(`/search?query=${searchQuery}`);
-    } else (
-      navigate('/search')
-    );
+    }
 
     setIsOpen(false);
   };
 
-  const searhDevice = useCallback(
+  const searchDevice = useCallback(
     (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         event.preventDefault();
@@ -68,10 +66,10 @@ export const SearchLine: FC<Props> = ({
   );
 
   useEffect(() => {
-    document.addEventListener('keyup', searhDevice);
+    document.addEventListener('keyup', searchDevice);
 
     return () => {
-      document.removeEventListener('keyup', searhDevice);
+      document.removeEventListener('keyup', searchDevice);
     };
   }, []);
 
@@ -125,7 +123,7 @@ export const SearchLine: FC<Props> = ({
               exit={{ display: 'none' }}
               transition={{ duration: 0 }}
               className="searchLine__container-image"
-              onClick={() => closeInput()}
+              onClick={closeInput}
             />
           </form>
         )}

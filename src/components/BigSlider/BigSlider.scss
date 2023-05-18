@@ -19,10 +19,7 @@
     @extend %skeleton;
     outline: none;
     padding-top: 106%;
-    display: block !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
 
     @include onTablet {
       padding-top: 35%;

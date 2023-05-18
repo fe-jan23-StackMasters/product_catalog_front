@@ -9,7 +9,7 @@
 }
 
 %skeleton {
-  background-color: $mockup-color;
+  background-color: var(--mockup-color);
   border-radius: 5px;
   animation: pulse 1s ease-in-out infinite alternate;
 }
