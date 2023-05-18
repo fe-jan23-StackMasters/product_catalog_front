@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import logo from '../../icons/Logo.svg';
 import favoritesHart from '../../icons/favourites.svg';
@@ -9,6 +9,7 @@ import { useLocalStorageContext } from '../../context/StorageContext';
 import { SearchLine } from '../SearchLine';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MenuToggler } from '../MenuToggler';
+import { useResizeContext } from '../../context/ResizeContext';
 
 const navList = ['home', 'phones', 'tablets', 'accessories'];
 
@@ -18,27 +19,14 @@ export type Props = {
 };
 
 export const Header: FC<Props> = ({ toggleMenu, isMenuOpen }) => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
-
   const { favorites, cartItems } = useLocalStorageContext();
 
   const location = useLocation();
   const page = location.pathname;
 
-  useEffect(() => {
-    const handleResize = () => {
-      const windowWidth = window.innerWidth;
-
-      setIsMobile(windowWidth < 640);
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const {
+    isMobileScreen,
+  } = useResizeContext();
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
@@ -83,7 +71,7 @@ export const Header: FC<Props> = ({ toggleMenu, isMenuOpen }) => {
           </AnimatePresence>
         </div>
 
-        {!isMobile ? (
+        {!isMobileScreen ? (
           <div className="header__buying-section">
             <SearchLine
               isOpen={isSearchOpen}

@@ -6,6 +6,7 @@ import './styles/utils/_reset.scss';
 import './styles/normalize.scss';
 import { App } from './App';
 import { LocalStorageProvider } from './context/StorageContext';
+import { ResizeProvider } from './context/ResizeContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -16,9 +17,11 @@ const queryClient = new QueryClient();
 root.render(
   <LocalStorageProvider>
     <QueryClientProvider client={queryClient}>
-      <Router>
-        <App />
-      </Router>
+      <ResizeProvider>
+        <Router>
+          <App />
+        </Router>
+      </ResizeProvider>
     </QueryClientProvider>
   </LocalStorageProvider>,
 );

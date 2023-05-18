@@ -1,5 +1,6 @@
 @import '../../styles/variables.scss';
 @import '../../styles/utils/mixins';
+@import '../../styles/utils/animations';
 
 .BigSlider {
   max-width: 1200px;
@@ -12,6 +13,27 @@
 
   @include onDesktop {
     padding: 0 32px;
+  }
+
+  &__skeleton {
+    @extend %skeleton;
+    outline: none;
+    padding-top: 106%;
+    display: block !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include onTablet {
+      padding-top: 35%;
+    }
+  }
+
+  &__loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   &__item {
@@ -31,6 +53,9 @@
     right: 0;
     left: 0;
     bottom: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
   }
 
   .slick-slider {

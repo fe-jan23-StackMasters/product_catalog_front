@@ -6,7 +6,7 @@
   flex-direction: column;
   padding: 16px;
   background-color: $surface1-color;
-  // transition: transform 0.3s;
+  transition: height 0.3s;
 
   @include onTablet {
     flex-direction: row;
