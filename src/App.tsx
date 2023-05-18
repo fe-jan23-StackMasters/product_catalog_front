@@ -11,29 +11,39 @@ import { ShoppingBasket } from './components/ShoppingBasket';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { BurgerMenu } from './components/BurgerMenu';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { ItemCard } from './components/ItemCard';
+import { ThemeContext } from './context/toggleContext';
 import { SearchPage } from './components/SearchPage';
-
 import { AnimatePresence } from 'framer-motion';
-
 import { ProductType } from './types/ProductType';
 
 const categories = Object.values(ProductType);
 
 export const App = () => {
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+
+    setTheme(newTheme);
+  };
 
   const toggleMenu = () => {
     setIsBurgerOpen(prev => !prev);
   };
 
   return (
-    <>
-      <Header toggleMenu={toggleMenu} isMenuOpen={isBurgerOpen}/>
-      <AnimatePresence>
-        {isBurgerOpen && <BurgerMenu toggleMenu={toggleMenu} />}
-      </AnimatePresence>
+    <div data-theme={theme}>
+        <Header
+          toggleMenu={toggleMenu}
+          toggleTheme={toggleTheme}
+          isMenuOpen={isBurgerOpen}
+        />
+        <AnimatePresence>
+          {isBurgerOpen && <BurgerMenu toggleMenu={toggleMenu} />}
+        </AnimatePresence>
 
       <main className="main">
         <Routes>
@@ -57,6 +67,6 @@ export const App = () => {
       </main>
 
       <Footer />
-    </>
+    </div>
   );
 };

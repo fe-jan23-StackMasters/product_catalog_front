@@ -28,22 +28,25 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: $surface1-color;
+  background: var(--surface1-color);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $surface2-color;
+  background: var(--surface2-color);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: $accent-color;
+  background: var(--accent-color);
 }
 
 body {
   position: relative;
   min-height: 100vh;
+  background-color: var(--bg-color);
   overflow-y: scroll;
+
+  transition: background-color 0.3s;
 }
 
 html {
@@ -52,6 +55,12 @@ html {
 
 main {
   padding-bottom: 360px;
+  background-color: var(--bg-color);
+  min-height: $heigth--main-tablet;
+
+  @include onDesktop {
+    min-height: $heigth--main;
+  }
 
   @include onTablet {
     padding-bottom: 164px;
@@ -70,7 +79,7 @@ h1 {
 
   letter-spacing: -0.01em;
 
-  color: $white-color;
+  color: var(--white-color);
 
   @include onTablet {
     font-size: 48px;
@@ -84,7 +93,7 @@ h2 {
   font-size: 22px;
   line-height: 140%;
 
-  color: $white-color;
+  color: var(--white-color);
 
   @include onTablet {
     font-size: 32px;
@@ -99,7 +108,7 @@ h3 {
   font-size: 20px;
   line-height: 26px;
 
-  color: $white-color;
+  color: var(--white-color);
 
   @include onTablet {
     font-weight: 800;
@@ -114,15 +123,11 @@ h4 {
   font-size: 16px;
   line-height: 20px;
 
-  color: $white-color;
+  color: var(--white-color);
 
   @include onTablet {
     font-weight: 700;
     font-size: 20px;
     line-height: 26px;
   }
-}
-
-body {
-  background-color: $black-color;
 }

@@ -1,12 +1,15 @@
 import './BasketCard.scss';
 import deleteIcon from '../../icons/Close.svg';
-import React from 'react';
+import blackDeleteIcon from '../../icons/blackClose.svg';
+import React, { useContext } from 'react';
 import { StorageProduct } from '../../types/StorageProduct';
 import { BASE_URL } from '../../api/requests';
 import { Link } from 'react-router-dom';
+import { ThemeContext } from '../../context/toggleContext';
 import { useLocalStorageContext } from '../../context/StorageContext';
 import { motion } from 'framer-motion';
 import { useResizeContext } from '../../context/ResizeContext';
+import classNames from 'classnames';
 
 type Props = {
   product: StorageProduct;
@@ -17,11 +20,21 @@ export const BasketCard: React.FC<Props> = ({ product }) => {
     = useLocalStorageContext();
 
   const { isMobileScreen } = useResizeContext();
+  const height = isMobileScreen ? 164 : 128;
 
   const { price, id, image, itemId, name } = product.info;
   const imageLink = `${BASE_URL}/${image}`;
   const totalPrice = price * product.quantity;
-  const height = isMobileScreen ? 164 : 128;
+  const { theme } = useContext(ThemeContext);
+  let deletePath = deleteIcon;
+  let isLight = false;
+
+  if (theme === 'light') {
+    isLight = true;
+    deletePath = blackDeleteIcon;
+  } else {
+    isLight = false;
+  }
 
   return (
     <motion.li
@@ -46,7 +59,7 @@ export const BasketCard: React.FC<Props> = ({ product }) => {
     >
       <div className="basket__card-top">
         <img
-          src={deleteIcon}
+          src={deletePath}
           alt="delete"
           className="basket__card-delete"
           onClick={() => removeFromCart(id)}
@@ -81,14 +94,18 @@ export const BasketCard: React.FC<Props> = ({ product }) => {
         <div className="basket__card-bottom--increase">
           <button
             type="button"
-            className="basket__card-minus"
+            className={classNames('basket__card-minus', {
+              'basket__card-minus--light': isLight,
+            })}
             onClick={() => decreaseQuantity(id)}
             disabled={product.quantity === 1}
           />
           <span className="basket__card-count">{product.quantity}</span>
           <button
             type="button"
-            className="basket__card-plus"
+            className={classNames('basket__card-plus', {
+              'basket__card-plus--light': isLight,
+            })}
             onClick={() => increaseQuantity(id)}
             disabled={product.quantity >= 20}
           />

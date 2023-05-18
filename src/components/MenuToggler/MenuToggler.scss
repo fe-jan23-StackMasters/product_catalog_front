@@ -22,7 +22,7 @@
     height: 11%;
     width: 100%;
 
-    background-color: $white-color;
+    background-color: var(--white-color);
     border-radius: 10px;
 
     transition: width 0.3s, transform 0.3s;

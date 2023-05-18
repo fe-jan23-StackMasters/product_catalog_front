@@ -1,9 +1,11 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo, useContext, useCallback } from 'react';
 import { Button } from '../Button/Button';
 import './add_to_favourite_button.scss';
 import favouriteIcon from '../../icons/favourites.svg';
 import favouriteIconFilled from '../../icons/faqvoritesFilled.svg';
+import blackHeart from '../../icons/blackHeart.svg';
 import classNames from 'classnames';
+import { ThemeContext } from '../../context/toggleContext';
 import { useLocalStorageContext } from '../../context/StorageContext';
 import { PhoneCard } from '../../types/PhoneCard';
 interface Props {
@@ -12,14 +14,27 @@ interface Props {
 }
 
 export const AddToFavourites: React.FC<Props> = ({ size, product }) => {
-  const { addToFavorites, removeFromFavorites, isInFavorites }
-    = useLocalStorageContext();
+  const {
+    addToFavorites,
+    removeFromFavorites,
+    isInFavorites,
+  } = useLocalStorageContext();
+
+  const { theme } = useContext(ThemeContext);
+  let imagePath;
   const isFavorite = isInFavorites(product.id);
 
-  const imagePath = useMemo(
-    () => (isFavorite ? favouriteIconFilled : favouriteIcon),
-    [isFavorite],
-  );
+  if (theme === 'light') {
+    imagePath = useMemo(
+      () => (isFavorite ? favouriteIconFilled : blackHeart),
+      [theme, isFavorite],
+    );
+  } else {
+    imagePath = useMemo(
+      () => (isFavorite ? favouriteIconFilled : favouriteIcon),
+      [theme, isFavorite],
+    );
+  }
 
   const handleClick = useCallback(() => {
     if (isFavorite) {
