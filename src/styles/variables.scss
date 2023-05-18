@@ -3,6 +3,7 @@
   --bg-button: #E2E6E9;
   --cart-text: #F1F2F9;
   --cart-text-active: #F1F2F9;
+  --btn-color: #F1F2F9;
   --secondary-color: #75767f;
   --icons-color: #4a4d58;
   --elements-color: #3b3e4a;
@@ -16,6 +17,7 @@
   --border-color: #313237;
   --hover-color: #a378ff;
   --mockup-color: #ffffff11;
+  --pagination-text: #f1f2f9;
 }
 
 [data-theme='light'] {
@@ -23,6 +25,7 @@
   --bg-button: #E2E6E9;
   --cart-text: #F1F2F9;
   --cart-text-active: #27AE60;
+  --btn-color: #FFFFFF;
   --secondary-color: #89939A;
   --icons-color: #B4BDC4;
   --elements-color: #E2E6E9;
@@ -36,7 +39,15 @@
   --border-color: #313237;
   --hover-color: #313237;
   --mockup-color: #faafff11;
+  --pagination-text: #f1f2f9;
 }
+
+$heigth--header: 67px;
+$heigth--footer: 103px;
+$heigth--main: calc(100vh - (#{$heigth--footer} + #{$heigth--header}));
+
+$heigth--header-tablet: 49px;
+$heigth--main-tablet: calc(100vh - (#{$heigth--footer} + #{$heigth--header-tablet}));
 
 $columns--tablet: 12;
 $columns--desktop: 24;

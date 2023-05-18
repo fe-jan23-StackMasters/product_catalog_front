@@ -85,5 +85,9 @@
 
     color: var(--white-color);
     text-decoration: none;
+
+    &--selected {
+      color: #F1F2F9;
+    }
   }
 }

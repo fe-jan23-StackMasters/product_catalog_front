@@ -29,6 +29,49 @@
     flex-shrink: 0;
     padding: 17px;
 
+    &-button {
+      border: none;
+      border-left: solid 1px var(--elements-color);
+      background: none;
+      position: relative;
+      cursor: pointer;
+      
+      @include onTablet {
+        width: 49px;
+      }
+
+      @include onDesktop {
+        width: 67px;
+      }
+
+
+      & img {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+
+        @include onTablet {
+          top: 23%;
+        }
+
+        @include onDesktop {
+          top: 30%;
+        }
+      }
+
+      &--moon img {
+        @include onTablet {
+          top: 33%;
+        }
+
+        @include onDesktop {
+          top: 36%;
+        }
+      }
+    }
+
     @include onDesktop {
       padding: 25px;
     }
@@ -86,7 +129,7 @@
     font-family: 'Mont';
     font-size: 9px;
     line-height: 11px;
-    color: var(--white-color);
+    color: #fff;
 
     @include square(14px);
     padding: 3px;

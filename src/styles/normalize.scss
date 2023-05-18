@@ -36,6 +36,11 @@ html {
 main {
   padding-bottom: 360px;
   background-color: var(--bg-color);
+  min-height: $heigth--main-tablet;
+
+  @include onDesktop {
+    min-height: $heigth--main;
+  }
 
   @include onTablet {
     padding-bottom: 80px;

@@ -3,6 +3,7 @@ import { HashRouter as Router } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './index.scss';
 import './styles/utils/_reset.scss';
+import './styles/variables.scss';
 import './styles/normalize.scss';
 import { App } from './App';
 import { ThemeProvider } from './context/toggleContext';

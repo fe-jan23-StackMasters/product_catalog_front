@@ -1,11 +1,17 @@
 import { FC, useEffect, useState, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import logoItem from '../../icons/niceGadgets.svg';
+import blackLogoItem from '../../icons/blackNice.svg';
+import blackShoping from '../../icons/blackShopingCart.svg';
 import logoItemOk from '../../icons/Ok.svg';
 import menuOpener from '../../icons/Menu.svg';
+import blackMenuOpener from '../../icons/blackMenu.svg';
 import favoritesRed from '../../icons/faqvoritesFilled.svg';
 import favoritesHart from '../../icons/favourites.svg';
+import blackFavHeart from '../../icons/blackHeart.svg';
 import shoppingBag from '../../icons/shoppingBag.svg';
+import moonIcon from '../../icons/moonIcon.svg';
+import sunIcon from '../../icons/sunIcon.svg';
 import { PageNavLink } from '../PageNavLink';
 import { useCardsIds } from '../../helpers/hooks/hooks';
 import classNames from 'classnames';
@@ -26,6 +32,23 @@ export const Header: FC<Props> = ({
   const [favIds] = useCardsIds('favourite', []);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
   const { theme } = useContext(ThemeContext);
+  let logoPath = logoItem;
+  let cartPath = shoppingBag;
+  let heartPath = favoritesHart;
+  let menuPath = menuOpener;
+  let themePath = sunIcon;
+  let isLight = false;
+
+  if (theme === 'light') {
+    isLight = true;
+    themePath = moonIcon;
+    logoPath = blackLogoItem;
+    cartPath = blackShoping;
+    heartPath = blackFavHeart;
+    menuPath = blackMenuOpener;
+  } else {
+    isLight = false;
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -48,7 +71,7 @@ export const Header: FC<Props> = ({
         <div className="header__right-side">
           {isMobile ? (
             <NavLink to="/" className="logo">
-              <img className="logo__image" src={logoItem} alt="Logo icon" />
+              <img className="logo__image" src={logoPath} alt="Logo icon" />
               <img className="logo__ok" src={logoItemOk} alt="ok" />
             </NavLink>
           ) : (
@@ -58,7 +81,7 @@ export const Header: FC<Props> = ({
                   <NavLink to="/" className="logo">
                     <img
                       className="logo__image"
-                      src={logoItem}
+                      src={logoPath}
                       alt="Logo icon"
                     />
                     <img className="logo__ok" src={logoItemOk} alt="ok" />
@@ -76,15 +99,18 @@ export const Header: FC<Props> = ({
           )}
         </div>
 
-        <button
-          type="button"
-          onClick={toggleTheme}
-        >
-          {theme}
-        </button>
-
           {!isMobile ? (
             <div className="header__buying-section">
+
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className={classNames('header__case header__case-button', {
+                  'header__case-button--moon': isLight,
+                })}
+              >
+                <img src={themePath} alt={theme} />
+              </button>
 
               <NavLink
                 to='/favourites'
@@ -107,7 +133,7 @@ export const Header: FC<Props> = ({
                 </>
               ) : (
                 <img
-                  src={favoritesHart}
+                  src={heartPath}
                   className="header__menu-opener_image"
                   alt="menu"
                 />
@@ -123,7 +149,7 @@ export const Header: FC<Props> = ({
                 <div className="header__count-position">
 
                   <img
-                    src={shoppingBag}
+                    src={cartPath}
                     className="header__menu-opener_image"
                     alt="menu"
                     />
@@ -142,7 +168,7 @@ export const Header: FC<Props> = ({
             >
               <img
                 className="header__menu-opener_image"
-                src={menuOpener}
+                src={menuPath}
                 alt="menu"
               />
           </button>

@@ -81,9 +81,13 @@
     background-position: center;
     background-color: transparent;
     padding: 20px 20px;
-    border: 1px solid var(--elements-color);
+    border: 1px solid var(--border-color);
     cursor: pointer;
     transition: all 0.3s;
+
+    &--light {
+      background-image: url('../../icons/blackMinus.svg');
+    }
 
     &:hover {
       background-color: var(--surface2-color);
@@ -96,9 +100,13 @@
     background-position: center;
     background-color: transparent;
     padding: 20px 20px;
-    border: 1px solid var(--elements-color);
+    border: 1px solid var(--border-color);
     cursor: pointer;
     transition: all 0.3s;
+
+    &--light {
+      background-image: url('../../icons/blackPlus.svg');
+    }
 
     &:hover {
       background-color: var(--surface2-color);

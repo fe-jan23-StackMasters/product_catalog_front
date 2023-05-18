@@ -46,5 +46,9 @@
     background-repeat: no-repeat;
     background-position: center;
     background-color: var(--surface2-color);
+
+    &--light {
+      background-image: url(../../icons/arrowBlackUp.svg);
+    }
   }
 }

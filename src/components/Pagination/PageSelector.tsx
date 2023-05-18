@@ -74,7 +74,9 @@ export const Paginate: React.FC<Props> = ({
           >
             <NavLink
               to={`./?page=${num}&perPage=${itemsPerPage}&sort=${sortBy}`}
-              className="pagination__link"
+              className={classNames('pagination__link', {
+                'pagination__link--selected': num === currentPage,
+              })}
               onClick={() => {
                 setCurrentPage(num);
               }}

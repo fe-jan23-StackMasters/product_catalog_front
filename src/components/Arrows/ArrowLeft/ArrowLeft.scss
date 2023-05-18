@@ -14,6 +14,10 @@
 
   color: white;
 
+  &--light {
+    background-image: url(../../../icons/blackArrowLeft.svg);
+  }
+
   &:hover {
     background-color: var(--icons-color);
   }
