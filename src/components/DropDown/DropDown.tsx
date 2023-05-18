@@ -4,16 +4,16 @@ import './DropDown.scss';
 
 type Props = {
   variables: string[];
-  getValueFromDropDown: (value: string) => void;
   searchParam?: string | null;
   defaultValue?: number;
+  changeValue: (value: string) => void
 };
 
 export const DropDown: React.FC<Props> = ({
   variables,
-  getValueFromDropDown,
   searchParam,
   defaultValue = 0,
+  changeValue,
 }) => {
   const [positionDropDown, setPositionDropDown] = useState(false);
   const [stateDropDown, setStateDropDown] = useState(
@@ -23,7 +23,7 @@ export const DropDown: React.FC<Props> = ({
   const handlerChange = (point: string) => {
     setStateDropDown(point);
     setPositionDropDown(false);
-    getValueFromDropDown(point);
+    changeValue(point);
   };
 
   return (

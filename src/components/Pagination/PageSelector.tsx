@@ -2,19 +2,19 @@ import React, { useEffect } from 'react';
 import classNames from 'classnames';
 import { ArrowLeft } from '../Arrows/ArrowLeft';
 import { ArrowRigth } from '../Arrows/ArrowRight';
-import { useSearchParams } from 'react-router-dom';
 
 interface Props {
   currentPage: number;
   pages: number;
+  setCurrentPage: (page: string) => void
 }
 
 export const Paginate: React.FC<Props> = ({
   currentPage,
   pages,
+  setCurrentPage,
 }) => {
   const pageNumbers: number[] = [];
-  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -26,15 +26,13 @@ export const Paginate: React.FC<Props> = ({
 
   const goToPrevPage = () => {
     if (currentPage !== 1) {
-      searchParams.set('page', currentPage - 1 + '');
-      setSearchParams(searchParams);
+      setCurrentPage((currentPage - 1).toString());
     }
   };
 
   const goToNextPage = () => {
     if (currentPage !== pageNumbers.length) {
-      searchParams.set('page', currentPage + 1 + '');
-      setSearchParams(searchParams);
+      setCurrentPage((currentPage + 1).toString());
     }
   };
 
@@ -58,8 +56,7 @@ export const Paginate: React.FC<Props> = ({
             <div
               className="pagination__link"
               onClick={() => {
-                searchParams.set('page', num + '');
-                setSearchParams(searchParams);
+                setCurrentPage(num.toString());
               }}
             >
               {num}
