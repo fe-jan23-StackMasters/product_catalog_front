@@ -4,7 +4,7 @@ import './DynamickBackToTopBtn.scss';
 import classNames from 'classnames';
 
 export const DynamickBackToTopBtn = () => {
-  const [stateBackToTop, setStateBackToTop] = useState(true);
+  const [stateBackToTop, setStateBackToTop] = useState(false);
 
   const toggleVisibility = () => {
     if (window.pageYOffset > 300) {
