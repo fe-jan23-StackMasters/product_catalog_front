@@ -24,9 +24,9 @@ $check-thickness: 3px;
 
   .container {
     margin: 0 auto;
-    width: 70%;
-    padding: 20px;
-    height: 280px;
+    width: 80%;
+    padding: 40px;
+    height: 60%;
     border-radius: 40px;
     border: 1px var(--bg-button) solid;
     flex-direction: column;
@@ -35,7 +35,8 @@ $check-thickness: 3px;
     justify-content: center;
 
     @include onTablet {
-      width: 60%;
+      width: 80%;
+      height: 60%;
     }
     @include onDesktop {
       max-width: 600px;

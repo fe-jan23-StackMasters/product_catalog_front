@@ -27,7 +27,8 @@ export const sliceName = (name: string) => {
       return splitedName.slice(0, 4).join(' ');
 
     case 'ipad':
-      if (splitedNameLower.includes('mini')) {
+      if (splitedNameLower.includes('mini')
+      || splitedNameLower.includes('air')) {
         return splitedName.slice(0, 3).join(' ');
       }
 

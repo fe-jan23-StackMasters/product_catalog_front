@@ -39,9 +39,6 @@ export const AproovedBox:React.FC<PropsAprooveBox>
           <h3 className="aprove-name">Succesful Buy</h3>
         </div>
       </div>
-      {/* <button onClick={() => openViewCHeck()}> */}
-      {/* _______============_________ */}
-      {/* </button> */}
     </>
   );
 };
