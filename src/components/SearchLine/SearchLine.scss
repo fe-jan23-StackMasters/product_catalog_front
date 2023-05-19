@@ -22,15 +22,26 @@
 
     &-input {
       font-family: inherit;
-      padding: 6px 30px 6px 6px;
       margin: -6px;
-      width: 200px;
+      padding: 6px 0;
+      width: 0;
       color: var(--white-color);
       letter-spacing: 0.07em;
       background-color: var(--surface1-color);
       border: none;
       outline: none;
       z-index: 0;
+      transition: all 0.2s;
+
+      &--active {
+        width: 200px;
+        padding: 6px 30px 6px 6px;
+      }
+
+      &--short {
+        width: 150px;
+        padding: 6px 30px 6px 6px;
+      }
 
       &:focus {
         border: none;
@@ -44,6 +55,11 @@
       right: 4px;
       transition: all 0.3s;
       cursor: pointer;
+      transform: scale(0);
+
+      &--active {
+        transform: scale(1);
+      }
     }
   }
 

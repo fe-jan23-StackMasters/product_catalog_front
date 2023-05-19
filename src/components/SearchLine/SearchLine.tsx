@@ -13,18 +13,15 @@ import blackDandruff from '../../icons/blackSearch.svg';
 import close from '../../icons/Close.svg';
 import blackClose from '../../icons/blackClose.svg';
 import classNames from 'classnames';
-import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeContext } from '../../context/toggleContext';
 
 type Props = {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
+  onCloseBurger: (value?: boolean) => void;
 };
 
-export const SearchLine: FC<Props> = ({
-  isOpen,
-  setIsOpen,
-}) => {
+export const SearchLine: FC<Props> = ({ isOpen, setIsOpen, onCloseBurger }) => {
   const { theme } = useContext(ThemeContext);
   const [searchQuery, setSearchQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -51,19 +48,18 @@ export const SearchLine: FC<Props> = ({
   const redirectPage = () => {
     if (searchQuery) {
       navigate(`/search?query=${searchQuery}`);
+      onCloseBurger(false);
     }
 
     setIsOpen(false);
   };
 
-  const searchDevice = useCallback(
-    (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        event.preventDefault();
-        closeInput();
-      }
-    }, [],
-  );
+  const searchDevice = useCallback((event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeInput();
+    }
+  }, []);
 
   useEffect(() => {
     document.addEventListener('keyup', searchDevice);
@@ -73,8 +69,10 @@ export const SearchLine: FC<Props> = ({
     };
   }, []);
 
+  const isShorter = window.innerWidth < 360;
+
   return (
-    <div className={classNames('searchLine', { 'searchLine--active': isOpen })}>
+    <div className="searchLine">
       <img
         src={dandruffPath}
         alt="dandruff"
@@ -84,50 +82,38 @@ export const SearchLine: FC<Props> = ({
         onClick={() => setIsOpen(true)}
       />
 
-      <AnimatePresence>
-        {isOpen && (
-          <form
-            className="searchLine__container"
-            onSubmit={(e) => {
-              e.preventDefault();
-              redirectPage();
-            }}
-          >
-            <motion.input
-              ref={inputRef}
-              key={'/'}
-              initial={{ width: 0 }}
-              animate={{ width: 200 }}
-              exit={{
-                width: 0,
-                paddingLeft: 0,
-                paddingRight: 0,
-              }}
-              transition={{ duration: 0.2 }}
-              type="text"
-              className="searchLine__container-input"
-              placeholder="Search"
-              onBlur={() => {
-                redirectPage();
-                closeInput();
-              }}
-              value={searchQuery}
-              onChange={(event) => setSearchQuery(event.target.value)}
-            />
+      <form
+        className="searchLine__container"
+        onSubmit={(e) => {
+          e.preventDefault();
+          redirectPage();
+        }}
+      >
+        <input
+          ref={inputRef}
+          type="text"
+          className={classNames('searchLine__container-input', {
+            'searchLine__container-input--active': isOpen && !isShorter,
+            'searchLine__container-input--short': isOpen && isShorter,
+          })}
+          placeholder="Search"
+          onBlur={() => {
+            redirectPage();
+            closeInput();
+          }}
+          value={searchQuery}
+          onChange={(event) => setSearchQuery(event.target.value)}
+        />
 
-            <motion.img
-              src={closePath}
-              alt="close search"
-              initial={{ display: 'none' }}
-              animate={{ display: 'block' }}
-              exit={{ display: 'none' }}
-              transition={{ duration: 0 }}
-              className="searchLine__container-image"
-              onClick={closeInput}
-            />
-          </form>
-        )}
-      </AnimatePresence>
+        <img
+          src={closePath}
+          alt="close search"
+          className={classNames('searchLine__container-image', {
+            'searchLine__container-image--active': isOpen,
+          })}
+          onClick={closeInput}
+        />
+      </form>
     </div>
   );
 };

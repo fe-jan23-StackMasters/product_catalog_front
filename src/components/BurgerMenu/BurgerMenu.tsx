@@ -11,7 +11,7 @@ import { useLocalStorageContext } from '../../context/StorageContext';
 import { motion } from 'framer-motion';
 
 export type Props = {
-  toggleMenu: () => void;
+  toggleMenu: (status?: boolean) => void;
 };
 
 const menuList: string[] = ['home', 'phones', 'tablets', 'accessories'];
@@ -58,7 +58,7 @@ export const BurgerMenu: React.FC<Props> = ({ toggleMenu }) => {
         <NavLink
           to="/favourites"
           className="btn likeButton"
-          onClick={toggleMenu}
+          onClick={() => toggleMenu()}
         >
           <div className="menu__footer-button">
             <img src={likePath} />
@@ -69,7 +69,11 @@ export const BurgerMenu: React.FC<Props> = ({ toggleMenu }) => {
             )}
           </div>
         </NavLink>
-        <NavLink to="/cart" className="btn cardButton" onClick={toggleMenu}>
+        <NavLink
+          to="/cart"
+          className="btn cardButton"
+          onClick={() => toggleMenu()}
+        >
           <div className="menu__footer-button">
             <img src={cartPath} />
             {cartItems.length > 0 && (

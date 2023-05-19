@@ -21,4 +21,8 @@
   @include onDesktop {
     padding-top: 56px;
   }
+
+  &--menu-open {
+    padding-top: 73px;
+  }
 }
