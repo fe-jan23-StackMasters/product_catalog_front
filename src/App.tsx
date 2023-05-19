@@ -56,7 +56,10 @@ export const App = () => {
           {categories.map((category) => (
             <Route path={category} key={category} element={<Outlet />}>
               <Route index element={<PhonesPage productType={category} />} />
-              <Route path=":itemCard" element={<ItemCard />} />
+              <Route
+                path=":itemCard"
+                element={<ItemCard productType={category}
+              />} />
             </Route>
           ))}
 
