@@ -47,6 +47,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: border-left 0.3s;
 
     &-button {
       border: none;
@@ -65,29 +66,8 @@
 
 
       & img {
-        position: absolute;
-        left: 0;
-        right: 0;
         margin-left: auto;
         margin-right: auto;
-
-        @include onTablet {
-          top: 23%;
-        }
-
-        @include onDesktop {
-          top: 30%;
-        }
-      }
-
-      &--moon img {
-        @include onTablet {
-          top: 33%;
-        }
-
-        @include onDesktop {
-          top: 36%;
-        }
       }
     }
 
