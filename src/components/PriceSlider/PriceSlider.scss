@@ -19,9 +19,10 @@
 .filterPrice {
   position: relative;
   align-items: center;
-  width: 288px;
   height: 40px;
   padding: 5px;
+  // min-width: 134px;
+  width: 100%;
   background-color: var(--surface2-color);
   border: 1px solid var(--elements-color);
 

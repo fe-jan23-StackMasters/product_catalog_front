@@ -133,14 +133,6 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
     getDataFromServer();
   }, [searchParams]);
 
-  useEffect(() => {
-    const newMaxPages = productInfo?.pages || 1;
-
-    if (+page > newMaxPages) {
-      onPageChange(newMaxPages.toString());
-    }
-  }, [productInfo?.pages]);
-
   const windowWidth = window.innerWidth;
 
   return (
@@ -170,6 +162,7 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
             defaultValue={1}
             changeValue={onPerPageChange}
           />
+        </div>
           {windowWidth >= 640 && (
             <div className="phonesPage__priceSlider">
               <p className="phonesPage__dropDown-title">Price</p>
@@ -181,20 +174,19 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
               />
             </div>
           )}
-        </div>
 
-        {windowWidth < 640 && (
-          <>
-            <div className="phonesPage__priceSlider">
-              <span className="phonesPage__priceSlider-title">Price</span>
-              <PriceSlider
-                priceMin={Array.isArray(range) ? range[0] : +priceMinP}
-                priceMax={Array.isArray(range) ? range[1] : 5000}
-                handleChangeFilterPrice={handleChangeFilterPrice}
-              />
-            </div>
-          </>
-        )}
+          {windowWidth < 640 && (
+            <>
+              <div className="phonesPage__priceSlider">
+                <span className="phonesPage__priceSlider-title">Price</span>
+                <PriceSlider
+                  priceMin={Array.isArray(range) ? range[0] : +priceMinP}
+                  priceMax={Array.isArray(range) ? range[1] : 5000}
+                  handleChangeFilterPrice={handleChangeFilterPrice}
+                  />
+              </div>
+            </>
+          )}
       </div>
 
       <div className="phonesPage__pagination pagination">
