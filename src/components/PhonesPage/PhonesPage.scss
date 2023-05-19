@@ -1,13 +1,14 @@
-@import '../../styles/variables.scss';
 @import '../../styles/utils/mixins';
 
 .phonesPage {
   &__dropDown {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 16px;
     margin-bottom: 24px;
+    // min-width: 288px;
 
     font-family: 'Mont';
     font-style: normal;

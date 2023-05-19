@@ -29,7 +29,8 @@ export const PhonesPage: React.FC<Props> = ({ productType }) => {
 
   return (
     <Container>
-      <LinkLine title={productType} />
+      <LinkLine title={productType.charAt(0).toUpperCase()
+          + productType.slice(1)} />
       <h1 className="phonesPage__header">{name}</h1>
 
       <Pagination productType={[productType]} />
