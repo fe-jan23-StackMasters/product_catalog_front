@@ -129,11 +129,7 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
 
   useEffect(() => {
     getDataFromServer();
-  }, [query]);
-
-  useEffect(() => {
-    getDataFromServer();
-  }, [searchParams]);
+  }, [query, searchParams, productType]);
 
   return (
     <>
