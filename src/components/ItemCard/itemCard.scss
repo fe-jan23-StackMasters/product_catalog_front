@@ -128,51 +128,67 @@
     &--black {
       background-color: black;
     }
+
     &--green {
       background-color: #5f7170;
     }
+
     &--yellow {
       background-color: #efff46;
     }
+
     &--white {
       background-color: var(--white-color);
     }
+
     &--purple {
       background-color: #905bff;
     }
+
     &--red {
       background-color: var(--red-color);
     }
+
     &--spaceblack {
-      background-color: $black-color;
+      background-color: #131313;
     }
+
     &--midnight {
       background-color: rgb(15, 15, 91);
     }
+
     &--silver {
       background-color: silver;
     }
+
     &--starlight {
       background-color: #fcdbc1;
     }
+
     &--spacegray {
       background-color: rgb(110, 114, 124);
     }
+
     &--sierrablue {
       background-color: rgb(94, 110, 134);
     }
+
     &--graphite {
       background-color: rgb(133, 130, 130);
     }
+
     &--blue {
       background-color: rgb(145, 148, 189);
     }
+
     &--pink {
       background-color: rgb(207, 138, 184);
     }
+
     &--gold {
       background-color: rgb(218, 211, 172);
     }
+
     &--midnightgreen {
       background-color: rgb(53, 69, 65);
     }
@@ -288,7 +304,7 @@
     font-size: 12px;
     line-height: 15px;
     text-decoration: none;
-    color: $secondary-color;
+    color: var(--secondary-color);
     margin-bottom: 40px;
   }
 
