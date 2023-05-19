@@ -11,17 +11,14 @@ export const DynamickBackToTopBtn = () => {
       setStateBackToTop(true);
     }
 
-    if ((window.pageYOffset + window.screen.height + 70)
+    if ((window.pageYOffset + window.screen.height)
       > document.documentElement.scrollHeight || window.pageYOffset < 300) {
       setStateBackToTop(false);
     }
   };
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    scrollTo(0, 0);
   };
 
   useEffect(() => {

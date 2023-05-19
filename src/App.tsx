@@ -65,7 +65,10 @@ export const App = () => {
           <Route path="/accessories" element={<AccessoriesPage />} />
           <Route path="/favourites" element={<FavouritesPage />} />
           <Route path="/cart" element={<ShoppingBasket />} />
-          <Route path="*" element={<PageNotFound />} />
+          <Route path="*" element={<PageNotFound
+            stateBtn={true}
+            textGost={'You lost'}
+            />} />
         </Routes>
       </main>
 

@@ -10,6 +10,7 @@ import {
 } from '../../context/StorageContext';
 import { AnimatePresence } from 'framer-motion';
 import { AproovedBox } from '../AproovedBox/AprovedBox';
+import { PageNotFound } from '../PageNotFound';
 
 export const ShoppingBasket = () => {
   const { totalPrice, totalQuantity, cartItems } = useLocalStorageContext();
@@ -47,7 +48,7 @@ export const ShoppingBasket = () => {
 
         {!cartItems.length ? (
           <Container>
-            <h2 className="basket__title">Ooops... Your basket is empty</h2>
+            <PageNotFound stateBtn={false} textGost={'Your basket is empty'}/>
 
             <NavLink to="/phones" className="basket__link">
               <Button width="50%" height="48px" type="btn__add btn__add-shop">
