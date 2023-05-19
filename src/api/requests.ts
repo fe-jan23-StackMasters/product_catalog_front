@@ -73,7 +73,7 @@ export const getDetailedInfo = (id: string): Promise<Phone> => {
   return get(`${BASE_URL}/products/${id}`);
 };
 
-export const getRecommenations = (id: string): Promise<PhoneCard[]> => {
+export const getRecommendations = (id: string): Promise<PhoneCard[]> => {
   return get(`${BASE_URL}/products/${id}/recommended`);
 };
 
