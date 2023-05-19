@@ -9,6 +9,8 @@
   font-size: 12px;
   line-height: 15px;
   color: var(--secondary-color);
+  width: 100%;
+  max-width: 288px;
 
   @include onTablet {
     align-items: start;
@@ -19,6 +21,7 @@
   }
 
   &-title {
+    margin-bottom: 4px;
     position: relative;
     left: -128px;
 
@@ -86,6 +89,11 @@
 
     &--selected {
       background-color: var(--accent-color);
+    }
+
+    &--disabled {
+      background-color: transparent;
+      border: 1px solid var(--surface1-color);
     }
   }
 

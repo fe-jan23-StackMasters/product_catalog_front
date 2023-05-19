@@ -23,35 +23,25 @@ interface Props {
   query?: string | undefined;
 }
 
-const sorts = [SortBy.NAME, SortBy.NEW, SortBy.OLD, SortBy.HIGHT, SortBy.LOW];
-
-const arrayOfItemsOnPage = ['8', '16', '32', '64'];
-
 export const Pagination: React.FC<Props> = ({ productType, query }) => {
+  const { isMobileScreen } = useResizeContext();
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState('16');
-  const [sortBy, setSortBy] = useState<SortBy>(SortBy.NEW);
-  const [productInfo, setProductInfo] = useState<RequestWithParamsResult>();
-  const [isFirstRender, setIsFirstRender] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
+  const page = searchParams.get('page') || '1';
+  const sort = searchParams.get('sort') || SortBy.NEW;
+  const perPage = searchParams.get('perPage') || '16';
+  const priceMinP = searchParams.get('priceMin') || '0';
+  const priceMaxP = searchParams.get('priceMax') || '5000';
+  const sorts = [SortBy.NAME, SortBy.NEW, SortBy.OLD, SortBy.HIGHT, SortBy.LOW];
+  const [productInfo, setProductInfo] = useState<RequestWithParamsResult>();
+  const arrayOfItemsOnPage = ['8', '16', '32', '64'];
   const phones = productInfo?.products;
-  const sort = searchParams.get('sort');
-  const perPage = searchParams.get('perPage');
-  const page = searchParams.get('page');
-  const priceMinFromUrl = searchParams.get('priceMin');
-  const priceMaxFromUrl = searchParams.get('priceMax');
-  let sortParamValidator
-    = sorts.find((by) => by.toString() === sort) || 'newest';
-  let perPageParamValidator
-    = arrayOfItemsOnPage.find((by) => by.toString() === perPage) || '16';
+  const [range, setRange] = useState<number | number[]>([0, 5000]);
   const skeletons = Array.from(
-    { length: Number(perPageParamValidator) },
+    { length: Number(perPage) },
     (_, index) => index + 1,
   );
-
-  const [range, setRange] = useState<number | number[]>([0, 5000]);
 
   const handleChangeFilterPrice = (
     _event: Event,
@@ -60,24 +50,72 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
     setRange(newValue);
   };
 
-  let priceMin = Array.isArray(range) ? range[0] : 0;
-  let priceMax = Array.isArray(range) ? range[1] : 5000;
+  useEffect(() => {
+    const debounceTimeout = setTimeout(() => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const priceMin = range[0].toString();
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const priceMax = range[1].toString();
+
+      if (priceMax !== priceMaxP) {
+        updateSearch({ priceMax }, searchParams, setSearchParams);
+      }
+
+      if (priceMin !== priceMinP) {
+        updateSearch({ priceMin }, searchParams, setSearchParams);
+      }
+    }, 700);
+
+    return () => {
+      clearTimeout(debounceTimeout);
+    };
+  }, [range]);
+
+  function updateSearch(
+    params: { [key: string]: string | null },
+    searchParams: URLSearchParams,
+    setSearchParams: (searchParams: URLSearchParams) => void,
+  ) {
+    Object.entries(params).forEach(([key, value]) => {
+      if (!value) {
+        searchParams.delete(key);
+      } else {
+        searchParams.set(key, value);
+      }
+    });
+
+    setSearchParams(searchParams);
+  }
+
+  const onSortChange = (sort: string) => {
+    updateSearch({ sort }, searchParams, setSearchParams);
+  };
+
+  const onPerPageChange = (perPage: string) => {
+    updateSearch({ perPage }, searchParams, setSearchParams);
+  };
+
+  const onPageChange = (page: string) => {
+    updateSearch({ page }, searchParams, setSearchParams);
+  };
 
   const getDataFromServer = async() => {
     setIsLoading(true);
 
     try {
-      const dataFromServer = await getProducts(
-        +itemsPerPage,
-        currentPage,
-        productType,
-        sorts.find((by) => by.toString() === sort) || SortBy.NEW,
-        priceMin,
-        priceMax,
-        query,
+      setProductInfo(
+        await getProducts(
+          +perPage,
+          +page,
+          productType,
+          sorts.find((by) => by.toString() === sort) || SortBy.NEW,
+          +priceMinP,
+          +priceMaxP,
+          query,
+        ),
       );
-
-      setProductInfo(dataFromServer);
     } catch {
       setIsError(true);
     } finally {
@@ -94,112 +132,8 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
   }, [query]);
 
   useEffect(() => {
-    // eslint-disable-next-line prefer-const, no-undef
-    let timer: NodeJS.Timeout | undefined;
-
-    if (timer) {
-      clearTimeout(timer);
-    }
-
-    timer = setTimeout(() => {
-      if (!isFirstRender) {
-        getDataFromServer();
-        searchParams.set('priceMin', priceMin + '');
-        searchParams.set('priceMax', priceMax + '');
-        setSearchParams(searchParams);
-        setCurrentPage(1);
-      }
-
-      setIsFirstRender(false);
-    }, 500);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [priceMin, priceMax]);
-
-  useEffect(() => {
-    setItemsPerPage(perPage || '16');
-    setCurrentPage(Number(page) || 1);
-
-    if (!(isNaN(Number(priceMinFromUrl)) || priceMinFromUrl === null)) {
-      priceMin = Number(priceMinFromUrl);
-    } else {
-      priceMin = 0;
-    }
-
-    if (!(isNaN(Number(priceMaxFromUrl)) || priceMaxFromUrl === null)) {
-      priceMax = Number(priceMaxFromUrl);
-    } else {
-      priceMax = 5000;
-    }
-
-    setRange([priceMin, priceMax]);
-
-    if (sorts.some((by) => sort === by.toString())) {
-      setSortBy(sorts.find((by) => by.toString() === sort) || SortBy.NEW);
-    } else {
-      setSortBy(SortBy.NEW);
-    }
-
-    if (arrayOfItemsOnPage.some((by) => perPage === by.toString())) {
-      setItemsPerPage(
-        arrayOfItemsOnPage.find((by) => by.toString() === perPage) || '16',
-      );
-    } else {
-      setItemsPerPage('16');
-    }
-  }, []);
-
-  useEffect(() => {
     getDataFromServer();
-  }, [productType]);
-
-  useEffect(() => {
-    getDataFromServer();
-  }, [itemsPerPage, sortBy]);
-
-  useEffect(() => {
-    if (page) {
-      setCurrentPage(+page);
-    } else {
-      setCurrentPage(1);
-    }
-
-    getDataFromServer();
-  }, [page]);
-
-  const handlerDropdownItemPerPage = (returnedValue: string) => {
-    searchParams.set('perPage', returnedValue);
-
-    setItemsPerPage(returnedValue);
-    perPageParamValidator = returnedValue;
-
-    if (currentPage !== 1) {
-      setCurrentPage(1);
-    } else {
-      setSearchParams(searchParams);
-    }
-  };
-
-  const handlerDropdownSortBy = (returnedValue: string) => {
-    searchParams.set('sort', returnedValue);
-
-    setSortBy(
-      sorts.find((by) => by.toString() === returnedValue) || SortBy.NEW,
-    );
-    sortParamValidator = returnedValue;
-
-    if (currentPage !== 1) {
-      setCurrentPage(1);
-    } else {
-      setSearchParams(searchParams);
-    }
-  };
-
-  // const windowWidth = window.innerWidth;
-
-  const { isMobileScreen } = useResizeContext();
+  }, [searchParams]);
 
   return (
     <>
@@ -213,9 +147,9 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
 
           <DropDown
             variables={sorts}
-            getValueFromDropDown={handlerDropdownSortBy}
-            searchParam={sortParamValidator}
+            searchParam={sort}
             defaultValue={1}
+            changeValue={onSortChange}
           />
         </div>
 
@@ -224,47 +158,46 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
 
           <DropDown
             variables={arrayOfItemsOnPage}
-            getValueFromDropDown={handlerDropdownItemPerPage}
-            searchParam={perPageParamValidator}
+            searchParam={perPage}
             defaultValue={1}
+            changeValue={onPerPageChange}
           />
         </div>
+          {!isMobileScreen && (
+            <div className="phonesPage__priceSlider">
+              <p className="phonesPage__dropDown-title">Price</p>
 
-        {!isMobileScreen && (
-          <div className="phonesPage__priceSlider">
-            <p className="phonesPage__dropDown-title">Price</p>
+              <PriceSlider
+                priceMin={Array.isArray(range) ? range[0] : +priceMinP}
+                priceMax={Array.isArray(range) ? range[1] : 5000}
+                handleChangeFilterPrice={handleChangeFilterPrice}
+              />
+            </div>
+          )}
 
-            <PriceSlider
-              priceMin={priceMin}
-              priceMax={priceMax}
-              handleChangeFilterPrice={handleChangeFilterPrice}
-            />
-          </div>
-        )}
+          {isMobileScreen && (
+            <>
+              <div
+                className="phonesPage__priceSlider
+                phonesPage__priceSlider-mobile"
+              >
+                <span className="phonesPage__priceSlider-title">Price</span>
+                <PriceSlider
+                  priceMin={Array.isArray(range) ? range[0] : +priceMinP}
+                  priceMax={Array.isArray(range) ? range[1] : 5000}
+                  handleChangeFilterPrice={handleChangeFilterPrice}
+                  />
+              </div>
+            </>
+          )}
       </div>
-
-      {isMobileScreen && (
-        <>
-          <div
-            className="phonesPage__priceSlider
-            phonesPage__priceSlider-mobile"
-          >
-            <span className="phonesPage__priceSlider-title">Price</span>
-            <PriceSlider
-              priceMin={priceMin}
-              priceMax={priceMax}
-              handleChangeFilterPrice={handleChangeFilterPrice}
-            />
-          </div>
-        </>
-      )}
 
       <div className="phonesPage__pagination pagination">
         <div className="pagination__items">
           {isLoading ? (
             skeletons.map((skeleton) => <ProductCardSkeleton key={skeleton} />)
           ) : phones !== undefined ? (
-            phones?.length === 0 ? (
+            phones.length === 0 ? (
               <h2 className="pagination__nothing">Nothing found 😔</h2>
             ) : (
               phones.map((product) => (
@@ -276,7 +209,11 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
           )}
         </div>
         {!isError && !isLoading && (
-          <Paginate currentPage={currentPage} pages={productInfo?.pages || 0} />
+          <Paginate
+            currentPage={+page}
+            pages={productInfo?.pages || 0}
+            setCurrentPage={onPageChange}
+          />
         )}
       </div>
     </>

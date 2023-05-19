@@ -6,9 +6,9 @@ import { motion } from 'framer-motion';
 
 type Props = {
   variables: string[];
-  getValueFromDropDown: (value: string) => void;
   searchParam?: string | null;
   defaultValue?: number;
+  changeValue: (value: string) => void;
 };
 
 const sortByNames = {
@@ -21,9 +21,9 @@ const sortByNames = {
 
 export const DropDown: React.FC<Props> = ({
   variables,
-  getValueFromDropDown,
   searchParam,
   defaultValue = 0,
+  changeValue,
 }) => {
   const [isOpen, setOpen] = useState(false);
   const [stateDropDown, setStateDropDown] = useState(
@@ -33,15 +33,14 @@ export const DropDown: React.FC<Props> = ({
   const handlerChange = (point: string) => {
     setStateDropDown(point);
     setOpen(false);
-    getValueFromDropDown(point);
+    changeValue(point);
   };
 
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (
-      dropdownRef.current
-      && !dropdownRef.current.contains(event.target as Node)
+    if (dropdownRef.current
+        && !dropdownRef.current.contains(event.target as Node)
     ) {
       setOpen(false);
     }
