@@ -18,7 +18,7 @@ export const SearchPage = () => {
       <LinkLine title="Search" />
       {query ? (
         <h2 className="phonesPage__header">
-          {`Search for results - ${query}`}
+          {`Search results for "${query}"`}
         </h2>
       ) : (
         <h2 className="phonesPage__header">

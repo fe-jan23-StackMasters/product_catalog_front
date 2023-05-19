@@ -1,44 +1,54 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState, useContext } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import logo from '../../icons/Logo.svg';
+import logoItem from '../../icons/Logo.svg';
+import blackLogoItem from '../../icons/LogoItem.svg';
+import blackShoping from '../../icons/blackShopingCart.svg';
 import favoritesHart from '../../icons/favourites.svg';
+import blackFavHeart from '../../icons/blackHeart.svg';
 import shoppingBag from '../../icons/shoppingBag.svg';
+import moonIcon from '../../icons/moonIcon.svg';
+import sunIcon from '../../icons/sunIcon.svg';
 import { PageNavLink } from '../PageNavLink';
 import classNames from 'classnames';
+import { ThemeContext } from '../../context/toggleContext';
 import { useLocalStorageContext } from '../../context/StorageContext';
 import { SearchLine } from '../SearchLine';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MenuToggler } from '../MenuToggler';
+import { useResizeContext } from '../../context/ResizeContext';
 
 const navList = ['home', 'phones', 'tablets', 'accessories'];
 
 export type Props = {
   toggleMenu: () => void;
   isMenuOpen: boolean;
+  toggleTheme: () => void;
 };
 
-export const Header: FC<Props> = ({ toggleMenu, isMenuOpen }) => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+export const Header: FC<Props> = ({ toggleMenu, isMenuOpen, toggleTheme }) => {
+  const { theme } = useContext(ThemeContext);
+  let logoPath = logoItem;
+  let cartPath = shoppingBag;
+  let heartPath = favoritesHart;
+  let themePath = sunIcon;
+  let isLight = false;
+
+  if (theme === 'light') {
+    isLight = true;
+    themePath = moonIcon;
+    logoPath = blackLogoItem;
+    cartPath = blackShoping;
+    heartPath = blackFavHeart;
+  } else {
+    isLight = false;
+  }
 
   const { favorites, cartItems } = useLocalStorageContext();
 
   const location = useLocation();
   const page = location.pathname;
 
-  useEffect(() => {
-    const handleResize = () => {
-      const windowWidth = window.innerWidth;
-
-      setIsMobile(windowWidth < 640);
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const { isMobileScreen } = useResizeContext();
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
@@ -52,7 +62,7 @@ export const Header: FC<Props> = ({ toggleMenu, isMenuOpen }) => {
         <div className="header__left-side">
           {!isLogoHidden && (
             <NavLink to="/" className="logo">
-              <img className="logo__image" src={logo} alt="Logo icon" />
+              <img className="logo__image" src={logoPath} alt="Logo icon" />
             </NavLink>
           )}
           <AnimatePresence>
@@ -83,12 +93,23 @@ export const Header: FC<Props> = ({ toggleMenu, isMenuOpen }) => {
           </AnimatePresence>
         </div>
 
-        {!isMobile ? (
+        {!isMobileScreen ? (
           <div className="header__buying-section">
             <SearchLine
               isOpen={isSearchOpen}
               setIsOpen={setIsSearchOpen}
             />
+
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className={classNames('header__case header__case-button', {
+                'header__case-button--moon': isLight,
+              })}
+            >
+              <img src={themePath} alt={theme} />
+            </button>
+
             <NavLink
               to="/favourites"
               className={({ isActive }) =>
@@ -99,7 +120,7 @@ export const Header: FC<Props> = ({ toggleMenu, isMenuOpen }) => {
             >
               <div className="header__count-position">
                 <img
-                  src={favoritesHart}
+                  src={heartPath}
                   className="header__menu-opener_image"
                   alt="menu"
                 />
@@ -127,7 +148,7 @@ export const Header: FC<Props> = ({ toggleMenu, isMenuOpen }) => {
             >
               <div className="header__count-position">
                 <img
-                  src={shoppingBag}
+                  src={cartPath}
                   className="header__menu-opener_image"
                   alt="menu"
                 />
@@ -151,6 +172,17 @@ export const Header: FC<Props> = ({ toggleMenu, isMenuOpen }) => {
               isOpen={isSearchOpen}
               setIsOpen={setIsSearchOpen}
             />
+
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className={classNames('header__case header__case-button', {
+                'header__case-button--moon': isLight,
+              })}
+            >
+              <img src={themePath} alt={theme} />
+            </button>
+
             <MenuToggler isOpen={isMenuOpen} onToggle={toggleMenu} />
           </div>
         )}

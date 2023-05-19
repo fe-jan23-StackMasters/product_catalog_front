@@ -17,7 +17,7 @@
     font-size: 12px;
     line-height: 15px;
     text-decoration: none;
-    color: $secondary-color;
+    color: var(secondary-color);
     text-align: center;
     align-items: center;
 
@@ -37,7 +37,6 @@
     font-weight: 800;
     font-size: 32px;
     line-height: 41px;
-    color: white;
     letter-spacing: -0.01em;
     margin-bottom: 8px;
   }

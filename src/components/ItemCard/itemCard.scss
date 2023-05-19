@@ -11,7 +11,7 @@
     font-weight: 700;
     font-size: 20px;
     line-height: 26px;
-    color: $white-color;
+    color: var(--white-color);
     padding-bottom: 16px;
     margin-bottom: 32px;
 
@@ -36,7 +36,7 @@
     font-weight: 700;
     font-size: 20px;
     line-height: 26px;
-    color: $white-color;
+    color: var(--white-color);
     margin-bottom: 16px;
   }
 
@@ -72,7 +72,7 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 21px;
-    color: $white-color;
+    color: var(--white-color);
   }
 }
 
@@ -108,7 +108,7 @@
     align-items: center;
     @include square(32px);
     border-radius: 50%;
-    background-color: $white-color;
+    background-color: var(--white-color);
 
     &:hover,
     &:active {
@@ -118,7 +118,7 @@
   }
 
   &__color {
-    border: 1px solid $black-color;
+    border: 1px solid var(--black-color);
 
     @include square(30.5px);
     border-radius: 50%;
@@ -135,13 +135,13 @@
       background-color: #efff46;
     }
     &--white {
-      background-color: $white-color;
+      background-color: var(--white-color);
     }
     &--purple {
       background-color: #905bff;
     }
     &--red {
-      background-color: $red-color;
+      background-color: var(--red-color);
     }
     &--spaceblack {
       background-color: $black-color;
@@ -199,8 +199,8 @@
     height: 32px;
     border: 1px solid #4a4d58;
     padding: 8px;
-    background-color: $black-color;
-    color: $white-color;
+    background-color: var(--black-color);
+    color: var(--white-color);
 
     font-family: 'Mont';
     font-style: normal;
@@ -212,8 +212,8 @@
 
     &:hover,
     &:active {
-      background-color: $white-color;
-      color: $black-color;
+      background-color: var(--white-color);
+      color: var(--black-color);
     }
   }
 
@@ -230,7 +230,7 @@
     font-weight: 800;
     font-size: 32px;
     line-height: 41px;
-    color: $white-color;
+    color: var(--white-color);
   }
 
   &__add-prev-price {

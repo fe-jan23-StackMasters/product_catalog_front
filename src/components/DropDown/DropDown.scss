@@ -9,11 +9,11 @@
   justify-content: space-between;
   align-items: center;
   height: 40px;
-  background-color: $surface2-color;
+  background-color: var(--surface2-color);
   font-weight: 700;
   font-size: 14px;
   line-height: 21px;
-  color: $white-color;
+  color: var(--white-color);
   font-style: normal;
   padding: 0px 12px;
   border: 1px solid transparent;
@@ -22,18 +22,18 @@
     box-sizing: border-box;
     height: 10px;
     width: 8px;
-    fill: $secondary-color;
+    fill: var(--secondary-color);
     transform: rotate(90deg);
     transition: 0.5s;
   }
 
   &:hover {
-    border: 1px solid $icons-color;
-    background-color: $surface2-color;
+    border: 1px solid var(--icons-color);
+    background-color: var(--surface2-color);
     cursor: pointer;
 
     .dropdown_arrowDrop {
-      fill: $icons-color;
+      fill: var(--icons-color);
     }
   }
 }
@@ -48,9 +48,9 @@
   box-sizing: border-box;
   z-index: 5;
   pointer-events: none;
-  border: 1px $elements-color solid;
+  border: 1px var(--elements-color) solid;
   box-shadow: 0px 2px 15px 0px #0000000d;
-  background-color: $black-color;
+  background-color: var(--black-color);
   transition: 0.3s;
 
   &--active {
@@ -68,17 +68,17 @@
     flex-direction: column;
     box-sizing: border-box;
     align-items: center;
-    color: $secondary-color;
+    color: var(--secondary-color);
     width: 100%;
     height: 0px;
-    background-color: $black-color;
+    background-color: var(--black-color);
     text-align: left;
-    background-color: $black-color;
+    background-color: var(--black-color);
     transition: height 0.3s;
 
     &:hover {
-      background-color: $surface2-color;
-      color: $white-color;
+      background-color: var(--surface2-color);
+      color: var(--white-color);
       cursor: pointer;
     }
 

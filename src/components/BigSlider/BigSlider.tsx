@@ -6,10 +6,12 @@ import './BigSlider.scss';
 import arrPrev from '../../icons/arrowLeft.svg';
 import arrNext from '../../icons/arrowRight.svg';
 import { useQuery } from '@tanstack/react-query';
-import { BASE_URL, getBanners } from '../../api/requests';
+import { BASE_URL, Banner, getBanners } from '../../api/requests';
+import { Loader } from '../Loader';
+import { useResizeContext } from '../../context/ResizeContext';
 
 export const BigSlider: React.FC = () => {
-  const [banners, setBanners] = useState<string[]>([]);
+  const [banners, setBanners] = useState<Banner[]>([]);
 
   useQuery({
     queryKey: ['banners'],
@@ -18,6 +20,8 @@ export const BigSlider: React.FC = () => {
       setBanners(data);
     },
   });
+
+  const { isMobileScreen } = useResizeContext();
 
   const prevArrow = (
     <div>
@@ -63,50 +67,26 @@ export const BigSlider: React.FC = () => {
 
   return (
     <div className="BigSlider">
-      <Slider {...settings}>
-        {/* {banners.map((banner) => (
-          <div className="BigSlider__item" key={banner}>
-            <div
-              className="BigSlider__image"
-              style={{
-                backgroundImage: `url(${BASE_URL}/${banner})`,
-                backgroundPosition: 'center',
-                backgroundSize: 'cover',
-              }}
-            />
+      {banners.length === 0 ? (
+        <div className="BigSlider__skeleton">
+          <div className="BigSlider__loader">
+            <Loader />
           </div>
-        ))} */}
-        <div className="BigSlider__item">
-          <div
-            className="BigSlider__image"
-            style={{
-              backgroundImage: `url(${BASE_URL}/${banners[0]})`,
-              backgroundPosition: 'center',
-              backgroundSize: 'cover',
-            }}
-          />
         </div>
-        <div className="BigSlider__item">
-          <div
-            className="BigSlider__image"
-            style={{
-              backgroundImage: `url(${BASE_URL}/${banners[1]})`,
-              backgroundPosition: 'center',
-              backgroundSize: 'cover',
-            }}
-          />
-        </div>
-        <div className="BigSlider__item">
-          <div
-            className="BigSlider__image"
-            style={{
-              backgroundImage: `url(${BASE_URL}/${banners[2]})`,
-              backgroundPosition: 'center',
-              backgroundSize: 'cover',
-            }}
-          />
-        </div>
-      </Slider>
+      ) : (
+        <Slider {...settings}>
+          {banners.map((banner) => (
+            <div className="BigSlider__item" key={banner.desktop}>
+              <img
+                className="BigSlider__image"
+                src={`${BASE_URL}/${
+                  isMobileScreen ? banner.mobile : banner.desktop
+                }`}
+              />
+            </div>
+          ))}
+        </Slider>
+      )}
     </div>
   );
 };

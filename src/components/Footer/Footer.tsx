@@ -1,18 +1,29 @@
 import './Footer.scss';
 import '../../App.scss';
 import niceGadgetsSvg from '../../icons/niceGadgets.svg';
+import blackLogoItem from '../../icons/blackNice.svg';
 import okHand from '../../icons/okHand.png';
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { BackToTop } from '../BackToTop/BackToTop';
+import { ThemeContext } from '../../context/toggleContext';
 
 export const Footer: React.FC = () => {
+  const { theme } = useContext(ThemeContext);
+  let imagePath;
+
+  if (theme === 'light') {
+    imagePath = blackLogoItem;
+  } else {
+    imagePath = niceGadgetsSvg;
+  }
+
   return (
     <footer className="footer">
       <div className="footer__container">
         <a className="footer__logo" href="/">
           <img
-            src={niceGadgetsSvg}
+            src={imagePath}
             className="footer__logo--svg"
             alt="NICE GADGETS"
           />
