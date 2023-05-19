@@ -6,7 +6,8 @@
   align-items: center;
   padding: 14px;
   height: 48px;
-  border-left: 1px solid $elements-color;
+  border-left: 1px solid var(--elements-color);
+  transition: border-left 0.3s;
 
   @include onTablet {
     height: 50px;
@@ -22,15 +23,26 @@
 
     &-input {
       font-family: inherit;
-      padding: 6px 30px 6px 6px;
       margin: -6px;
-      width: 200px;
-      color: $white-color;
+      padding: 6px 0;
+      width: 0;
+      color: var(--white-color);
       letter-spacing: 0.07em;
-      background-color: $surface1-color;
+      background-color: var(--surface1-color);
       border: none;
       outline: none;
       z-index: 0;
+      transition: all 0.2s;
+
+      &--active {
+        width: 200px;
+        padding: 6px 30px 6px 6px;
+      }
+
+      &--short {
+        width: 150px;
+        padding: 6px 30px 6px 6px;
+      }
 
       &:focus {
         border: none;
@@ -44,9 +56,10 @@
       right: 4px;
       transition: all 0.3s;
       cursor: pointer;
+      transform: scale(0);
 
-      &:hover {
-        background-color: $black-color;
+      &--active {
+        transform: scale(1);
       }
     }
   }

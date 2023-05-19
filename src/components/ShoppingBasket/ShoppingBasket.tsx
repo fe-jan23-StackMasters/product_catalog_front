@@ -34,7 +34,10 @@ export const ShoppingBasket = () => {
           <ul className="basket__cards">
             <AnimatePresence>
               {cartItems.map((product) => (
-                <BasketCard key={product.info.id} product={product} />
+                <BasketCard
+                  key={product.info.id}
+                  product={product}
+                />
               ))}
             </AnimatePresence>
           </ul>

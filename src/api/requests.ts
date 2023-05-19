@@ -77,6 +77,11 @@ export const getRecommenations = (id: string): Promise<PhoneCard[]> => {
   return get(`${BASE_URL}/products/${id}/recommended`);
 };
 
-export const getBanners = (): Promise<string[]> => {
+export type Banner = {
+  mobile: string,
+  desktop: string
+}
+
+export const getBanners = (): Promise<Banner[]> => {
   return get(`${BASE_URL}/images/banners`);
 };

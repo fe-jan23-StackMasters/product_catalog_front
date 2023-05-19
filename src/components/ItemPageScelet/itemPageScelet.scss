@@ -21,7 +21,7 @@
     font-weight: 700;
     font-size: 20px;
     line-height: 26px;
-    color: $white-color;
+    color: var(--white-color);
     padding-bottom: 16px;
     margin-bottom: 32px;
 
@@ -154,7 +154,7 @@
     align-items: center;
     @include square(32px);
     border-radius: 50%;
-    background-color: $white-color;
+    background-color: var(--white-color);
     animation: pulse 1s ease-in-out infinite alternate;
     
 
@@ -164,7 +164,7 @@
       padding-bottom: 50px;
 
       font-size: 8px;
-      color:  $black-color;
+      color:  var(--black-color);
       font-family: 'Mont';
 
       &:hover {
@@ -174,7 +174,7 @@
   }
 
   &__color {
-    border: 1px solid $black-color;
+    border: 1px solid var(--black-color);
 
     @include square(30.5px);
     border-radius: 50%;
@@ -210,9 +210,9 @@
     height: 32px;
     border: 1px solid #4a4d58;
     padding: 8px;
-    background-color: $black-color;
+    background-color: var(--black-color);
     border-radius: 4px;
-    color: $white-color;
+    color: var(--white-color);
 
     &_in {
       border-radius: 4px;

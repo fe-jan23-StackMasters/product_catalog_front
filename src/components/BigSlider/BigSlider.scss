@@ -1,5 +1,6 @@
 @import '../../styles/variables.scss';
 @import '../../styles/utils/mixins';
+@import '../../styles/utils/animations';
 
 .BigSlider {
   max-width: 1200px;
@@ -12,6 +13,24 @@
 
   @include onDesktop {
     padding: 0 32px;
+  }
+
+  &__skeleton {
+    @extend %skeleton;
+    outline: none;
+    padding-top: 106%;
+    position: relative;
+
+    @include onTablet {
+      padding-top: 35%;
+    }
+  }
+
+  &__loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   &__item {
@@ -31,6 +50,9 @@
     right: 0;
     left: 0;
     bottom: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
   }
 
   .slick-slider {
@@ -75,7 +97,7 @@
 
     & button {
       font-size: 0;
-      background-color: $elements-color;
+      background-color: var(--elements-color);
       width: 14px;
       height: 4px;
       border: none;
@@ -83,7 +105,7 @@
   }
 
   .dot .slick-active button {
-    background-color: $white-color;
+    background-color: var(--white-color);
   }
 
   .slick-next {
@@ -115,20 +137,12 @@
     display: flex !important;
     justify-content: center;
     align-items: center;
-    background-color: $surface2-color;
+    background-color: var(--surface2-color);
 
     transition: background-color 0.3s;
 
-    & img {
-      filter: brightness(4.25);
-    }
-
     &:hover {
-      background-color: $icons-color;
-
-      & img {
-        filter: brightness(14);
-      }
+      background-color: var(--icons-color);
     }
   }
 }

@@ -10,6 +10,7 @@ import { ProductType } from '../../types/ProductType';
 import { PhoneCard } from '../../types/PhoneCard';
 import { PriceSlider } from '../PriceSlider';
 import { ProductCardSkeleton } from '../ProductCardSkeleton';
+import { useResizeContext } from '../../context/ResizeContext';
 
 type RequestWithParamsResult = {
   pages: number;
@@ -196,7 +197,9 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
     }
   };
 
-  const windowWidth = window.innerWidth;
+  // const windowWidth = window.innerWidth;
+
+  const { isMobileScreen } = useResizeContext();
 
   return (
     <>
@@ -227,7 +230,7 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
           />
         </div>
 
-        {windowWidth >= 640 && (
+        {!isMobileScreen && (
           <div className="phonesPage__priceSlider">
             <p className="phonesPage__dropDown-title">Price</p>
 
@@ -240,9 +243,12 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
         )}
       </div>
 
-      {windowWidth < 640 && (
+      {isMobileScreen && (
         <>
-          <div className="phonesPage__priceSlider">
+          <div
+            className="phonesPage__priceSlider
+            phonesPage__priceSlider-mobile"
+          >
             <span className="phonesPage__priceSlider-title">Price</span>
             <PriceSlider
               priceMin={priceMin}

@@ -6,7 +6,7 @@
   background-image: url(../../../icons/strokeLeft.svg);
   background-repeat: no-repeat;
   background-position: center;
-  background-color: $surface2-color;
+  background-color: var(--surface2-color);
 
   height: 32px;
   width: 32px;
@@ -14,14 +14,18 @@
 
   color: white;
 
+  &--light {
+    background-image: url(../../../icons/blackArrowLeft.svg);
+  }
+
   &:hover {
-    background-color: $icons-color;
+    background-color: var(--icons-color);
   }
 
   &--disabled {
     background-image: url(../../../icons/strokeLeftDisabled.svg);
     background-color: transparent;
-    border: 1px solid $elements-color;
+    border: 1px solid var(--elements-color);
 
     &:hover {
       background-color: transparent;

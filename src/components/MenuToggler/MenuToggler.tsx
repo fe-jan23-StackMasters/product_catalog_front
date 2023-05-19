@@ -3,7 +3,7 @@ import './MenuToggler.scss';
 
 type Props = {
   isOpen: boolean;
-  onToggle: () => void;
+  onToggle: (status?: boolean) => void;
 };
 
 export const MenuToggler = ({ isOpen, onToggle }: Props) => {
@@ -13,7 +13,7 @@ export const MenuToggler = ({ isOpen, onToggle }: Props) => {
         'header__case header__menu-button burger outline-arrow',
         { 'burger--opened': isOpen },
       )}
-      onClick={onToggle}
+      onClick={() => onToggle()}
     >
       <div className='burger__container'>
         <div className="burger__line burger__line--1" />
