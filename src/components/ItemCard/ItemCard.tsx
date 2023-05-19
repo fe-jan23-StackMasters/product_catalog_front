@@ -10,9 +10,11 @@ import { AddToFavourites } from '../AddToFavouriteButton';
 import './itemCard.scss';
 import rightArrov from '../../icons/arrowRight.svg';
 import { LinkLine } from '../LinkLine';
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { colorsObject } from './colorsObject';
 import { SliderProductPage } from '../SliderProductPage/SliderProductPage';
+import classNames from 'classnames';
+import { Container } from '../Container';
 
 export const ItemCard = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -76,7 +78,7 @@ export const ItemCard = () => {
     {isLoading ? (
       <ItemPageScelet />
     ) : (
-      <>
+      <Container>
       <div className="grid">
         <div className="grid__item grid__phone
           grid__item-tablet--1-12 grid__item-desktop--1-24">
@@ -105,17 +107,30 @@ export const ItemCard = () => {
 
               <div className="settings__colors">
                 {item?.colorsAvailable.map(color => (
-                  <div key={color} className="settings__button-color">
-                    <Link
+                  <NavLink
+                    key={color}
+                    to={`/phones/${item.namespaceId}-${item.capacity.toLowerCase()}-${color}`}
+                    className={({ isActive }) =>
+                      classNames(
+                        'settings__button-color',
+                        { 'settings__button-color--is-active': isActive },
+                      )
+                    }>
+                    <NavLink
                       to={`/phones/${item.namespaceId}-${item.capacity.toLowerCase()}-${color}`}
                       title={color}
                       style={{
                         backgroundColor: colorsObject[color],
                       }}
-                      className={`settings__color settingss__color--${color}`}
+                      className={({ isActive }) =>
+                        classNames(
+                          'settings__color',
+                          { 'settings__color--is-active': isActive },
+                        )
+                      }
                     >
-                    </Link>
-                  </div>
+                    </NavLink>
+                  </NavLink>
                 ))}
               </div>
             </div>
@@ -124,12 +139,18 @@ export const ItemCard = () => {
 
             <div className="settings__capacities">
               {item?.capacityAvailable.map(capacity => (
-                <Link
+                <NavLink
                   to={`/phones/${item.namespaceId}-${capacity.toLowerCase()}-${item.color}`}
-                  key={capacity} className="settings__button-capacity"
+                  key={capacity}
+                  className={({ isActive }) =>
+                    classNames(
+                      'settings__button-capacity',
+                      { 'settings__button-capacity--is-active': isActive },
+                    )
+                  }
                 >
                   {capacity}
-                </Link>
+                </NavLink>
               ))}
             </div>
 
@@ -208,7 +229,7 @@ export const ItemCard = () => {
             </div>
           </div>
 
-          <div className="grid__item
+          <div className="grid__item grid__phone
             grid__item-tablet--1-12 grid__item-desktop--14-24">
             <h2 className="about__title">Tech specs</h2>
 
@@ -250,7 +271,7 @@ export const ItemCard = () => {
 
               <div className="about__option">
                 <p className="about__option-name">cell</p>
-                <p className="about__option-content">{item?.cell}</p>
+                <p className="about__option-content">{item?.cell.join(', ')}</p>
               </div>
             </div>
           </div>
@@ -270,7 +291,7 @@ export const ItemCard = () => {
           </div>
         </div>
       </section>
-      </>
+      </Container>
     )}
     </>
   );

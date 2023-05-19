@@ -1,9 +1,10 @@
+import { Container } from '../Container';
 import { ProductCardSkeleton } from '../ProductCardSkeleton';
 import './itemPageScelet.scss';
 
 export const ItemPageScelet = () => {
   return (
-    <div className='page'>
+    <Container>
     <div className="grid">
       <div className="grid__item grid__phone
         grid__item-tablet--1-12 grid__item-desktop--1-24">
@@ -214,6 +215,6 @@ export const ItemPageScelet = () => {
         </div>
       </div>
     </section>
-    </div>
+    </Container>
   );
 };

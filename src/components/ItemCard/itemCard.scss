@@ -108,12 +108,18 @@
     align-items: center;
     @include square(32px);
     border-radius: 50%;
-    background-color: $white-color;
+    background-color: #4a4d58;
+
+    &--is-active {
+      background-color: $white-color;
+      pointer-events: none;
+    }
 
     &:hover,
-    &:active {
-      transform: scale(1.1);
-      filter: contrast(1.3);
+    &--is-active {
+      @include square(33px);
+      transform: scale(1.02);
+      filter: contrast(1.1);
     }
   }
 
@@ -125,56 +131,15 @@
 
     cursor: pointer;
 
-    &--black {
-      background-color: black;
-    }
-    &--green {
-      background-color: #5f7170;
-    }
-    &--yellow {
-      background-color: #efff46;
-    }
-    &--white {
+    &--is-active {
       background-color: $white-color;
+      pointer-events: none;
     }
-    &--purple {
-      background-color: #905bff;
-    }
-    &--red {
-      background-color: $red-color;
-    }
-    &--spaceblack {
-      background-color: $black-color;
-    }
-    &--midnight {
-      background-color: rgb(15, 15, 91);
-    }
-    &--silver {
-      background-color: silver;
-    }
-    &--starlight {
-      background-color: #fcdbc1;
-    }
-    &--spacegray {
-      background-color: rgb(110, 114, 124);
-    }
-    &--sierrablue {
-      background-color: rgb(94, 110, 134);
-    }
-    &--graphite {
-      background-color: rgb(133, 130, 130);
-    }
-    &--blue {
-      background-color: rgb(145, 148, 189);
-    }
-    &--pink {
-      background-color: rgb(207, 138, 184);
-    }
-    &--gold {
-      background-color: rgb(218, 211, 172);
-    }
-    &--midnightgreen {
-      background-color: rgb(53, 69, 65);
+
+    &:hover,
+    &--is-active {
+      transform: scale(1.02);
+      filter: contrast(1.1);
     }
   }
 
@@ -210,9 +175,14 @@
     text-decoration: none;
     cursor: pointer;
 
-    &:hover,
-    &:active {
+    &--is-active {
       background-color: $white-color;
+      color: $black-color;
+      pointer-events: none;
+    }
+
+    &:hover{
+      background-color: rgba(200, 194, 194, 0.17);
       color: $black-color;
     }
   }
