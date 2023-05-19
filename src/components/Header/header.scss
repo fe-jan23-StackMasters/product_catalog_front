@@ -4,6 +4,13 @@
 
   transition: background-color 0.3s, border 0.3s;
 
+  &--fixed {
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 999;
+  }
+
   &__content {
     @include top-actions;
   }
@@ -40,6 +47,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: border-left 0.3s;
 
     &-button {
       border: none;
@@ -47,7 +55,7 @@
       background: none;
       position: relative;
       cursor: pointer;
-      
+
       @include onTablet {
         width: 49px;
       }
@@ -58,29 +66,8 @@
 
 
       & img {
-        position: absolute;
-        left: 0;
-        right: 0;
         margin-left: auto;
         margin-right: auto;
-
-        @include onTablet {
-          top: 23%;
-        }
-
-        @include onDesktop {
-          top: 30%;
-        }
-      }
-
-      &--moon img {
-        @include onTablet {
-          top: 33%;
-        }
-
-        @include onDesktop {
-          top: 36%;
-        }
       }
     }
 
@@ -89,20 +76,9 @@
     }
 
     &--is-active {
-    position: relative;
-      
+      position: relative;
     }
 
-    &--is-active::after {
-      left: 0;
-      right: 0;
-      bottom: 0;
-      position: absolute;
-      content: '';
-      background-color: var(--white-color);
-      height: 4px;
-      display: block;
-    }
   }
 
   &__menu-opener_image {

@@ -6,10 +6,13 @@ import 'slick-carousel/slick/slick-theme.css';
 import './Slider.scss';
 import ArrowRight from '../../icons/arrowRight.svg';
 import ArrowLeft from '../../icons/arrowLeft.svg';
+import blackArrPrev from '../../icons/blackArrowLeft.svg';
+import blackArrNext from '../../icons/blackArrowRight.svg';
 import { PhoneCard } from '../../types/PhoneCard';
-import React from 'react';
+import React, { useContext } from 'react';
 import { ProductCard } from '../ProductCard/ProductCard';
 import { ProductCardSkeleton } from '../ProductCardSkeleton';
+import { ThemeContext } from '../../context/toggleContext';
 
 type Props = {
   title: string;
@@ -24,14 +27,23 @@ export const HomeSlider: React.FC<Props> = ({
   isError,
   isLoading,
 }) => {
+  const { theme } = useContext(ThemeContext);
+  let nextArrPath = ArrowRight;
+  let prevArrPath = ArrowLeft;
+
+  if (theme === 'light') {
+    nextArrPath = blackArrNext;
+    prevArrPath = blackArrPrev;
+  }
+
   const arrowRight = (
     <div>
-      <img src={ArrowRight} />
+      <img src={nextArrPath} />
     </div>
   );
   const arrowLeft = (
     <div>
-      <img src={ArrowLeft} />
+      <img src={prevArrPath} />
     </div>
   );
   const settingsSlider = {

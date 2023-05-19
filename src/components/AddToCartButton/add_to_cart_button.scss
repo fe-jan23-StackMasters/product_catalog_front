@@ -1,3 +1,5 @@
+@import '../../styles/utils/mixins';
+
 .btn__add-to {
   display: flex;
   justify-content: center;
@@ -15,9 +17,11 @@
 
   transition: all 0.3s ease;
 
-  &:hover {
-    background: var(--hover-color);
-    color: var(--cart-text-active);
+  @include onDesktop {
+    &:hover {
+      background: var(--hover-color);
+      color: var(--cart-text-active);
+    }
   }
 
   &--added {

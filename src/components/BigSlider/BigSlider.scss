@@ -140,16 +140,8 @@
 
     transition: background-color 0.3s;
 
-    & img {
-      filter: brightness(4.25);
-    }
-
     &:hover {
       background-color: var(--icons-color);
-
-      & img {
-        filter: brightness(14);
-      }
     }
   }
 }

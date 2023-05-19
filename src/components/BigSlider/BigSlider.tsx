@@ -1,17 +1,28 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './BigSlider.scss';
 import arrPrev from '../../icons/arrowLeft.svg';
 import arrNext from '../../icons/arrowRight.svg';
+import blackArrPrev from '../../icons/blackArrowLeft.svg';
+import blackArrNext from '../../icons/blackArrowRight.svg';
 import { useQuery } from '@tanstack/react-query';
 import { BASE_URL, Banner, getBanners } from '../../api/requests';
 import { Loader } from '../Loader';
 import { useResizeContext } from '../../context/ResizeContext';
+import { ThemeContext } from '../../context/toggleContext';
 
 export const BigSlider: React.FC = () => {
   const [banners, setBanners] = useState<Banner[]>([]);
+  const { theme } = useContext(ThemeContext);
+  let nextArrPath = arrNext;
+  let prevArrPath = arrPrev;
+
+  if (theme === 'light') {
+    nextArrPath = blackArrNext;
+    prevArrPath = blackArrPrev;
+  }
 
   useQuery({
     queryKey: ['banners'],
@@ -25,13 +36,13 @@ export const BigSlider: React.FC = () => {
 
   const prevArrow = (
     <div>
-      <img src={arrPrev} />
+      <img src={prevArrPath} />
     </div>
   );
 
   const nexArrow = (
     <div>
-      <img src={arrNext} />
+      <img src={nextArrPath} />
     </div>
   );
 

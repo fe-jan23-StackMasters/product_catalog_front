@@ -49,7 +49,10 @@ export const BasketCard: React.FC<Props> = ({ product }) => {
         opacity: 1,
         translateY: 0,
       }}
-      exit={{
+      exit={isMobileScreen ? {
+        opacity: 0,
+        translateX: -100,
+      } : {
         height: 0,
         paddingTop: 0,
         paddingBottom: 0,
@@ -70,7 +73,7 @@ export const BasketCard: React.FC<Props> = ({ product }) => {
             src={imageLink}
             alt="iphone"
             className="basket__card-image"
-            exit={{
+            exit={isMobileScreen ? {} : {
               scaleY: 0,
             }}
             transition={{ duration: 0.3 }}
@@ -80,7 +83,7 @@ export const BasketCard: React.FC<Props> = ({ product }) => {
         <Link to={`/phones/${itemId}`} className="basket__card-title">
           <motion.span
             className="basket__card-title"
-            exit={{
+            exit={isMobileScreen ? {} : {
               scaleY: 0,
             }}
             transition={{ duration: 0.3 }}
