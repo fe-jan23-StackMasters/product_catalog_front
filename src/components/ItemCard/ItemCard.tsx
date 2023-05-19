@@ -1,13 +1,14 @@
 import { HomeSlider } from '../Slider/Slider';
 import { ItemPageScelet } from '../ItemPageScelet';
 import { getDetailedInfo, getRecommendations } from '../../api/requests';
-import { FC, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, FC } from 'react';
 import { PhoneCard } from '../../types/PhoneCard';
 import { Phone } from '../../types/Phone';
 import { AddToCart } from '../AddToCartButton';
 import { AddToFavourites } from '../AddToFavouriteButton';
 import './itemCard.scss';
 import rightArrov from '../../icons/arrowRight.svg';
+import blackRightArrov from '../../icons/blackArrowRight.svg';
 import { LinkLine } from '../LinkLine';
 import { NavLink, useLocation } from 'react-router-dom';
 import { colorsObject } from './colorsObject';
@@ -15,6 +16,7 @@ import { SliderProductPage } from '../SliderProductPage/SliderProductPage';
 import classNames from 'classnames';
 import { Container } from '../Container';
 import { getShortInfo } from '../../helpers/detailedToShortInfo';
+import { ThemeContext } from '../../context/toggleContext';
 import { sliceName } from '../../helpers/sliceName';
 import { ProductType } from '../../types/ProductType';
 
@@ -30,6 +32,13 @@ export const ItemCard: FC<Props> = ({ productType }) => {
   const [item, setItem] = useState<Phone | null>(null);
   const [recommendedProducts, setRecommended] = useState<PhoneCard[]>();
   const location = useLocation();
+  const { theme } = useContext(ThemeContext);
+  let arrowPath = rightArrov;
+
+  if (theme === 'light') {
+    arrowPath = blackRightArrov;
+  }
+
   const shortName = sliceName(item?.name || '');
 
   useEffect(() => {
@@ -84,7 +93,7 @@ export const ItemCard: FC<Props> = ({ productType }) => {
           grid__item-tablet--1-12 grid__item-desktop--1-24">
           <div className="line">
             <LinkLine title={productType}/>
-            <img className="line__arrow" src={rightArrov} alt="right" />
+            <img className="line__arrow" src={arrowPath} alt="right" />
             <p className='line__id'>{shortName}</p>
           </div>
 

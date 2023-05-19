@@ -1,0 +1,24 @@
+@import '../../styles/utils/mixins';
+
+.contacts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 20rem;
+  padding: 20px;
+
+  @include onTablet {
+    max-width: 40rem;
+  }
+ 
+  @include onDesktop {
+    max-width: 60rem;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
