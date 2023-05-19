@@ -16,6 +16,8 @@ import { ThemeContext } from './context/toggleContext';
 import { SearchPage } from './components/SearchPage';
 import { AnimatePresence } from 'framer-motion';
 import { ProductType } from './types/ProductType';
+import { DynamickBackToTopBtn } from
+  './components/DynamickBackToTopBtn/DynamickBackToTopBtn';
 import classNames from 'classnames';
 
 const categories = Object.values(ProductType);
@@ -36,6 +38,7 @@ export const App = () => {
 
   return (
     <div data-theme={theme}>
+      <DynamickBackToTopBtn />
       <Header
         toggleMenu={toggleMenu}
         toggleTheme={toggleTheme}

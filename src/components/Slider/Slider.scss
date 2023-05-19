@@ -37,7 +37,7 @@
       align-items: center;
       justify-content: center;
       width: 32px;
-      border: 1px solid #3b3e4a;
+      border: 1px solid var(--elements-color);
       transition: background-color 0.3s;
       top: -55px;
 
@@ -53,7 +53,7 @@
 
     .slick-next:hover,
     .slick-prev:hover {
-      background: #323542;
+      background: var(--surface2-color);
 
       & img {
         filter: brightness(4.25);

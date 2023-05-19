@@ -1,5 +1,5 @@
-@import './variables';
 @import './utils/mixins';
+@import './variables.scss';
 
 @font-face {
   font-family: 'Mont';
@@ -32,16 +32,16 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #75767f;
+  background: var(--secondary-color);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #313237;
+  background: var(--border-color);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #bdbdbd;
+  background: var(--mockup-color);
 }
 
 body {

@@ -15,7 +15,7 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 21px;
-    color: #75767f;
+    color: var(--secondary-color);
     margin-bottom: 32px;
 
     @include onTablet {
