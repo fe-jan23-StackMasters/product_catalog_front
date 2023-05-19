@@ -8,6 +8,7 @@ import { NavLink } from 'react-router-dom';
 import { Button } from '../Button';
 import { PhoneCard } from '../../types/PhoneCard';
 import { useLocalStorageContext } from '../../context/StorageContext';
+import { PageNotFound } from '../PageNotFound';
 
 export const FavouritesPage: FC = () => {
   const { favorites } = useLocalStorageContext();
@@ -30,9 +31,7 @@ export const FavouritesPage: FC = () => {
           </>
         ) : (
           <Container>
-            <h2 className="basket__title">
-              Ooops... Your favourites are empty
-            </h2>
+           <PageNotFound stateBtn={false} textGost={'You have no favorites'} />
             <NavLink to="/phones" className="basket__link">
               <Button width="50%" height="48px" type="btn__add btn__add-shop">
                 Add

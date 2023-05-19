@@ -10,10 +10,11 @@ $check-color: $brand-success;
 $check-thickness: 3px;
 
 .aprove {
-  height: 80vh;
+  height: 400px;
   width: 100%;
-  position: fixed;
+  top: 30%;
   display: none;
+  position: absolute;
   z-index: 1;
   align-items: center;
   justify-content: center;
@@ -26,7 +27,7 @@ $check-thickness: 3px;
     margin: 0 auto;
     width: 80%;
     padding: 40px;
-    height: 60%;
+    height: 300px;
     border-radius: 40px;
     border: 1px var(--bg-button) solid;
     flex-direction: column;
@@ -36,7 +37,6 @@ $check-thickness: 3px;
 
     @include onTablet {
       width: 80%;
-      height: 60%;
     }
     @include onDesktop {
       max-width: 600px;
