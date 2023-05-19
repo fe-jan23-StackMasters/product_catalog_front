@@ -78,7 +78,7 @@ export const Header: FC<Props> = ({ toggleMenu, isMenuOpen, toggleTheme }) => {
                     transform: 'translateX(0)',
                   }}
                   transition={{ duration: 0.2, delay: 0.2 }}
-                  onClick={() => toggleMenu()}
+                  onClick={() => toggleMenu(false)}
                 />
               </NavLink>
             )}
