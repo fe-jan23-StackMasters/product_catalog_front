@@ -63,6 +63,10 @@ export function useCart() {
     [setCartItems, cartItems, removeFromCart],
   );
 
+  const clearCart = useCallback(() => {
+    setCartItems([]);
+  }, []);
+
   const totalPrice = useMemo(() => {
     return cartItems.reduce((acc, cartItem) => {
       return acc + cartItem.info.price * cartItem.quantity;
@@ -82,6 +86,7 @@ export function useCart() {
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
+    clearCart,
     totalPrice,
     totalQuantity,
   } as const;

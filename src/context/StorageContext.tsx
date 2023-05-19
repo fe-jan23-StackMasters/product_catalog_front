@@ -14,6 +14,7 @@ interface LocalStorageContextValue {
   cartItems: StorageProduct[];
   isAddedToCart: (itemId: string) => boolean;
   addToCart: (product: StorageProduct) => void;
+  clearCart: () => void;
   removeFromCart: storageFunc;
   increaseQuantity: storageFunc;
   decreaseQuantity: storageFunc;
@@ -48,6 +49,7 @@ export const LocalStorageProvider = ({
     decreaseQuantity,
     totalPrice,
     totalQuantity,
+    clearCart,
   } = useCart();
 
   const contextValue = {
@@ -58,6 +60,7 @@ export const LocalStorageProvider = ({
     cartItems,
     isAddedToCart,
     addToCart,
+    clearCart,
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
