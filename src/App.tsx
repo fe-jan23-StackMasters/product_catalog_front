@@ -19,6 +19,7 @@ import { ProductType } from './types/ProductType';
 import { DynamickBackToTopBtn } from
   './components/DynamickBackToTopBtn/DynamickBackToTopBtn';
 import classNames from 'classnames';
+import { Contacts } from './components/Contacts';
 
 const categories = Object.values(ProductType);
 
@@ -60,6 +61,7 @@ export const App = () => {
             </Route>
           ))}
 
+          <Route path="/contacts" element={<Contacts />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/tablets" element={<TabletsPage />} />
           <Route path="/accessories" element={<AccessoriesPage />} />

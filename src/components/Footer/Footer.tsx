@@ -7,6 +7,7 @@ import okHand from '../../icons/okHand.png';
 import React, { useContext } from 'react';
 import { BackToTop } from '../BackToTop/BackToTop';
 import { ThemeContext } from '../../context/toggleContext';
+import { Link } from 'react-router-dom';
 
 export const Footer: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -42,9 +43,9 @@ export const Footer: React.FC = () => {
             </a>
           </li>
           <li className="footer__item">
-            <a href="" className="footer__link">
+            <Link to={'/Contacts'} className="footer__link">
               CONTACTS
-            </a>
+            </Link>
           </li>
           <li className="footer__item">
             <a href="" className="footer__link">

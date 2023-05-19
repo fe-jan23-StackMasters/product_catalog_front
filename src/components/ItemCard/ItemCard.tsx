@@ -1,13 +1,14 @@
 import { HomeSlider } from '../Slider/Slider';
 import { ItemPageScelet } from '../ItemPageScelet';
 import { getDetailedInfo, getRecommendations } from '../../api/requests';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { PhoneCard } from '../../types/PhoneCard';
 import { Phone } from '../../types/Phone';
 import { AddToCart } from '../AddToCartButton';
 import { AddToFavourites } from '../AddToFavouriteButton';
 import './itemCard.scss';
 import rightArrov from '../../icons/arrowRight.svg';
+import blackRightArrov from '../../icons/blackArrowRight.svg';
 import { LinkLine } from '../LinkLine';
 import { NavLink, useLocation } from 'react-router-dom';
 import { colorsObject } from './colorsObject';
@@ -15,6 +16,7 @@ import { SliderProductPage } from '../SliderProductPage/SliderProductPage';
 import classNames from 'classnames';
 import { Container } from '../Container';
 import { getShortInfo } from '../../helpers/detailedToShortInfo';
+import { ThemeContext } from '../../context/toggleContext';
 
 export const ItemCard = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +26,12 @@ export const ItemCard = () => {
   const [item, setItem] = useState<Phone | null>(null);
   const [recommendedProducts, setRecommended] = useState<PhoneCard[]>();
   const location = useLocation();
+  const { theme } = useContext(ThemeContext);
+  let arrowPath = rightArrov;
+
+  if (theme === 'light') {
+    arrowPath = blackRightArrov;
+  }
 
   useEffect(() => {
     setIsLoading(true);
@@ -77,7 +85,7 @@ export const ItemCard = () => {
             >
               <div className="line">
                 <LinkLine title={'Phones'} />
-                <img className="line__arrow" src={rightArrov} alt="right" />
+                <img className="line__arrow" src={arrowPath} alt="right" />
                 <p className="line__id">{item?.name}</p>
               </div>
 
