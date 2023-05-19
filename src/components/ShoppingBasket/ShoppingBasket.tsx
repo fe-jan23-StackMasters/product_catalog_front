@@ -5,7 +5,9 @@ import './ShoppingBasket.scss';
 import { Container } from '../Container';
 import { Link, NavLink } from 'react-router-dom';
 import leftArrov from '../../icons/arrowLeft.svg';
-import { useLocalStorageContext } from '../../context/StorageContext';
+import {
+  useLocalStorageContext,
+} from '../../context/StorageContext';
 import { AnimatePresence } from 'framer-motion';
 import { AproovedBox } from '../AproovedBox/AprovedBox';
 
@@ -13,14 +15,15 @@ export const ShoppingBasket = () => {
   const { totalPrice, totalQuantity, cartItems } = useLocalStorageContext();
   const [stateAproove, setStateAproove] = useState(false);
   const [stateCheckout, setStateCheckout] = useState(false);
+  const { clearCart } = useLocalStorageContext();
   const closes = () => {
     setStateAproove(false);
     setStateCheckout(false);
   };
 
-  // eslint-disable-next-line no-unused-vars
   const openViewCHeck = () => {
     setStateAproove(!stateAproove);
+    clearCart();
 
     setTimeout(() => {
       setStateCheckout(true);
@@ -33,7 +36,7 @@ export const ShoppingBasket = () => {
 
   return (
     <>
-       <AproovedBox stateAproove={stateAproove} stateCheckout={stateCheckout} />
+      <AproovedBox stateAproove={stateAproove} stateCheckout={stateCheckout} />
       <Container>
         <Link to="/home" className="backLink">
           <img className="backLink__image" src={leftArrov} alt="left" />
