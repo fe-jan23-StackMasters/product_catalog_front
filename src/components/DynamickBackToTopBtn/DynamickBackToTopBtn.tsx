@@ -33,12 +33,18 @@ export const DynamickBackToTopBtn = () => {
   }, []);
 
   return (
-    <div
-      className={classNames('backToTop__btn',
-        { 'backToTop__btn--active': stateBackToTop })}
-      onClick={() => scrollToTop()}
-    >
-      <img src={arrow} className='backToTop__btn-arrow' />
-    </div>
+    <>
+      {stateBackToTop && (
+        <div
+        className={classNames('backToTop__btn',
+          { 'backToTop__btn--active': stateBackToTop })}
+        onClick={() => {
+          scrollToTop();
+        }}
+      >
+        <img src={arrow} className='backToTop__btn-arrow' />
+      </div>
+      )}
+    </>
   );
 };
