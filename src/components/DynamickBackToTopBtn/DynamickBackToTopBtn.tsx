@@ -4,7 +4,7 @@ import './DynamickBackToTopBtn.scss';
 import classNames from 'classnames';
 
 export const DynamickBackToTopBtn = () => {
-  const [stateBackToTop, setStateBackToTop] = useState(true);
+  const [stateBackToTop, setStateBackToTop] = useState(false);
 
   const toggleVisibility = () => {
     if (window.pageYOffset > 300) {
@@ -30,12 +30,18 @@ export const DynamickBackToTopBtn = () => {
   }, []);
 
   return (
-    <div
-      className={classNames('backToTop__btn',
-        { 'backToTop__btn--active': stateBackToTop })}
-      onClick={() => scrollToTop()}
-    >
-      <img src={arrow} className='backToTop__btn-arrow' />
-    </div>
+    <>
+      {stateBackToTop && (
+        <div
+        className={classNames('backToTop__btn',
+          { 'backToTop__btn--active': stateBackToTop })}
+        onClick={() => {
+          scrollToTop();
+        }}
+      >
+        <img src={arrow} className='backToTop__btn-arrow' />
+      </div>
+      )}
+    </>
   );
 };
