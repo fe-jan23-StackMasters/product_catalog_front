@@ -110,7 +110,7 @@
     background-color: #4a4d58;
 
     &--is-active {
-      background-color: $white-color;
+      background-color: var(--white-color);
       pointer-events: none;
     }
 
