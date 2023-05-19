@@ -131,7 +131,7 @@
     cursor: pointer;
 
     &--is-active {
-      background-color: $white-color;
+      background-color: var(--white-color);
       pointer-events: none;
     }
 
@@ -182,7 +182,7 @@
 
     &:hover{
       background-color: rgba(200, 194, 194, 0.17);
-      color: $black-color;
+      color: var(--black-color);
     }
   }
 
@@ -258,13 +258,21 @@
     line-height: 15px;
     text-decoration: none;
     color: var(--secondary-color);
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+
+    @include onTablet {
+      margin-bottom: 40px;
+    }
   }
 
   &__arrow {
     margin-right: 14px;
     @include square(14px);
     margin-left: 10px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+
+    @include onTablet {
+      margin-bottom: 40px;
+    }
   }
 }

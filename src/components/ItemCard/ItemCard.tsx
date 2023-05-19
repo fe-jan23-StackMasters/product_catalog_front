@@ -18,6 +18,7 @@ import { SliderProductPage } from '../SliderProductPage/SliderProductPage';
 import classNames from 'classnames';
 import { Container } from '../Container';
 import { getShortInfo } from '../../helpers/detailedToShortInfo';
+import { sliceName } from '../../helpers/sliceName';
 
 export const ItemCard = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -25,6 +26,7 @@ export const ItemCard = () => {
   const [item, setItem] = useState<Phone | null>(null);
   const [recommendedProducts, setRecommended] = useState<PhoneCard[]>();
   const location = useLocation();
+  const shortName = sliceName(item?.name || '');
 
   useEffect(() => {
     setIsLoading(true);
@@ -69,7 +71,7 @@ export const ItemCard = () => {
           <div className="line">
             <LinkLine title={'Phones'}/>
             <img className="line__arrow" src={rightArrov} alt="right" />
-            <p className='line__id'>{item?.name}</p>
+            <p className='line__id'>{shortName}</p>
           </div>
 
           <h1 className='title'>{item?.name}</h1>
