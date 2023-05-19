@@ -1,18 +1,12 @@
-@import '../../styles/variables.scss';
-
 $bgColor: #f7f7f7;
 $jaggedDistance: 35px;
 
-// boo
 $booSize: $jaggedDistance * 5;
 $booBg: $bgColor;
 $booShadow: darken($booBg, 5%);
 
-// face
 $booFaceSize: round($jaggedDistance / 1.3333);
 $booFaceColor: #9b9b9b;
-
-// ===========
 
 @keyframes floating {
   0% {
