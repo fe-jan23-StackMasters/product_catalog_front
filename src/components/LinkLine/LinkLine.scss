@@ -1,7 +1,7 @@
 @import '../../styles/utils/mixins';
 @import '../../styles/variables.scss';
 
-.accessories {
+.link-line {
   &__links {
     display: flex;
     text-align: center;
@@ -21,9 +21,13 @@
     font-style: normal;
     font-weight: 700;
     font-size: 12px;
-    line-height: 15px;
+    line-height: 12px;
     text-decoration: none;
-    color: $secondary-color;
+    color: var(--secondary-color);
+  }
+
+  &__text {
+    transform: translateY(1px);
   }
 
   &__arrow {

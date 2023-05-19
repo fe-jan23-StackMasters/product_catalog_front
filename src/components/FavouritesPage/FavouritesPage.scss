@@ -8,7 +8,7 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 21px;
-    color: $secondary-color;
+    color: var(--secondary-color);
     margin-bottom: 32px;
 
     @include onTablet {
@@ -17,6 +17,13 @@
   }
 
   &__cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__card {
     display: grid;
     padding-bottom: 40px;
     grid-template-columns: repeat(1, minmax(0, 1fr));

@@ -18,16 +18,17 @@ type RequestWithParamsResult = {
 };
 
 interface Props {
-  productType: ProductType;
+  productType: ProductType[];
+  query?: string | undefined;
 }
 
-export const Pagination: React.FC<Props> = ({ productType }) => {
+export const Pagination: React.FC<Props> = ({ productType, query }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get('page') || '1';
   const sort = searchParams.get('sort') || SortBy.NEW;
-  const count = searchParams.get('count') || '16';
+  const perPage = searchParams.get('perPage') || '16';
   const priceMinP = searchParams.get('priceMin') || '0';
   const priceMaxP = searchParams.get('priceMax') || '5000';
   const sorts = [SortBy.NAME, SortBy.NEW, SortBy.OLD, SortBy.HIGHT, SortBy.LOW];
@@ -36,7 +37,7 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
   const phones = productInfo?.products;
   const [range, setRange] = useState<number | number[]>([0, 5000]);
   const skeletons = Array.from(
-    { length: Number(count) },
+    { length: Number(perPage) },
     (_, index) => index + 1,
   );
 
@@ -90,26 +91,29 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
     updateSearch({ sort }, searchParams, setSearchParams);
   };
 
-  const onCountChange = (count: string) => {
-    updateSearch({ count }, searchParams, setSearchParams);
+  const onPerPageChange = (perPage: string) => {
+    updateSearch({ perPage }, searchParams, setSearchParams);
   };
 
   const onPageChange = (page: string) => {
     updateSearch({ page }, searchParams, setSearchParams);
   };
 
-  const getProductsFromServer = async() => {
+  const getDataFromServer = async() => {
     setIsLoading(true);
 
     try {
-      setProductInfo(await getProducts(
-        +count,
-        +page,
-        [productType],
-        sorts.find((by) => by.toString() === sort) || SortBy.NEW,
-        +priceMinP,
-        +priceMaxP,
-      ));
+      setProductInfo(
+        await getProducts(
+          +perPage,
+          +page,
+          productType,
+          sorts.find((by) => by.toString() === sort) || SortBy.NEW,
+          +priceMinP,
+          +priceMaxP,
+          query,
+        ),
+      );
     } catch {
       setIsError(true);
     } finally {
@@ -117,8 +121,16 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
     }
   };
 
+  if (!query) {
+    searchParams.delete('query');
+  }
+
   useEffect(() => {
-    getProductsFromServer();
+    getDataFromServer();
+  }, [query]);
+
+  useEffect(() => {
+    getDataFromServer();
   }, [searchParams]);
 
   useEffect(() => {
@@ -139,10 +151,10 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
 
       <div className="phonesPage__dropDown">
         <div className="phonesPage__dropDown--sortBy">
-          Sort By
+          <p className="phonesPage__dropDown-title">Sort by</p>
+
           <DropDown
             variables={sorts}
-            // getValueFromDropDown={handlerDropdownSortBy}
             searchParam={sort}
             defaultValue={1}
             changeValue={onSortChange}
@@ -150,64 +162,64 @@ export const Pagination: React.FC<Props> = ({ productType }) => {
         </div>
 
         <div className="phonesPage__dropDown--itemsOnPage">
-          Items on page
+          <p className="phonesPage__dropDown-title">Items on page</p>
+
           <DropDown
             variables={arrayOfItemsOnPage}
-            // getValueFromDropDown={handlerDropdownItemPerPage}
-            searchParam={count}
+            searchParam={perPage}
             defaultValue={1}
-            changeValue={onCountChange}
+            changeValue={onPerPageChange}
           />
+          {windowWidth >= 640 && (
+            <div className="phonesPage__priceSlider">
+              <p className="phonesPage__dropDown-title">Price</p>
 
-        {windowWidth >= 640 && (
-          <div className="phonesPage__priceSlider">
-            Price
-            <PriceSlider
-              priceMin={Array.isArray(range) ? range[0] : +priceMinP}
-              priceMax={Array.isArray(range) ? range[1] : 5000}
-              handleChangeFilterPrice={handleChangeFilterPrice}
-            />
-          </div>
-        )}
-      </div>
-
-      {windowWidth < 640 && (
-        <>
-          <div className="phonesPage__priceSlider">
-            <span className="phonesPage__priceSlider-title" >Price</span>
-            <PriceSlider
-              priceMin={Array.isArray(range) ? range[0] : +priceMinP}
-              priceMax={Array.isArray(range) ? range[1] : 5000}
-              handleChangeFilterPrice={handleChangeFilterPrice}
-            />
+              <PriceSlider
+                priceMin={Array.isArray(range) ? range[0] : +priceMinP}
+                priceMax={Array.isArray(range) ? range[1] : 5000}
+                handleChangeFilterPrice={handleChangeFilterPrice}
+              />
+            </div>
+          )}
         </div>
-        </>
-      )}
+
+        {windowWidth < 640 && (
+          <>
+            <div className="phonesPage__priceSlider">
+              <span className="phonesPage__priceSlider-title">Price</span>
+              <PriceSlider
+                priceMin={Array.isArray(range) ? range[0] : +priceMinP}
+                priceMax={Array.isArray(range) ? range[1] : 5000}
+                handleChangeFilterPrice={handleChangeFilterPrice}
+              />
+            </div>
+          </>
+        )}
       </div>
 
       <div className="phonesPage__pagination pagination">
-      <div className="pagination__items">
-        {isLoading ? (
-          skeletons.map((skeleton) => <ProductCardSkeleton key={skeleton} />)
-        ) : phones !== undefined ? (
-          phones.length === 0 ? (
-            <h2>There is nothing</h2>
+        <div className="pagination__items">
+          {isLoading ? (
+            skeletons.map((skeleton) => <ProductCardSkeleton key={skeleton} />)
+          ) : phones !== undefined ? (
+            phones.length === 0 ? (
+              <h2 className="pagination__nothing">Nothing found 😔</h2>
+            ) : (
+              phones.map((product) => (
+                <ProductCard product={product} key={product.id} />
+              ))
+            )
           ) : (
-            phones.map((product) => (
-              <ProductCard product={product} key={product.id} />
-            ))
-          )
-        ) : (
-          <h2>Unable to load data</h2>
+            <h2>Unable to load data</h2>
+          )}
+        </div>
+        {!isError && !isLoading && (
+          <Paginate
+            currentPage={+page}
+            pages={productInfo?.pages || 0}
+            setCurrentPage={onPageChange}
+          />
         )}
-      </div>
-      {!isError && !isLoading && (
-        <Paginate
-          currentPage={+page}
-          pages={productInfo?.pages || 1}
-          setCurrentPage={onPageChange}
-        />
-      )}
       </div>
     </>
   );

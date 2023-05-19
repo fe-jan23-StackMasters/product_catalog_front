@@ -6,7 +6,7 @@ import { ArrowRigth } from '../Arrows/ArrowRight';
 interface Props {
   currentPage: number;
   pages: number;
-  setCurrentPage: (page: string) => void
+  setCurrentPage: (page: string) => void;
 }
 
 export const Paginate: React.FC<Props> = ({
@@ -36,6 +36,10 @@ export const Paginate: React.FC<Props> = ({
     }
   };
 
+  if (pages === 0) {
+    return null;
+  }
+
   return (
     <>
       <ul className="pagination__page">
@@ -54,7 +58,9 @@ export const Paginate: React.FC<Props> = ({
             key={num}
           >
             <div
-              className="pagination__link"
+              className={classNames('pagination__link', {
+                'pagination__link--selected': num === currentPage,
+              })}
               onClick={() => {
                 setCurrentPage(num.toString());
               }}

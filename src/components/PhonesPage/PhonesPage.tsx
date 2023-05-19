@@ -8,7 +8,7 @@ import './PhonesPage.scss';
 
 type Props = {
   productType: ProductType;
-}
+};
 
 export const PhonesPage: React.FC<Props> = ({ productType }) => {
   let name = '';
@@ -33,7 +33,7 @@ export const PhonesPage: React.FC<Props> = ({ productType }) => {
           + productType.slice(1)} />
       <h1 className="phonesPage__header">{name}</h1>
 
-      <Pagination productType={productType} />
+      <Pagination productType={[productType]} />
     </Container>
   );
 };

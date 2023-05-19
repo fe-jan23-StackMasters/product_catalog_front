@@ -63,10 +63,10 @@ $booFaceColor: #9b9b9b;
     background-position: left bottom;
     background-image: linear-gradient(
         -45deg,
-        $black-color ($size / 2),
+        var(--black-color) ($size / 2),
         transparent 0
       ),
-      linear-gradient(45deg, $black-color ($size / 2), transparent 0),
+      linear-gradient(45deg, var(--black-color) ($size / 2), transparent 0),
       linear-gradient(-45deg, $booFaceColor ($size / 1.7), transparent 0),
       linear-gradient(45deg, $booFaceColor ($size / 1.7), transparent 0);
   }
@@ -113,11 +113,11 @@ $booFaceColor: #9b9b9b;
   }
 
   &-button {
-    background: $accent-color;
+    background: var(--accent-color);
     padding: 15px;
     font-weight: 700;
     font-size: 14px;
-    color: $white-color;
+    color: var(--white-color);
 
     border: none;
     cursor: pointer;
@@ -125,7 +125,7 @@ $booFaceColor: #9b9b9b;
     transition: all 0.3s ease;
 
     &:hover {
-      background: $hover-color;
+      background: var(--hover-color);
     }
   }
 

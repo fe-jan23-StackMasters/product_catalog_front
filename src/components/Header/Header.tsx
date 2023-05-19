@@ -1,99 +1,115 @@
-import { FC, useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import logoItem from '../../icons/niceGadgets.svg';
-import logoItemOk from '../../icons/Ok.svg';
-import menuOpener from '../../icons/Menu.svg';
+import { FC, useState, useContext } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import logoItem from '../../icons/Logo.svg';
+import blackLogoItem from '../../icons/LogoItem.svg';
+import blackShoping from '../../icons/blackShopingCart.svg';
 import favoritesHart from '../../icons/favourites.svg';
+import blackFavHeart from '../../icons/blackHeart.svg';
 import shoppingBag from '../../icons/shoppingBag.svg';
+import moonIcon from '../../icons/moonIcon.svg';
+import sunIcon from '../../icons/sunIcon.svg';
 import { PageNavLink } from '../PageNavLink';
 import classNames from 'classnames';
+import { ThemeContext } from '../../context/toggleContext';
 import { useLocalStorageContext } from '../../context/StorageContext';
 import { SearchLine } from '../SearchLine';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MenuToggler } from '../MenuToggler';
+import { useResizeContext } from '../../context/ResizeContext';
 
 const navList = ['home', 'phones', 'tablets', 'accessories'];
 
 export type Props = {
   toggleMenu: () => void;
+  isMenuOpen: boolean;
+  toggleTheme: () => void;
 };
 
-export const Header: FC<Props> = ({ toggleMenu }) => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+export const Header: FC<Props> = ({ toggleMenu, isMenuOpen, toggleTheme }) => {
+  const { theme } = useContext(ThemeContext);
+  let logoPath = logoItem;
+  let cartPath = shoppingBag;
+  let heartPath = favoritesHart;
+  let themePath = sunIcon;
+  let isLight = false;
+
+  if (theme === 'light') {
+    isLight = true;
+    themePath = moonIcon;
+    logoPath = blackLogoItem;
+    cartPath = blackShoping;
+    heartPath = blackFavHeart;
+  } else {
+    isLight = false;
+  }
 
   const { favorites, cartItems } = useLocalStorageContext();
 
-  useEffect(() => {
-    const handleResize = () => {
-      const windowWidth = window.innerWidth;
+  const location = useLocation();
+  const page = location.pathname;
 
-      setIsMobile(windowWidth < 640);
-    };
+  const { isMobileScreen } = useResizeContext();
 
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleOpenInput = () => {
-    setIsOpen(true);
-  };
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const windowSize = window.innerWidth;
+  const isLogoHidden = windowSize < 420 && isSearchOpen;
+  const isNavbarHidden = windowSize < 810 && isSearchOpen;
 
   return (
     <header className="header">
       <div className="header__content">
-        <div className="header__right-side">
-          {((windowSize > 420 && windowSize < 828) && isOpen) && (
+        <div className="header__left-side">
+          {!isLogoHidden && (
             <NavLink to="/" className="logo">
-              <img className="logo__image" src={logoItem} alt="Logo icon" />
-              <img className="logo__ok" src={logoItemOk} alt="ok" />
+              <img className="logo__image" src={logoPath} alt="Logo icon" />
             </NavLink>
           )}
-
-          {(!(windowSize < 828) || !isOpen) && (
-            <>
-              {isMobile ? (
-                <NavLink to="/" className="logo">
-                  <img className="logo__image" src={logoItem} alt="Logo icon" />
-                  <img className="logo__ok" src={logoItemOk} alt="ok" />
-                </NavLink>
-              ) : (
-                <nav className="header__nav nav" hidden={isMobile}>
-                  <ul className="nav__panel">
-                    <li className="nav__item">
-                      <NavLink to="/" className="logo">
-                        <img
-                          className="logo__image"
-                          src={logoItem}
-                          alt="Logo icon"
-                        />
-                        <img className="logo__ok" src={logoItemOk} alt="ok" />
-                      </NavLink>
+          <AnimatePresence>
+            {!isNavbarHidden && (
+              <motion.nav
+                className="header__nav nav"
+                initial={{
+                  opacity: 0,
+                  position: 'absolute',
+                  transform: 'translateX(-50px)',
+                }}
+                animate={{
+                  opacity: 1,
+                  position: 'relative',
+                  transform: 'translateX(0)',
+                }}
+                transition={{ duration: 0.2, delay: 0.2 }}
+              >
+                <ul className="nav__panel">
+                  {navList.map((item) => (
+                    <li key={item} className="nav__item">
+                      <PageNavLink to={`/${item}`} text={item} />
                     </li>
-                    {navList.map((item) => (
-                      <li key={item} className="nav__item">
-                        <PageNavLink to={`/${item}`} text={item} />
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-              )}
-            </>
-          )}
+                  ))}
+                </ul>
+              </motion.nav>
+            )}
+          </AnimatePresence>
         </div>
 
-        {!isMobile ? (
+        {!isMobileScreen ? (
           <div className="header__buying-section">
             <SearchLine
-              isOpen={isOpen}
-              handleOpenInput={handleOpenInput}
-              setIsOpen={setIsOpen}
+              isOpen={isSearchOpen}
+              setIsOpen={setIsSearchOpen}
             />
+
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className={classNames('header__case header__case-button', {
+                'header__case-button--moon': isLight,
+              })}
+            >
+              <img src={themePath} alt={theme} />
+            </button>
+
             <NavLink
               to="/favourites"
               className={({ isActive }) =>
@@ -104,7 +120,7 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
             >
               <div className="header__count-position">
                 <img
-                  src={favoritesHart}
+                  src={heartPath}
                   className="header__menu-opener_image"
                   alt="menu"
                 />
@@ -114,6 +130,12 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
                   </span>
                 )}
               </div>
+              {page === '/favourites' ? (
+                <motion.div
+                  className="nav__link-underline"
+                  layoutId="underline"
+                />
+              ) : null}
             </NavLink>
 
             <NavLink
@@ -126,7 +148,7 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
             >
               <div className="header__count-position">
                 <img
-                  src={shoppingBag}
+                  src={cartPath}
                   className="header__menu-opener_image"
                   alt="menu"
                 />
@@ -136,25 +158,32 @@ export const Header: FC<Props> = ({ toggleMenu }) => {
                   </span>
                 )}
               </div>
+              {page === '/cart' ? (
+                <motion.div
+                  className="nav__link-underline"
+                  layoutId="underline"
+                />
+              ) : null}
             </NavLink>
           </div>
         ) : (
           <div className="header__menu-container">
             <SearchLine
-              isOpen={isOpen}
-              handleOpenInput={handleOpenInput}
-              setIsOpen={setIsOpen}
+              isOpen={isSearchOpen}
+              setIsOpen={setIsSearchOpen}
             />
+
             <button
-              className="header__menu-button header__case"
-              onClick={toggleMenu}
+              type="button"
+              onClick={toggleTheme}
+              className={classNames('header__case header__case-button', {
+                'header__case-button--moon': isLight,
+              })}
             >
-              <img
-                className="header__menu-opener_image"
-                src={menuOpener}
-                alt="menu"
-              />
+              <img src={themePath} alt={theme} />
             </button>
+
+            <MenuToggler isOpen={isMenuOpen} onToggle={toggleMenu} />
           </div>
         )}
       </div>

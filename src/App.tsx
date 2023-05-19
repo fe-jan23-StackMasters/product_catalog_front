@@ -1,6 +1,5 @@
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import './App.scss';
-
 import { PageNotFound } from './components/PageNotFound';
 import { HomePage } from './components/HomePage';
 import { PhonesPage } from './components/PhonesPage';
@@ -11,41 +10,53 @@ import { ShoppingBasket } from './components/ShoppingBasket';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { BurgerMenu } from './components/BurgerMenu';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { ItemCard } from './components/ItemCard';
+import { ThemeContext } from './context/toggleContext';
+import { SearchPage } from './components/SearchPage';
+import { AnimatePresence } from 'framer-motion';
 import { ProductType } from './types/ProductType';
 
 const categories = Object.values(ProductType);
 
 export const App = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+
+    setTheme(newTheme);
+  };
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
-    document.body.classList.toggle('no-scroll');
+    setIsBurgerOpen((prev) => !prev);
   };
 
   return (
-    <>
-      {!isOpen ? (
-        <Header toggleMenu={toggleMenu} />
-      ) : (
-        <BurgerMenu toggleMenu={toggleMenu} />
-      )}
+    <div data-theme={theme}>
+      <Header
+        toggleMenu={toggleMenu}
+        toggleTheme={toggleTheme}
+        isMenuOpen={isBurgerOpen}
+      />
+      <AnimatePresence>
+        {isBurgerOpen && <BurgerMenu toggleMenu={toggleMenu} />}
+      </AnimatePresence>
 
       <main className="main">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<Navigate to="/" replace />} />
 
-          {categories.map(category => (
+          {categories.map((category) => (
             <Route path={category} key={category} element={<Outlet />}>
-              <Route index element={<PhonesPage
-                productType={category}/>} />
+              <Route index element={<PhonesPage productType={category} />} />
               <Route path=":itemCard" element={<ItemCard />} />
             </Route>
           ))}
 
+          <Route path="/search" element={<SearchPage />} />
           <Route path="/tablets" element={<TabletsPage />} />
           <Route path="/accessories" element={<AccessoriesPage />} />
           <Route path="/favourites" element={<FavouritesPage />} />
@@ -55,6 +66,6 @@ export const App = () => {
       </main>
 
       <Footer />
-    </>
+    </div>
   );
 };

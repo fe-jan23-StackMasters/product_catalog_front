@@ -11,7 +11,7 @@
     font-weight: 700;
     font-size: 20px;
     line-height: 26px;
-    color: $white-color;
+    color: var(--white-color);
     padding-bottom: 16px;
     margin-bottom: 32px;
 
@@ -36,7 +36,7 @@
     font-weight: 700;
     font-size: 20px;
     line-height: 26px;
-    color: $white-color;
+    color: var(--white-color);
     margin-bottom: 16px;
   }
 
@@ -72,7 +72,7 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 21px;
-    color: $white-color;
+    color: var(--white-color);
   }
 }
 
@@ -102,21 +102,23 @@
   }
 
   &__button-color {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     @include square(32px);
     border-radius: 50%;
-    background-color: $white-color;
+    background-color: var(--white-color);
 
-    &:hover {
+    &:hover,
+    &:active {
       transform: scale(1.1);
       filter: contrast(1.3);
     }
   }
 
   &__color {
-    border: 1px solid $black-color;
+    border: 1px solid var(--black-color);
 
     @include square(30.5px);
     border-radius: 50%;
@@ -126,20 +128,69 @@
     &--black {
       background-color: black;
     }
+
     &--green {
       background-color: #5f7170;
     }
+
     &--yellow {
-      background-color: #fcdbc1;
+      background-color: #efff46;
     }
+
     &--white {
-      background-color: $white-color;
+      background-color: var(--white-color);
     }
+
     &--purple {
       background-color: #905bff;
     }
+
     &--red {
-      background-color: $red-color;
+      background-color: var(--red-color);
+    }
+
+    &--spaceblack {
+      background-color: #131313;
+    }
+
+    &--midnight {
+      background-color: rgb(15, 15, 91);
+    }
+
+    &--silver {
+      background-color: silver;
+    }
+
+    &--starlight {
+      background-color: #fcdbc1;
+    }
+
+    &--spacegray {
+      background-color: rgb(110, 114, 124);
+    }
+
+    &--sierrablue {
+      background-color: rgb(94, 110, 134);
+    }
+
+    &--graphite {
+      background-color: rgb(133, 130, 130);
+    }
+
+    &--blue {
+      background-color: rgb(145, 148, 189);
+    }
+
+    &--pink {
+      background-color: rgb(207, 138, 184);
+    }
+
+    &--gold {
+      background-color: rgb(218, 211, 172);
+    }
+
+    &--midnightgreen {
+      background-color: rgb(53, 69, 65);
     }
   }
 
@@ -157,25 +208,28 @@
 
   &__button-capacity {
     display: flex;
+    justify-content: center;
     align-items: center;
-    text-align: center;
 
     width: 63px;
     height: 32px;
     border: 1px solid #4a4d58;
     padding: 8px;
-    background-color: $black-color;
-    color: $white-color;
+    background-color: var(--black-color);
+    color: var(--white-color);
 
     font-family: 'Mont';
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 21px;
+    text-decoration: none;
+    cursor: pointer;
 
-    &:hover {
-      background-color: $white-color;
-      color: $black-color;
+    &:hover,
+    &:active {
+      background-color: var(--white-color);
+      color: var(--black-color);
     }
   }
 
@@ -192,7 +246,7 @@
     font-weight: 800;
     font-size: 32px;
     line-height: 41px;
-    color: $white-color;
+    color: var(--white-color);
   }
 
   &__add-prev-price {
@@ -210,6 +264,18 @@
     gap: 8px;
     margin-bottom: 32px;
   }
+
+  &__add-tablet {
+    margin-bottom: 55px;
+
+    @include onTablet {
+      margin-bottom: 65px;
+    }
+
+    @include onDesktop {
+      margin-bottom: 110px;
+    }
+  }
 }
 
 .title {
@@ -220,4 +286,32 @@
 
 .slider {
   @include max-block;
+}
+
+.line {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  @include max-block;
+
+  &__id {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-family: 'Mont', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    text-decoration: none;
+    color: var(--secondary-color);
+    margin-bottom: 40px;
+  }
+
+  &__arrow {
+    margin-right: 14px;
+    @include square(14px);
+    margin-left: 10px;
+    margin-bottom: 40px;
+  }
 }
