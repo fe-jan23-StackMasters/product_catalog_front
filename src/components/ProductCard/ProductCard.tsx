@@ -3,7 +3,7 @@ import { AddToCart } from '../AddToCartButton/AddToCartButton';
 import { AddToFavourites } from '../AddToFavouriteButton/AddToFavourite';
 import './product_card.scss';
 import { PhoneCard } from '../../types/PhoneCard';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { BASE_URL } from '../../api/requests';
 
 interface Props {
@@ -18,11 +18,11 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
 
   return (
     <div className="card">
-      <Link to={`/phones/${phoneId}`} className="card__link">
+      <NavLink to={`/phones/${phoneId}`} className="card__link">
         <img src={`${BASE_URL}/${image}`} alt={name} className="card__image" />
 
         <h1 className="card__title">{name}</h1>
-      </Link>
+      </NavLink>
 
       <div className="card__prices">
         <p className="card__price--sale">${price}</p>

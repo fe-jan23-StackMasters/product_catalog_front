@@ -8,7 +8,7 @@ import './LinkLine.scss';
 import { ThemeContext } from '../../context/toggleContext';
 
 interface Props {
-  title: string;
+  title: string | undefined;
 }
 
 const capitalize = (title: string) => {
