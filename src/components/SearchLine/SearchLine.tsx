@@ -18,9 +18,10 @@ import { ThemeContext } from '../../context/toggleContext';
 type Props = {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
+  onCloseBurger: (value?: boolean) => void;
 };
 
-export const SearchLine: FC<Props> = ({ isOpen, setIsOpen }) => {
+export const SearchLine: FC<Props> = ({ isOpen, setIsOpen, onCloseBurger }) => {
   const { theme } = useContext(ThemeContext);
   const [searchQuery, setSearchQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -47,6 +48,7 @@ export const SearchLine: FC<Props> = ({ isOpen, setIsOpen }) => {
   const redirectPage = () => {
     if (searchQuery) {
       navigate(`/search?query=${searchQuery}`);
+      onCloseBurger(false);
     }
 
     setIsOpen(false);

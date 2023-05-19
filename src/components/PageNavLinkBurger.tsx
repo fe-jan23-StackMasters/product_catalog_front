@@ -5,12 +5,12 @@ import classNames from 'classnames';
 export type Props = {
   to: string;
   text: string;
-  toggleMenu: () => void;
+  toggleMenu: (status?: boolean) => void;
 };
 
 export const PageNavLinkBurger: FC<Props> = ({ to, text, toggleMenu }) => (
   <NavLink
-    onClick={toggleMenu}
+    onClick={() => toggleMenu()}
     to={to}
     className={({ isActive }) =>
       classNames('nav__link', { 'nav__link--is-active': isActive })

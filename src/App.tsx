@@ -10,12 +10,13 @@ import { ShoppingBasket } from './components/ShoppingBasket';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { BurgerMenu } from './components/BurgerMenu';
-import { useContext, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { ItemCard } from './components/ItemCard';
 import { ThemeContext } from './context/toggleContext';
 import { SearchPage } from './components/SearchPage';
 import { AnimatePresence } from 'framer-motion';
 import { ProductType } from './types/ProductType';
+import classNames from 'classnames';
 
 const categories = Object.values(ProductType);
 
@@ -29,9 +30,9 @@ export const App = () => {
     setTheme(newTheme);
   };
 
-  const toggleMenu = () => {
-    setIsBurgerOpen((prev) => !prev);
-  };
+  const toggleMenu = useCallback((status?: boolean) => {
+    setIsBurgerOpen((prev) => status ?? !prev);
+  }, []);
 
   return (
     <div data-theme={theme}>
@@ -44,7 +45,7 @@ export const App = () => {
         {isBurgerOpen && <BurgerMenu toggleMenu={toggleMenu} />}
       </AnimatePresence>
 
-      <main className="main">
+      <main className={classNames('main', { 'main--menu-open': isBurgerOpen })}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<Navigate to="/" replace />} />

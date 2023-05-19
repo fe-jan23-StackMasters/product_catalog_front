@@ -20,7 +20,7 @@ import { useResizeContext } from '../../context/ResizeContext';
 const navList = ['home', 'phones', 'tablets', 'accessories'];
 
 export type Props = {
-  toggleMenu: () => void;
+  toggleMenu: (status?: boolean) => void;
   isMenuOpen: boolean;
   toggleTheme: () => void;
 };
@@ -57,7 +57,7 @@ export const Header: FC<Props> = ({ toggleMenu, isMenuOpen, toggleTheme }) => {
   const isNavbarHidden = windowSize < 860 && isSearchOpen;
 
   return (
-    <header className="header">
+    <header className={classNames('header', { 'header--fixed': isMenuOpen })}>
       <AnimatePresence>
         <div className="header__content">
           <div className="header__left-side">
@@ -78,6 +78,7 @@ export const Header: FC<Props> = ({ toggleMenu, isMenuOpen, toggleTheme }) => {
                     transform: 'translateX(0)',
                   }}
                   transition={{ duration: 0.2, delay: 0.2 }}
+                  onClick={() => toggleMenu()}
                 />
               </NavLink>
             )}
@@ -108,7 +109,11 @@ export const Header: FC<Props> = ({ toggleMenu, isMenuOpen, toggleTheme }) => {
           </div>
 
           <div className="header__buying-section">
-            <SearchLine isOpen={isSearchOpen} setIsOpen={setIsSearchOpen} />
+            <SearchLine
+              onCloseBurger={toggleMenu}
+              isOpen={isSearchOpen}
+              setIsOpen={setIsSearchOpen}
+            />
 
             <button
               type="button"
