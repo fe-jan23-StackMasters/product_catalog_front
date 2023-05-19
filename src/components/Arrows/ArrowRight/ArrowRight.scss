@@ -12,6 +12,7 @@
   cursor: pointer;
 
   color: white;
+  transition: background-color 0.2s;
 
   &--light {
     background-image: url(../../../icons/blackArrowRight.svg);
