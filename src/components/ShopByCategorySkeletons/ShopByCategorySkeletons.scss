@@ -1,0 +1,31 @@
+@import '../../styles/variables.scss';
+@import '../../styles/utils/mixins';
+@import '../../styles/utils/animations.scss';
+
+.skeleton-card {
+  &-image {
+    width: 100%;
+    // height: calc(100% - 16px - 24px - 20px - 20px);
+    padding-top: calc(100% - 16px - 24px - 20px - 20px);
+    margin-bottom: 24px;
+    background-color: var(--surface1-color);
+    @extend %skeleton;
+  }
+
+  &-title {
+    width: 80%;
+    height: 20px;
+    margin-top: 10px;
+    background-color: var(--surface1-color);
+    @extend %skeleton;
+
+  }
+
+  &-amount {
+    width: 60%;
+    height: 16px;
+    margin-top: 10px;
+    background-color: var(--surface1-color);
+    @extend %skeleton;
+  }
+}

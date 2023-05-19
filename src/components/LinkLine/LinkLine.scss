@@ -22,7 +22,16 @@
     font-size: 12px;
     line-height: 12px;
     text-decoration: none;
-    color: var(--secondary-color);
+    color: var(--white-color);
+
+
+    &--is-active {
+      color: var(--secondary-color);
+    }
+    
+    &-name-path {
+      color: var(--white-color);
+    }
   }
 
   &__text {
