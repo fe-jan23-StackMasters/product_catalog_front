@@ -2,7 +2,7 @@
 @import '../../styles/utils/mixins';
 
 .card {
-  width: 212px;
+  width: 100%;
   height: 100%;
 
   color: var(--white-color);
@@ -32,10 +32,11 @@
   }
 
   &__image {
-    width: 148px;
+    min-width: 100%;
     height: 129px;
     margin: 0 auto 24px;
     object-fit: contain;
+    display: block;
 
     @include onTablet {
       width: 173px;

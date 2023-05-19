@@ -82,9 +82,10 @@
     width: 32px;
     cursor: pointer;
     background-color: var(--surface1-color);
+    transition: background-color 0.2s;
 
     &:hover:not(.pagination__item--selected) {
-      background-color: var(--elements-color);
+      background-color: var(--pagination-hover);
     }
 
     &--selected {
