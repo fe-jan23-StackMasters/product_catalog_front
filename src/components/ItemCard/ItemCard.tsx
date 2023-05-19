@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { HomeSlider } from '../Slider/Slider';
 import { ItemPageScelet } from '../ItemPageScelet';
-import { getDetailedInfo, getHot, getProducts } from '../../api/requests';
+import {
+  getDetailedInfo, getRecommenations,
+} from '../../api/requests';
 import { useEffect, useState } from 'react';
 import { PhoneCard } from '../../types/PhoneCard';
 import { Phone } from '../../types/Phone';
@@ -15,29 +17,13 @@ import { colorsObject } from './colorsObject';
 import { SliderProductPage } from '../SliderProductPage/SliderProductPage';
 import classNames from 'classnames';
 import { Container } from '../Container';
+import { getShortInfo } from '../../helpers/detailedToShortInfo';
 
 export const ItemCard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [itemId, setPhoneId] = useState<string>('');
   const [item, setItem] = useState<Phone | null>(null);
-  const [items, setItems] = useState<PhoneCard[]>([]);
-  const [hotProducts, setHotProducts] = useState<PhoneCard[]>();
-
-  useEffect(() => {
-    const getAllPhones = async() => {
-      try {
-        const result = await getProducts();
-        const allPhones = result.products;
-
-        setItems(allPhones);
-      } catch (error) {
-        throw new Error('Error fetching all phones: ' + error);
-      }
-    };
-
-    getAllPhones();
-  }, []);
-
+  const [recommendedProducts, setRecommended] = useState<PhoneCard[]>();
   const location = useLocation();
 
   useEffect(() => {
@@ -61,17 +47,15 @@ export const ItemCard = () => {
       });
   }, [itemId, location]);
 
-  const { isError: isHotError, isLoading: isHotLoading } = useQuery({
-    queryKey: ['hotProducts'],
-    queryFn: () => getHot(),
+  const { isError, isLoading: isRecLoading } = useQuery({
+    queryKey: ['recommendedProducts'],
+    queryFn: () => getRecommenations(itemId),
     onSuccess(data) {
-      setHotProducts(data);
+      setRecommended(data);
     },
   });
 
-  const product: PhoneCard | undefined = items.find(
-    (item) => itemId === item.phoneId,
-  );
+  const product = item ? getShortInfo(item) : null;
 
   return (
     <>
@@ -172,8 +156,8 @@ export const ItemCard = () => {
                 />
 
                 <AddToFavourites
-                size="48px"
-                product={product}
+                  size="48px"
+                  product={product}
                 />
               </>
               )}
@@ -284,9 +268,9 @@ export const ItemCard = () => {
         grid__item-tablet--1-12 grid__item-desktop--1-24">
             <HomeSlider
               title={'You may also like'}
-              products={hotProducts || []}
-              isLoading={isHotLoading}
-              isError={isHotError}
+              products={recommendedProducts || []}
+              isLoading={isRecLoading}
+              isError={isError}
             />
           </div>
         </div>
