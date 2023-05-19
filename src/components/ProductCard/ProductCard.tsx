@@ -12,13 +12,13 @@ interface Props {
 
 export const ProductCard: React.FC<Props> = ({ product }) => {
   // eslint-disable-next-line max-len
-  const { name, fullPrice, price, screen, capacity, ram, phoneId, image } = product;
+  const { name, fullPrice, price, screen, capacity, ram, phoneId, image, category } = product;
 
   const inces = screen.split(' ')[0];
 
   return (
     <div className="card">
-      <NavLink to={`/phones/${phoneId}`} className="card__link">
+      <NavLink to={`/${category}/${phoneId}`} className="card__link">
         <img src={`${BASE_URL}/${image}`} alt={name} className="card__image" />
 
         <h1 className="card__title">{name}</h1>

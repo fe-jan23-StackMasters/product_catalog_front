@@ -1,7 +1,7 @@
 import { HomeSlider } from '../Slider/Slider';
 import { ItemPageScelet } from '../ItemPageScelet';
 import { getDetailedInfo, getRecommendations } from '../../api/requests';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, FC } from 'react';
 import { PhoneCard } from '../../types/PhoneCard';
 import { Phone } from '../../types/Phone';
 import { AddToCart } from '../AddToCartButton';
@@ -17,8 +17,14 @@ import classNames from 'classnames';
 import { Container } from '../Container';
 import { getShortInfo } from '../../helpers/detailedToShortInfo';
 import { ThemeContext } from '../../context/toggleContext';
+import { sliceName } from '../../helpers/sliceName';
+import { ProductType } from '../../types/ProductType';
 
-export const ItemCard = () => {
+type Props = {
+  productType: ProductType;
+};
+
+export const ItemCard: FC<Props> = ({ productType }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isRecLoading, setIsRecLoading] = useState(false);
   const [isRecError, setIsRecError] = useState(false);
@@ -32,6 +38,8 @@ export const ItemCard = () => {
   if (theme === 'light') {
     arrowPath = blackRightArrov;
   }
+
+  const shortName = sliceName(item?.name || '');
 
   useEffect(() => {
     setIsLoading(true);
@@ -54,6 +62,8 @@ export const ItemCard = () => {
       });
   }, [itemId, location]);
 
+  window.console.log(location.pathname);
+
   useEffect(() => {
     setIsRecLoading(true);
     setIsRecError(false);
@@ -74,24 +84,22 @@ export const ItemCard = () => {
 
   return (
     <>
-      {isLoading ? (
-        <ItemPageScelet />
-      ) : (
-        <Container>
-          <div className="grid">
-            <div
-              className="grid__item grid__phone
-          grid__item-tablet--1-12 grid__item-desktop--1-24"
-            >
-              <div className="line">
-                <LinkLine title={'Phones'} />
-                <img className="line__arrow" src={arrowPath} alt="right" />
-                <p className="line__id">{item?.name}</p>
-              </div>
-
-              <h1 className="title">{item?.name}</h1>
-            </div>
+    {isLoading ? (
+      <ItemPageScelet />
+    ) : (
+      <Container>
+      <div className="grid">
+        <div className="grid__item grid__phone
+          grid__item-tablet--1-12 grid__item-desktop--1-24">
+          <div className="line">
+            <LinkLine title={productType}/>
+            <img className="line__arrow" src={arrowPath} alt="right" />
+            <p className='line__id'>{shortName}</p>
           </div>
+
+          <h1 className='title'>{item?.name}</h1>
+        </div>
+      </div>
 
           <section className="settings">
             <div className="grid">
@@ -296,7 +304,7 @@ export const ItemCard = () => {
             </div>
           </section>
         </Container>
-      )}
+    )}
     </>
   );
 };

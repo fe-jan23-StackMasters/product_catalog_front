@@ -1,31 +1,53 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PhoneCard } from '../../types/PhoneCard';
 import { BigSlider } from '../BigSlider';
 import { ShopBy } from '../ShopBy';
 import { HomeSlider } from '../Slider';
-import { useQuery } from '@tanstack/react-query';
 import { getHot, getNew } from '../../api/requests';
 import { Container } from '../Container';
 
 export const HomePage = () => {
   const [newProducts, setNewProducts] = useState<PhoneCard[]>();
+  const [newError, setNewError] = useState(false);
+  const [newLoading, setNewLoading] = useState(false);
+
   const [hotProducts, setHotProducts] = useState<PhoneCard[]>();
+  const [hotError, setHotError] = useState(false);
+  const [hotLoading, setHotLoading] = useState(false);
 
-  const { isError: isHotError, isLoading: isHotLoading } = useQuery({
-    queryKey: ['hotProducts'],
-    queryFn: () => getHot(),
-    onSuccess(data) {
-      setHotProducts(data);
-    },
-  });
+  useEffect(() => {
+    setNewLoading(true);
+    setNewError(false);
 
-  const { isError: isNewError, isLoading: isNewLoading } = useQuery({
-    queryKey: ['newProducts'],
-    queryFn: () => getNew(),
-    onSuccess(data) {
-      setNewProducts(data);
-    },
-  });
+    (async() => {
+      try {
+        const newItems = await getNew();
+
+        setNewProducts(newItems);
+      } catch {
+        setNewError(true);
+      } finally {
+        setNewLoading(false);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    setHotLoading(true);
+    setHotError(false);
+
+    (async() => {
+      try {
+        const hotItems = await getHot();
+
+        setHotProducts(hotItems);
+      } catch {
+        setHotError(true);
+      } finally {
+        setHotLoading(false);
+      }
+    })();
+  }, []);
 
   return (
     <section className="HomePage">
@@ -42,8 +64,8 @@ export const HomePage = () => {
           <HomeSlider
             title={'Brand new models'}
             products={newProducts || []}
-            isLoading={isNewLoading}
-            isError={isNewError}
+            isLoading={newLoading}
+            isError={newError}
           />
         </div>
 
@@ -55,8 +77,8 @@ export const HomePage = () => {
           <HomeSlider
             title={'Hot prices'}
             products={hotProducts || []}
-            isLoading={isHotLoading}
-            isError={isHotError}
+            isLoading={hotLoading}
+            isError={hotError}
           />
         </div>
       </Container>

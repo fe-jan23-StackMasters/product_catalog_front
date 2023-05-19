@@ -233,8 +233,6 @@
 
 .title {
   @include max-block;
-
-  margin-bottom: 40px;
 }
 
 .slider {
@@ -258,13 +256,21 @@
     line-height: 15px;
     text-decoration: none;
     color: var(--secondary-color);
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+
+    @include onTablet {
+      margin-bottom: 40px;
+    }
   }
 
   &__arrow {
     margin-right: 14px;
     @include square(14px);
     margin-left: 10px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+
+    @include onTablet {
+      margin-bottom: 40px;
+    }
   }
 }

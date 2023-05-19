@@ -57,7 +57,10 @@ export const App = () => {
           {categories.map((category) => (
             <Route path={category} key={category} element={<Outlet />}>
               <Route index element={<PhonesPage productType={category} />} />
-              <Route path=":itemCard" element={<ItemCard />} />
+              <Route
+                path=":itemCard"
+                element={<ItemCard productType={category}
+              />} />
             </Route>
           ))}
 
@@ -67,7 +70,10 @@ export const App = () => {
           <Route path="/accessories" element={<AccessoriesPage />} />
           <Route path="/favourites" element={<FavouritesPage />} />
           <Route path="/cart" element={<ShoppingBasket />} />
-          <Route path="*" element={<PageNotFound />} />
+          <Route path="*" element={<PageNotFound
+            stateBtn={true}
+            textGost={'You lost'}
+            />} />
         </Routes>
       </main>
 
