@@ -10,6 +10,7 @@ import { ProductType } from '../../types/ProductType';
 import { PhoneCard } from '../../types/PhoneCard';
 import { PriceSlider } from '../PriceSlider';
 import { ProductCardSkeleton } from '../ProductCardSkeleton';
+import { useResizeContext } from '../../context/ResizeContext';
 
 type RequestWithParamsResult = {
   pages: number;
@@ -23,6 +24,7 @@ interface Props {
 }
 
 export const Pagination: React.FC<Props> = ({ productType, query }) => {
+  const { isMobileScreen } = useResizeContext();
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -133,8 +135,6 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
     getDataFromServer();
   }, [searchParams]);
 
-  const windowWidth = window.innerWidth;
-
   return (
     <>
       <div className="phonesPage__modelsCount">
@@ -163,7 +163,7 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
             changeValue={onPerPageChange}
           />
         </div>
-          {windowWidth >= 640 && (
+          {!isMobileScreen && (
             <div className="phonesPage__priceSlider">
               <p className="phonesPage__dropDown-title">Price</p>
 
@@ -175,9 +175,12 @@ export const Pagination: React.FC<Props> = ({ productType, query }) => {
             </div>
           )}
 
-          {windowWidth < 640 && (
+          {isMobileScreen && (
             <>
-              <div className="phonesPage__priceSlider">
+              <div
+                className="phonesPage__priceSlider
+                phonesPage__priceSlider-mobile"
+              >
                 <span className="phonesPage__priceSlider-title">Price</span>
                 <PriceSlider
                   priceMin={Array.isArray(range) ? range[0] : +priceMinP}
